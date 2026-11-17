@@ -18,6 +18,7 @@ android {
             val signingFile = providers.environmentVariable("ANDROID_KEYSTORE_PATH").orNull
             if (signingFile != null) {
                 storeFile = file(signingFile)
+                storeType = "PKCS12"
                 storePassword = providers.environmentVariable("ANDROID_KEYSTORE_PASSWORD").orNull
                 keyAlias = providers.environmentVariable("ANDROID_KEY_ALIAS").orNull
                 keyPassword = providers.environmentVariable("ANDROID_KEY_PASSWORD").orNull
