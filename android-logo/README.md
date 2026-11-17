@@ -28,3 +28,7 @@ Output: `app/build/outputs/apk/debug/app-debug.apk`. Build pertama memerlukan in
 - Pilihan warna hanya bertahan selama halaman aktif; pemuatan ulang/rotasi Activity akan meresetnya.
 - Latar putih dan bagian putih logo berasal dari satu kelompok warna; belum dapat dipisahkan.
 - Jangan memasukkan kunci signing ke repository. Versi release memerlukan konfigurasi signing terpisah.
+
+## Update UI visual
+
+Logo besar, panah navigasi, tombol swatch tanpa teks panjang. HTML yang sama otomatis dikemas saat build. Latar putih dikunci berdasarkan mask piksel putih yang tersambung tepi; bagian putih internal tertutup ikut palet. Signing demo tetap memakai identitas publik AOSP yang sama (lihat `RELEASE.md`), sehingga release baru dengan versionCode lebih tinggi dapat memperbarui demo sebelumnya. Masih perlu uji pada perangkat.

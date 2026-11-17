@@ -31,3 +31,11 @@ Galeri menampilkan satu konsep aktif dengan Prev/Next (berputar), tombol nomor 0
 Kelima sumber PNG tertanam di `index.html`; tidak perlu fetch atau server agar kanvas dapat dipakai ketika membuka file lokal. `preview-logo-mcm.html` di root adalah salinan mandiri yang sama. Tidak ada gambar tambahan per kombinasi warna. Setelah mengganti sumber artwork, data gambar tertanam pada HTML harus diperbarui juga; sekadar mengganti `assets/` tidak mengubah preview interaktif.
 
 Pemeriksaan logika: `node tests/test_logo_preview.cjs` (sintaks, pemetaan warna simultan, sumber tetap utuh, reset, warna kustom, lima sumber tertanam, dan kesamaan versi offline). Ini bukan pengujian browser otomatis.
+
+## Mode visual dan latar terkunci
+
+UI kini mengutamakan satu logo besar, navigasi ikon, enam tombol swatch, reset, dan ekspor (HTML). Penjelasan teknis tidak ditampilkan pada layar utama.
+
+Mask latar dihitung sekali per sumber dengan flood fill empat arah terhadap piksel putih yang tersambung ke tepi kanvas. Piksel latar ini selalu putih pada preview dan hasil ekspor, terlepas dari susunan palet. Bagian putih yang tertutup di dalam logo tetap dapat diwarnai. Bagian putih yang terbuka dan tersambung ke luar dianggap latar; pemisahan semantik lebih rinci memerlukan master vektor/mask manual. Ini tidak memperbaiki cropping pada artwork lama.
+
+Tes `node tests/test_logo_preview.cjs` memeriksa keenam permutasi: latar tetap putih dan putih internal tertutup tetap dapat berubah. Pengujian ini logika piksel, bukan uji perangkat Android.
