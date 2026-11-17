@@ -69,8 +69,8 @@ jobs:
           import xml.etree.ElementTree as ET
           log=Path(os.environ['RUNNER_TEMP'])/'android-build.log'
           if log.exists():
-              for line in log.read_text(errors='replace').splitlines()[-65:]:
-                  print('::error::'+line.replace('%','%25').replace('\r','%0D'))
+              tail='\n'.join(log.read_text(errors='replace').splitlines()[-100:])
+              print('::error::'+tail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
           for report in Path('android-logo/app/build/test-results').rglob('TEST-*.xml'):
               for failure in ET.parse(report).iter('failure'):
                   print('::error::'+(failure.text or '')[:5000].replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
