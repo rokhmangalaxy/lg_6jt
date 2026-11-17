@@ -7,5 +7,5 @@ object LogoCatalog {
     val count get() = files.size
     fun next(index: Int, step: Int): Int = ((index + step) % count + count) % count
     fun background(logo: Int, preset: Int): Int =
-        if (logo in 1 until count && preset in 0..1) 0xff000000.toInt() else LogoPixels.presets[preset][3]
+        0xffd1d5db.toInt() // Light gray for every preset: white initials remain visible, never black.
 }

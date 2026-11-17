@@ -14,6 +14,10 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
     for filename in expected:
         path = 'assets/' + filename
         assert path in available, f'Missing APK asset: {path}'
+        vector = 'assets/' + filename.removesuffix('.png') + '.json'
+        assert vector in available, f'Missing vector source: {vector}'
+        import json
+        assert json.loads(apk.read(vector))['layers'], f'Empty vector source: {vector}'
         data = apk.read(path)
         assert data.startswith(b'\x89PNG\r\n\x1a\n'), f'Invalid PNG: {filename}'
 print('PASS: release APK contains exactly the 4 selected catalog PNGs')

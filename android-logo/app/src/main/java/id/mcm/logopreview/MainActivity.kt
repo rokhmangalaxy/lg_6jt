@@ -26,8 +26,9 @@ class MainActivity : Activity() {
     private val prefs by lazy { getSharedPreferences("native-studio", MODE_PRIVATE) }
     private val files = LogoCatalog.files
     private val names = LogoCatalog.names
-    private val sources = android.util.LruCache<Int, Triple<Bitmap, IntArray, BooleanArray>>(3)
-    private val rendered = android.util.LruCache<Int, Bitmap>(8)
+    private val rendered = object : android.util.LruCache<Int, Bitmap>(32*1024) {
+        override fun sizeOf(key: Int, value: Bitmap): Int = (value.allocationByteCount/1024).coerceAtLeast(1)
+    }
     private lateinit var content: FrameLayout
     private lateinit var logoView: LogoView
     private lateinit var counter: TextView
@@ -147,16 +148,9 @@ class MainActivity : Activity() {
     // Called only on the single background executor, shared by preview and export.
     private fun renderLogo(index:Int,preset:Int):Bitmap {
         val key=index*4+preset
-        return rendered.get(key) ?: run {
-            val (original,pixels,mask)=sources.get(index) ?: run {
-                val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply {inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false}) } ?: error("Gambar tidak tersedia")
-                val p=IntArray(b.width*b.height);b.getPixels(p,0,b.width,0,0,b.width,b.height)
-                val solid=LogoPixels.normalize(p)
-                Triple(b,solid,LogoPixels.mask(solid,b.width,b.height,index)).also { sources.put(index,it) }
-            }
-            Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset,LogoCatalog.background(index,preset)),original.width,original.height,Bitmap.Config.ARGB_8888).also { rendered.put(key,it) }
-        }
+        return rendered.get(key) ?: LogoVectorRenderer.render(assets,index,preset).also {rendered.put(key,it)}
     }
+
     @Suppress("DEPRECATION")
     private fun beginExport() {
         if(pendingExportLogo>=0||logoView.bitmap==null)return

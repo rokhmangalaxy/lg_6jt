@@ -33,10 +33,8 @@ class LogoPixelsTest {
         assertEquals(0,LogoCatalog.next(3,1))
         assertEquals(3,LogoCatalog.next(0,-1))
     }
-    @Test fun backgroundsPreserveAttachmentAppearanceAndMonochromeUsesGray() {
-        assertEquals(white,LogoCatalog.background(0,0))
-        for(logo in 1..3)for(preset in 0..1)assertEquals(0xff000000.toInt(),LogoCatalog.background(logo,preset))
-        for(logo in 0..3)for(preset in 2..3)assertEquals(0xffd1d5db.toInt(),LogoCatalog.background(logo,preset))
+    @Test fun everyLogoAndSwatchUseLightGrayNeverBlack() {
+        for(logo in 0..3)for(preset in 0..3)assertEquals(0xffd1d5db.toInt(),LogoCatalog.background(logo,preset))
     }
     @Test fun normalizePreservesTransparencyAndRoundsBrandColors() {
         val source=intArrayOf(0,0x00101010,0xffdd2727.toInt(),0xff183358.toInt(),0xfffefefe.toInt())

@@ -70,3 +70,11 @@ Tes decoder Android memperluas 10 logo × 4 swatch ke proses encode/decode PNG, 
 Katalog terbaru menggantikan sepuluh eksplorasi dengan simbol no.4 tanpa wordmark, lalu lampiran sel 1/8/9 (grid kiri ke kanan, atas ke bawah). APK mengemas tepat empat PNG di `logo-assets/`, tidak lagi seluruh `html/assets/`. Lihat `../04-desain/pilihan-client/README.md`.
 
 Mask background memakai alpha eksplisit agar lubang/outline hitam pada referensi dipisahkan dari huruf putih. Swatch 1/2 pada tiga simbol lampiran memakai background hitam sesuai referensi, sedangkan no.4 tetap putih. Mode monokrom semuanya gray. Preview/ekspor native menggunakan jalur render yang sama. Pilihan katalog baru memakai preferensi tersendiri; catatan lama tidak disentuh.
+
+## Perbaikan preview bergerigi dan background
+
+Semua 4 logo × 4 swatch sekarang memakai background abu-abu terang #D1D5DB, tanpa background hitam. Ini mempertahankan keterbacaan inisial putih. PNG referensi tidak lagi digunakan langsung sebagai bitmap preview yang diperbesar.
+
+`LogoVectorRenderer` membaca path M/L/Q/Z dari JSON pendamping, menggambar dengan Android Canvas dan Paint.ANTI_ALIAS_FLAG ke bitmap bersisi maksimum 1600px. Preview dan unduhan memakai bitmap render yang sama. Cache hasil dibatasi 32 MiB, bukan hanya jumlah gambar. Perubahan warna diterapkan pada fill path sebelum rasterisasi, sehingga piksel antialias tidak dikuantisasi menjadi tepi keras lagi.
+
+Tracing tetap berasal dari raster kecil, bukan master perusahaan. Kontur utamanya dipertahankan, fragmen kecil dibersihkan; bukan jaminan siap cetak/bordir. JSON dan SVG bisa dirapikan lebih lanjut. Tes native mengecek nonempty render, background nonhitam, piksel antialias, serta round-trip ekspor pada semua 16 kombinasi.
