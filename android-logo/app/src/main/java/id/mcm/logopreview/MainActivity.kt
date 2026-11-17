@@ -3,6 +3,7 @@ package id.mcm.logopreview
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
 import android.text.Editable
@@ -34,7 +35,9 @@ class MainActivity : Activity() {
     private lateinit var paletteRow: LinearLayout
     private lateinit var numberRow: LinearLayout
     private lateinit var numberScroll: HorizontalScrollView
-    private lateinit var bottom: LinearLayout
+    private lateinit var downloadButton: Button
+    private var pendingExportLogo = -1
+    private var pendingExportPreset = 0
     private var current = 0
     private var page = 0
     @Volatile private var generation = 0
@@ -60,7 +63,9 @@ class MainActivity : Activity() {
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         current=state?.getInt("logo") ?: prefs.getInt("logo",0)
-        page=state?.getInt("page") ?: 0
+        page=0 // Client-review mode: hide Menu/Notes without deleting their stored data.
+        pendingExportLogo=state?.getInt("exportLogo",-1) ?: -1
+        pendingExportPreset=state?.getInt("exportPreset",0) ?: 0
         noteType=prefs.getInt("noteType",0)
         for(i in selections.indices) selections[i]=prefs.getInt("palette$i",0).coerceIn(0,3)
         current=current.coerceIn(0,LogoCatalog.count-1);page=page.coerceIn(0,2)
@@ -78,21 +83,19 @@ class MainActivity : Activity() {
         }
         val header=row().apply { setBackgroundColor(NeoSurface.BASE);setPadding(dp(16),0,dp(16),0) }
         header.addView(text("MCM · Logo Studio",18f).apply { setTextColor(navy);setTypeface(null,Typeface.BOLD) },LinearLayout.LayoutParams(0,dp(56),1f))
+        downloadButton=button("↓","Download logo PNG") { beginExport() }.apply {
+            textSize=24f;isEnabled=false
+        }
+        header.addView(downloadButton,LinearLayout.LayoutParams(dp(56),dp(56)))
         root.addView(header)
         content=FrameLayout(this);root.addView(content,LinearLayout.LayoutParams(-1,0,1f))
-        bottom=row();root.addView(bottom,LinearLayout.LayoutParams(-1,dp(60)))
         setContentView(root);root.requestApplyInsets();showPage()
     }
     private fun showPage() {
         generation++
-        content.removeAllViews();bottom.removeAllViews()
-        arrayOf("◈ Logo","☰ Menu","✎ Catatan").forEachIndexed { i,label ->
-            bottom.addView(button(label) {
-                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(content.windowToken,0)
-                page=i;showPage()
-            }.apply { isSelected=page==i },LinearLayout.LayoutParams(0,-1,1f))
-        }
-        when(page) { 0 -> showStudio(); 1 -> showMenu(); else -> showNotes() }
+        content.removeAllViews()
+        page=0
+        showStudio()
     }
     private fun showStudio() {
         val layout=column().apply { setPadding(dp(12),0,dp(12),0) }
@@ -128,26 +131,64 @@ class MainActivity : Activity() {
         }.apply { isSelected=current==i },LinearLayout.LayoutParams(dp(52),-1))
         numberScroll.post { if(page==0)numberScroll.smoothScrollTo((current*dp(52)-numberScroll.width/2+dp(26)).coerceAtLeast(0),0) }
         val index=current;val preset=selections[index];val token=++generation
-        val key=index*4+preset
         val bg=LogoPixels.presets[preset][3]
-        logoView.canvasBackground=bg;logoView.bitmap=null;logoView.invalidate();status.text="Memuat…"
+        logoView.canvasBackground=bg;logoView.bitmap=null;logoView.invalidate();status.text="Memuat…";downloadButton.isEnabled=false
         worker.execute {
             if(token!=generation)return@execute
             try {
-                val bitmap=rendered.get(key) ?: run {
-                    val (original,pixels,mask)=sources.get(index) ?: run {
-                        val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply {inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false}) } ?: error("Gambar tidak tersedia")
-                        val p=IntArray(b.width*b.height);b.getPixels(p,0,b.width,0,0,b.width,b.height)
-                        val solid=LogoPixels.normalize(p)
-                        Triple(b,solid,LogoPixels.mask(solid,b.width,b.height,index)).also { sources.put(index,it) }
-                    }
-                    val result=Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset),original.width,original.height,Bitmap.Config.ARGB_8888)
-                    rendered.put(key,result);result
-                }
-                runOnUiThread { if(!isDestroyed&&page==0&&token==generation) {logoView.bitmap=bitmap;logoView.invalidate();status.text=""} }
+                val bitmap=renderLogo(index,preset)
+                runOnUiThread { if(!isDestroyed&&page==0&&token==generation) {logoView.bitmap=bitmap;logoView.invalidate();status.text="";downloadButton.isEnabled=pendingExportLogo<0} }
             } catch (error: Exception) {
                 android.util.Log.e("MCMLogo", "Preview failed: ${files[index]}, preset=$preset", error)
                 runOnUiThread {if(!isDestroyed&&page==0&&token==generation)status.text="Logo ${index+1} gagal dimuat. Coba pilih ulang."}
+            }
+        }
+    }
+    // Called only on the single background executor, shared by preview and export.
+    private fun renderLogo(index:Int,preset:Int):Bitmap {
+        val key=index*4+preset
+        return rendered.get(key) ?: run {
+            val (original,pixels,mask)=sources.get(index) ?: run {
+                val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply {inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false}) } ?: error("Gambar tidak tersedia")
+                val p=IntArray(b.width*b.height);b.getPixels(p,0,b.width,0,0,b.width,b.height)
+                val solid=LogoPixels.normalize(p)
+                Triple(b,solid,LogoPixels.mask(solid,b.width,b.height,index)).also { sources.put(index,it) }
+            }
+            Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset),original.width,original.height,Bitmap.Config.ARGB_8888).also { rendered.put(key,it) }
+        }
+    }
+    @Suppress("DEPRECATION")
+    private fun beginExport() {
+        if(pendingExportLogo>=0||logoView.bitmap==null)return
+        pendingExportLogo=current;pendingExportPreset=selections[current];downloadButton.isEnabled=false
+        val name=String.format(java.util.Locale.ROOT,"MCM-logo-%02d-swatch-%d.png",current+1,pendingExportPreset+1)
+        val intent=Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE);type="image/png";putExtra(Intent.EXTRA_TITLE,name)
+        }
+        try {startActivityForResult(intent,1001)}catch(_:android.content.ActivityNotFoundException){
+            pendingExportLogo=-1;downloadButton.isEnabled=true
+            Toast.makeText(this,"Aplikasi penyimpan berkas tidak tersedia",Toast.LENGTH_LONG).show()
+        }
+    }
+    @Deprecated("Platform result API retained for SDK-only native app")
+    override fun onActivityResult(requestCode:Int,resultCode:Int,data:Intent?) {
+        super.onActivityResult(requestCode,resultCode,data)
+        if(requestCode!=1001)return
+        val index=pendingExportLogo;val preset=pendingExportPreset;val uri=data?.data
+        pendingExportLogo=-1
+        if(resultCode!=RESULT_OK||uri==null||index !in files.indices){downloadButton.isEnabled=logoView.bitmap!=null;return}
+        status.text="Menyimpan PNG…"
+        worker.execute {
+            try {
+                val bitmap=renderLogo(index,preset)
+                contentResolver.openOutputStream(uri,"wt").use { stream ->
+                    checkNotNull(stream){"Tujuan penyimpanan tidak dapat dibuka"}
+                    LogoExporter.write(bitmap,stream)
+                }
+                runOnUiThread {if(!isDestroyed){status.text="PNG tersimpan";downloadButton.isEnabled=logoView.bitmap!=null;Toast.makeText(this,"Logo PNG tersimpan",Toast.LENGTH_SHORT).show()}}
+            }catch(error:Exception){
+                android.util.Log.e("MCMLogo","PNG export failed",error)
+                runOnUiThread {if(!isDestroyed){status.text="Gagal menyimpan PNG. Coba lagi.";downloadButton.isEnabled=logoView.bitmap!=null}}
             }
         }
     }
@@ -206,8 +247,8 @@ class MainActivity : Activity() {
         }
         scroll.addView(layout);content.addView(scroll)
     }
-    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("logo",current);outState.putInt("page",page);super.onSaveInstanceState(outState)}
-    override fun onDestroy() {generation++;worker.shutdownNow();super.onDestroy()}
+    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("logo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
+    override fun onDestroy() {generation++;worker.shutdown();super.onDestroy()}
 
     private class LogoView(context:Context,val navigate:(Int)->Unit):View(context) {
         var bitmap:Bitmap?=null

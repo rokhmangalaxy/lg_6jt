@@ -54,3 +54,13 @@ Katalog native kini 10 logo: lima lama tetap pada indeks yang sama, ditambah Hex
 UI neumorphism memakai latar #E9EEF5, relief bayangan terang di kiri atas dan gelap di kanan bawah. Tombol terpilih/tertekan memakai tampilan inset dengan penanda warna/border agar tidak hanya bergantung pada bayangan. Kartu gambar tetap putih/abu-abu sesuai preset, efek UI tidak dicampur ke piksel logo. Semua digambar native melalui `NeoSurface`/Canvas, bukan WebView.
 
 Cache sumber dibatasi 3 gambar dan cache hasil 8 kombinasi; antrean render yang sudah usang dilewati. Bayangan memakai software layer lokal pada kontrol/kartu, sehingga kelancaran masih harus divalidasi di perangkat kelas bawah. Katalog dan mask nameplate tambahan tercakup unit test. HTML offline ikut diperbarui menjadi 10 logo dan gaya neumorphism sebagai preview terpisah, bukan UI di APK.
+
+## Client review: download PNG dan navigasi bawah disembunyikan
+
+Tombol simbol ↓ pada header membuka Android Storage Access Framework (`ACTION_CREATE_DOCUMENT`, image/png), sehingga pengguna memilih lokasi/nama file tanpa izin storage luas. PNG berisi Bitmap hasil swatch aktif pada resolusi sumber asli, bukan screenshot layar; shadow neumorphism, header, dan kontrol tidak ikut diekspor. Pilihan logo/preset disnapshot saat tombol ditekan. Cancel tidak mengubah sumber atau swatch. Nama default `MCM-logo-XX-swatch-N.png`.
+
+Preview/loading menonaktifkan tombol sampai gambar tersedia. Export dan kompresi berjalan pada executor latar. Status berhasil/gagal diberikan; saat gagal, pengguna dapat mencoba lagi. Background putih/gray dan counter teks mengikuti preview. PNG masih raster konsep, bukan SVG/master vektor/berkas mesin bordir.
+
+Navigasi bawah Logo/Menu/Catatan sementara tidak ditampilkan; aplikasi selalu membuka studio. Semua SharedPreferences catatan/draft lama tetap disimpan, tidak dihapus. UI HTML terpisah juga menyembunyikan navigasi bawah dan memindahkan tombol unduh ke header.
+
+Tes decoder Android memperluas 10 logo × 4 swatch ke proses encode/decode PNG, memeriksa ukuran serta piksel representatif. Pemilih lokasi Android dan akses provider penyimpanan tetap perlu diuji pada perangkat nyata.

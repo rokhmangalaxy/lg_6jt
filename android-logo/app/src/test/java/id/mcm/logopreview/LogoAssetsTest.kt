@@ -3,6 +3,7 @@ package id.mcm.logopreview
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import java.io.ByteArrayOutputStream
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,6 +40,13 @@ class LogoAssetsTest {
                 val output = Bitmap.createBitmap(result,b.width,b.height,Bitmap.Config.ARGB_8888)
                 assertEquals("Wrong background: $file preset=$preset", LogoPixels.presets[preset][3],output.getPixel(0,0))
                 assertTrue("Empty preview: $file preset=$preset", result.any { it != LogoPixels.presets[preset][3] })
+                val bytes=ByteArrayOutputStream().also { LogoExporter.write(output,it) }.toByteArray()
+                val exported=BitmapFactory.decodeByteArray(bytes,0,bytes.size)!!
+                assertEquals("Export width: $file",b.width,exported.width)
+                assertEquals("Export height: $file",b.height,exported.height)
+                assertEquals("Export background: $file",output.getPixel(0,0),exported.getPixel(0,0))
+                assertEquals("Export content: $file",output.getPixel(b.width/2,b.height/2),exported.getPixel(b.width/2,b.height/2))
+                exported.recycle()
                 output.recycle()
             }
             b.recycle()
