@@ -56,6 +56,9 @@ jobs:
           ANDROID_KEY_ALIAS: mcm-demo
           ANDROID_KEY_PASSWORD: android
         run: gradle --no-daemon testReleaseUnitTest assembleRelease lintRelease
+      - name: Verify packaged logo inventory
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/check_apk_assets.py android-logo/app/build/outputs/apk/release/app-release.apk
       - name: Verify signature and publish APK directly
         if: github.event_name != 'pull_request'
         env:

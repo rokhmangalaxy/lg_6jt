@@ -136,7 +136,7 @@ class MainActivity : Activity() {
             try {
                 val bitmap=rendered.get(key) ?: run {
                     val (original,pixels,mask)=sources.get(index) ?: run {
-                        val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it) } ?: error("Gambar tidak tersedia")
+                        val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply {inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false}) } ?: error("Gambar tidak tersedia")
                         val p=IntArray(b.width*b.height);b.getPixels(p,0,b.width,0,0,b.width,b.height)
                         Triple(b,p,LogoPixels.mask(p,b.width,b.height,index)).also { sources.put(index,it) }
                     }
@@ -144,7 +144,10 @@ class MainActivity : Activity() {
                     rendered.put(key,result);result
                 }
                 runOnUiThread { if(!isDestroyed&&page==0&&token==generation) {logoView.bitmap=bitmap;logoView.invalidate();status.text=""} }
-            } catch (_: Exception) { runOnUiThread {if(!isDestroyed&&page==0&&token==generation)status.text="Gagal memuat logo. Coba pilih ulang."} }
+            } catch (error: Exception) {
+                android.util.Log.e("MCMLogo", "Preview failed: ${files[index]}, preset=$preset", error)
+                runOnUiThread {if(!isDestroyed&&page==0&&token==generation)status.text="Logo ${index+1} gagal dimuat. Coba pilih ulang."}
+            }
         }
     }
     private fun showMenu() {

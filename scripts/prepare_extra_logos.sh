@@ -10,5 +10,5 @@ for n in 06 07 08 09 10; do
   convert -size 1200x800 xc:white "$tmp/symbol.png" -gravity north -geometry +0+76 -composite \
     -font DejaVu-Sans-Bold -fill '#173257' -pointsize 42 -gravity north \
     -annotate +0+660 'PT. MENARA CIPTA METALINDO' \
-    +dither -remap "$tmp/palette.png" "html/assets/variasi-$n-native.png"
+    +dither -remap "$tmp/palette.png" PNG24:"html/assets/variasi-$n-native.png"
 done

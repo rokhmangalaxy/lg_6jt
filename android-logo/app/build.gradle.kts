@@ -35,15 +35,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
-    sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/logoAssets"))
+    // Use the actual asset folder directly: avoid generated-asset task ordering/cache issues.
+    sourceSets["main"].assets.srcDir(rootProject.file("../html/assets"))
+    testOptions { unitTests.isIncludeAndroidResources = true }
 }
 
-// Package original solid rasters for native Bitmap rendering; no HTML/WebView.
-val syncLogoAssets by tasks.registering(Copy::class) {
-    from(rootProject.file("../html/assets"))
-    include("*.png")
-    into(layout.buildDirectory.dir("generated/logoAssets"))
+dependencies {
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.robolectric:robolectric:4.14.1")
 }
-tasks.named("preBuild") { dependsOn(syncLogoAssets) }
-
- dependencies { testImplementation("junit:junit:4.13.2") }
