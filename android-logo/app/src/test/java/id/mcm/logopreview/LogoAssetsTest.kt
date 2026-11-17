@@ -20,7 +20,7 @@ class LogoAssetsTest {
     @Test fun everyCatalogAssetDecodesAndRendersAllFourSwatches() {
         val app: Application = RuntimeEnvironment.getApplication()
         val available = app.assets.list("")!!.toSet()
-        assertEquals(LogoCatalog.files.toSet(),available.filter { it.endsWith(".png") }.toSet())
+        assertEquals(LogoCatalog.files.toSet(),available.filter { !it.contains("/") && it.endsWith(".png") }.toSet())
         for ((index, file) in LogoCatalog.files.withIndex()) {
             assertTrue("Missing packaged asset: $file", file in available)
             val options = BitmapFactory.Options().apply {
