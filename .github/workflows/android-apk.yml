@@ -55,7 +55,26 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: android
           ANDROID_KEY_ALIAS: mcm-demo
           ANDROID_KEY_PASSWORD: android
-        run: gradle --no-daemon testReleaseUnitTest assembleRelease lintRelease
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle --no-daemon testReleaseUnitTest assembleRelease lintRelease 2>&1 | tee "$RUNNER_TEMP/android-build.log"
+      - name: Report build diagnostics
+        if: failure()
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          import os
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          log=Path(os.environ['RUNNER_TEMP'])/'android-build.log'
+          if log.exists():
+              for line in log.read_text(errors='replace').splitlines()[-65:]:
+                  print('::error::'+line.replace('%','%25').replace('\r','%0D'))
+          for report in Path('android-logo/app/build/test-results').rglob('TEST-*.xml'):
+              for failure in ET.parse(report).iter('failure'):
+                  print('::error::'+(failure.text or '')[:5000].replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PYCODE
       - name: Verify packaged logo inventory
         if: github.event_name != 'pull_request'
         run: python3 scripts/check_apk_assets.py android-logo/app/build/outputs/apk/release/app-release.apk
