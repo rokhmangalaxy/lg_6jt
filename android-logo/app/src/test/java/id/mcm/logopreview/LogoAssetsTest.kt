@@ -20,6 +20,7 @@ class LogoAssetsTest {
     @Test fun everyCatalogAssetDecodesAndRendersAllFourSwatches() {
         val app: Application = RuntimeEnvironment.getApplication()
         val available = app.assets.list("")!!.toSet()
+        assertEquals(LogoCatalog.files.toSet(),available.filter { it.endsWith(".png") }.toSet())
         for ((index, file) in LogoCatalog.files.withIndex()) {
             assertTrue("Missing packaged asset: $file", file in available)
             val options = BitmapFactory.Options().apply {
@@ -36,10 +37,10 @@ class LogoAssetsTest {
             assertTrue("Blank source: $file", pixels.any { it == 0xff173257.toInt() || it == 0xffdc2626.toInt() })
             val mask = LogoPixels.mask(pixels,b.width,b.height,index)
             for (preset in 0..3) {
-                val result = LogoPixels.recolor(pixels,mask,preset)
+                val result = LogoPixels.recolor(pixels,mask,preset,LogoCatalog.background(index,preset))
                 val output = Bitmap.createBitmap(result,b.width,b.height,Bitmap.Config.ARGB_8888)
-                assertEquals("Wrong background: $file preset=$preset", LogoPixels.presets[preset][3],output.getPixel(0,0))
-                assertTrue("Empty preview: $file preset=$preset", result.any { it != LogoPixels.presets[preset][3] })
+                assertEquals("Wrong background: $file preset=$preset", LogoCatalog.background(index,preset),output.getPixel(0,0))
+                assertTrue("Empty preview: $file preset=$preset", result.any { it != LogoCatalog.background(index,preset) })
                 val bytes=ByteArrayOutputStream().also { LogoExporter.write(output,it) }.toByteArray()
                 val exported=BitmapFactory.decodeByteArray(bytes,0,bytes.size)!!
                 assertEquals("Export width: $file",b.width,exported.width)

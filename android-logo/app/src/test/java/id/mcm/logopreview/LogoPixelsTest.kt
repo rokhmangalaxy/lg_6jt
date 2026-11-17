@@ -6,57 +6,42 @@ import org.junit.Test
 class LogoPixelsTest {
     private val white = -1
     private val red = 0xffdc2626.toInt()
-    private fun fixture(): IntArray = IntArray(100) { white }.apply {
-        for (y in 2..5) for(x in 2..5) if(y==2||y==5||x==2||x==5)this[y*10+x]=red
-    }
-    @Test fun exteriorAndEnclosedWhiteAreSeparate() {
-        val pixels=fixture();val mask=LogoPixels.mask(pixels,10,10,-1)
-        assertTrue(mask[0]);assertFalse(mask[33])
-        for(preset in 0..3){
-            val output=LogoPixels.recolor(pixels,mask,preset)
-            assertEquals(LogoPixels.presets[preset][3],output[0])
-            assertEquals(LogoPixels.presets[preset][2],output[33])
+    private val blue = 0xff173257.toInt()
+    @Test fun alphaSeparatesWhiteInitialsFromBackgroundIncludingClosedHoles() {
+        val source=intArrayOf(0,red,white,blue,0)
+        val mask=LogoPixels.mask(source,5,1,0)
+        assertArrayEquals(booleanArrayOf(true,false,false,false,true),mask)
+        for(logo in 0 until LogoCatalog.count)for(preset in 0..3){
+            val bg=LogoCatalog.background(logo,preset)
+            val output=LogoPixels.recolor(source,mask,preset,bg)
+            assertEquals(bg,output[0]);assertEquals(bg,output[4])
+            assertEquals(LogoPixels.presets[preset][2],output[2])
         }
-    }
-    @Test fun nameplateCounterUsesBackground() {
-        // Closed white hole in the bottom nameplate of logo 05.
-        val pixels=IntArray(100){white}
-        for(y in 7..9)for(x in 2..4)if(y!=8||x!=3)pixels[y*10+x]=red
-        val mask=LogoPixels.mask(pixels,10,10,4)
-        assertTrue(mask[83])
-        for(preset in 0..3)assertEquals(LogoPixels.presets[preset][3],LogoPixels.recolor(pixels,mask,preset)[83])
     }
     @Test fun recolorDoesNotMutateOriginalAndCanReset() {
-        val source=fixture();val before=source.copyOf();val mask=LogoPixels.mask(source,10,10,-1)
+        val source=intArrayOf(0,red,blue,white);val before=source.copyOf()
+        val mask=LogoPixels.mask(source,4,1,0)
         LogoPixels.recolor(source,mask,1)
         assertArrayEquals(before,source)
-        assertArrayEquals(before,LogoPixels.recolor(source,mask,0))
+        assertArrayEquals(intArrayOf(white,red,blue,white),LogoPixels.recolor(source,mask,0))
     }
-    @Test fun swappingOnlySwapsBrandColors() {
-        val source=intArrayOf(red,0xff173257.toInt(),white)
-        val result=LogoPixels.recolor(source,booleanArrayOf(false,false,true),1)
-        assertArrayEquals(intArrayOf(0xff173257.toInt(),red,white),result)
-    }
-    @Test fun catalogHasTenUniqueEntriesAndWraps() {
-        assertEquals(10,LogoCatalog.count)
+    @Test fun catalogHasExactlyTheFourClientSelectionsAndWraps() {
+        assertEquals(4,LogoCatalog.count)
+        assertArrayEquals(arrayOf("client-logo-04.png","client-attachment-01.png","client-attachment-08.png","client-attachment-09.png"),LogoCatalog.files)
         assertEquals(LogoCatalog.files.size,LogoCatalog.names.size)
-        assertEquals(10,LogoCatalog.files.toSet().size)
-        assertEquals(0,LogoCatalog.next(9,1))
-        assertEquals(9,LogoCatalog.next(0,-1))
+        assertEquals(4,LogoCatalog.files.toSet().size)
+        assertEquals(0,LogoCatalog.next(3,1))
+        assertEquals(3,LogoCatalog.next(0,-1))
     }
-    @Test fun newNameplatesHaveTransparentCountersInEveryPreset() {
-        val pixels=IntArray(100){white}
-        for(y in 7..9)for(x in 2..4)if(y!=8||x!=3)pixels[y*10+x]=red
-        for(logo in 5..9){
-            val mask=LogoPixels.mask(pixels,10,10,logo)
-            assertTrue(mask[83])
-            for(preset in 0..3) assertEquals(LogoPixels.presets[preset][3],LogoPixels.recolor(pixels,mask,preset)[83])
-        }
+    @Test fun backgroundsPreserveAttachmentAppearanceAndMonochromeUsesGray() {
+        assertEquals(white,LogoCatalog.background(0,0))
+        for(logo in 1..3)for(preset in 0..1)assertEquals(0xff000000.toInt(),LogoCatalog.background(logo,preset))
+        for(logo in 0..3)for(preset in 2..3)assertEquals(0xffd1d5db.toInt(),LogoCatalog.background(logo,preset))
     }
-    @Test fun normalizeHandlesColorProfileRoundingWithoutMutatingSource() {
-        val source=intArrayOf(0xffdd2727.toInt(),0xff183358.toInt(),0xfffefefe.toInt())
+    @Test fun normalizePreservesTransparencyAndRoundsBrandColors() {
+        val source=intArrayOf(0,0x00101010,0xffdd2727.toInt(),0xff183358.toInt(),0xfffefefe.toInt())
         val before=source.copyOf()
-        assertArrayEquals(intArrayOf(0xffdc2626.toInt(),0xff173257.toInt(),-1),LogoPixels.normalize(source))
+        assertArrayEquals(intArrayOf(0,0,red,blue,white),LogoPixels.normalize(source))
         assertArrayEquals(before,source)
     }
 }

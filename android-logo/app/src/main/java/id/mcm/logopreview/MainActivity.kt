@@ -62,12 +62,12 @@ class MainActivity : Activity() {
     }
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
-        current=state?.getInt("logo") ?: prefs.getInt("logo",0)
+        current=state?.getInt("clientSetLogo") ?: prefs.getInt("clientSetLogo",0)
         page=0 // Client-review mode: hide Menu/Notes without deleting their stored data.
         pendingExportLogo=state?.getInt("exportLogo",-1) ?: -1
         pendingExportPreset=state?.getInt("exportPreset",0) ?: 0
         noteType=prefs.getInt("noteType",0)
-        for(i in selections.indices) selections[i]=prefs.getInt("palette$i",0).coerceIn(0,3)
+        for(i in selections.indices) selections[i]=prefs.getInt("clientSetPalette$i",0).coerceIn(0,3)
         current=current.coerceIn(0,LogoCatalog.count-1);page=page.coerceIn(0,2)
         val root=column().apply { setBackgroundColor(NeoSurface.BASE) }
         // Insets are owned by the root on Android 15 edge-to-edge; no guessed status-bar sizes.
@@ -115,23 +115,23 @@ class MainActivity : Activity() {
         layout.addView(numberScroll,LinearLayout.LayoutParams(-1,dp(54)))
         content.addView(layout,FrameLayout.LayoutParams(-1,-1));updateStudio()
     }
-    private fun navigate(step: Int) {current=LogoCatalog.next(current,step);prefs.edit().putInt("logo",current).apply();updateStudio()}
+    private fun navigate(step: Int) {current=LogoCatalog.next(current,step);prefs.edit().putInt("clientSetLogo",current).apply();updateStudio()}
     private fun updateStudio() {
         counter.text="${current+1} / ${LogoCatalog.count} · ${names[current]}"
         paletteRow.removeAllViews();numberRow.removeAllViews()
         arrayOf("Swatch 1","Swatch 2","Hitam–Putih","Putih–Hitam").forEachIndexed { i,label ->
             val swatch=SwatchView(this, i, label).apply {
                 isSelected=selections[current]==i
-                setOnClickListener { selections[current]=i;prefs.edit().putInt("palette$current",i).apply();updateStudio() }
+                setOnClickListener { selections[current]=i;prefs.edit().putInt("clientSetPalette$current",i).apply();updateStudio() }
             }
             paletteRow.addView(swatch,LinearLayout.LayoutParams(0,-1,1f))
         }
         for(i in files.indices) numberRow.addView(button(String.format(java.util.Locale.ROOT,"%02d",i+1),"Logo ${i+1}") {
-            current=i;prefs.edit().putInt("logo",i).apply();updateStudio()
+            current=i;prefs.edit().putInt("clientSetLogo",i).apply();updateStudio()
         }.apply { isSelected=current==i },LinearLayout.LayoutParams(dp(52),-1))
         numberScroll.post { if(page==0)numberScroll.smoothScrollTo((current*dp(52)-numberScroll.width/2+dp(26)).coerceAtLeast(0),0) }
         val index=current;val preset=selections[index];val token=++generation
-        val bg=LogoPixels.presets[preset][3]
+        val bg=LogoCatalog.background(index,preset)
         logoView.canvasBackground=bg;logoView.bitmap=null;logoView.invalidate();status.text="Memuat…";downloadButton.isEnabled=false
         worker.execute {
             if(token!=generation)return@execute
@@ -154,14 +154,14 @@ class MainActivity : Activity() {
                 val solid=LogoPixels.normalize(p)
                 Triple(b,solid,LogoPixels.mask(solid,b.width,b.height,index)).also { sources.put(index,it) }
             }
-            Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset),original.width,original.height,Bitmap.Config.ARGB_8888).also { rendered.put(key,it) }
+            Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset,LogoCatalog.background(index,preset)),original.width,original.height,Bitmap.Config.ARGB_8888).also { rendered.put(key,it) }
         }
     }
     @Suppress("DEPRECATION")
     private fun beginExport() {
         if(pendingExportLogo>=0||logoView.bitmap==null)return
         pendingExportLogo=current;pendingExportPreset=selections[current];downloadButton.isEnabled=false
-        val name=String.format(java.util.Locale.ROOT,"MCM-logo-%02d-swatch-%d.png",current+1,pendingExportPreset+1)
+        val name="MCM-${files[current].removeSuffix(".png")}-swatch-${pendingExportPreset+1}.png"
         val intent=Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE);type="image/png";putExtra(Intent.EXTRA_TITLE,name)
         }
@@ -195,7 +195,7 @@ class MainActivity : Activity() {
     private fun showMenu() {
         val layout=column().apply {setPadding(dp(20),dp(16),dp(20),dp(16))}
         layout.addView(text("Menu",22f))
-        layout.addView(button("Reset warna logo aktif") {selections[current]=0;prefs.edit().putInt("palette$current",0).apply();Toast.makeText(this,"Warna direset",Toast.LENGTH_SHORT).show()})
+        layout.addView(button("Reset warna logo aktif") {selections[current]=0;prefs.edit().putInt("clientSetPalette$current",0).apply();Toast.makeText(this,"Warna direset",Toast.LENGTH_SHORT).show()})
         layout.addView(text("Native Kotlin · Offline\nSigning demo publik · untuk review internal",14f))
         content.addView(layout)
     }
@@ -247,7 +247,7 @@ class MainActivity : Activity() {
         }
         scroll.addView(layout);content.addView(scroll)
     }
-    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("logo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
+    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("clientSetLogo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
     override fun onDestroy() {generation++;worker.shutdown();super.onDestroy()}
 
     private class LogoView(context:Context,val navigate:(Int)->Unit):View(context) {

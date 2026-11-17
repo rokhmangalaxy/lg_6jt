@@ -64,3 +64,9 @@ Preview/loading menonaktifkan tombol sampai gambar tersedia. Export dan kompresi
 Navigasi bawah Logo/Menu/Catatan sementara tidak ditampilkan; aplikasi selalu membuka studio. Semua SharedPreferences catatan/draft lama tetap disimpan, tidak dihapus. UI HTML terpisah juga menyembunyikan navigasi bawah dan memindahkan tombol unduh ke header.
 
 Tes decoder Android memperluas 10 logo × 4 swatch ke proses encode/decode PNG, memeriksa ukuran serta piksel representatif. Pemilih lokasi Android dan akses provider penyimpanan tetap perlu diuji pada perangkat nyata.
+
+## Pilihan klien: hanya empat logo
+
+Katalog terbaru menggantikan sepuluh eksplorasi dengan simbol no.4 tanpa wordmark, lalu lampiran sel 1/8/9 (grid kiri ke kanan, atas ke bawah). APK mengemas tepat empat PNG di `logo-assets/`, tidak lagi seluruh `html/assets/`. Lihat `../04-desain/pilihan-client/README.md`.
+
+Mask background memakai alpha eksplisit agar lubang/outline hitam pada referensi dipisahkan dari huruf putih. Swatch 1/2 pada tiga simbol lampiran memakai background hitam sesuai referensi, sedangkan no.4 tetap putih. Mode monokrom semuanya gray. Preview/ekspor native menggunakan jalur render yang sama. Pilihan katalog baru memakai preferensi tersendiri; catatan lama tidak disentuh.

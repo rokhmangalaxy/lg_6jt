@@ -36,7 +36,7 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     // Use the actual asset folder directly: avoid generated-asset task ordering/cache issues.
-    sourceSets["main"].assets.srcDir(rootProject.file("../html/assets"))
+    sourceSets["main"].assets.srcDir(rootProject.file("logo-assets"))
     testOptions { unitTests.isIncludeAndroidResources = true }
 }
 
