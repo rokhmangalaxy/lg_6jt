@@ -47,3 +47,11 @@ Urutan studio: topbar → logo → Prev/Next → Swatch 1/2/Hitam–Putih/Putih�
 Navigasi bawah membuka Logo, Menu (reset/ekspor HTML), dan Catatan. Catatan memuat jenis Bug/Pengembangan, isi, waktu, dan nomor logo aktif. Teks ditampilkan dengan textContent, tidak sebagai HTML. Catatan dan draft disimpan lewat localStorage pada perangkat/origin yang sama; tidak disinkronkan ke GitHub. Hapus memerlukan konfirmasi. Jika storage gagal, UI menyampaikan bahwa data hanya bertahan sementara. Penghapusan data aplikasi/browser atau uninstall menghilangkan catatan. Pindah file/origin browser juga dapat membuat data lama tidak terlihat.
 
 Android mengaktifkan DOM storage pada origin lokal tetap yang sama; tidak menambahkan akses jaringan atau jembatan JavaScript/native. Update package yang ditandatangani sama mempertahankan data aplikasi selama tidak dihapus oleh pengguna/OS. Perlu uji instalasi/update pada perangkat nyata.
+
+## Counter huruf, swipe, dan ikon galaksi
+
+Mask nameplate berupa batas ternormalisasi spesifik pada lima sumber raster. Semua piksel putih di area nama perusahaan, termasuk lubang O/A/P/R, dianggap latar, bukan fill putih simbol. Area simbol di luar nameplate tetap memakai aturan sebelumnya. Batas ini perlu disesuaikan bila gambar sumber/komposisi berubah.
+
+Area logo mendukung swipe kiri/kanan melalui Pointer Events (juga drag mouse), ambang 55px, dominan horizontal, maksimal 900ms. Scroll vertikal tetap diizinkan; pointercancel membatalkan gesture. Tombol Prev/Next tetap tersedia.
+
+Ikon launcher Android berupa spiral merah–biru pada putih, dengan adaptive icon dan fallback berbagai density. Sumber AI ada di `android-logo/icon-source/galaxy.png`, hasil palet solid dan margin aman ada pada resource Android. Ini ikon aplikasi, bukan kandidat logo perusahaan baru.

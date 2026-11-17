@@ -42,3 +42,19 @@ for(const preset of presets){
  assert.deepEqual(Array.from(output.slice(48,51)),whiteColor);
 }
 console.log('PASS: 4 presets, fixed white/gray exterior, enclosed white remains editable');
+
+// Closed white counters in the nameplate must use the actual background.
+fixture.textRegion=[0,0,1,1];delete fixture.backgroundMask;
+for(const preset of presets){
+ const out=sandbox.recolor(fixture,[...preset.colors,preset.background]).data;
+ const bg=preset.background.slice(1).match(/../g).map(h=>parseInt(h,16));
+ assert.deepEqual(Array.from(out.slice(48,51)),bg);
+}
+const swipe=script.match(/function swipeDirection\(dx,dy,elapsed\)\{[\s\S]*?\n\}/)[0];
+vm.runInContext(`${swipe};this.swipeDirection=swipeDirection;`,sandbox);
+assert.equal(sandbox.swipeDirection(-100,5,200),1);
+assert.equal(sandbox.swipeDirection(100,5,200),-1);
+assert.equal(sandbox.swipeDirection(20,0,200),0);
+assert.equal(sandbox.swipeDirection(60,100,200),0);
+assert.equal(sandbox.swipeDirection(100,0,1500),0);
+console.log('PASS: nameplate counters match background, swipe thresholds and direction');
