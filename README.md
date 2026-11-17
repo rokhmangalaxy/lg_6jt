@@ -20,3 +20,6 @@ Pisahkan fakta dari usulan desain. Jangan menganggap logo, warna, filosofi, atau
 - [Galeri mandiri](html/index.html) — lima logo dengan palet solid yang sama.
 - [Panduan preview dan GitHub Pages](html/README.md).
 - Workflow publikasi manual: `.github/workflows/pages.yml`. Situs GitHub Pages belum diaktifkan; butuh pengaturan pemilik dan persetujuan publikasi konsep.
+
+## Android Kotlin
+Lihat [proyek MCM Logo Studio](android-logo/README.md) untuk aplikasi offline dan workflow build APK. Status APK: belum dibangun; membutuhkan toolchain Android lokal atau GitHub Actions.
