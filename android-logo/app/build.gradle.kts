@@ -38,9 +38,12 @@ android {
     sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/logoAssets"))
 }
 
-// Reuse the standalone HTML: no duplicate artwork or remote website required.
+// Package original solid rasters for native Bitmap rendering; no HTML/WebView.
 val syncLogoAssets by tasks.registering(Copy::class) {
-    from(rootProject.file("../html/index.html"))
+    from(rootProject.file("../html/assets"))
+    include("*.png")
     into(layout.buildDirectory.dir("generated/logoAssets"))
 }
 tasks.named("preBuild") { dependsOn(syncLogoAssets) }
+
+ dependencies { testImplementation("junit:junit:4.13.2") }

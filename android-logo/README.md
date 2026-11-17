@@ -32,3 +32,17 @@ Output: `app/build/outputs/apk/debug/app-debug.apk`. Build pertama memerlukan in
 ## Update UI visual
 
 Logo besar, panah navigasi, tombol swatch tanpa teks panjang. HTML yang sama otomatis dikemas saat build. Latar putih dikunci berdasarkan mask piksel putih yang tersambung tepi; bagian putih internal tertutup ikut palet. Signing demo tetap memakai identitas publik AOSP yang sama (lihat `RELEASE.md`), sehingga release baru dengan versionCode lebih tinggi dapat memperbarui demo sebelumnya. Masih perlu uji pada perangkat.
+
+## Migrasi native Kotlin (versi berikutnya)
+
+APK sekarang menggunakan **Android Views + Canvas/Bitmap native**, bukan WebView/HTML/JavaScript. HTML mandiri tetap tersedia sebagai preview web terpisah, tetapi tidak lagi dikemas oleh APK. Build hanya menyalin lima PNG asli.
+
+- Area logo memakai layout weight, gambar fit-center tanpa mengubah rasio; header 56dp, navbar bawah 60dp, Prev/Next 48dp, swatch 64dp, nomor 48dp. System bar/keyboard insets ditangani melalui WindowInsets.
+- Decode, mask, dan perubahan warna dijalankan serial di background executor; hasil Bitmap di-cache maksimal delapan kombinasi, sumber/mask maksimal lima logo. Request lama tidak boleh menimpa pilihan terbaru.
+- Empat preset, mask lubang huruf nameplate, swipe native, ikon galaksi, menu/reset, dan catatan lokal dipertahankan.
+- Pilihan logo/palet, draft, dan catatan native tersimpan dalam SharedPreferences privat. Jenis catatan Bug/Pengembangan, waktu dan nomor logo dicatat. Penghapusan perlu konfirmasi.
+- **Catatan WebView lama belum dimigrasikan.** Storage WebView tidak dihapus oleh kode ini, tetapi catatan lama tidak tampil dalam UI native. Jika penting, salin catatan sebelum memperbarui. Jangan uninstall/hapus data bila ingin mempertahankan data lama.
+- Tidak ada ekspor PNG native (sama seperti APK sebelumnya). Masih ada pada HTML mandiri.
+- Unit test Kotlin `LogoPixelsTest` menguji mask/counter, empat preset, reset, dan immutability. Jalankan `gradle testDebugUnitTest assembleDebug lintDebug` atau workflow release untuk versi release.
+
+Performa subjektif, ukuran font besar, layar pendek/landscape, TalkBack, dan update dengan catatan lama masih perlu pengujian perangkat nyata. Signing dan application ID tidak berubah.

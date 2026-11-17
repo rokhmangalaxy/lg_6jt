@@ -36,7 +36,7 @@ jobs:
       - name: Validate pull request
         if: github.event_name == 'pull_request'
         working-directory: android-logo
-        run: gradle --no-daemon assembleDebug lintDebug
+        run: gradle --no-daemon testDebugUnitTest assembleDebug lintDebug
       - name: Prepare fixed public demo signing identity
         if: github.event_name != 'pull_request'
         shell: bash
@@ -55,7 +55,7 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: android
           ANDROID_KEY_ALIAS: mcm-demo
           ANDROID_KEY_PASSWORD: android
-        run: gradle --no-daemon assembleRelease lintRelease
+        run: gradle --no-daemon testReleaseUnitTest assembleRelease lintRelease
       - name: Verify signature and publish APK directly
         if: github.event_name != 'pull_request'
         env:
