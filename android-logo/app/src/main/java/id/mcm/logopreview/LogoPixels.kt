@@ -14,6 +14,22 @@ object LogoPixels {
         intArrayOf(0xff000000.toInt(),0xff000000.toInt(),WHITE,0xffd1d5db.toInt()),
         intArrayOf(WHITE,WHITE,0xff000000.toInt(),0xffd1d5db.toInt())
     )
+    /** Android may color-convert PNG profiles by a few levels. Quantize known solid assets. */
+    fun normalize(source: IntArray): IntArray {
+        val palette = presets[0]
+        return IntArray(source.size) { i ->
+            val pixel=source[i]
+            val r=(pixel ushr 16) and 255;val g=(pixel ushr 8) and 255;val b=pixel and 255
+            var best=WHITE;var distance=Int.MAX_VALUE
+            for(j in 0..2){
+                val c=palette[j]
+                val dr=r-((c ushr 16) and 255);val dg=g-((c ushr 8) and 255);val db=b-(c and 255)
+                val d=dr*dr+dg*dg+db*db
+                if(d<distance){distance=d;best=c}
+            }
+            best
+        }
+    }
     fun mask(pixels: IntArray, width: Int, height: Int, logo: Int): BooleanArray {
         require(pixels.size == width * height && width > 0 && height > 0)
         val mask = BooleanArray(pixels.size)

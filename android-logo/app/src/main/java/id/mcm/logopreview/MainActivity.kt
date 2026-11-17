@@ -138,7 +138,8 @@ class MainActivity : Activity() {
                     val (original,pixels,mask)=sources.get(index) ?: run {
                         val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply {inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false}) } ?: error("Gambar tidak tersedia")
                         val p=IntArray(b.width*b.height);b.getPixels(p,0,b.width,0,0,b.width,b.height)
-                        Triple(b,p,LogoPixels.mask(p,b.width,b.height,index)).also { sources.put(index,it) }
+                        val solid=LogoPixels.normalize(p)
+                        Triple(b,solid,LogoPixels.mask(solid,b.width,b.height,index)).also { sources.put(index,it) }
                     }
                     val result=Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset),original.width,original.height,Bitmap.Config.ARGB_8888)
                     rendered.put(key,result);result

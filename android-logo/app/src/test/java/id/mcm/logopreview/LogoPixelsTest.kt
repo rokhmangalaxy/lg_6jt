@@ -53,4 +53,10 @@ class LogoPixelsTest {
             for(preset in 0..3) assertEquals(LogoPixels.presets[preset][3],LogoPixels.recolor(pixels,mask,preset)[83])
         }
     }
+    @Test fun normalizeHandlesColorProfileRoundingWithoutMutatingSource() {
+        val source=intArrayOf(0xffdd2727.toInt(),0xff183358.toInt(),0xfffefefe.toInt())
+        val before=source.copyOf()
+        assertArrayEquals(intArrayOf(0xffdc2626.toInt(),0xff173257.toInt(),-1),LogoPixels.normalize(source))
+        assertArrayEquals(before,source)
+    }
 }

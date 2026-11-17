@@ -29,8 +29,9 @@ class LogoAssetsTest {
             assertNotNull("Android cannot decode: $file", bitmap)
             val b = bitmap!!
             assertTrue("Invalid size: $file", b.width > 0 && b.height > 0)
-            val pixels = IntArray(b.width*b.height)
-            b.getPixels(pixels,0,b.width,0,0,b.width,b.height)
+            val decoded = IntArray(b.width*b.height)
+            b.getPixels(decoded,0,b.width,0,0,b.width,b.height)
+            val pixels = LogoPixels.normalize(decoded)
             assertTrue("Blank source: $file", pixels.any { it == 0xff173257.toInt() || it == 0xffdc2626.toInt() })
             val mask = LogoPixels.mask(pixels,b.width,b.height,index)
             for (preset in 0..3) {
