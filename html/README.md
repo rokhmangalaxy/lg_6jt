@@ -39,3 +39,11 @@ UI kini mengutamakan satu logo besar, navigasi ikon, enam tombol swatch, reset, 
 Mask latar dihitung sekali per sumber dengan flood fill empat arah terhadap piksel putih yang tersambung ke tepi kanvas. Piksel latar ini selalu putih pada preview dan hasil ekspor, terlepas dari susunan palet. Bagian putih yang tertutup di dalam logo tetap dapat diwarnai. Bagian putih yang terbuka dan tersambung ke luar dianggap latar; pemisahan semantik lebih rinci memerlukan master vektor/mask manual. Ini tidak memperbaiki cropping pada artwork lama.
 
 Tes `node tests/test_logo_preview.cjs` memeriksa keenam permutasi: latar tetap putih dan putih internal tertutup tetap dapat berubah. Pengujian ini logika piksel, bukan uji perangkat Android.
+
+## Header, navigasi bawah, dan Catatan (update terbaru)
+
+Urutan studio: topbar → logo → Prev/Next → Swatch 1/2/Hitam–Putih/Putih–Hitam → nomor logo. Swatch 1/2 mempertahankan putih internal; monokrom memetakan merah dan biru bersama ke hitam atau putih, putih internal menjadi warna kebalikan. Latar luar selalu putih pada Swatch 1/2 atau abu-abu #d1d5db pada dua mode monokrom. Ini menggantikan enam permutasi sebelumnya.
+
+Navigasi bawah membuka Logo, Menu (reset/ekspor HTML), dan Catatan. Catatan memuat jenis Bug/Pengembangan, isi, waktu, dan nomor logo aktif. Teks ditampilkan dengan textContent, tidak sebagai HTML. Catatan dan draft disimpan lewat localStorage pada perangkat/origin yang sama; tidak disinkronkan ke GitHub. Hapus memerlukan konfirmasi. Jika storage gagal, UI menyampaikan bahwa data hanya bertahan sementara. Penghapusan data aplikasi/browser atau uninstall menghilangkan catatan. Pindah file/origin browser juga dapat membuat data lama tidak terlihat.
+
+Android mengaktifkan DOM storage pada origin lokal tetap yang sama; tidak menambahkan akses jaringan atau jembatan JavaScript/native. Update package yang ditandatangani sama mempertahankan data aplikasi selama tidak dihapus oleh pengguna/OS. Perlu uji instalasi/update pada perangkat nyata.

@@ -22,7 +22,7 @@ class MainActivity : Activity() {
             allowFileAccess = false
             allowContentAccess = false
             blockNetworkLoads = true
-            domStorageEnabled = false
+            domStorageEnabled = true
         }
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean = true
