@@ -23,9 +23,9 @@ class MainActivity : Activity() {
     private val navy = 0xff173257.toInt()
     private val worker = Executors.newSingleThreadExecutor()
     private val prefs by lazy { getSharedPreferences("native-studio", MODE_PRIVATE) }
-    private val files = arrayOf("variasi-01-evolusi.png", "variasi-02-diamond-negatif.png", "variasi-03-lipatan-metal.png", "variasi-04-horizontal.png", "variasi-05-monokrom.png")
-    private val names = arrayOf("Evolusi", "Diamond", "Lipatan metal", "Horizontal", "Industrial")
-    private val sources = mutableMapOf<Int, Triple<Bitmap, IntArray, BooleanArray>>()
+    private val files = LogoCatalog.files
+    private val names = LogoCatalog.names
+    private val sources = android.util.LruCache<Int, Triple<Bitmap, IntArray, BooleanArray>>(3)
     private val rendered = android.util.LruCache<Int, Bitmap>(8)
     private lateinit var content: FrameLayout
     private lateinit var logoView: LogoView
@@ -33,11 +33,12 @@ class MainActivity : Activity() {
     private lateinit var status: TextView
     private lateinit var paletteRow: LinearLayout
     private lateinit var numberRow: LinearLayout
+    private lateinit var numberScroll: HorizontalScrollView
     private lateinit var bottom: LinearLayout
     private var current = 0
     private var page = 0
-    private var generation = 0
-    private val selections = IntArray(5)
+    @Volatile private var generation = 0
+    private val selections = IntArray(LogoCatalog.count)
     private var noteType = 0
     private fun dp(n: Int) = (n * resources.displayMetrics.density).toInt()
     private fun column() = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
@@ -46,7 +47,15 @@ class MainActivity : Activity() {
     private fun button(label: String, description: String = label, action: () -> Unit) = Button(this).apply {
         text=label; textSize=13f; isAllCaps=false; contentDescription=description
         setTextColor(navy); minWidth=0; minimumWidth=0
-        setPadding(dp(4),0,dp(4),0); setOnClickListener { action() }
+        setPadding(dp(8),0,dp(8),0)
+        setLayerType(View.LAYER_TYPE_SOFTWARE,null)
+        val density=resources.displayMetrics.density
+        background=android.graphics.drawable.StateListDrawable().apply {
+            addState(intArrayOf(android.R.attr.state_pressed),NeoSurface(density,true))
+            addState(intArrayOf(android.R.attr.state_selected),NeoSurface(density,true))
+            addState(intArrayOf(),NeoSurface(density))
+        }
+        setOnClickListener { action() }
     }
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -54,8 +63,8 @@ class MainActivity : Activity() {
         page=state?.getInt("page") ?: 0
         noteType=prefs.getInt("noteType",0)
         for(i in selections.indices) selections[i]=prefs.getInt("palette$i",0).coerceIn(0,3)
-        current=current.coerceIn(0,4);page=page.coerceIn(0,2)
-        val root=column().apply { setBackgroundColor(Color.WHITE) }
+        current=current.coerceIn(0,LogoCatalog.count-1);page=page.coerceIn(0,2)
+        val root=column().apply { setBackgroundColor(NeoSurface.BASE) }
         // Insets are owned by the root on Android 15 edge-to-edge; no guessed status-bar sizes.
         root.setOnApplyWindowInsetsListener { v, insets ->
             if (android.os.Build.VERSION.SDK_INT >= 30) {
@@ -67,8 +76,8 @@ class MainActivity : Activity() {
             }
             insets
         }
-        val header=row().apply { setBackgroundColor(navy);setPadding(dp(16),0,dp(16),0) }
-        header.addView(text("MCM · Logo Studio",18f).apply { setTextColor(Color.WHITE);setTypeface(null,Typeface.BOLD) },LinearLayout.LayoutParams(0,dp(56),1f))
+        val header=row().apply { setBackgroundColor(NeoSurface.BASE);setPadding(dp(16),0,dp(16),0) }
+        header.addView(text("MCM · Logo Studio",18f).apply { setTextColor(navy);setTypeface(null,Typeface.BOLD) },LinearLayout.LayoutParams(0,dp(56),1f))
         root.addView(header)
         content=FrameLayout(this);root.addView(content,LinearLayout.LayoutParams(-1,0,1f))
         bottom=row();root.addView(bottom,LinearLayout.LayoutParams(-1,dp(60)))
@@ -81,7 +90,7 @@ class MainActivity : Activity() {
             bottom.addView(button(label) {
                 (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(content.windowToken,0)
                 page=i;showPage()
-            }.apply { isSelected=page==i;setBackgroundColor(if(page==i)0xffeaf0f8.toInt() else Color.WHITE) },LinearLayout.LayoutParams(0,-1,1f))
+            }.apply { isSelected=page==i },LinearLayout.LayoutParams(0,-1,1f))
         }
         when(page) { 0 -> showStudio(); 1 -> showMenu(); else -> showNotes() }
     }
@@ -98,12 +107,14 @@ class MainActivity : Activity() {
         navigation.addView(button("❯","Logo berikutnya"){navigate(1)},LinearLayout.LayoutParams(dp(64),dp(48)))
         layout.addView(navigation)
         paletteRow=row();layout.addView(paletteRow,LinearLayout.LayoutParams(-1,dp(64)))
-        numberRow=row();layout.addView(numberRow,LinearLayout.LayoutParams(-1,dp(48)))
+        numberRow=row()
+        numberScroll=HorizontalScrollView(this).apply {isHorizontalScrollBarEnabled=false;addView(numberRow,android.view.ViewGroup.LayoutParams(-2,-1))}
+        layout.addView(numberScroll,LinearLayout.LayoutParams(-1,dp(54)))
         content.addView(layout,FrameLayout.LayoutParams(-1,-1));updateStudio()
     }
-    private fun navigate(step: Int) {current=(current+step+5)%5;prefs.edit().putInt("logo",current).apply();updateStudio()}
+    private fun navigate(step: Int) {current=LogoCatalog.next(current,step);prefs.edit().putInt("logo",current).apply();updateStudio()}
     private fun updateStudio() {
-        counter.text="${current+1} / 5 · ${names[current]}"
+        counter.text="${current+1} / ${LogoCatalog.count} · ${names[current]}"
         paletteRow.removeAllViews();numberRow.removeAllViews()
         arrayOf("Swatch 1","Swatch 2","Hitam–Putih","Putih–Hitam").forEachIndexed { i,label ->
             val swatch=SwatchView(this, i, label).apply {
@@ -112,20 +123,22 @@ class MainActivity : Activity() {
             }
             paletteRow.addView(swatch,LinearLayout.LayoutParams(0,-1,1f))
         }
-        for(i in 0..4) numberRow.addView(button("0${i+1}","Logo ${i+1}") {
+        for(i in files.indices) numberRow.addView(button(String.format(java.util.Locale.ROOT,"%02d",i+1),"Logo ${i+1}") {
             current=i;prefs.edit().putInt("logo",i).apply();updateStudio()
-        }.apply { setBackgroundColor(if(current==i)0xffeaf0f8.toInt() else Color.WHITE) },LinearLayout.LayoutParams(0,-1,1f))
+        }.apply { isSelected=current==i },LinearLayout.LayoutParams(dp(52),-1))
+        numberScroll.post { if(page==0)numberScroll.smoothScrollTo((current*dp(52)-numberScroll.width/2+dp(26)).coerceAtLeast(0),0) }
         val index=current;val preset=selections[index];val token=++generation
         val key=index*4+preset
         val bg=LogoPixels.presets[preset][3]
-        logoView.setBackgroundColor(bg);logoView.bitmap=null;logoView.invalidate();status.text="Memuat…"
+        logoView.canvasBackground=bg;logoView.bitmap=null;logoView.invalidate();status.text="Memuat…"
         worker.execute {
+            if(token!=generation)return@execute
             try {
                 val bitmap=rendered.get(key) ?: run {
-                    val (original,pixels,mask)=sources.getOrPut(index) {
+                    val (original,pixels,mask)=sources.get(index) ?: run {
                         val b=assets.open(files[index]).use { BitmapFactory.decodeStream(it) } ?: error("Gambar tidak tersedia")
                         val p=IntArray(b.width*b.height);b.getPixels(p,0,b.width,0,0,b.width,b.height)
-                        Triple(b,p,LogoPixels.mask(p,b.width,b.height,index))
+                        Triple(b,p,LogoPixels.mask(p,b.width,b.height,index)).also { sources.put(index,it) }
                     }
                     val result=Bitmap.createBitmap(LogoPixels.recolor(pixels,mask,preset),original.width,original.height,Bitmap.Config.ARGB_8888)
                     rendered.put(key,result);result
@@ -194,12 +207,18 @@ class MainActivity : Activity() {
 
     private class LogoView(context:Context,val navigate:(Int)->Unit):View(context) {
         var bitmap:Bitmap?=null
+        var canvasBackground=Color.WHITE
         private val paint=Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
         private var x=0f;private var y=0f;private var time=0L
-        init {contentDescription="Preview logo, geser kiri atau kanan";isClickable=true}
+        init {contentDescription="Preview logo, geser kiri atau kanan";isClickable=true;setLayerType(LAYER_TYPE_SOFTWARE,null)}
         override fun onDraw(canvas:Canvas) {
             super.onDraw(canvas)
-            bitmap?.let { b -> val margin=16*resources.displayMetrics.density
+            val d=resources.displayMetrics.density
+            val card=RectF(10*d,12*d,width-10*d,height-12*d)
+            paint.color=NeoSurface.BASE;paint.setShadowLayer(7*d,4*d,4*d,0xffb8c5d5.toInt());canvas.drawRoundRect(card,20*d,20*d,paint)
+            paint.setShadowLayer(7*d,-4*d,-4*d,Color.WHITE);canvas.drawRoundRect(card,20*d,20*d,paint);paint.clearShadowLayer()
+            paint.color=canvasBackground;canvas.drawRoundRect(card,20*d,20*d,paint)
+            bitmap?.let { b -> val margin=24*resources.displayMetrics.density
                 val scale=min((width-2*margin)/b.width,(height-2*margin)/b.height).coerceAtLeast(0f)
                 val w=b.width*scale;val h=b.height*scale
                 canvas.drawBitmap(b,null,RectF((width-w)/2,(height-h)/2,(width+w)/2,(height+h)/2),paint)
@@ -218,10 +237,11 @@ class MainActivity : Activity() {
     }
     private inner class SwatchView(context:Context,val preset:Int,val label:String):View(context) {
         private val paint=Paint(Paint.ANTI_ALIAS_FLAG)
-        init {contentDescription=label;isClickable=true;isFocusable=true}
+        init {contentDescription=label;isClickable=true;isFocusable=true;setLayerType(LAYER_TYPE_SOFTWARE,null)}
         override fun onDraw(canvas:Canvas) {
             super.onDraw(canvas);val density=resources.displayMetrics.density
-            if(isSelected){paint.color=navy;paint.style=Paint.Style.STROKE;paint.strokeWidth=2*density;canvas.drawRoundRect(4*density,4*density,width-4*density,height-4*density,10*density,10*density,paint)}
+            NeoSurface(density,isSelected||isPressed).apply {setBounds(0,0,width,height);draw(canvas)}
+            if(isSelected){paint.color=navy;paint.style=Paint.Style.STROKE;paint.strokeWidth=density;canvas.drawRoundRect(7*density,7*density,width-7*density,height-7*density,12*density,12*density,paint)}
             paint.style=Paint.Style.FILL
             val radius=min(8*density,width/12f)
             for(i in 0..2){paint.color=LogoPixels.presets[preset][i];canvas.drawCircle(width/2f+(i-1)*radius*2.5f,22*density,radius,paint)
@@ -229,6 +249,7 @@ class MainActivity : Activity() {
             paint.color=navy;paint.textSize=10*resources.displayMetrics.scaledDensity;paint.textAlign=Paint.Align.CENTER
             canvas.drawText(label,width/2f,48*density,paint)
         }
+        override fun drawableStateChanged(){super.drawableStateChanged();invalidate()}
         override fun setSelected(selected:Boolean){super.setSelected(selected);invalidate()}
     }
 }

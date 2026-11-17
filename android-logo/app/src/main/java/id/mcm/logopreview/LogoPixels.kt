@@ -40,6 +40,7 @@ object LogoPixels {
             }
         }
         if (logo in regions.indices) nameplate(regions[logo])
+        if (logo in 5 until LogoCatalog.count) nameplate(floatArrayOf(0f,.8f,1f,1f))
         if (logo == 3) nameplate(floatArrayOf(.23f,.36f,.285f,.44f))
         return mask
     }

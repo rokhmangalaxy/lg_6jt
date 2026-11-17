@@ -55,3 +55,7 @@ Mask nameplate berupa batas ternormalisasi spesifik pada lima sumber raster. Sem
 Area logo mendukung swipe kiri/kanan melalui Pointer Events (juga drag mouse), ambang 55px, dominan horizontal, maksimal 900ms. Scroll vertikal tetap diizinkan; pointercancel membatalkan gesture. Tombol Prev/Next tetap tersedia.
 
 Ikon launcher Android berupa spiral merah–biru pada putih, dengan adaptive icon dan fallback berbagai density. Sumber AI ada di `android-logo/icon-source/galaxy.png`, hasil palet solid dan margin aman ada pada resource Android. Ini ikon aplikasi, bukan kandidat logo perusahaan baru.
+
+## Sepuluh konsep
+
+Preview mandiri sekarang berisi 10 logo. Konsep 06–10 ada di `assets/variasi-06-native.png` sampai `variasi-10-native.png`, dengan nameplate yang konsisten. Warna solid tetap sama; mask nama baru dimulai pada 80% tinggi. UI preview mengikuti gaya neumorphism, sedangkan aplikasi Android tetap memakai implementasi native terpisah.

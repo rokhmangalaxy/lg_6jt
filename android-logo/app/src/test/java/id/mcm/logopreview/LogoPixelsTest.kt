@@ -37,4 +37,20 @@ class LogoPixelsTest {
         val result=LogoPixels.recolor(source,booleanArrayOf(false,false,true),1)
         assertArrayEquals(intArrayOf(0xff173257.toInt(),red,white),result)
     }
+    @Test fun catalogHasTenUniqueEntriesAndWraps() {
+        assertEquals(10,LogoCatalog.count)
+        assertEquals(LogoCatalog.files.size,LogoCatalog.names.size)
+        assertEquals(10,LogoCatalog.files.toSet().size)
+        assertEquals(0,LogoCatalog.next(9,1))
+        assertEquals(9,LogoCatalog.next(0,-1))
+    }
+    @Test fun newNameplatesHaveTransparentCountersInEveryPreset() {
+        val pixels=IntArray(100){white}
+        for(y in 7..9)for(x in 2..4)if(y!=8||x!=3)pixels[y*10+x]=red
+        for(logo in 5..9){
+            val mask=LogoPixels.mask(pixels,10,10,logo)
+            assertTrue(mask[83])
+            for(preset in 0..3) assertEquals(LogoPixels.presets[preset][3],LogoPixels.recolor(pixels,mask,preset)[83])
+        }
+    }
 }

@@ -46,3 +46,11 @@ APK sekarang menggunakan **Android Views + Canvas/Bitmap native**, bukan WebView
 - Unit test Kotlin `LogoPixelsTest` menguji mask/counter, empat preset, reset, dan immutability. Jalankan `gradle testDebugUnitTest assembleDebug lintDebug` atau workflow release untuk versi release.
 
 Performa subjektif, ukuran font besar, layar pendek/landscape, TalkBack, dan update dengan catatan lama masih perlu pengujian perangkat nyata. Signing dan application ID tidak berubah.
+
+## Sepuluh konsep + neumorphism
+
+Katalog native kini 10 logo: lima lama tetap pada indeks yang sama, ditambah Hexa Frame, Folded MCM, Shield, Interlock, dan Precision Cut. `LogoCatalog` menjadi sumber jumlah/nama/file; navigasi wrap 10→1 dan 1→10. Nomor 01–10 dapat digeser horizontal, masing-masing target 52dp. Pilihan palet lama dan catatan native tetap pada namespace SharedPreferences yang sama.
+
+UI neumorphism memakai latar #E9EEF5, relief bayangan terang di kiri atas dan gelap di kanan bawah. Tombol terpilih/tertekan memakai tampilan inset dengan penanda warna/border agar tidak hanya bergantung pada bayangan. Kartu gambar tetap putih/abu-abu sesuai preset, efek UI tidak dicampur ke piksel logo. Semua digambar native melalui `NeoSurface`/Canvas, bukan WebView.
+
+Cache sumber dibatasi 3 gambar dan cache hasil 8 kombinasi; antrean render yang sudah usang dilewati. Bayangan memakai software layer lokal pada kontrol/kartu, sehingga kelancaran masih harus divalidasi di perangkat kelas bawah. Katalog dan mask nameplate tambahan tercakup unit test. HTML offline ikut diperbarui menjadi 10 logo dan gaya neumorphism sebagai preview terpisah, bukan UI di APK.

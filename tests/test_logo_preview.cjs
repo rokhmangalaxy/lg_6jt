@@ -14,10 +14,10 @@ assert.deepEqual(Array.from(sandbox.recolor(src,['#173257','#dc2626','#ffffff'])
 assert.deepEqual(Array.from(src.data),original,'original pixels unchanged');
 assert.deepEqual(Array.from(sandbox.recolor(src,['#dc2626','#173257','#ffffff']).data),original,'reset restores original');
 assert.deepEqual(Array.from(sandbox.recolor(src,['#000000','#000000','#000000']).data),[0,0,0,255,0,0,0,255,255,255,255,255]);
-assert.equal((html.match(/data:image\/png;base64,/g)||[]).length,5);
+assert.equal((html.match(/data:image\/png;base64,/g)||[]).length,10);
 assert(!html.includes('src="assets/'));
 assert.equal(html,fs.readFileSync('preview-logo-mcm.html','utf8'));
-console.log('PASS: JS syntax, simultaneous swap, source immutability, reset, custom palette, 5 embedded sources, offline parity');
+console.log('PASS: JS syntax, simultaneous swap, source immutability, reset, custom palette, 10 embedded sources, offline parity');
 
 const presets=JSON.parse(script.match(/const presets=(\[[\s\S]*?\]);/)[1].replace(/(name|colors|background):/g,'"$1":').replace(/'/g,'"'));
 assert.equal(presets.length,4);
