@@ -23,3 +23,11 @@ Workflow `.github/workflows/pages.yml` hanya mengunggah **folder `html/`**, buka
 ## Memperbarui gambar
 
 Setelah mengubah logo solid di `03-konsep/solid/`, salin lima PNG ke `html/assets/`, periksa preview, lalu jalankan publikasi manual lagi. Gambar adalah konsep raster berbasis generasi AI, bukan master vektor/siap bordir. Palet kerja bukan warna resmi perusahaan.
+
+## Navigasi dan warna interaktif
+
+Galeri menampilkan satu konsep aktif dengan Prev/Next (berputar), tombol nomor 01–05, dan tombol panah keyboard. Enam tombol susunan palet memetakan area merah, biru, dan putih dari gambar sumber asli ke seluruh enam permutasi warna dasar. Tidak ada color picker atau warna tambahan. Pilihan terpisah per konsep bertahan selama halaman terbuka, bukan setelah reload. Area putih termasuk latar. Unduh PNG mengekspor warna konsep aktif; reset hanya berlaku pada konsep aktif.
+
+Kelima sumber PNG tertanam di `index.html`; tidak perlu fetch atau server agar kanvas dapat dipakai ketika membuka file lokal. `preview-logo-mcm.html` di root adalah salinan mandiri yang sama. Tidak ada gambar tambahan per kombinasi warna. Setelah mengganti sumber artwork, data gambar tertanam pada HTML harus diperbarui juga; sekadar mengganti `assets/` tidak mengubah preview interaktif.
+
+Pemeriksaan logika: `node tests/test_logo_preview.cjs` (sintaks, pemetaan warna simultan, sumber tetap utuh, reset, warna kustom, lima sumber tertanam, dan kesamaan versi offline). Ini bukan pengujian browser otomatis.
