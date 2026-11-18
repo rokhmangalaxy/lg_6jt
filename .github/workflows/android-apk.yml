@@ -21,6 +21,8 @@ jobs:
       ANDROID_VERSION_NAME: 1.0.${{ github.run_number }}
     steps:
       - uses: actions/checkout@v5
+      - name: Verify geometric logo masters
+        run: python3 -m unittest discover -s tests -p 'test*geometric*.py'
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
