@@ -23,3 +23,14 @@ class CatalogTest(unittest.TestCase):
         original=json.loads((R/'04-desain/redraw-geometris-04/mcm-04-geometris.json').read_text())
         app=json.loads((R/'android-logo/logo-assets/client-logo-04.json').read_text())
         self.assertEqual(original['layers'],app['layers'])
+    def test_corrected_slots_use_reference_cell_coordinates(self):
+        # Prevent returning to the 400x436 re-proportioned drawings from v1.0.20.
+        for slot,cell in ((2,8),(3,9)):
+            catalog=(R/'android-logo/app/src/main/java/id/mcm/logopreview/LogoCatalog.kt').read_text()
+            import re
+            files=re.findall(r'"(client-[^"\n]+\.png)"',catalog)
+            self.assertEqual(files[slot],f'client-attachment-{cell:02}.png')
+            data=json.loads((R/'android-logo/logo-assets'/files[slot].replace('.png','.json')).read_text())
+            self.assertEqual((data['width'],data['height']),(404,351))
+            self.assertEqual(data['referenceCell'],cell)
+            self.assertEqual(data['referenceCrop'],[465 if cell==8 else 902,755,404,351])
