@@ -100,6 +100,11 @@ jobs:
             echo "::notice title=APK::$info"
           done < /tmp/apk-info.txt
           echo "::notice title=APK sha256::$sha ($size byte)"
+          bt="$ANDROID_HOME/build-tools/35.0.0"
+          badging=$("$bt/aapt2" dump badging "$apk" 2>/dev/null | grep -E "^package:|^launchable-activity:|^sdkVersion:|^targetSdkVersion:" | paste -sd'|' - | cut -c1-320 || true)
+          certs=$("$bt/apksigner" verify --print-certs "$apk" 2>/dev/null | grep -E "Signer #1 certificate (DN|SHA-256)" | paste -sd'|' - | cut -c1-240 || true)
+          echo "::notice title=APK badging::$badging"
+          echo "::notice title=APK sertifikat::$certs"
           tag="cutgridimages-v${{ github.run_number }}"
           notes="APK debug otomatis dari commit ${{ github.sha }}. Pasang di perangkat Android 8+ (minSdk 26); izinkan pemasangan dari sumber tidak dikenal bila diminta. Ditandatangani dengan debug keystore milik runner, sehingga APK dari run berbeda harus di-uninstall dulu sebelum dipasang ulang. sha256: $sha"
           if gh release view "$tag" >/dev/null 2>&1; then

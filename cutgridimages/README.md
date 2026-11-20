@@ -6,6 +6,17 @@ yang presisi, memilih petak mana yang dipakai, lalu menyimpannya ke galeri peran
 Paket aplikasi: `com.emrobinso.cutgridimages`. Tanpa dependensi runtime eksternal, tanpa internet;
 semua pemrosesan di perangkat.
 
+## Unduh APK
+
+APK debug dibangun otomatis dan diterbitkan sebagai aset Release di setiap perubahan folder ini:
+
+- Halaman rilis: <https://github.com/rokhmangalaxy/lg_6jt/releases>
+- Berkas terbaru: `app-debug.apk` pada rilis `cutgridimages-v<N>` (tag mengikuti nomor run workflow).
+
+Pasang di Android 8+ (minSdk 26) dan izinkan pemasangan dari sumber tidak dikenal bila diminta.
+APK ditandatangani *debug keystore* milik runner CI, sehingga APK dari run berbeda memakai kunci
+berbeda: uninstall dulu sebelum memasang versi baru. `sha256` setiap build dicetak di catatan rilis.
+
 ## Tiga layar
 
 Navigasi bawah: **Beranda · Galeri · Pengaturan**.
@@ -106,8 +117,9 @@ langkah informasi sehingga temuannya tidak menghalangi artifact. Bila berhasil, 
 (izinkan pemasangan dari sumber aplikasi pengunduh bila diminta). Ini APK debug untuk pengujian,
 bukan rilis Play Store dan belum ditandatangani untuk distribusi.
 
-Status: workflow sudah disiapkan, tetapi **APK belum dibangun di CI** pada sesi ini (job Actions
-belum berjalan karena masalah billing).
+Status: repository sudah **publik**, sehingga job Actions memakai runner standar gratis. Build
+terakhir (rilis `cutgridimages-v9`) menyelesaikan `testDebugUnitTest`, `assembleDebug`, lint
+(informatif), unggah artifact, dan penerbitan aset Release tanpa kegagalan.
 
 Toolchain: JDK 17, Gradle 8.9, AGP 8.7.3, Kotlin 2.0.21, compile/target SDK 35, min SDK 26
 (Android 8+). Tidak ada Gradle wrapper biner di repository; Gradle disiapkan oleh workflow.
@@ -166,12 +178,17 @@ beserta konfigurasi yang sudah disiapkan: **[CI-ALTERNATIF.md](CI-ALTERNATIF.md)
   *Cut Grid Images*, ikon adaptif, dan `launchable-activity: com.emrobinso.cutgridimages.HomeActivity`
   (`--target-sdk-version 35`, `minSdkVersion 26`). `apksigner` juga berhasil menandatangani APK
   hasil tautan itu (skema v2 + v3 terverifikasi).
-- **APK lengkap belum bisa dirakit di sandbox:** satu-satunya komponen yang tidak tersedia adalah
-  dexer JVM (`d8`/`r8`). GitHub release assets (host `objects.githubusercontent.com`), Google Maven,
-  dan Maven Central tidak dapat diakses dari sandbox; jar `d8.jar` yang ditemukan di repo GitHub
-  semuanya pointer Git LFS. Karena itu job CI (Actions/Codemagic/CircleCI) atau build di mesin
-  sendiri tetap diperlukan untuk menghasilkan APK yang bisa dipasang.
-- Belum diuji: lint penuh dan pemasangan di perangkat/emulator.
+- **Build lengkap di GitHub Actions sudah berhasil** (run 44684519927, rilis `cutgridimages-v9`):
+  unit test + `assembleDebug` + `lintDebug` selesai, dan APK debug terverifikasi berisi
+  `classes.dex` (2,3 MB) beserta `classes2.dex`…`classes5.dex`, `resources.arsc`, dan
+  `AndroidManifest.xml` — total 901.652 byte, `sha256`
+  `e77df6f16c6ea2089db5f5795ba45859e8d758bd200c7f6c4d8e58aa98235037`.
+- **Sandbox agen tidak dapat merakit APK penuh** karena tidak ada dexer JVM (`d8`/`r8`) dan host
+  unduhan besar (Google Maven, `objects.githubusercontent.com`, `release-assets.githubusercontent.com`,
+  `*.blob.core.windows.net`) diblokir; karena itu job CI dipakai untuk menghasilkan APK yang bisa
+  dipasang.
+- Belum diuji: pemasangan di perangkat/emulator dan alur UI secara manual (build & unit test sudah
+  hijau).
 
 ## Batasan yang diketahui
 
