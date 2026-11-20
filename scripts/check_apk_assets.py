@@ -14,6 +14,9 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
     pilot=json.loads(apk.read('assets/exploration/catalog.json'))['reviewedEntries']
     assert len(pilot)==2
     for entry in pilot:
+        assert entry['format']=='manual-vector'
+        vector=json.loads(apk.read('assets/'+entry['vectorAsset']))
+        assert vector['layers'] and vector['construction']=='manual-geometric-v1'
         assert apk.read('assets/'+entry['asset']).startswith(b'\x89PNG\r\n\x1a\n')
     assert actual == {'assets/' + name for name in expected} | {'assets/'+e['asset'] for e in pilot}, f'Unexpected/missing logos: {actual}'
     for filename in expected:

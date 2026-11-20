@@ -34,8 +34,8 @@ class MainActivity : Activity() {
     private lateinit var counter: TextView
     private lateinit var status: TextView
     private lateinit var paletteRow: LinearLayout
-    private lateinit var numberRow: LinearLayout
-    private lateinit var numberScroll: HorizontalScrollView
+    private lateinit var numberRow: GridLayout
+    private lateinit var numberScroll: ScrollView
     private lateinit var downloadButton: Button
     private var pendingExportLogo = -1
     private var pendingExportPreset = 0
@@ -152,22 +152,17 @@ class MainActivity : Activity() {
     }
     private fun showStudio() {
         val layout=column().apply { setPadding(dp(12),0,dp(12),0) }
-        val collections=row()
-        arrayOf("Pilihan Klien","Eksplorasi").forEachIndexed { i,label ->
-            collections.addView(button(label){
-                val target=if(i==0)0 else LogoCatalog.clientCount
-                if(LogoCatalog.isExploration(current)!=(i==1)){
-                    prefs.edit().putInt(if(LogoCatalog.isExploration(current))"lastExploration" else "lastClient",current).apply()
-                    current=prefs.getInt(if(i==0)"lastClient" else "lastExploration",target)
-                    if(current !in LogoCatalog.collection(target))current=target
-                    prefs.edit().putInt("clientSetLogo",current).apply()
-                    showPage()
-                }
-            }.apply {isSelected=LogoCatalog.isExploration(current)==(i==1)},LinearLayout.LayoutParams(0,dp(48),1f))
-        }
-        layout.addView(collections)
         logoView=LogoView(this) { step -> navigate(step) }
-        layout.addView(logoView,LinearLayout.LayoutParams(-1,0,1f))
+        val square=object:FrameLayout(this){
+            override fun onMeasure(widthSpec:Int,heightSpec:Int){
+                val w=View.MeasureSpec.getSize(widthSpec)
+                val side=minOf(w,(resources.displayMetrics.heightPixels*.36f).toInt())
+                logoView.measure(View.MeasureSpec.makeMeasureSpec(side,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(side,View.MeasureSpec.EXACTLY))
+                setMeasuredDimension(w,side)
+            }
+        }
+        square.addView(logoView,FrameLayout.LayoutParams(-2,-2,Gravity.CENTER))
+        layout.addView(square,LinearLayout.LayoutParams(-1,-2))
         status=text("",12f).apply { gravity=Gravity.CENTER }
         layout.addView(status,LinearLayout.LayoutParams(-1,dp(20)))
         val navigation=row()
@@ -177,10 +172,14 @@ class MainActivity : Activity() {
         navigation.addView(button("❯","Logo berikutnya"){navigate(1)},LinearLayout.LayoutParams(dp(64),dp(48)))
         layout.addView(navigation)
         paletteRow=row();layout.addView(paletteRow,LinearLayout.LayoutParams(-1,dp(64)))
-        numberRow=row()
-        numberScroll=HorizontalScrollView(this).apply {isHorizontalScrollBarEnabled=false;addView(numberRow,android.view.ViewGroup.LayoutParams(-2,-1))}
-        layout.addView(numberScroll,LinearLayout.LayoutParams(-1,dp(54)))
+        layout.addView(text("Semua variasi · ketuk thumbnail untuk memilih",12f))
+        numberRow=GridLayout(this).apply {columnCount=3;alignmentMode=GridLayout.ALIGN_BOUNDS}
+        numberScroll=ScrollView(this).apply {isFillViewport=false;addView(numberRow,android.view.ViewGroup.LayoutParams(-1,-2))}
+        layout.addView(numberScroll,LinearLayout.LayoutParams(-1,0,1f))
         content.addView(layout,FrameLayout.LayoutParams(-1,-1));updateStudio()
+    }
+    private fun selectLogo(index:Int){
+        current=index;prefs.edit().putInt("clientSetLogo",index).apply();updateStudio()
     }
     private fun navigate(step: Int) {current=LogoCatalog.next(current,step);prefs.edit().putInt("clientSetLogo",current).apply();updateStudio()}
     private fun updateStudio() {
@@ -194,10 +193,19 @@ class MainActivity : Activity() {
             }
             paletteRow.addView(swatch,LinearLayout.LayoutParams(0,-1,1f))
         }
-        for(i in collection) numberRow.addView(button(String.format(java.util.Locale.ROOT,"%02d",i-collection.first+1),"Logo ${i+1}") {
-            current=i;prefs.edit().putInt("clientSetLogo",i).apply();updateStudio()
-        }.apply { isSelected=current==i },LinearLayout.LayoutParams(dp(52),-1))
-        numberScroll.post { if(page==0)numberScroll.smoothScrollTo(((current-collection.first)*dp(52)-numberScroll.width/2+dp(26)).coerceAtLeast(0),0) }
+        val thumbnails=mutableListOf<Pair<Int,ImageView>>()
+        for(i in files.indices){
+            val tile=column().apply {setPadding(dp(4),dp(4),dp(4),dp(4))}
+            val thumb=ImageView(this).apply {
+                scaleType=ImageView.ScaleType.FIT_CENTER
+                contentDescription="Pilih ${names[i]}";setBackgroundColor(LogoCatalog.background(i,selections[i]))
+                setOnClickListener {selectLogo(i)}
+            }
+            tile.addView(thumb,LinearLayout.LayoutParams(-1,dp(84)))
+            tile.addView(button(String.format(java.util.Locale.ROOT,"%02d",i+1),"Pilih ${names[i]}"){selectLogo(i)}.apply {isSelected=current==i},LinearLayout.LayoutParams(-1,dp(40)))
+            numberRow.addView(tile,GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED),GridLayout.spec(i%3,1f)).apply{width=0;height=-2})
+            thumbnails.add(i to thumb)
+        }
         val index=current;val preset=selections[index];val token=++generation
         val bg=LogoCatalog.background(index,preset)
         logoView.canvasBackground=bg;logoView.bitmap=null;logoView.invalidate();status.text="Memuat…";downloadButton.isEnabled=false
@@ -206,6 +214,13 @@ class MainActivity : Activity() {
             try {
                 val bitmap=renderLogo(index,preset)
                 runOnUiThread { if(!isDestroyed&&page==0&&token==generation) {logoView.bitmap=bitmap;logoView.invalidate();status.text="";downloadButton.isEnabled=pendingExportLogo<0} }
+                for((id,view) in thumbnails){
+                    if(token!=generation)break
+                    val thumbnail=LogoVectorRenderer.render(assets,id,selections[id],240)
+                    runOnUiThread {
+                        if(!isDestroyed&&page==0&&token==generation)view.setImageBitmap(thumbnail) else thumbnail.recycle()
+                    }
+                }
             } catch (error: Exception) {
                 android.util.Log.e("MCMLogo", "Preview failed: ${files[index]}, preset=$preset", error)
                 runOnUiThread {if(!isDestroyed&&page==0&&token==generation)status.text="Logo ${index+1} gagal dimuat. Coba pilih ulang."}
@@ -333,7 +348,7 @@ class MainActivity : Activity() {
         override fun onDraw(canvas:Canvas) {
             super.onDraw(canvas)
             val d=resources.displayMetrics.density
-            val card=RectF(10*d,12*d,width-10*d,height-12*d)
+            val card=RectF(10*d,10*d,width-10*d,height-10*d)
             paint.color=NeoSurface.BASE;paint.setShadowLayer(7*d,4*d,4*d,0xffb8c5d5.toInt());canvas.drawRoundRect(card,20*d,20*d,paint)
             paint.setShadowLayer(7*d,-4*d,-4*d,Color.WHITE);canvas.drawRoundRect(card,20*d,20*d,paint);paint.clearShadowLayer()
             paint.color=canvasBackground;canvas.drawRoundRect(card,20*d,20*d,paint)

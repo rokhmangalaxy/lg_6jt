@@ -30,8 +30,8 @@ class LogoPixelsTest {
         assertArrayEquals(arrayOf("client-logo-04.png","client-attachment-01.png","client-attachment-08.png","client-attachment-09.png"),LogoCatalog.files.take(4).toTypedArray())
         assertEquals(LogoCatalog.files.size,LogoCatalog.names.size)
         assertEquals(6,LogoCatalog.files.toSet().size)
-        assertEquals(0,LogoCatalog.next(3,1))
-        assertEquals(3,LogoCatalog.next(0,-1))
+        assertEquals(4,LogoCatalog.next(3,1))
+        assertEquals(5,LogoCatalog.next(0,-1))
     }
     @Test fun everyLogoAndSwatchUseLightGrayNeverBlack() {
         for(logo in 0..3)for(preset in 0..3)assertEquals(0xffd1d5db.toInt(),LogoCatalog.background(logo,preset))

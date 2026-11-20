@@ -90,3 +90,8 @@ Tab Logo memiliki koleksi terpisah Pilihan Klien (empat indeks lama tidak beruba
 `app/src/main/assets/exploration/catalog.json` memetakan ID stabil, nama tampilan, nama asli, Drive ID, hash sumber, dan status pilot. File Drive tidak di-rename. Generator `scripts/prepare_exploration_pilot.py` memerlukan dua unduhan sumber di folder lokal `google_drive/` dan ImageMagick. PNG dipisahkan dari latar putih terhubung dengan floodfill; area putih tertutup dipertahankan sebagai artwork. Palet dipetakan saat runtime untuk empat swatch. Ini raster, bukan SVG geometris baru: pembesaran tidak menciptakan detail tambahan.
 
 Folder Drive dilaporkan memiliki 342 file. Hanya dua sampel yang diimpor dan diperiksa pada tahap ini. Hash kedua sumber berbeda; belum ada klaim deduplikasi visual atau audit seluruh 342 file. Perlu peninjauan dan pemrosesan batch berikutnya sebelum katalog penuh ditambahkan. Seluruh aset klien dan seragam lama tetap utuh.
+
+## Koreksi setelah v1.0.25
+Semua enam logo berada dalam satu katalog bernama Variasi 01–06; belum ada keputusan klien. Pemisah koleksi dihapus. Preview utama kotak di atas, grid thumbnail tiga kolom yang bisa digulir di bawah swatch. Swipe/prev/next kini menjangkau seluruh enam variasi. Tab bawah tetap Logo | Seragam.
+
+Variasi 05/06 sekarang memakai master SVG manual dan JSON native dari titik yang sama; raster renderer serta importer floodfill dihentikan. PNG yang tersisa hanya thumbnail/arsip; preview, mockup dan ekspor dirender dari path native. Sisa file Drive belum diimpor. Bagian dokumentasi pilot raster di atas merupakan riwayat, bukan perilaku saat ini.

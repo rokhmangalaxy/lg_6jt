@@ -22,7 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Verify geometric logo masters
-        run: python3 -m unittest discover -s tests -p 'test*geometric*.py'
+        run: |
+          python3 -m unittest discover -s tests -p 'test*geometric*.py'
+          python3 -m unittest discover -s tests -p 'test_variation_vectors.py'
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

@@ -37,14 +37,21 @@ class UniformTest {
         app.getSharedPreferences("native-studio",0).edit().clear().putInt("clientSetLogo",2).putInt("clientSetPalette2",1).commit()
         val controller=Robolectric.buildActivity(MainActivity::class.java).setup()
         fun tap(label:String){all(controller.get().window.decorView).filterIsInstance<Button>().first{it.text.toString()==label}.performClick()}
+        val decor=controller.get().window.decorView
+        decor.measure(View.MeasureSpec.makeMeasureSpec(1080,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(1920,View.MeasureSpec.EXACTLY))
+        decor.layout(0,0,1080,1920)
+        val preview=all(decor).first{it.contentDescription=="Preview logo, geser kiri atau kanan"}
+        assertTrue(preview.width>0);assertEquals(preview.width,preview.height)
+        assertEquals(6,all(decor).filterIsInstance<Button>().count{it.text.toString().matches(Regex("0[1-6]"))})
+        assertFalse(all(decor).filterIsInstance<Button>().any{it.text=="Pilihan Klien"||it.text=="Eksplorasi"})
         tap("Seragam")
-        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Lampiran 08 · Swatch 2"})
+        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Variasi 03 · Swatch 2"})
         controller.recreate()
-        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Lampiran 08 · Swatch 2"})
+        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Variasi 03 · Swatch 2"})
         tap("Logo");tap("04");tap("Seragam")
-        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Lampiran 09 · Swatch 1"})
-        tap("Logo");tap("Eksplorasi");tap("Seragam")
-        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Eksplorasi 01–01 · Swatch 1"})
+        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Variasi 04 · Swatch 1"})
+        tap("Logo");tap("05");tap("Seragam")
+        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Variasi 05 · Swatch 1"})
         controller.pause().stop().destroy()
     }
 }
