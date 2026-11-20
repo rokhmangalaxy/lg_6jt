@@ -45,7 +45,18 @@ jobs:
 
       - name: Unit tests and debug APK
         working-directory: cutgridimages
-        run: gradle --no-daemon testDebugUnitTest assembleDebug
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle --no-daemon --stacktrace testDebugUnitTest assembleDebug 2>&1 | tee build.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            # Cetak ekor log sebagai anotasi supaya penyebab gagal bisa dibaca lewat REST API
+            # meski log mentah tidak dapat diunduh dari lingkungan tertentu.
+            tail -c 2500 build.log | tr '\n' '~' | tr -d '\r'
+            echo "::error::build-gagal~$(tail -c 2400 build.log | tr '\n' '~' | tr -d '\r')"
+            exit "$status"
+          fi
 
       # Lint bersifat informasi: temuan gaya tidak menghalangi artifact APK.
       - name: Lint
