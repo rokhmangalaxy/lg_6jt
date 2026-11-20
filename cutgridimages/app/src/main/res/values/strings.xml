@@ -26,6 +26,10 @@
     <string name="pick_first">Pilih gambar terlebih dahulu</string>
     <string name="loading_image">Memuat gambar…</string>
     <string name="load_failed">Gagal memuat gambar: %1$s</string>
+    <string name="load_failed_hint">Gagal memuat gambar: %1$s\nTekan lama thumbnail untuk menghapusnya, lalu pilih ulang gambarnya.</string>
+    <string name="remove_source_title">Hapus gambar ini?</string>
+    <string name="remove_source_message">Gambar dihapus dari daftar Beranda beserta salinan lokalnya.</string>
+    <string name="source_removed">Gambar dihapus dari daftar</string>
     <string name="saving_pieces">Menyimpan potongan…</string>
     <string name="unpickable_tile">Potongan ini terlalu kecil untuk disimpan</string>
 

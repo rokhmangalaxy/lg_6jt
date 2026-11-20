@@ -4,10 +4,19 @@ import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
 
-/** Gambar sumber (URI dokumen) yang ditambahkan pengguna. */
-data class SourceImage(val uri: String, val addedAt: Long)
+/**
+ * Gambar sumber yang ditambahkan pengguna.
+ *
+ * [cachedPath] menunjuk salinan lokal di penyimpanan aplikasi (lihat `image.SourceCache`).
+ * Bila salinan ada, gambar tidak lagi bergantung pada izin URI penyedia dokumen.
+ */
+data class SourceImage(
+    val uri: String,
+    val addedAt: Long,
+    val cachedPath: String? = null,
+)
 
-/** Menyimpan daftar URI gambar sumber agar bertahan setelah aplikasi ditutup. */
+/** Menyimpan daftar gambar sumber agar bertahan setelah aplikasi ditutup. */
 class ImageSourceStore(context: Context) {
 
     private val prefs = context.applicationContext
@@ -27,7 +36,20 @@ class ImageSourceStore(context: Context) {
         return current
     }
 
-    fun remove(uri: String) = persist(list().filterNot { it.uri == uri })
+    /** Mencatat lokasi salinan lokal untuk [uri] (atau menghapus catatannya bila null). */
+    fun setCached(uri: String, path: String?): List<SourceImage> {
+        val updated = list().map { item ->
+            if (item.uri == uri) item.copy(cachedPath = path) else item
+        }
+        persist(updated)
+        return updated
+    }
+
+    fun remove(uri: String): List<SourceImage> {
+        val updated = list().filterNot { it.uri == uri }
+        persist(updated)
+        return updated
+    }
 
     fun clear() {
         prefs.edit().remove(KEY_SOURCES).apply()
@@ -35,7 +57,14 @@ class ImageSourceStore(context: Context) {
 
     private fun persist(items: List<SourceImage>) {
         val array = JSONArray()
-        items.forEach { array.put(JSONObject().put("uri", it.uri).put("addedAt", it.addedAt)) }
+        items.forEach { item ->
+            array.put(
+                JSONObject()
+                    .put("uri", item.uri)
+                    .put("addedAt", item.addedAt)
+                    .put("cache", item.cachedPath ?: ""),
+            )
+        }
         prefs.edit().putString(KEY_SOURCES, array.toString()).apply()
     }
 
@@ -47,7 +76,9 @@ class ImageSourceStore(context: Context) {
                 for (index in 0 until array.length()) {
                     val item = array.optJSONObject(index) ?: continue
                     val uri = item.optString("uri")
-                    if (uri.isNotBlank()) add(SourceImage(uri, item.optLong("addedAt")))
+                    if (uri.isBlank()) continue
+                    val cache = item.optString("cache").takeIf { it.isNotBlank() }
+                    add(SourceImage(uri, item.optLong("addedAt"), cache))
                 }
             }
         }.getOrDefault(emptyList())

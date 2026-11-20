@@ -1,6 +1,7 @@
 package com.emrobinso.cutgridimages
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -26,15 +27,20 @@ import com.emrobinso.cutgridimages.grid.GridSlicer
 import com.emrobinso.cutgridimages.grid.MAX_GRID
 import com.emrobinso.cutgridimages.grid.MIN_GRID
 import com.emrobinso.cutgridimages.image.ImageLoader
+import com.emrobinso.cutgridimages.image.SourceCache
 import com.emrobinso.cutgridimages.image.Thumbnails
 import com.emrobinso.cutgridimages.ui.GridEditorView
 import com.emrobinso.cutgridimages.ui.dp
 import com.emrobinso.cutgridimages.ui.roundedBackground
+import java.io.File
 import java.util.concurrent.Executors
 
 /**
  * Beranda: placeholder input gambar (multi seleksi), strip 5 kolom yang bisa di-scroll,
  * gambar utama dengan pengaturan kolom/baris, dan mode seleksi untuk menyimpan potongan.
+ *
+ * Setiap gambar yang berhasil dibaca langsung disalin ke penyimpanan aplikasi, sehingga
+ * pemuatan berikutnya tidak lagi bergantung pada izin URI penyedia dokumen.
  */
 class HomeActivity : Activity() {
 
@@ -116,10 +122,11 @@ class HomeActivity : Activity() {
         updateGridLabels()
 
         val restoredMain = savedInstanceState?.getString(STATE_MAIN_URI)
+        val preferred = restoredMain?.let { uri -> sources.firstOrNull { it.uri == uri } }
+            ?: sources.firstOrNull()
         when {
             handleLaunchIntent(intent) -> Unit
-            restoredMain != null -> selectMain(restoredMain)
-            sources.isNotEmpty() -> selectMain(sources.first().uri)
+            preferred != null -> selectMain(preferred)
         }
     }
 
@@ -162,7 +169,7 @@ class HomeActivity : Activity() {
             if (sources.none { it.uri == mainUri }) {
                 mainUri = null
                 showMain(null)
-                if (sources.isNotEmpty()) selectMain(sources.first().uri)
+                sources.firstOrNull()?.let { selectMain(it) }
             }
             renderThumbnails()
         }
@@ -208,7 +215,9 @@ class HomeActivity : Activity() {
         }
         sources = sourceStore.add(picked.map { it.toString() })
         renderThumbnails()
-        selectMain(picked.first().toString())
+
+        val firstUri = picked.first().toString()
+        sources.firstOrNull { it.uri == firstUri }?.let { selectMain(it) }
     }
 
     private fun handleLaunchIntent(intent: Intent?): Boolean {
@@ -218,9 +227,10 @@ class HomeActivity : Activity() {
             Intent.ACTION_SEND -> sharedImageUri(intent)
             else -> null
         } ?: return false
-        sources = sourceStore.add(listOf(uri.toString()))
+        val uriString = uri.toString()
+        sources = sourceStore.add(listOf(uriString))
         renderThumbnails()
-        selectMain(uri.toString())
+        sources.firstOrNull { it.uri == uriString }?.let { selectMain(it) }
         return true
     }
 
@@ -269,9 +279,13 @@ class HomeActivity : Activity() {
             ).apply { setMargins(dp(3), dp(3), dp(3), dp(3)) }
             image.scaleType = ImageView.ScaleType.CENTER_CROP
             frame.addView(image)
-            frame.setOnClickListener { selectMain(source.uri) }
+            frame.setOnClickListener { selectMain(source) }
+            frame.setOnLongClickListener {
+                confirmRemoveSource(source)
+                true
+            }
             thumbnailGrid.addView(frame)
-            loadThumbnail(source.uri, image)
+            loadThumbnail(source, image)
         }
 
         val addTile = TextView(this)
@@ -290,28 +304,32 @@ class HomeActivity : Activity() {
         thumbnailGrid.addView(addTile)
     }
 
-    private fun loadThumbnail(uriString: String, target: ImageView) {
+    private fun loadThumbnail(source: SourceImage, target: ImageView) {
+        val uriString = source.uri
         target.tag = uriString
+        val cached = source.cachedPath?.let { File(it) }?.takeIf { it.isFile }
         executor.execute {
-            val bitmap = runCatching {
-                Thumbnails.decode(contentResolver, Uri.parse(uriString), THUMBNAIL_DIMENSION)
-            }.getOrNull()
+            val bitmap = if (cached != null) {
+                Thumbnails.decodeFile(cached, THUMBNAIL_DIMENSION)
+            } else {
+                runCatching {
+                    Thumbnails.decode(contentResolver, Uri.parse(uriString), THUMBNAIL_DIMENSION)
+                }.getOrNull()
+            }
             handler.post {
                 if (target.tag == uriString && bitmap != null) target.setImageBitmap(bitmap)
             }
         }
     }
 
-    private fun selectMain(uriString: String) {
+    private fun selectMain(source: SourceImage) {
         if (busy) return
-        mainUri = uriString
+        mainUri = source.uri
         renderThumbnails()
         setStatus(getString(R.string.loading_image))
         val token = ++loadToken
         executor.execute {
-            val loaded = runCatching {
-                ImageLoader.load(this, Uri.parse(uriString), PREVIEW_MAX_DIMENSION)
-            }
+            val loaded = runCatching { loadSourceBitmap(source) }
             handler.post {
                 if (isFinishing || isDestroyed || token != loadToken) {
                     loaded.getOrNull()?.recycle()
@@ -322,10 +340,57 @@ class HomeActivity : Activity() {
                     setStatus("")
                 }.onFailure { error ->
                     showMain(null)
-                    setStatus(getString(R.string.load_failed, error.readableMessage()))
+                    setStatus(getString(R.string.load_failed_hint, error.readableMessage()))
                 }
             }
         }
+    }
+
+    /**
+     * Memuat gambar utama: pakai salinan lokal bila ada, jika tidak baca dari URI lalu
+     * simpan salinannya supaya pemuatan berikutnya tidak bergantung pada izin penyedia.
+     */
+    private fun loadSourceBitmap(source: SourceImage): Bitmap {
+        val cached = source.cachedPath?.let { File(it) }?.takeIf { it.isFile }
+        if (cached != null) {
+            val fromCache = runCatching { ImageLoader.loadFile(cached, PREVIEW_MAX_DIMENSION) }
+            if (fromCache.isSuccess) return fromCache.getOrThrow()
+            runCatching { cached.delete() }
+        }
+
+        val bitmap = ImageLoader.load(this, Uri.parse(source.uri), PREVIEW_MAX_DIMENSION)
+        val file = SourceCache.write(this, source.uri, bitmap)
+        if (file != null) {
+            val updated = sourceStore.setCached(source.uri, file.absolutePath)
+            handler.post {
+                if (!isFinishing && !isDestroyed) {
+                    sources = updated
+                    renderThumbnails()
+                }
+            }
+        }
+        return bitmap
+    }
+
+    private fun confirmRemoveSource(source: SourceImage) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.remove_source_title)
+            .setMessage(R.string.remove_source_message)
+            .setPositiveButton(R.string.delete) { _, _ -> removeSource(source) }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun removeSource(source: SourceImage) {
+        SourceCache.delete(this, source.uri)
+        sources = sourceStore.remove(source.uri)
+        if (mainUri == source.uri) {
+            mainUri = null
+            showMain(null)
+            sources.firstOrNull()?.let { selectMain(it) }
+        }
+        renderThumbnails()
+        setStatus(getString(R.string.source_removed))
     }
 
     private fun showMain(bitmap: Bitmap?) {

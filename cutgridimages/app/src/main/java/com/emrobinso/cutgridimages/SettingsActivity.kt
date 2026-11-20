@@ -18,6 +18,7 @@ import com.emrobinso.cutgridimages.data.ImageSourceStore
 import com.emrobinso.cutgridimages.data.PieceStore
 import com.emrobinso.cutgridimages.data.SettingsStore
 import com.emrobinso.cutgridimages.image.PieceNaming
+import com.emrobinso.cutgridimages.image.SourceCache
 import com.emrobinso.cutgridimages.ui.dp
 
 /** Pengaturan: nama proyek, digit nomor, pemisah, warna seleksi, dan pembersihan data. */
@@ -161,6 +162,7 @@ class SettingsActivity : Activity() {
             .setPositiveButton(R.string.delete) { _, _ ->
                 pieceStore.clear()
                 sourceStore.clear()
+                SourceCache.clear(this)
                 statusText.text = getString(R.string.clear_done)
             }
             .setNegativeButton(R.string.cancel, null)

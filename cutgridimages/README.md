@@ -64,7 +64,12 @@ dan titik dua → `-`), pemisah kosong kembali ke `_`, dan nomor berjalan per pr
 
 - Potongan hasil seleksi disimpan sebagai PNG di penyimpanan internal aplikasi
   (`filesDir/pieces/`) dengan indeks `filesDir/pieces.json` — belum menyentuh galeri perangkat.
-- Daftar URI gambar yang ditambahkan disimpan di `filesDir/…` JSON dengan izin baca persisten.
+- Daftar URI gambar yang ditambahkan disimpan di `SharedPreferences` (`cutgrid_sources`), ditambah
+  izin baca persisten bila penyedia mendukungnya.
+- Setiap gambar yang berhasil dibaca **disalin** ke `filesDir/sources/` (JPEG, atau PNG bila
+  beralfa) sehingga pemuatan berikutnya tidak bergantung pada izin URI penyedia dokumen —
+  URI dari "Buka dengan"/"Bagikan" pun tetap bisa dibuka setelah aplikasi ditutup.
+  Ketuk lama thumbnail di Beranda untuk menghapus gambar beserta salinannya.
 - Pengaturan disimpan di `SharedPreferences` bernama `cutgrid_settings`.
 - Ekspor ke perangkat menulis ke `Pictures/CutGridImages`:
   - Android 10+ (`API 29+`): MediaStore, tanpa izin apa pun.
