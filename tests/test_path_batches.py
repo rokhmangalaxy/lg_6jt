@@ -79,4 +79,67 @@ class PathBatch04Test(PathBatchTest):
         self.assertEqual(current['exactDuplicateAudit']['filesChecked'],18)
         self.assertEqual(current['exactDuplicateAudit']['duplicateGroups'],[])
 
+class PathBatch05Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-05'
+    count=10
+    total=28
+    pending=[]
+
+    def test_full_capacity_and_provenance(self):
+        progress=json.loads((self.batch/'progress.json').read_text())
+        self.assertEqual(progress['newMasterCount'],10)
+        self.assertEqual(progress['groups']['3']['redrawn'],list(range(1,10)))
+        self.assertEqual(progress['groups']['4']['redrawn'],[1])
+        self.assertEqual(progress['exactDuplicateAudit']['filesChecked'],28)
+        self.assertEqual(progress['exactDuplicateAudit']['duplicateGroups'],[])
+        known={hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'04-desain/variasi-svg').rglob('*.svg') if p.parent!=self.batch}
+        previous_ids=set()
+        for batch in ('03','04'):
+            previous=json.loads((R/f'04-desain/variasi-svg/batch-{batch}/progress.json').read_text())
+            previous_ids.update(e['id'] for e in previous['entries'])
+        for e in progress['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known)
+            known.add(digest)
+
+    def test_polygons_do_not_self_intersect(self):
+        def orient(a,b,c):return (b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])
+        def crossing(a,b,c,d):
+            return orient(a,b,c)*orient(a,b,d)<0 and orient(c,d,a)*orient(c,d,b)<0
+        for path in self.batch.glob('exp-*.json'):
+            data=json.loads(path.read_text())
+            for layer in data['layers']:
+                poly=[]
+                for command in layer['commands']:
+                    if command[0]=='M':poly=[command[1:]]
+                    elif command[0]=='L':poly.append(command[1:])
+                    else:
+                        edges=list(zip(poly,poly[1:]+poly[:1]))
+                        for i,(a,b) in enumerate(edges):
+                            self.assertNotEqual(a,b)
+                            for j,(c,d) in enumerate(edges):
+                                if j>i+1 and not (i==0 and j==len(edges)-1):
+                                    self.assertFalse(crossing(a,b,c,d),(path.name,i,j))
+
+    def test_negative_spaces_and_split_center_are_transparent(self):
+        def painted(key,point):
+            x,y=point
+            data=json.loads((self.batch/f'{key}.json').read_text())
+            for layer in data['layers']:
+                inside=False;poly=[]
+                for command in layer['commands']:
+                    if command[0]=='M':poly=[command[1:]]
+                    elif command[0]=='L':poly.append(command[1:])
+                    else:
+                        for (x1,y1),(x2,y2) in zip(poly,poly[1:]+poly[:1]):
+                            if (y1>y)!=(y2>y) and x<(x2-x1)*(y-y1)/(y2-y1)+x1:inside=not inside
+                if inside:return True
+            return False
+        # Transparent counters rather than white paint; center seam stays open.
+        for key,point in [('exp-003-09',(208,180)),('exp-003-09',(208,40)),('exp-003-09',(208,280)),('exp-003-04',(175,120)),('exp-003-02',(152,160)),('exp-004-01',(165,160))]:
+            self.assertFalse(painted(key,point),(key,point))
+        for key,point in [('exp-003-09',(180,180)),('exp-003-09',(40,162)),('exp-003-04',(20,120)),('exp-003-02',(18,170)),('exp-004-01',(20,156))]:
+            self.assertTrue(painted(key,point),(key,point))
+
 if __name__=='__main__':unittest.main()

@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main, arena/1707a542-lg-6jt]
-    paths: ['android-logo/**', 'html/index.html', '.github/workflows/android-apk.yml']
+    paths: ['android-logo/**', 'html/index.html', '04-desain/variasi-svg/**', 'scripts/**', 'tests/**', '.github/workflows/android-apk.yml']
   pull_request:
-    paths: ['android-logo/**', 'html/index.html', '.github/workflows/android-apk.yml']
+    paths: ['android-logo/**', 'html/index.html', '04-desain/variasi-svg/**', 'scripts/**', 'tests/**', '.github/workflows/android-apk.yml']
 permissions:
   contents: read
 concurrency:
