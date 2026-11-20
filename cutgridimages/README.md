@@ -62,7 +62,16 @@ Toolchain: JDK 17, Gradle 8.9, AGP 8.7.3, Kotlin 2.0.21, compile/target SDK 35, 
 
 ## Build lokal
 
-Buka folder `cutgridimages/` di Android Studio (JDK 17, SDK 35), atau:
+Buka folder `cutgridimages/` di Android Studio (JDK 17, SDK 35), atau jalankan skrip yang sudah
+tersedia (memeriksa JDK, Android SDK, dan Gradle lebih dulu):
+
+```sh
+cd cutgridimages
+./build-apk.sh          # debug + unit test
+./build-apk.sh release  # release (belum ditandatangani)
+```
+
+Padanan manualnya:
 
 ```sh
 cd cutgridimages
@@ -71,6 +80,25 @@ gradle testDebugUnitTest assembleDebug
 
 Hasil: `app/build/outputs/apk/debug/app-debug.apk`. Build pertama memerlukan internet untuk
 Google Maven, Maven Central, dan komponen SDK Android.
+
+## Jika GitHub Actions kena limit
+
+Job Actions pada repository **privat** memakai kuota menit berbayar; bila kuota habis atau
+pembayaran/spending limit bermasalah, job tidak dijalankan sama sekali (pesan: *"The job was not
+started because recent account payments have failed or your spending limit needs to be
+increased"*). Workflow tidak perlu diubah; pilih salah satu jalan keluar:
+
+1. **Jadikan repository publik.** Repository publik memakai runner standar gratis tanpa kuota
+   menit, sehingga workflow langsung bisa berjalan. Periksa dulu tidak ada berkas sensitif.
+2. **Perbaiki billing.** Settings → Billing & plans: perbarui metode pembayaran atau naikkan
+   spending limit, lalu jalankan ulang workflow dari tab Actions.
+3. **Build mandiri.** Pakai `./build-apk.sh` di komputer sendiri (Android Studio/Gradle) — tidak
+   memerlukan Actions sama sekali.
+4. **CI alternatif.** `codemagic.yaml` atau konfigurasi CircleCI bisa memakai runner gratis
+   terpisah dari kuota GitHub; perlu menghubungkan repository di layanan tersebut.
+
+Hemat menit Actions: workflow hanya berjalan saat berkas `cutgridimages/**` berubah, punya
+`concurrency` dengan `cancel-in-progress`, dan memakai cache Gradle dari `gradle/actions/setup-gradle`.
 
 ## Verifikasi yang sudah dilakukan
 
