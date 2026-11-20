@@ -32,6 +32,10 @@
     <string name="reset_grid">Reset sumbu</string>
     <string name="grid_reset">Garis grid dikembalikan ke posisi rata</string>
     <string name="grid_drag_hint">Geser garis grid untuk mengatur potongan</string>
+    <string name="auto_grid">Deteksi otomatis</string>
+    <string name="auto_grid_running">Mendeteksi kotak logo…</string>
+    <string name="auto_grid_done">%1$d sel terdeteksi — potongan mengikuti batas konten</string>
+    <string name="auto_grid_failed">Tidak ada latar polos yang bisa dideteksi; gunakan garis manual</string>
     <string name="load_failed">Gagal memuat gambar: %1$s</string>
     <string name="load_failed_hint">Gagal memuat gambar: %1$s\nTekan lama thumbnail untuk menghapusnya, lalu pilih ulang gambarnya.</string>
     <string name="remove_source_title">Hapus gambar ini?</string>

@@ -120,6 +120,40 @@ object GridSlicer {
         return tiles
     }
 
+    /**
+     * Mengubah kotak hasil deteksi (fraksi 0..1) menjadi petak piksel.
+     * Petak diurutkan baris demi baris mengikuti urutan [rects].
+     */
+    fun tilesFrom(rects: List<FractionRect>, width: Int, height: Int): List<GridTile> {
+        require(width > 0) { "width harus positif, diterima $width" }
+        require(height > 0) { "height harus positif, diterima $height" }
+        val tiles = ArrayList<GridTile>(rects.size)
+        var currentTop = -1
+        var row = -1
+        var column = 0
+        rects.forEachIndexed { index, rect ->
+            val left = Math.round(rect.left.coerceIn(0f, 1f) * width).coerceIn(0, width)
+            val right = Math.round(rect.right.coerceIn(0f, 1f) * width).coerceIn(0, width)
+            val top = Math.round(rect.top.coerceIn(0f, 1f) * height).coerceIn(0, height)
+            val bottom = Math.round(rect.bottom.coerceIn(0f, 1f) * height).coerceIn(0, height)
+            if (top != currentTop) {
+                currentTop = top
+                row++
+                column = 0
+            }
+            tiles += GridTile(
+                index = index,
+                row = row.coerceAtLeast(0),
+                column = column++,
+                left = left,
+                top = top,
+                right = maxOf(left, right),
+                bottom = maxOf(top, bottom),
+            )
+        }
+        return tiles
+    }
+
     /** Fraksi 0..1 menjadi tepi piksel yang selalu naik dan menutup sisi 0..[size]. */
     private fun pixelEdges(cuts: FloatArray, size: Int): IntArray {
         val edges = IntArray(cuts.size)

@@ -26,6 +26,7 @@ import com.emrobinso.cutgridimages.data.ImageSourceStore
 import com.emrobinso.cutgridimages.data.PieceStore
 import com.emrobinso.cutgridimages.data.SettingsStore
 import com.emrobinso.cutgridimages.data.SourceImage
+import com.emrobinso.cutgridimages.grid.ContentGridDetector
 import com.emrobinso.cutgridimages.grid.MAX_GRID
 import com.emrobinso.cutgridimages.grid.MIN_GRID
 import com.emrobinso.cutgridimages.image.ImageLoader
@@ -62,6 +63,7 @@ class HomeActivity : Activity() {
     private lateinit var rowsMinus: Button
     private lateinit var rowsPlus: Button
     private lateinit var resetGridButton: Button
+    private lateinit var autoGridButton: Button
     private lateinit var selectAllButton: Button
     private lateinit var clearSelectionButton: Button
     private lateinit var saveSelectedButton: Button
@@ -131,6 +133,7 @@ class HomeActivity : Activity() {
             editor.resetGrid()
             setStatus(getString(R.string.grid_reset))
         }
+        autoGridButton.setOnClickListener { detectGrid() }
         selectAllButton.setOnClickListener { editor.selectAll() }
         clearSelectionButton.setOnClickListener { editor.clearSelection() }
         saveSelectedButton.setOnClickListener { savePieces(onlySelected = true) }
@@ -174,6 +177,7 @@ class HomeActivity : Activity() {
         rowsMinus = findViewById(R.id.rowsMinus)
         rowsPlus = findViewById(R.id.rowsPlus)
         resetGridButton = findViewById(R.id.resetGridButton)
+        autoGridButton = findViewById(R.id.autoGridButton)
         selectAllButton = findViewById(R.id.selectAllButton)
         clearSelectionButton = findViewById(R.id.clearSelectionButton)
         saveSelectedButton = findViewById(R.id.saveSelectedButton)
@@ -478,7 +482,54 @@ class HomeActivity : Activity() {
         }
         mainBitmap = bitmap
         editor.setImage(bitmap)
+        editor.setDetectedCells(null)
         updateSelectionUi()
+    }
+
+    /**
+     * Menjalankan deteksi kotak isi pada gambar utama (dipakai untuk lembar logo berlatar polos).
+     * Gambar dikecilkan lebih dulu supaya pemindaian piksel tetap ringan.
+     */
+    private fun detectGrid() {
+        val bitmap = mainBitmap
+        if (bitmap == null) {
+            setStatus(getString(R.string.pick_first))
+            return
+        }
+        if (busy) return
+        val expectedColumns = editor.columns
+        val expectedRows = editor.rows
+        setStatus(getString(R.string.auto_grid_running))
+
+        executor.execute {
+            val detected = runCatching {
+                val longest = maxOf(bitmap.width, bitmap.height)
+                val scale = (DETECTION_MAX_DIMENSION / longest).coerceAtMost(1f)
+                val width = (bitmap.width * scale).toInt().coerceAtLeast(1)
+                val height = (bitmap.height * scale).toInt().coerceAtLeast(1)
+                val scaled = Bitmap.createScaledBitmap(bitmap, width, height, true)
+                val pixels = IntArray(width * height)
+                scaled.getPixels(pixels, 0, width, 0, 0, width, height)
+                if (scaled !== bitmap) scaled.recycle()
+                ContentGridDetector.detect(
+                    pixels = pixels,
+                    width = width,
+                    height = height,
+                    expectedColumns = expectedColumns,
+                    expectedRows = expectedRows,
+                )
+            }.getOrNull()
+
+            handler.post {
+                if (isFinishing || isDestroyed) return@post
+                if (detected == null || detected.cells.size < 2) {
+                    setStatus(getString(R.string.auto_grid_failed))
+                    return@post
+                }
+                editor.setDetectedCells(detected.cells)
+                setStatus(getString(R.string.auto_grid_done, detected.cells.size))
+            }
+        }
     }
 
     private fun confirmRemoveSource(source: SourceImage) {
@@ -641,6 +692,7 @@ class HomeActivity : Activity() {
         rowsMinus.isEnabled = !value
         rowsPlus.isEnabled = !value
         resetGridButton.isEnabled = !value
+        autoGridButton.isEnabled = !value
         selectAllButton.isEnabled = !value && mainBitmap != null
         clearSelectionButton.isEnabled = !value && editor.selectedCount > 0
         saveSelectedButton.isEnabled = !value && mode == Mode.SELECT && editor.selectedCount > 0
@@ -707,6 +759,7 @@ class HomeActivity : Activity() {
         const val PREVIEW_CACHE_SIZE = 2
         const val THUMBNAIL_CACHE_LIMIT = 80
         const val PICK_LIMIT = 20
+        const val DETECTION_MAX_DIMENSION = 640f
         const val STATE_MAIN_URI = "state_main_uri"
         const val STATE_COLUMNS = "state_columns"
         const val STATE_ROWS = "state_rows"

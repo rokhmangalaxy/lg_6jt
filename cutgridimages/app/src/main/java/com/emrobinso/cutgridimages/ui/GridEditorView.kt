@@ -13,6 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import com.emrobinso.cutgridimages.R
 import com.emrobinso.cutgridimages.data.AppSettings
+import com.emrobinso.cutgridimages.grid.FractionRect
 import com.emrobinso.cutgridimages.grid.GridSlicer
 import com.emrobinso.cutgridimages.grid.GridTile
 import com.emrobinso.cutgridimages.grid.MAX_GRID
@@ -69,6 +70,9 @@ class GridEditorView @JvmOverloads constructor(
     private var dragAxis = DragAxis.NONE
     private var dragIndex = -1
 
+    /** Sel hasil deteksi otomatis; bila ada, grid manual diabaikan sampai direset. */
+    private var detectedCells: List<FractionRect>? = null
+
     /** Posisi garis kolom dalam fraksi 0..1 (ukuran `columns + 1`). */
     private var columnCuts: FloatArray = GridSlicer.uniformCuts(3)
 
@@ -82,6 +86,7 @@ class GridEditorView @JvmOverloads constructor(
         set(value) {
             field = value.coerceIn(MIN_GRID, MAX_GRID)
             columnCuts = GridSlicer.uniformCuts(field)
+            detectedCells = null
             clearSelection()
             invalidate()
         }
@@ -90,6 +95,7 @@ class GridEditorView @JvmOverloads constructor(
         set(value) {
             field = value.coerceIn(MIN_GRID, MAX_GRID)
             rowCuts = GridSlicer.uniformCuts(field)
+            detectedCells = null
             clearSelection()
             invalidate()
         }
@@ -127,11 +133,24 @@ class GridEditorView @JvmOverloads constructor(
     fun currentTiles(): List<GridTile> {
         val image = bitmap ?: return emptyList()
         if (image.width <= 0 || image.height <= 0) return emptyList()
+        val cells = detectedCells
+        if (cells != null) return GridSlicer.tilesFrom(cells, image.width, image.height)
         return GridSlicer.tilesFor(image.width, image.height, columnCuts, rowCuts)
+    }
+
+    val hasDetectedCells: Boolean get() = detectedCells != null
+
+    /** Mengaktifkan sel hasil deteksi otomatis (null untuk kembali ke grid manual). */
+    fun setDetectedCells(cells: List<FractionRect>?) {
+        detectedCells = cells
+        clearSelection()
+        onGridChanged?.invoke()
+        invalidate()
     }
 
     /** Mengembalikan semua garis ke posisi seragam. */
     fun resetGrid() {
+        detectedCells = null
         columnCuts = GridSlicer.uniformCuts(columns)
         rowCuts = GridSlicer.uniformCuts(rows)
         onGridChanged?.invoke()
@@ -189,18 +208,29 @@ class GridEditorView @JvmOverloads constructor(
         }
 
         linePaint.color = if (selectionMode) highlightColor else Color.argb(235, 255, 255, 255)
-        for (position in 1 until columnCuts.size - 1) {
-            val x = imageRect.left + columnCuts[position] * imageRect.width()
-            canvas.drawLine(x, imageRect.top, x, imageRect.bottom, lineShadowPaint)
-            canvas.drawLine(x, imageRect.top, x, imageRect.bottom, linePaint)
+        if (detectedCells != null) {
+            // Outline tiap sel hasil deteksi, mengikuti batas konten masing-masing.
+            tiles.forEach { tile ->
+                val left = imageRect.left + tile.left * scaleX
+                val top = imageRect.top + tile.top * scaleY
+                val right = imageRect.left + tile.right * scaleX
+                val bottom = imageRect.top + tile.bottom * scaleY
+                canvas.drawRect(left, top, right, bottom, lineShadowPaint)
+                canvas.drawRect(left, top, right, bottom, linePaint)
+            }
+        } else {
+            for (position in 1 until columnCuts.size - 1) {
+                val x = imageRect.left + columnCuts[position] * imageRect.width()
+                canvas.drawLine(x, imageRect.top, x, imageRect.bottom, lineShadowPaint)
+                canvas.drawLine(x, imageRect.top, x, imageRect.bottom, linePaint)
+            }
+            for (position in 1 until rowCuts.size - 1) {
+                val y = imageRect.top + rowCuts[position] * imageRect.height()
+                canvas.drawLine(imageRect.left, y, imageRect.right, y, lineShadowPaint)
+                canvas.drawLine(imageRect.left, y, imageRect.right, y, linePaint)
+            }
+            if (!selectionMode) drawHandles(canvas)
         }
-        for (position in 1 until rowCuts.size - 1) {
-            val y = imageRect.top + rowCuts[position] * imageRect.height()
-            canvas.drawLine(imageRect.left, y, imageRect.right, y, lineShadowPaint)
-            canvas.drawLine(imageRect.left, y, imageRect.right, y, linePaint)
-        }
-
-        if (!selectionMode) drawHandles(canvas)
     }
 
     /** Titik kecil di tengah tiap garis sebagai penanda bahwa garis bisa digeser. */
@@ -230,7 +260,7 @@ class GridEditorView @JvmOverloads constructor(
                 downX = event.x
                 downY = event.y
                 downAt = SystemClock.uptimeMillis()
-                val hit = findCut(event.x, event.y)
+                val hit = if (detectedCells != null) null else findCut(event.x, event.y)
                 dragAxis = hit?.first ?: DragAxis.NONE
                 dragIndex = hit?.second ?: -1
                 return true
