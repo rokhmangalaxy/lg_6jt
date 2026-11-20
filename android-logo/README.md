@@ -107,3 +107,11 @@ Variasi 07 (shield) dan 08 (triangle) adalah studi geometris baru dari keluarga 
 Kelompok Drive 1 nomor 02,03,04 digambar ulang dengan koordinat manual menjadi master SVG dan JSON native; bukan auto-trace. Tiga ID baru ditambahkan di akhir katalog sehingga delapan ID dan favorit lama tidak bergeser. Warna sumber bertekstur dijadikan solid dan M kiri/kanan disimetriskan. Sumber 02/04 adalah M merah dan C navy tanpa bingkai baru; sumber 03 mempertahankan bingkai hexagon navy dengan MCM merah.
 
 Generator `scripts/build_drive_batch_02.py` menghasilkan perbandingan offline di `04-desain/variasi-svg/batch-02/perbandingan.html` dan progres di `progress.json`. Audit SHA256 hanya mencakup lima sumber Drive yang sudah diunduh; tidak ada klaim seluruh folder telah diaudit. Progres kelompok 1: 01,02,03,04,08 selesai (5/9), tersisa 05,06,07,09. Folder lain belum dikerjakan. Tiga redraw tetap perlu review visual pengguna, bukan master produksi yang disetujui.
+
+## Interim vector catalog — explicit APK request
+The user requested an interim APK before the full Drive collection is complete.
+The catalog now has 105 variations: 99 unique Drive masters, four original selections,
+and two studies. Original 11 IDs/indices remain unchanged. Group 12 source files are
+SHA-256-identical to group 11 and mapped as aliases, never duplicated in the app.
+Native JSON is copied verbatim from batch masters. APK builds are manual dispatch
+only; PR/push run path checks. The public demo signing identity is unchanged.

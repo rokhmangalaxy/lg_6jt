@@ -19,9 +19,8 @@ jobs:
       - name: Validate path masters without building Android
         run: python3 -m unittest discover -s tests -p 'test_path_batches.py'
   build:
-    # User requested no APK builds until the whole Drive vector collection is done.
-    # Remove this explicit pause only after completion and user confirmation.
-    if: ${{ false }}
+    # User explicitly requested an interim APK; automatic PR/push builds stay off.
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-24.04
     permissions:
       contents: write

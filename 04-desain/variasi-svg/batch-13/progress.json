@@ -1,0 +1,320 @@
+{
+  "batch": "13",
+  "apkBuildsPaused": false,
+  "newMasterCount": 1,
+  "driveSourcesWithMasters": 99,
+  "reportedDriveFiles": 342,
+  "remainingNotProcessed": 234,
+  "progressPercent": 31.58,
+  "progressBasis": "covered source files including nine verified duplicates / 342 reported files",
+  "groups": {
+    "1": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "2": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "3": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "4": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "5": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "6": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "7": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "8": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "9": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "10": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "11": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    }
+  },
+  "exactDuplicateAudit": {
+    "scope": "downloaded PNG files only, not entire Drive folder",
+    "filesChecked": 108,
+    "duplicateGroups": [
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-01.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-01.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-02.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-02.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-03.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-03.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-04.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-04.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-05.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-05.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-06.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-06.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-07.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-07.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-08.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-08.png"
+      ],
+      [
+        "Max_a_Gambar_kotak_berisi__11_logo-09.png",
+        "Max_a_Gambar_kotak_berisi__12_logo-09.png"
+      ]
+    ]
+  },
+  "visualReview": {
+    "scope": "new sources compared against downloaded references; no full-folder visual audit",
+    "result": "source-specific layouts retained; similar motifs not automatically merged",
+    "requiresUserApproval": true
+  },
+  "notes": [
+    "99 unique Drive masters; nine duplicate sources reuse group 11 geometry.",
+    "108 sources covered, 234 not processed; collection not complete.",
+    "APK integration and manually authorized build follow in this turn."
+  ],
+  "entries": [
+    {
+      "id": "exp-011-09",
+      "group": 11,
+      "sourceNumber": 9,
+      "driveId": "14Wp9mIqa_--b02AmFUuahVIsagUBkzwn",
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-09.png",
+      "sourceSha256": "15ccd1510a553abc201c008dd5d797b3bda8b3926a6531c0fe9232ab86653567",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-13/exp-011-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-13/exp-011-09.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    }
+  ],
+  "buildPolicy": "User explicitly requested an APK now; manual workflow dispatch only.",
+  "uniqueDriveMasters": 99,
+  "driveSourcesCoveredIncludingDuplicates": 108,
+  "redrawOnlyPercent": 28.95,
+  "sourceAliases": [
+    {
+      "group": 12,
+      "sourceNumber": 1,
+      "driveId": "1hy_Q8mc0HZVFWjnQQpxFQUq_DOyjbEKZ",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-01.png",
+      "sourceSha256": "63c8a3feb3973f3e4844b05d36ffff971d8c3a72c30b4318bdc4e5b1fb8ca457",
+      "duplicateOf": "exp-011-01",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 2,
+      "driveId": "1nRZLDTu6FhVVizwIo_66O6FUyiW-5paN",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-02.png",
+      "sourceSha256": "2ee2100abc076ad5b45a1c3869c1526ee6c7ab4fc9e33da4cefe59c70c9ac641",
+      "duplicateOf": "exp-011-02",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 3,
+      "driveId": "1d1W11PKtufqOxGl22pAmIz4e7wFMo89R",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-03.png",
+      "sourceSha256": "0f57c159048cae62414e844f650f4ec21fff5ed5a0f76d7032f4bf8d397ecb8b",
+      "duplicateOf": "exp-011-03",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 4,
+      "driveId": "1ovG3j6Vc99yIGvS3HqXGaNmtkc8rDrTx",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-04.png",
+      "sourceSha256": "0da2c7027dfa7e29a6bb44a6f8569a2b4b01c3e694544dddfa99d6c265b0ff6e",
+      "duplicateOf": "exp-011-04",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 5,
+      "driveId": "1KfcUB_yD0wOBEecb6fb0jpb9IMOWcW1x",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-05.png",
+      "sourceSha256": "7de5dc666e598e3bae92c6a85f58779df27f6f3112493c24976a7211f791d245",
+      "duplicateOf": "exp-011-05",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 6,
+      "driveId": "1-DMOYuGRwxpH0aHGOM2W0gwvPLZLc_i6",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-06.png",
+      "sourceSha256": "b603121ee1422d3bbe97793ea36af9016dbc5a3b53854ce8af6b3bc13e4aac3b",
+      "duplicateOf": "exp-011-06",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 7,
+      "driveId": "1F0NHSqNnna1wBxR3D6zKD646_-ej3s3i",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-07.png",
+      "sourceSha256": "b49885ef0f5a12f50f8d2cdeb22e7b051a40f782a764ae800c8273e8991f4c1e",
+      "duplicateOf": "exp-011-07",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 8,
+      "driveId": "19OCt8d4AxX2IqYXMw2R69xG4n76EIdrr",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-08.png",
+      "sourceSha256": "a067e929a609d4bd9e1b29ec341aca6bf7b88cb1184a5f5f0cf5f158929e02ec",
+      "duplicateOf": "exp-011-08",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    },
+    {
+      "group": 12,
+      "sourceNumber": 9,
+      "driveId": "1-5vODvv6tkYgbAl0aW0bPuVgu5v0ZYzm",
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-09.png",
+      "sourceSha256": "15ccd1510a553abc201c008dd5d797b3bda8b3926a6531c0fe9232ab86653567",
+      "duplicateOf": "exp-011-09",
+      "status": "exact-byte-duplicate-no-new-redraw"
+    }
+  ]
+}

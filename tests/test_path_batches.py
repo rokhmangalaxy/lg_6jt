@@ -58,7 +58,7 @@ class PathBatchTest(unittest.TestCase):
     def test_apk_job_is_explicitly_paused(self):
         workflow=(R/'.github/workflows/android-apk.yml').read_text()
         block=workflow.split('\n  build:\n',1)[1]
-        self.assertIn('    if: ${{ false }}',block.split('    runs-on:',1)[0])
+        self.assertIn("    if: ${{ github.event_name == 'workflow_dispatch' }}",block.split('    runs-on:',1)[0])
         self.assertIn("test_path_batches.py",workflow)
 class PathBatch04Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-04'
@@ -478,5 +478,45 @@ class PathBatch12Test(PathBatchTest):
             self.assertFalse(painted(key,x,y),(key,x,y))
         for key,x,y in [('exp-011-07',65,151),('exp-011-07',145,151),('exp-011-07',174,151),('exp-010-08',60,80),('exp-010-08',60,110),('exp-011-03',60,120),('exp-011-08',150,116),('exp-011-04',140,160)]:
             self.assertTrue(painted(key,x,y),(key,x,y))
+
+class PathBatch13Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-13'
+    count=1
+    total=99
+    pending=[]
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_progress_and_limited_audit_are_consistent(self):
+        p=json.loads((self.batch/'progress.json').read_text())
+        self.assertFalse(p['apkBuildsPaused'])
+        self.assertEqual(p['uniqueDriveMasters'],99)
+        self.assertEqual(p['driveSourcesCoveredIncludingDuplicates'],108)
+        self.assertEqual(p['remainingNotProcessed'],234)
+        self.assertEqual(p['progressPercent'],round(108/342*100,2))
+        self.assertEqual(p['redrawOnlyPercent'],round(99/342*100,2))
+        self.assertEqual(len(p['sourceAliases']),9)
+        for alias in p['sourceAliases']:
+            source=R/'google_drive'/alias['sourceName']
+            original=R/f"google_drive/Max_a_Gambar_kotak_berisi__11_logo-{alias['sourceNumber']:02}.png"
+            if source.exists() and original.exists():
+                self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),alias['sourceSha256'])
+                self.assertEqual(source.read_bytes(),original.read_bytes())
+
+    def test_integrated_catalog_and_native_geometry(self):
+        import re
+        assets=R/'android-logo/app/src/main/assets'
+        entries=json.loads((assets/'exploration/catalog.json').read_text())['reviewedEntries']
+        self.assertEqual(len(entries),101)
+        self.assertEqual(len({e['id'] for e in entries}),101)
+        self.assertFalse(any(e['id'].startswith('exp-012-') for e in entries))
+        kotlin=(R/'android-logo/app/src/main/java/id/mcm/logopreview/LogoCatalog.kt').read_text()
+        files=re.findall(r'"([^"\n]+\.png)"',kotlin)
+        self.assertEqual(len(files),105)
+        self.assertEqual(files[:11],['client-logo-04.png','client-attachment-01.png','client-attachment-08.png','client-attachment-09.png','exploration/exp-001-01.png','exploration/exp-001-08.png','exploration/geo-007.png','exploration/geo-008.png','exploration/exp-001-02.png','exploration/exp-001-03.png','exploration/exp-001-04.png'])
+        self.assertEqual(set(files[4:]),{e['asset'] for e in entries})
+        for e in entries:
+            self.assertTrue((assets/e['asset']).read_bytes().startswith(b'\x89PNG'))
+            native=json.loads((assets/e['vectorAsset']).read_text())
+            if 'pathJson' in e:self.assertEqual(native,json.loads((R/e['pathJson']).read_text()))
 
 if __name__=='__main__':unittest.main()

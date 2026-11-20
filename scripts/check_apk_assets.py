@@ -12,7 +12,7 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
     actual = {name for name in available if name.startswith('assets/') and name.endswith('.png')}
     import json
     pilot=json.loads(apk.read('assets/exploration/catalog.json'))['reviewedEntries']
-    assert len(pilot)==7
+    assert len(pilot)==101
     for entry in pilot:
         assert entry['format']=='manual-vector'
         vector=json.loads(apk.read('assets/'+entry['vectorAsset']))
@@ -28,4 +28,4 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
         assert json.loads(apk.read(vector))['layers'], f'Empty vector source: {vector}'
         data = apk.read(path)
         assert data.startswith(b'\x89PNG\r\n\x1a\n'), f'Invalid PNG: {filename}'
-print('PASS: release APK contains exactly the 4 selected catalog PNGs')
+print('PASS: release APK contains 105 logo variations with native paths, no duplicate group 12 assets')
