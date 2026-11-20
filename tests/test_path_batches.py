@@ -2,16 +2,19 @@
 from pathlib import Path
 import hashlib
 import json
-import re
 import unittest
 import xml.etree.ElementTree as ET
 R=Path(__file__).resolve().parents[1]
-B=R/'04-desain/variasi-svg/batch-03'
 class PathBatchTest(unittest.TestCase):
-    def test_ten_manual_masters_match_native_paths(self):
-        entries=json.loads((B/'progress.json').read_text())['entries']
-        self.assertEqual(len(entries),10)
-        self.assertEqual(len({e['id'] for e in entries}),10)
+    batch=R/'04-desain/variasi-svg/batch-03'
+    count=10
+    total=15
+    pending=[7,8,9]
+
+    def test_manual_masters_match_native_paths(self):
+        entries=json.loads((self.batch/'progress.json').read_text())['entries']
+        self.assertEqual(len(entries),self.count)
+        self.assertEqual(len({e['id'] for e in entries}),self.count)
         for entry in entries:
             with self.subTest(id=entry['id']):
                 data=json.loads((R/entry['pathJson']).read_text())
@@ -41,12 +44,12 @@ class PathBatchTest(unittest.TestCase):
                             self.assertGreater(abs(area),1);opened=False
                     self.assertFalse(opened)
     def test_progress_and_limited_audit_are_consistent(self):
-        progress=json.loads((B/'progress.json').read_text())
+        progress=json.loads((self.batch/'progress.json').read_text())
         self.assertTrue(progress['apkBuildsPaused'])
-        self.assertEqual(progress['driveSourcesWithMasters'],15)
+        self.assertEqual(progress['driveSourcesWithMasters'],self.total)
         self.assertEqual(progress['remainingNotProcessed']+progress['driveSourcesWithMasters'],342)
         self.assertEqual(progress['groups']['1']['pending'],[])
-        self.assertEqual(progress['groups']['2']['pending'],[7,8,9])
+        self.assertEqual(progress['groups']['2']['pending'],self.pending)
         for e in progress['entries']:
             self.assertEqual(e['appIntegration'],'deferred-until-collection-complete')
             self.assertRegex(e['sourceSha256'],r'^[0-9a-f]{64}$')
@@ -57,4 +60,23 @@ class PathBatchTest(unittest.TestCase):
         block=workflow.split('\n  build:\n',1)[1]
         self.assertIn('    if: ${{ false }}',block.split('    runs-on:',1)[0])
         self.assertIn("test_path_batches.py",workflow)
+class PathBatch04Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-04'
+    count=3
+    total=18
+    pending=[]
+
+    def test_no_cross_batch_ids_or_geometry_duplicates(self):
+        previous=json.loads((R/'04-desain/variasi-svg/batch-03/progress.json').read_text())
+        current=json.loads((self.batch/'progress.json').read_text())
+        self.assertFalse({e['id'] for e in previous['entries']} & {e['id'] for e in current['entries']})
+        known={hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'04-desain/variasi-svg').rglob('*.svg') if p.parent!=self.batch}
+        for e in current['entries']:
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known)
+            known.add(digest)
+        self.assertTrue(current['visualReview']['requiresUserApproval'])
+        self.assertEqual(current['exactDuplicateAudit']['filesChecked'],18)
+        self.assertEqual(current['exactDuplicateAudit']['duplicateGroups'],[])
+
 if __name__=='__main__':unittest.main()
