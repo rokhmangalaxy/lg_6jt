@@ -83,3 +83,10 @@ Tracing tetap berasal dari raster kecil, bukan master perusahaan. Kontur utamany
 Navigasi bawah Logo | Seragam. Tab Seragam selalu mengambil `current` dan `selections[current]` yang sama dengan tab Logo; tidak ada pemilih logo terpisah. Tab, jenis produk, sudut serta snapshot ekspor dipertahankan saat rotasi. Pilihan logo dan swatch tetap tersimpan di preferensi.
 
 Sumber foto: prototipe pengguna `kotlin/Studio Seragam/Studio-Seragam-source.zip`. Menggunakan tiga sudut topi dan kemeja (depan, serong depan, belakang); aset serong belakang duplikat tidak ditawarkan. Renderer menempelkan master transparan, bukan latar abu-abu preview, dengan fit aspect ratio. Ekspor JPG melalui document picker mendukung Android 8+, memakai snapshot pilihan saat unduh diklik. Ini mockup foto 2D, tidak ada klaim bordir produksi; simulasi benang dan recolor kain belum disertakan.
+
+## Koleksi eksplorasi — pilot
+Tab Logo memiliki koleksi terpisah Pilihan Klien (empat indeks lama tidak berubah) dan Eksplorasi (dua sampel kelompok 1, nomor 01/08). Navigasi hanya berputar di koleksi aktif. Swatch disimpan per logo dan renderer yang sama dipakai tab Seragam serta ekspor.
+
+`app/src/main/assets/exploration/catalog.json` memetakan ID stabil, nama tampilan, nama asli, Drive ID, hash sumber, dan status pilot. File Drive tidak di-rename. Generator `scripts/prepare_exploration_pilot.py` memerlukan dua unduhan sumber di folder lokal `google_drive/` dan ImageMagick. PNG dipisahkan dari latar putih terhubung dengan floodfill; area putih tertutup dipertahankan sebagai artwork. Palet dipetakan saat runtime untuk empat swatch. Ini raster, bukan SVG geometris baru: pembesaran tidak menciptakan detail tambahan.
+
+Folder Drive dilaporkan memiliki 342 file. Hanya dua sampel yang diimpor dan diperiksa pada tahap ini. Hash kedua sumber berbeda; belum ada klaim deduplikasi visual atau audit seluruh 342 file. Perlu peninjauan dan pemrosesan batch berikutnya sebelum katalog penuh ditambahkan. Seluruh aset klien dan seragam lama tetap utuh.

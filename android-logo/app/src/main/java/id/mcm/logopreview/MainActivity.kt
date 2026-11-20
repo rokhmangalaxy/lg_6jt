@@ -152,6 +152,20 @@ class MainActivity : Activity() {
     }
     private fun showStudio() {
         val layout=column().apply { setPadding(dp(12),0,dp(12),0) }
+        val collections=row()
+        arrayOf("Pilihan Klien","Eksplorasi").forEachIndexed { i,label ->
+            collections.addView(button(label){
+                val target=if(i==0)0 else LogoCatalog.clientCount
+                if(LogoCatalog.isExploration(current)!=(i==1)){
+                    prefs.edit().putInt(if(LogoCatalog.isExploration(current))"lastExploration" else "lastClient",current).apply()
+                    current=prefs.getInt(if(i==0)"lastClient" else "lastExploration",target)
+                    if(current !in LogoCatalog.collection(target))current=target
+                    prefs.edit().putInt("clientSetLogo",current).apply()
+                    showPage()
+                }
+            }.apply {isSelected=LogoCatalog.isExploration(current)==(i==1)},LinearLayout.LayoutParams(0,dp(48),1f))
+        }
+        layout.addView(collections)
         logoView=LogoView(this) { step -> navigate(step) }
         layout.addView(logoView,LinearLayout.LayoutParams(-1,0,1f))
         status=text("",12f).apply { gravity=Gravity.CENTER }
@@ -170,7 +184,8 @@ class MainActivity : Activity() {
     }
     private fun navigate(step: Int) {current=LogoCatalog.next(current,step);prefs.edit().putInt("clientSetLogo",current).apply();updateStudio()}
     private fun updateStudio() {
-        counter.text="${current+1} / ${LogoCatalog.count} · ${names[current]}"
+        val collection=LogoCatalog.collection(current)
+        counter.text="${current-collection.first+1} / ${collection.count()} · ${names[current]}"
         paletteRow.removeAllViews();numberRow.removeAllViews()
         arrayOf("Swatch 1","Swatch 2","Hitam–Putih","Putih–Hitam").forEachIndexed { i,label ->
             val swatch=SwatchView(this, i, label).apply {
@@ -179,10 +194,10 @@ class MainActivity : Activity() {
             }
             paletteRow.addView(swatch,LinearLayout.LayoutParams(0,-1,1f))
         }
-        for(i in files.indices) numberRow.addView(button(String.format(java.util.Locale.ROOT,"%02d",i+1),"Logo ${i+1}") {
+        for(i in collection) numberRow.addView(button(String.format(java.util.Locale.ROOT,"%02d",i-collection.first+1),"Logo ${i+1}") {
             current=i;prefs.edit().putInt("clientSetLogo",i).apply();updateStudio()
         }.apply { isSelected=current==i },LinearLayout.LayoutParams(dp(52),-1))
-        numberScroll.post { if(page==0)numberScroll.smoothScrollTo((current*dp(52)-numberScroll.width/2+dp(26)).coerceAtLeast(0),0) }
+        numberScroll.post { if(page==0)numberScroll.smoothScrollTo(((current-collection.first)*dp(52)-numberScroll.width/2+dp(26)).coerceAtLeast(0),0) }
         val index=current;val preset=selections[index];val token=++generation
         val bg=LogoCatalog.background(index,preset)
         logoView.canvasBackground=bg;logoView.bitmap=null;logoView.invalidate();status.text="Memuat…";downloadButton.isEnabled=false
@@ -207,7 +222,7 @@ class MainActivity : Activity() {
     private fun beginExport() {
         if(pendingExportLogo>=0||logoView.bitmap==null)return
         pendingExportLogo=current;pendingExportPreset=selections[current];downloadButton.isEnabled=false
-        val name="MCM-${files[current].removeSuffix(".png")}-swatch-${pendingExportPreset+1}.png"
+        val name="MCM-${files[current].substringAfterLast("/").removeSuffix(".png")}-swatch-${pendingExportPreset+1}.png"
         val intent=Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE);type="image/png";putExtra(Intent.EXTRA_TITLE,name)
         }

@@ -10,7 +10,12 @@ assert len(expected) == 4 and len(set(expected)) == 4
 with zipfile.ZipFile(sys.argv[1]) as apk:
     available = set(apk.namelist())
     actual = {name for name in available if name.startswith('assets/') and name.endswith('.png')}
-    assert actual == {'assets/' + name for name in expected}, f'Unexpected/missing logos: {actual}'
+    import json
+    pilot=json.loads(apk.read('assets/exploration/catalog.json'))['reviewedEntries']
+    assert len(pilot)==2
+    for entry in pilot:
+        assert apk.read('assets/'+entry['asset']).startswith(b'\x89PNG\r\n\x1a\n')
+    assert actual == {'assets/' + name for name in expected} | {'assets/'+e['asset'] for e in pilot}, f'Unexpected/missing logos: {actual}'
     for filename in expected:
         path = 'assets/' + filename
         assert path in available, f'Missing APK asset: {path}'

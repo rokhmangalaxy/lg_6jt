@@ -43,6 +43,8 @@ class UniformTest {
         assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Lampiran 08 · Swatch 2"})
         tap("Logo");tap("04");tap("Seragam")
         assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Lampiran 09 · Swatch 1"})
+        tap("Logo");tap("Eksplorasi");tap("Seragam")
+        assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Eksplorasi 01–01 · Swatch 1"})
         controller.pause().stop().destroy()
     }
 }

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "driveFolderId": "1fkCuPkqGe4jRAvKhTmi8Z78veYqmWGVh",
+  "reportedFolderFiles": 342,
+  "reviewedEntries": [
+    {
+      "id": "exp-001-01",
+      "name": "Eksplorasi 01\u201301",
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-01.png",
+      "driveId": "1IVHq9P1VGzAsMO5deUIAKPokgLzgn7Yz",
+      "sourceSha256": "0b1023d4b6cf139e475765b745392b9e0f7dad39a9c92bfc23e1ec24feb5d97a",
+      "asset": "exploration/exp-001-01.png",
+      "format": "raster",
+      "group": 1,
+      "sourceNumber": 1,
+      "status": "pilot-reviewed"
+    },
+    {
+      "id": "exp-001-08",
+      "name": "Eksplorasi 01\u201308",
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-08.png",
+      "driveId": "1Vvrn5uwVmy-MvJb2h65UJ5LZFoLuOKsO",
+      "sourceSha256": "184b82af9b20a23b23a9170d7eb214478d5c3452c567d34dc48c61f9c9d5bdbc",
+      "asset": "exploration/exp-001-08.png",
+      "format": "raster",
+      "group": 1,
+      "sourceNumber": 8,
+      "status": "pilot-reviewed"
+    }
+  ],
+  "scope": "Two-source pilot only; remaining Drive files not audited for duplicates."
+}

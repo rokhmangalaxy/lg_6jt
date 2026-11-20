@@ -13,6 +13,7 @@ import kotlin.math.roundToInt
 object LogoVectorRenderer {
     fun render(assets: AssetManager, logo: Int, preset: Int, maxEdge: Int = 1600, transparent: Boolean = false): Bitmap {
         require(logo in 0 until LogoCatalog.count && preset in 0..3 && maxEdge > 0)
+        if(LogoCatalog.isExploration(logo)) return ExplorationRenderer.render(assets,logo,preset,maxEdge,transparent)
         val file=LogoCatalog.files[logo].removeSuffix(".png")+".json"
         val json=JSONObject(assets.open(file).bufferedReader().use {it.readText()})
         val sourceWidth=json.getInt("width");val sourceHeight=json.getInt("height")
