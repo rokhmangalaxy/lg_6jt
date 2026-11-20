@@ -118,8 +118,8 @@ langkah informasi sehingga temuannya tidak menghalangi artifact. Bila berhasil, 
 bukan rilis Play Store dan belum ditandatangani untuk distribusi.
 
 Status: repository sudah **publik**, sehingga job Actions memakai runner standar gratis. Build
-terakhir (rilis `cutgridimages-v9`) menyelesaikan `testDebugUnitTest`, `assembleDebug`, lint
-(informatif), unggah artifact, dan penerbitan aset Release tanpa kegagalan.
+rilis `cutgridimages-v10` (run 44684760440) menyelesaikan `testDebugUnitTest`, `assembleDebug`,
+lint (informatif), unggah artifact, dan penerbitan aset Release tanpa kegagalan.
 
 Toolchain: JDK 17, Gradle 8.9, AGP 8.7.3, Kotlin 2.0.21, compile/target SDK 35, min SDK 26
 (Android 8+). Tidak ada Gradle wrapper biner di repository; Gradle disiapkan oleh workflow.
@@ -178,11 +178,17 @@ beserta konfigurasi yang sudah disiapkan: **[CI-ALTERNATIF.md](CI-ALTERNATIF.md)
   *Cut Grid Images*, ikon adaptif, dan `launchable-activity: com.emrobinso.cutgridimages.HomeActivity`
   (`--target-sdk-version 35`, `minSdkVersion 26`). `apksigner` juga berhasil menandatangani APK
   hasil tautan itu (skema v2 + v3 terverifikasi).
-- **Build lengkap di GitHub Actions sudah berhasil** (run 44684519927, rilis `cutgridimages-v9`):
-  unit test + `assembleDebug` + `lintDebug` selesai, dan APK debug terverifikasi berisi
-  `classes.dex` (2,3 MB) beserta `classes2.dex`…`classes5.dex`, `resources.arsc`, dan
-  `AndroidManifest.xml` — total 901.652 byte, `sha256`
-  `e77df6f16c6ea2089db5f5795ba45859e8d758bd200c7f6c4d8e58aa98235037`.
+- **Build lengkap di GitHub Actions sudah berhasil** (run 44684760440, rilis `cutgridimages-v10`).
+  APK yang dihasilkan diperiksa langsung di runner:
+  - `package: name='com.emrobinso.cutgridimages' versionCode='10' versionName='1.0.10'
+    compileSdkVersion='35'`, `targetSdkVersion:'35'`,
+    `launchable-activity: HomeActivity` dengan label *Cut Grid Images*;
+  - isi arsip: `classes.dex` (2,3 MB) + `classes2.dex`…`classes5.dex`, `resources.arsc`,
+    `AndroidManifest.xml`, 25 entri total;
+  - ukuran 901.652 byte, `sha256`
+    `3a7723a49801e3788b5cf1e98f50fa812e8cde96343b347a6ff438757e0d96de`;
+  - tanda tangan `apksigner verify`: DN `C=US, O=Android, CN=Android Debug`,
+    sertifikat SHA-256 `58e6fe9facc6d74a3be5e082f230ac63ff888c47bef7006e329db90e071769ba`.
 - **Sandbox agen tidak dapat merakit APK penuh** karena tidak ada dexer JVM (`d8`/`r8`) dan host
   unduhan besar (Google Maven, `objects.githubusercontent.com`, `release-assets.githubusercontent.com`,
   `*.blob.core.windows.net`) diblokir; karena itu job CI dipakai untuk menghasilkan APK yang bisa
