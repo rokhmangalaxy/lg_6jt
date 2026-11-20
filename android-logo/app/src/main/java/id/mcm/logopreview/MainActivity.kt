@@ -41,6 +41,10 @@ class MainActivity : Activity() {
     private var pendingExportPreset = 0
     private var current = 0
     private var page = 0
+    private lateinit var bottomNav: LinearLayout
+    private var uniformCap = true
+    private var uniformAngle = 0
+    private var uniformExport: IntArray? = null
     @Volatile private var generation = 0
     private val selections = IntArray(LogoCatalog.count)
     private var noteType = 0
@@ -64,7 +68,10 @@ class MainActivity : Activity() {
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         current=state?.getInt("clientSetLogo") ?: prefs.getInt("clientSetLogo",0)
-        page=0 // Client-review mode: hide Menu/Notes without deleting their stored data.
+        page=state?.getInt("activeTab") ?: 0
+        uniformCap=state?.getBoolean("uniformCap") ?: prefs.getBoolean("uniformCap",true)
+        uniformAngle=(state?.getInt("uniformAngle") ?: prefs.getInt("uniformAngle",0)).coerceIn(0,2)
+        uniformExport=state?.getIntArray("uniformExport")
         pendingExportLogo=state?.getInt("exportLogo",-1) ?: -1
         pendingExportPreset=state?.getInt("exportPreset",0) ?: 0
         noteType=prefs.getInt("noteType",0)
@@ -84,19 +91,64 @@ class MainActivity : Activity() {
         }
         val header=row().apply { setBackgroundColor(NeoSurface.BASE);setPadding(dp(16),0,dp(16),0) }
         header.addView(text("MCM · Logo Studio",18f).apply { setTextColor(navy);setTypeface(null,Typeface.BOLD) },LinearLayout.LayoutParams(0,dp(56),1f))
-        downloadButton=button("↓","Download logo PNG") { beginExport() }.apply {
+        downloadButton=button("↓","Download gambar") { if(page==1)beginUniformExport() else beginExport() }.apply {
             textSize=24f;isEnabled=false
         }
         header.addView(downloadButton,LinearLayout.LayoutParams(dp(56),dp(56)))
         root.addView(header)
         content=FrameLayout(this);root.addView(content,LinearLayout.LayoutParams(-1,0,1f))
+        bottomNav=row()
+        arrayOf("Logo","Seragam").forEachIndexed { index,label ->
+            bottomNav.addView(button(label,"Menu $label") { page=index;showPage() },LinearLayout.LayoutParams(0,dp(56),1f))
+        }
+        root.addView(bottomNav)
         setContentView(root);root.requestApplyInsets();showPage()
     }
     private fun showPage() {
         generation++
         content.removeAllViews()
-        page=0
-        showStudio()
+        for(i in 0..1)bottomNav.getChildAt(i).isSelected=page==i
+        downloadButton.isEnabled=false
+        if(page==1)showUniform() else showStudio()
+    }
+    private fun showUniform() {
+        val layout=column().apply { setPadding(dp(12),0,dp(12),0) }
+        val swatches=arrayOf("Swatch 1","Swatch 2","Hitam–Putih","Putih–Hitam")
+        layout.addView(text("${names[current]} · ${swatches[selections[current]]}",14f))
+        val image=ImageView(this).apply { scaleType=ImageView.ScaleType.FIT_CENTER;contentDescription="Mockup seragam dengan logo aktif" }
+        layout.addView(image,LinearLayout.LayoutParams(-1,0,1f))
+        val types=row()
+        arrayOf("Topi","Kemeja").forEachIndexed { i,label ->
+            types.addView(button(label) { uniformCap=i==0;uniformAngle=0;saveUniform();showPage() }.apply {isSelected=uniformCap==(i==0)},LinearLayout.LayoutParams(0,dp(48),1f))
+        }
+        layout.addView(types)
+        val angles=row()
+        val labels=if(uniformCap)arrayOf("Depan","Serong kiri","Samping kiri")else arrayOf("Depan","Serong depan","Belakang")
+        labels.forEachIndexed { i,label ->angles.addView(button(label){uniformAngle=i;saveUniform();showPage()}.apply{isSelected=uniformAngle==i},LinearLayout.LayoutParams(0,dp(48),1f)) }
+        layout.addView(angles)
+        layout.addView(text("Simulasi penempatan 2D · bukan pola bordir produksi.\nUbah logo dan swatch melalui tab Logo.",12f))
+        content.addView(layout)
+        val token=++generation;val index=current;val preset=selections[index];val cap=uniformCap;val angle=uniformAngle
+        worker.execute {
+            try {
+                val bitmap=UniformRenderer.render(assets,index,preset,cap,angle)
+                runOnUiThread {
+                    if(!isDestroyed&&page==1&&token==generation){image.setImageBitmap(bitmap);downloadButton.isEnabled=uniformExport==null}
+                    else bitmap.recycle()
+                }
+            }catch(error:Exception){runOnUiThread {if(!isDestroyed&&page==1&&token==generation)Toast.makeText(this,"Mockup gagal dimuat",Toast.LENGTH_LONG).show()}}
+        }
+    }
+    private fun saveUniform(){prefs.edit().putBoolean("uniformCap",uniformCap).putInt("uniformAngle",uniformAngle).apply()}
+    @Suppress("DEPRECATION")
+    private fun beginUniformExport(){
+        if(uniformExport!=null)return
+        uniformExport=intArrayOf(current,selections[current],if(uniformCap)1 else 0,uniformAngle)
+        val intent=Intent(Intent.ACTION_CREATE_DOCUMENT).apply{
+            addCategory(Intent.CATEGORY_OPENABLE);type="image/jpeg"
+            putExtra(Intent.EXTRA_TITLE,"MCM-seragam-${current+1}-swatch-${selections[current]+1}.jpg")
+        }
+        try{startActivityForResult(intent,1002)}catch(_:android.content.ActivityNotFoundException){uniformExport=null;Toast.makeText(this,"Aplikasi penyimpan tidak tersedia",Toast.LENGTH_LONG).show()}
     }
     private fun showStudio() {
         val layout=column().apply { setPadding(dp(12),0,dp(12),0) }
@@ -167,6 +219,19 @@ class MainActivity : Activity() {
     @Deprecated("Platform result API retained for SDK-only native app")
     override fun onActivityResult(requestCode:Int,resultCode:Int,data:Intent?) {
         super.onActivityResult(requestCode,resultCode,data)
+        if(requestCode==1002){
+            val config=uniformExport;uniformExport=null
+            val uri=data?.data
+            if(resultCode==RESULT_OK&&uri!=null&&config!=null)worker.execute{
+                try{
+                    val bitmap=UniformRenderer.render(assets,config[0],config[1],config[2]==1,config[3])
+                    try{contentResolver.openOutputStream(uri,"wt").use{stream->checkNotNull(stream);check(bitmap.compress(Bitmap.CompressFormat.JPEG,94,stream))}}finally{bitmap.recycle()}
+                    runOnUiThread{if(!isDestroyed)Toast.makeText(this,"Mockup JPG tersimpan",Toast.LENGTH_SHORT).show()}
+                }catch(_:Exception){runOnUiThread{if(!isDestroyed)Toast.makeText(this,"Gagal menyimpan mockup",Toast.LENGTH_LONG).show()}}
+            }
+            if(page==1)showPage()
+            return
+        }
         if(requestCode!=1001)return
         val index=pendingExportLogo;val preset=pendingExportPreset;val uri=data?.data
         pendingExportLogo=-1
@@ -241,7 +306,7 @@ class MainActivity : Activity() {
         }
         scroll.addView(layout);content.addView(scroll)
     }
-    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("clientSetLogo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
+    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("activeTab",page);outState.putBoolean("uniformCap",uniformCap);outState.putInt("uniformAngle",uniformAngle);outState.putIntArray("uniformExport",uniformExport);outState.putInt("clientSetLogo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
     override fun onDestroy() {generation++;worker.shutdown();super.onDestroy()}
 
     private class LogoView(context:Context,val navigate:(Int)->Unit):View(context) {

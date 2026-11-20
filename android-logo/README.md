@@ -78,3 +78,8 @@ Semua 4 logo × 4 swatch sekarang memakai background abu-abu terang #D1D5DB, tan
 `LogoVectorRenderer` membaca path M/L/Q/Z dari JSON pendamping, menggambar dengan Android Canvas dan Paint.ANTI_ALIAS_FLAG ke bitmap bersisi maksimum 1600px. Preview dan unduhan memakai bitmap render yang sama. Cache hasil dibatasi 32 MiB, bukan hanya jumlah gambar. Perubahan warna diterapkan pada fill path sebelum rasterisasi, sehingga piksel antialias tidak dikuantisasi menjadi tepi keras lagi.
 
 Tracing tetap berasal dari raster kecil, bukan master perusahaan. Kontur utamanya dipertahankan, fragmen kecil dibersihkan; bukan jaminan siap cetak/bordir. JSON dan SVG bisa dirapikan lebih lanjut. Tes native mengecek nonempty render, background nonhitam, piksel antialias, serta round-trip ekspor pada semua 16 kombinasi.
+
+## Studio Seragam (integrasi native)
+Navigasi bawah Logo | Seragam. Tab Seragam selalu mengambil `current` dan `selections[current]` yang sama dengan tab Logo; tidak ada pemilih logo terpisah. Tab, jenis produk, sudut serta snapshot ekspor dipertahankan saat rotasi. Pilihan logo dan swatch tetap tersimpan di preferensi.
+
+Sumber foto: prototipe pengguna `kotlin/Studio Seragam/Studio-Seragam-source.zip`. Menggunakan tiga sudut topi dan kemeja (depan, serong depan, belakang); aset serong belakang duplikat tidak ditawarkan. Renderer menempelkan master transparan, bukan latar abu-abu preview, dengan fit aspect ratio. Ekspor JPG melalui document picker mendukung Android 8+, memakai snapshot pilihan saat unduh diklik. Ini mockup foto 2D, tidak ada klaim bordir produksi; simulasi benang dan recolor kain belum disertakan.

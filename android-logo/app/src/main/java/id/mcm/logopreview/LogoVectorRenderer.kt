@@ -11,7 +11,7 @@ import kotlin.math.roundToInt
 
 /** Native antialiased path rendering. Does not scale/quantize the small PNG preview. */
 object LogoVectorRenderer {
-    fun render(assets: AssetManager, logo: Int, preset: Int, maxEdge: Int = 1600): Bitmap {
+    fun render(assets: AssetManager, logo: Int, preset: Int, maxEdge: Int = 1600, transparent: Boolean = false): Bitmap {
         require(logo in 0 until LogoCatalog.count && preset in 0..3 && maxEdge > 0)
         val file=LogoCatalog.files[logo].removeSuffix(".png")+".json"
         val json=JSONObject(assets.open(file).bufferedReader().use {it.readText()})
@@ -21,7 +21,7 @@ object LogoVectorRenderer {
         val width=(sourceWidth*scale).roundToInt().coerceAtLeast(1)
         val height=(sourceHeight*scale).roundToInt().coerceAtLeast(1)
         val bitmap=Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888)
-        val canvas=Canvas(bitmap);canvas.drawColor(LogoCatalog.background(logo,preset))
+        val canvas=Canvas(bitmap);if (!transparent) canvas.drawColor(LogoCatalog.background(logo,preset))
         canvas.scale(width.toFloat()/sourceWidth,height.toFloat()/sourceHeight)
         val paint=Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG).apply {style=Paint.Style.FILL}
         val layers=json.getJSONArray("layers")
