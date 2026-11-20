@@ -142,4 +142,47 @@ class PathBatch05Test(PathBatchTest):
         for key,point in [('exp-003-09',(180,180)),('exp-003-09',(40,162)),('exp-003-04',(20,120)),('exp-003-02',(18,170)),('exp-004-01',(20,156))]:
             self.assertTrue(painted(key,point),(key,point))
 
+class PathBatch06Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-06'
+    count=10
+    total=38
+    pending=[]
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_full_capacity_and_no_duplicate_master_ids(self):
+        progress=json.loads((self.batch/'progress.json').read_text())
+        self.assertEqual(progress['newMasterCount'],10)
+        self.assertEqual(progress['groups']['4']['redrawn'],list(range(1,10)))
+        self.assertEqual(progress['groups']['5']['redrawn'],[1,2])
+        self.assertEqual(progress['exactDuplicateAudit']['filesChecked'],38)
+        self.assertEqual(progress['exactDuplicateAudit']['duplicateGroups'],[])
+        previous_ids=set()
+        for batch in ('03','04','05'):
+            previous=json.loads((R/f'04-desain/variasi-svg/batch-{batch}/progress.json').read_text())
+            previous_ids.update(e['id'] for e in previous['entries'])
+        known={hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'04-desain/variasi-svg').rglob('*.svg') if p.parent!=self.batch}
+        for e in progress['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known)
+            known.add(digest)
+
+    def test_badge_bolt_holes_and_counters_are_transparent(self):
+        def painted(key,x,y):
+            data=json.loads((self.batch/f'{key}.json').read_text())
+            for layer in data['layers']:
+                inside=False;poly=[]
+                for c in layer['commands']:
+                    if c[0]=='M':poly=[c[1:]]
+                    elif c[0]=='L':poly.append(c[1:])
+                    else:
+                        for (x1,y1),(x2,y2) in zip(poly,poly[1:]+poly[:1]):
+                            if (y1>y)!=(y2>y) and x<(x2-x1)*(y-y1)/(y2-y1)+x1:inside=not inside
+                if inside:return True
+            return False
+        for key,x,y in [('exp-004-08',42,103),('exp-004-08',354,103),('exp-004-08',177,103),('exp-004-03',125,160),('exp-004-05',188,180),('exp-004-09',160,180),('exp-005-01',180,180),('exp-005-02',190,160)]:
+            self.assertFalse(painted(key,x,y),(key,x,y))
+        for key,x,y in [('exp-004-08',60,103),('exp-004-08',10,103),('exp-004-03',142,160),('exp-004-05',160,180),('exp-004-09',135,180),('exp-005-02',150,160)]:
+            self.assertTrue(painted(key,x,y),(key,x,y))
+
 if __name__=='__main__':unittest.main()
