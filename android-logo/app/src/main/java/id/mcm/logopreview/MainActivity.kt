@@ -144,6 +144,14 @@ class MainActivity : Activity() {
         val items=favorites.indices()
         favoritesPage=favoritesPage.coerceIn(0,FavoriteStore.pageCount(items.size,favoriteColumns)-1)
         layout.addView(text("♥ Favorit · ${items.size} logo",20f))
+        layout.addView(button("Copy nama favorit","Salin semua nama logo favorit"){
+            val allNames=favorites.indices().joinToString("\n"){names[it]}
+            if(allNames.isNotEmpty()){
+                val clipboard=getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                clipboard.setPrimaryClip(android.content.ClipData.newPlainText("Nama logo favorit",allNames))
+                Toast.makeText(this,"${favorites.indices().size} nama favorit disalin",Toast.LENGTH_SHORT).show()
+            }
+        }.apply{isEnabled=items.isNotEmpty()},LinearLayout.LayoutParams(-1,dp(48)))
         val controls=row()
         for(columns in listOf(3,5))controls.addView(button("$columns kolom"){
             favoriteColumns=columns;favoritesPage=0;prefs.edit().putInt("favoriteColumns",columns).apply();showPage()
