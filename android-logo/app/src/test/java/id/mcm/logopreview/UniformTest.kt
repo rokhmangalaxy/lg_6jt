@@ -26,9 +26,9 @@ class UniformTest {
             val mockup=UniformRenderer.render(app.assets,logo,preset,true,0)
             assertEquals(600,mockup.width);assertEquals(600,mockup.height);mockup.recycle()
         }
-        for(cap in listOf(false,true))for(angle in 0..2){
+        for(cap in listOf(false,true))for(angle in 0..3){
             val image=UniformRenderer.render(app.assets,2,1,cap,angle)
-            assertEquals(600,image.width);assertTrue(image.height>0);image.recycle()
+            assertEquals(if(angle==3)1200 else 600,image.width);assertTrue(image.height>0);image.recycle()
         }
     }
     private fun all(v:View):List<View> = listOf(v)+if(v is ViewGroup)(0 until v.childCount).flatMap{all(v.getChildAt(it))}else emptyList()
@@ -42,7 +42,7 @@ class UniformTest {
         decor.layout(0,0,1080,1920)
         val preview=all(decor).first{it.contentDescription=="Preview logo, geser kiri atau kanan"}
         assertTrue(preview.width>0);assertEquals(preview.width,preview.height)
-        assertEquals(6,all(decor).filterIsInstance<Button>().count{it.text.toString().matches(Regex("0[1-6]"))})
+        assertEquals(8,all(decor).filterIsInstance<Button>().count{it.text.toString().matches(Regex("0[1-8]"))})
         assertFalse(all(decor).filterIsInstance<Button>().any{it.text=="Pilihan Klien"||it.text=="Eksplorasi"})
         tap("Seragam")
         assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Variasi 03 · Swatch 2"})

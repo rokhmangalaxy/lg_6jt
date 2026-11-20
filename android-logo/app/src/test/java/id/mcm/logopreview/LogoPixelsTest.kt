@@ -26,12 +26,12 @@ class LogoPixelsTest {
         assertArrayEquals(intArrayOf(white,red,blue,white),LogoPixels.recolor(source,mask,0))
     }
     @Test fun catalogHasExactlyTheFourClientSelectionsAndWraps() {
-        assertEquals(6,LogoCatalog.count)
+        assertEquals(8,LogoCatalog.count)
         assertArrayEquals(arrayOf("client-logo-04.png","client-attachment-01.png","client-attachment-08.png","client-attachment-09.png"),LogoCatalog.files.take(4).toTypedArray())
         assertEquals(LogoCatalog.files.size,LogoCatalog.names.size)
-        assertEquals(6,LogoCatalog.files.toSet().size)
+        assertEquals(8,LogoCatalog.files.toSet().size)
         assertEquals(4,LogoCatalog.next(3,1))
-        assertEquals(5,LogoCatalog.next(0,-1))
+        assertEquals(7,LogoCatalog.next(0,-1))
     }
     @Test fun everyLogoAndSwatchUseLightGrayNeverBlack() {
         for(logo in 0..3)for(preset in 0..3)assertEquals(0xffd1d5db.toInt(),LogoCatalog.background(logo,preset))

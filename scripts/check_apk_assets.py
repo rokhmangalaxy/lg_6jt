@@ -12,7 +12,7 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
     actual = {name for name in available if name.startswith('assets/') and name.endswith('.png')}
     import json
     pilot=json.loads(apk.read('assets/exploration/catalog.json'))['reviewedEntries']
-    assert len(pilot)==2
+    assert len(pilot)==4
     for entry in pilot:
         assert entry['format']=='manual-vector'
         vector=json.loads(apk.read('assets/'+entry['vectorAsset']))

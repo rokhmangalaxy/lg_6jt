@@ -41,6 +41,10 @@ class MainActivity : Activity() {
     private var pendingExportPreset = 0
     private var current = 0
     private var page = 0
+    private val favorites by lazy { FavoriteStore(prefs) }
+    private var favoritesPage=0
+    private var favoriteColumns=3
+    private lateinit var favoriteButton:Button
     private lateinit var bottomNav: LinearLayout
     private var uniformCap = true
     private var uniformAngle = 0
@@ -70,10 +74,12 @@ class MainActivity : Activity() {
         current=state?.getInt("clientSetLogo") ?: prefs.getInt("clientSetLogo",0)
         page=state?.getInt("activeTab") ?: 0
         uniformCap=state?.getBoolean("uniformCap") ?: prefs.getBoolean("uniformCap",true)
-        uniformAngle=(state?.getInt("uniformAngle") ?: prefs.getInt("uniformAngle",0)).coerceIn(0,2)
+        uniformAngle=(state?.getInt("uniformAngle") ?: prefs.getInt("uniformAngle",0)).coerceIn(0,3)
         uniformExport=state?.getIntArray("uniformExport")
         pendingExportLogo=state?.getInt("exportLogo",-1) ?: -1
         pendingExportPreset=state?.getInt("exportPreset",0) ?: 0
+        favoritesPage=state?.getInt("favoritesPage")?:0
+        favoriteColumns=prefs.getInt("favoriteColumns",3).let{if(it==5)5 else 3}
         noteType=prefs.getInt("noteType",0)
         for(i in selections.indices) selections[i]=prefs.getInt("clientSetPalette$i",0).coerceIn(0,3)
         current=current.coerceIn(0,LogoCatalog.count-1);page=page.coerceIn(0,2)
@@ -91,15 +97,23 @@ class MainActivity : Activity() {
         }
         val header=row().apply { setBackgroundColor(NeoSurface.BASE);setPadding(dp(16),0,dp(16),0) }
         header.addView(text("MCM · Logo Studio",18f).apply { setTextColor(navy);setTypeface(null,Typeface.BOLD) },LinearLayout.LayoutParams(0,dp(56),1f))
-        downloadButton=button("↓","Download gambar") { if(page==1)beginUniformExport() else beginExport() }.apply {
+        downloadButton=button("↓","Download gambar") { if(page==1)beginUniformExport() else if(page==0)beginExport() }.apply {
             textSize=24f;isEnabled=false
         }
         header.addView(downloadButton,LinearLayout.LayoutParams(dp(56),dp(56)))
         root.addView(header)
         content=FrameLayout(this);root.addView(content,LinearLayout.LayoutParams(-1,0,1f))
-        bottomNav=row()
-        arrayOf("Logo","Seragam").forEachIndexed { index,label ->
-            bottomNav.addView(button(label,"Menu $label") { page=index;showPage() },LinearLayout.LayoutParams(0,dp(56),1f))
+        bottomNav=row().apply {
+            setPadding(dp(8),dp(6),dp(8),dp(6))
+            setBackgroundColor(0xffe1e7ef.toInt());elevation=dp(6).toFloat()
+        }
+        arrayOf("Logo","♥ Favorit","Seragam").forEachIndexed { index,label ->
+            val target=intArrayOf(0,2,1)[index]
+            bottomNav.addView(Button(this).apply{
+                text=label;isAllCaps=false;textSize=13f;contentDescription="Menu $label"
+                minWidth=0;minimumWidth=0;setPadding(0,0,0,0)
+                setOnClickListener{page=target;showPage()}
+            },LinearLayout.LayoutParams(0,dp(52),1f).apply{setMargins(dp(3),0,dp(3),0)})
         }
         root.addView(bottomNav)
         setContentView(root);root.requestApplyInsets();showPage()
@@ -107,9 +121,60 @@ class MainActivity : Activity() {
     private fun showPage() {
         generation++
         content.removeAllViews()
-        for(i in 0..1)bottomNav.getChildAt(i).isSelected=page==i
+        for(i in 0..2){
+            val selected=page==intArrayOf(0,2,1)[i]
+            (bottomNav.getChildAt(i) as Button).apply{
+                isSelected=selected;setTextColor(if(selected)Color.WHITE else navy)
+                backgroundTintList=null
+                background=android.graphics.drawable.GradientDrawable().apply{setColor(if(selected)navy else Color.TRANSPARENT);cornerRadius=dp(18).toFloat()}
+            }
+        }
         downloadButton.isEnabled=false
-        if(page==1)showUniform() else showStudio()
+        if(page==1)showUniform() else if(page==2)showFavorites() else showStudio()
+    }
+    private fun refreshFavoriteButton(){
+        val liked=favorites.contains(current)
+        favoriteButton.text=if(liked)"♥" else "♡"
+        favoriteButton.contentDescription=if(liked)"Hapus dari favorit" else "Tambahkan ke favorit"
+        favoriteButton.setTextColor(if(liked)0xffdc2626.toInt() else navy)
+    }
+    private fun toggleCurrentFavorite(){favorites.toggle(current);refreshFavoriteButton()}
+    private fun showFavorites(){
+        val layout=column().apply{setPadding(dp(12),dp(8),dp(12),0)}
+        val items=favorites.indices()
+        favoritesPage=favoritesPage.coerceIn(0,FavoriteStore.pageCount(items.size,favoriteColumns)-1)
+        layout.addView(text("♥ Favorit · ${items.size} logo",20f))
+        val controls=row()
+        for(columns in listOf(3,5))controls.addView(button("$columns kolom"){
+            favoriteColumns=columns;favoritesPage=0;prefs.edit().putInt("favoriteColumns",columns).apply();showPage()
+        }.apply{isSelected=columns==favoriteColumns},LinearLayout.LayoutParams(0,dp(48),1f))
+        layout.addView(controls)
+        val grid=GridLayout(this).apply{columnCount=favoriteColumns}
+        val scroll=ScrollView(this).apply{addView(grid)}
+        layout.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
+        if(items.isEmpty())grid.addView(text("Belum ada favorit. Ketuk ♡ di pojok preview logo.",14f))
+        val token=++generation
+        for((position,id) in FavoriteStore.page(items,favoriteColumns,favoritesPage).withIndex()){
+            val tile=column().apply{setPadding(dp(3),dp(4),dp(3),dp(4))}
+            val image=ImageView(this).apply{
+                scaleType=ImageView.ScaleType.FIT_CENTER;contentDescription="Buka ${names[id]}"
+                setOnClickListener{current=id;prefs.edit().putInt("clientSetLogo",id).apply();page=0;showPage()}
+            }
+            tile.addView(image,LinearLayout.LayoutParams(-1,dp(if(favoriteColumns==3)96 else 64)))
+            tile.addView(button("${id+1} ♥","Hapus ${names[id]} dari favorit"){favorites.toggle(id);showPage()},LinearLayout.LayoutParams(-1,dp(48)))
+            grid.addView(tile,GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED),GridLayout.spec(position%favoriteColumns,1f)).apply{width=0;height=-2})
+            worker.execute{
+                try{
+                    val thumbnail=LogoVectorRenderer.render(assets,id,selections[id],240)
+                    runOnUiThread{if(!isDestroyed&&page==2&&generation==token)image.setImageBitmap(thumbnail)else thumbnail.recycle()}
+                }catch(_:Exception){runOnUiThread{if(!isDestroyed&&generation==token)image.contentDescription="Thumbnail gagal dimuat: ${names[id]}"}}
+            }
+        }
+        val pager=row()
+        pager.addView(button("❮","Halaman favorit sebelumnya"){favoritesPage--;showPage()}.apply{isEnabled=favoritesPage>0},LinearLayout.LayoutParams(dp(56),dp(48)))
+        pager.addView(text("${favoritesPage+1} / ${FavoriteStore.pageCount(items.size,favoriteColumns)}").apply{gravity=Gravity.CENTER},LinearLayout.LayoutParams(0,dp(48),1f))
+        pager.addView(button("❯","Halaman favorit berikutnya"){favoritesPage++;showPage()}.apply{isEnabled=favoritesPage+1<FavoriteStore.pageCount(items.size,favoriteColumns)},LinearLayout.LayoutParams(dp(56),dp(48)))
+        layout.addView(pager);content.addView(layout)
     }
     private fun showUniform() {
         val layout=column().apply { setPadding(dp(12),0,dp(12),0) }
@@ -123,7 +188,7 @@ class MainActivity : Activity() {
         }
         layout.addView(types)
         val angles=row()
-        val labels=if(uniformCap)arrayOf("Depan","Serong kiri","Samping kiri")else arrayOf("Depan","Serong depan","Belakang")
+        val labels=if(uniformCap)arrayOf("Depan","Serong kiri","Samping kiri","Kolase")else arrayOf("Depan","Serong depan","Belakang","Kolase")
         labels.forEachIndexed { i,label ->angles.addView(button(label){uniformAngle=i;saveUniform();showPage()}.apply{isSelected=uniformAngle==i},LinearLayout.LayoutParams(0,dp(48),1f)) }
         layout.addView(angles)
         layout.addView(text("Simulasi penempatan 2D · bukan pola bordir produksi.\nUbah logo dan swatch melalui tab Logo.",12f))
@@ -158,10 +223,20 @@ class MainActivity : Activity() {
                 val w=View.MeasureSpec.getSize(widthSpec)
                 val side=minOf(w,(resources.displayMetrics.heightPixels*.36f).toInt())
                 logoView.measure(View.MeasureSpec.makeMeasureSpec(side,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(side,View.MeasureSpec.EXACTLY))
+                if(childCount>1)getChildAt(1).measure(View.MeasureSpec.makeMeasureSpec(dp(48),View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(dp(48),View.MeasureSpec.EXACTLY))
                 setMeasuredDimension(w,side)
+            }
+            override fun onLayout(changed:Boolean,l:Int,t:Int,r:Int,b:Int){
+                super.onLayout(changed,l,t,r,b)
+                if(childCount>1){
+                    val right=(width+logoView.measuredWidth)/2-dp(12)
+                    getChildAt(1).layout(right-dp(48),height-dp(60),right,height-dp(12))
+                }
             }
         }
         square.addView(logoView,FrameLayout.LayoutParams(-2,-2,Gravity.CENTER))
+        favoriteButton=button("♡","Tambahkan ke favorit"){toggleCurrentFavorite()}.apply{textSize=25f}
+        square.addView(favoriteButton,FrameLayout.LayoutParams(dp(48),dp(48),Gravity.BOTTOM or Gravity.END).apply{setMargins(0,0,dp(12),dp(12))})
         layout.addView(square,LinearLayout.LayoutParams(-1,-2))
         status=text("",12f).apply { gravity=Gravity.CENTER }
         layout.addView(status,LinearLayout.LayoutParams(-1,dp(20)))
@@ -184,6 +259,7 @@ class MainActivity : Activity() {
     private fun navigate(step: Int) {current=LogoCatalog.next(current,step);prefs.edit().putInt("clientSetLogo",current).apply();updateStudio()}
     private fun updateStudio() {
         val collection=LogoCatalog.collection(current)
+        refreshFavoriteButton()
         counter.text="${current-collection.first+1} / ${collection.count()} · ${names[current]}"
         paletteRow.removeAllViews();numberRow.removeAllViews()
         arrayOf("Swatch 1","Swatch 2","Hitam–Putih","Putih–Hitam").forEachIndexed { i,label ->
@@ -336,7 +412,7 @@ class MainActivity : Activity() {
         }
         scroll.addView(layout);content.addView(scroll)
     }
-    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("activeTab",page);outState.putBoolean("uniformCap",uniformCap);outState.putInt("uniformAngle",uniformAngle);outState.putIntArray("uniformExport",uniformExport);outState.putInt("clientSetLogo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
+    override fun onSaveInstanceState(outState: Bundle) {outState.putInt("favoritesPage",favoritesPage);outState.putInt("activeTab",page);outState.putBoolean("uniformCap",uniformCap);outState.putInt("uniformAngle",uniformAngle);outState.putIntArray("uniformExport",uniformExport);outState.putInt("clientSetLogo",current);outState.putInt("exportLogo",pendingExportLogo);outState.putInt("exportPreset",pendingExportPreset);super.onSaveInstanceState(outState)}
     override fun onDestroy() {generation++;worker.shutdown();super.onDestroy()}
 
     private class LogoView(context:Context,val navigate:(Int)->Unit):View(context) {

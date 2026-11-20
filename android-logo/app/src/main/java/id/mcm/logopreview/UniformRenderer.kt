@@ -9,6 +9,18 @@ object UniformRenderer {
     // rear-angle is a duplicate front asset in the supplied prototype; do not offer it.
     val shirtPhotos = arrayOf("front", "angle", "back")
     fun render(assets: AssetManager, logo: Int, preset: Int, cap: Boolean, angle: Int): Bitmap {
+        if(angle==3){
+            val result=Bitmap.createBitmap(1200,1200,Bitmap.Config.ARGB_8888)
+            val canvas=Canvas(result);canvas.drawColor(0xffedefed.toInt())
+            for(i in 0..2){
+                val image=render(assets,logo,preset,cap,i)
+                val box=if(i==0)RectF(0f,0f,800f,1200f)else RectF(812f,if(i==1)0f else 606f,1200f,if(i==1)594f else 1200f)
+                val scale=minOf(box.width()/image.width,box.height()/image.height)
+                val w=image.width*scale;val h=image.height*scale
+                canvas.drawBitmap(image,null,RectF(box.centerX()-w/2,box.centerY()-h/2,box.centerX()+w/2,box.centerY()+h/2),Paint(3));image.recycle()
+            }
+            return result
+        }
         val photos=if(cap) capPhotos else shirtPhotos
         require(angle in photos.indices)
         val photo=assets.open("uniform/${photos[angle]}.webp").use { BitmapFactory.decodeStream(it) }

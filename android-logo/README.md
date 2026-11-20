@@ -95,3 +95,10 @@ Folder Drive dilaporkan memiliki 342 file. Hanya dua sampel yang diimpor dan dip
 Semua enam logo berada dalam satu katalog bernama Variasi 01–06; belum ada keputusan klien. Pemisah koleksi dihapus. Preview utama kotak di atas, grid thumbnail tiga kolom yang bisa digulir di bawah swatch. Swipe/prev/next kini menjangkau seluruh enam variasi. Tab bawah tetap Logo | Seragam.
 
 Variasi 05/06 sekarang memakai master SVG manual dan JSON native dari titik yang sama; raster renderer serta importer floodfill dihentikan. PNG yang tersisa hanya thumbnail/arsip; preview, mockup dan ekspor dirender dari path native. Sisa file Drive belum diimpor. Bagian dokumentasi pilot raster di atas merupakan riwayat, bukan perilaku saat ini.
+
+## Favorit, kolase, variasi 07–08
+Navigasi bawah berbentuk pill datar dengan latar bar khusus: Logo | ♥ Favorit | Seragam. Hati di kanan bawah bidang preview menambah/menghapus favorit. Favorit disimpan lokal dengan ID aset stabil, bukan nomor halaman; grid 3 atau 5 kolom, dua baris per halaman, tombol prev/next, kosong dan penghapusan halaman terakhir ditangani. Ketuk thumbnail favorit untuk kembali ke logo tersebut beserta swatch terakhirnya.
+
+Seragam menyediakan sudut Kolase: komposisi tiga sudut produk aktif, tetap memakai logo/swatch yang sama, dengan ekspor JPG 1200×1200 melalui header. Jenis produk, sudut kolase, grid favorit dan halaman saat rotasi dipertahankan.
+
+Variasi 07 (shield) dan 08 (triangle) adalah studi geometris baru dari keluarga bentuk pada referensi sembilan logo sebelumnya, bukan unduhan Drive tambahan atau salinan piksel. Master SVG dan JSON dihasilkan bersama oleh `scripts/build_more_variations.py`. Seluruh delapan variasi memakai path native; file Drive lain belum diimpor.

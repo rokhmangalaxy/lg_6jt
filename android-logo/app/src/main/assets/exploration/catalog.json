@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "driveFolderId": "1fkCuPkqGe4jRAvKhTmi8Z78veYqmWGVh",
   "reportedFolderFiles": 342,
   "reviewedEntries": [
@@ -30,6 +30,26 @@
       "status": "pilot-reviewed",
       "vectorAsset": "exploration/exp-001-08.json",
       "masterSvg": "04-desain/variasi-svg/exp-001-08.svg"
+    },
+    {
+      "id": "geo-007",
+      "name": "Variasi 07",
+      "asset": "exploration/geo-007.png",
+      "vectorAsset": "exploration/geo-007.json",
+      "masterSvg": "04-desain/variasi-svg/geo-007.svg",
+      "format": "manual-vector",
+      "status": "new-geometric-study",
+      "sourceName": "Original nine-logo reference: shield/triangle family, not pixel-exact reproduction"
+    },
+    {
+      "id": "geo-008",
+      "name": "Variasi 08",
+      "asset": "exploration/geo-008.png",
+      "vectorAsset": "exploration/geo-008.json",
+      "masterSvg": "04-desain/variasi-svg/geo-008.svg",
+      "format": "manual-vector",
+      "status": "new-geometric-study",
+      "sourceName": "Original nine-logo reference: shield/triangle family, not pixel-exact reproduction"
     }
   ],
   "scope": "Two-source pilot only; remaining Drive files not audited for duplicates."
