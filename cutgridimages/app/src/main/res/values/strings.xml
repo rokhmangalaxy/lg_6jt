@@ -25,6 +25,10 @@
     <string name="selection_empty">Pilih potongan pada gambar terlebih dahulu</string>
     <string name="pick_first">Pilih gambar terlebih dahulu</string>
     <string name="loading_image">Memuat gambar…</string>
+    <string name="prev_image">Gambar sebelumnya</string>
+    <string name="next_image">Gambar berikutnya</string>
+    <string name="image_counter">%1$d / %2$d</string>
+    <string name="image_collection">%1$d gambar di koleksi</string>
     <string name="load_failed">Gagal memuat gambar: %1$s</string>
     <string name="load_failed_hint">Gagal memuat gambar: %1$s\nTekan lama thumbnail untuk menghapusnya, lalu pilih ulang gambarnya.</string>
     <string name="remove_source_title">Hapus gambar ini?</string>

@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accent">#1F6FEB</color>
-    <color name="accent_dark">#1857B8</color>
+    <!-- Aksen lavender pekat (saturasi tinggi) -->
+    <color name="accent">#7C3AED</color>
+    <color name="accent_dark">#5B21B6</color>
+    <color name="accent_soft">#C4B5FD</color>
+
+    <!-- Permukaan pastel lavender -->
+    <color name="canvas">#F5F0FF</color>
     <color name="surface">#FFFFFF</color>
-    <color name="canvas">#F1F3F6</color>
-    <color name="nav_background">#F7F8FA</color>
-    <color name="line">#DCE1E8</color>
-    <color name="ink">#111827</color>
-    <color name="ink_muted">#5B6472</color>
-    <color name="chip">#E8EDF5</color>
-    <color name="danger">#C62828</color>
-    <color name="icon_background">#1F6FEB</color>
-    <color name="selected_outline">#1F6FEB</color>
+    <color name="card">#FFFFFF</color>
+    <color name="lavender_tint">#EDE4FF</color>
+    <color name="lavender_tint_deep">#E2D3FF</color>
+    <color name="nav_background">#FBF8FF</color>
+
+    <!-- Garis, teks, kontrol -->
+    <color name="line">#E6DBFB</color>
+    <color name="ink">#2A1B4A</color>
+    <color name="ink_muted">#6E5A96</color>
+    <color name="chip">#EFE7FF</color>
+    <color name="danger">#E11D48</color>
+    <color name="danger_soft">#FFE4EC</color>
+    <color name="icon_background">#7C3AED</color>
+    <color name="selected_outline">#7C3AED</color>
 </resources>

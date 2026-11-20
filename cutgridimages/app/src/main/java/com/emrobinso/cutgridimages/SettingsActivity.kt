@@ -177,7 +177,10 @@ class SettingsActivity : Activity() {
         val buttons = listOf(navHome, navGallery, navSettings)
         buttons.forEachIndexed { position, button ->
             val active = position == index
-            button.setTextColor(getColor(if (active) R.color.accent else R.color.ink_muted))
+            button.backgroundTintList = android.content.res.ColorStateList.valueOf(
+                if (active) getColor(R.color.accent) else android.graphics.Color.TRANSPARENT,
+            )
+            button.setTextColor(getColor(if (active) R.color.surface else R.color.ink_muted))
             button.typeface = if (active) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
         }
     }

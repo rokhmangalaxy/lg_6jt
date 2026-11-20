@@ -28,6 +28,8 @@ Navigasi bawah: **Beranda · Galeri · Pengaturan**.
 - Gambar yang ditambahkan muncul sebagai **thumbnail mini dalam wadah 5 kolom × 2 baris yang bisa
   digulir vertikal**, ditambah satu petak `+` untuk menambah gambar lagi.
 - Mengetuk thumbnail menjadikannya **gambar utama** pada editor.
+- Di sisi kiri/kanan gambar utama ada tombol **◀ / ▶** untuk pindah ke gambar sebelum/berikutnya
+  dalam koleksi (memutar di ujung), dengan penunjuk posisi `2 / 5` di pojok kanan atas.
 - Tombol **Atur grid** membuka mode grid dengan **kolom/baris yang bisa dinaikkan/diturunkan
   (1–10 masing-masing)** dan pratinjau garis grid tepat di atas gambar.
 - Mode **Seleksi**: mengetuk petak di gambar memberi **overlay warna semi-transparan** (warna dari
@@ -53,6 +55,14 @@ Navigasi bawah: **Beranda · Galeri · Pengaturan**.
 - **Warna transparansi seleksi** bawaan **hijau muda** (`#8BC34A`), 8 pilihan warna.
 - **Pratinjau nama berkas** yang langsung berubah saat isian diubah, tombol **Simpan
   pengaturan**, dan **Hapus semua data gambar** (potongan + daftar sumber) dengan konfirmasi.
+
+## Tampilan
+
+Tema **lavender pastel dengan aksen saturasi tinggi** (`#7C3AED` di atas kanvas `#F5F0FF`):
+kartu membulat 22dp, tombol pil, isian berbingkai lembut, dan navigasi bawah mengambang.
+Aplikasi **tidak berjalan fullscreen** — status bar dan navigation bar tetap terlihat
+(`windowFullscreen=false`, `windowLightStatusBar`, dan `fitsSystemWindows` pada tiap layar),
+sehingga konten tidak tertimpa sistem bar pada Android 15 (edge-to-edge).
 
 ## Penamaan berkas
 

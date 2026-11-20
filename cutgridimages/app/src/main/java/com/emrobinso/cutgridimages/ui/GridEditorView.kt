@@ -43,7 +43,7 @@ class GridEditorView @JvmOverloads constructor(
         strokeWidth = 1.6f * resources.displayMetrics.density
     }
     private val hintPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#8A8F98")
+        color = Color.parseColor("#6E5A96")
         textAlign = Paint.Align.CENTER
         textSize = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,

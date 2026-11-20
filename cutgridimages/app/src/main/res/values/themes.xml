@@ -4,9 +4,15 @@
         <item name="android:colorAccent">@color/accent</item>
         <item name="android:colorPrimary">@color/accent</item>
         <item name="android:colorPrimaryDark">@color/accent_dark</item>
-        <item name="android:windowBackground">@color/surface</item>
-        <item name="android:statusBarColor">@color/surface</item>
-        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:colorEdgeEffect">@color/accent_soft</item>
+
+        <!-- Bar sistem tetap terlihat: aplikasi tidak berjalan sebagai fullscreen. -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/canvas</item>
+        <item name="android:statusBarColor">@color/lavender_tint</item>
+        <item name="android:navigationBarColor">@color/nav_background</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 </resources>

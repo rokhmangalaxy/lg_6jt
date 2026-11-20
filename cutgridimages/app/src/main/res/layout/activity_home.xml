@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface"
+    android:background="@color/canvas"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <!-- Kepala layar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingStart="20dp"
-        android:paddingTop="14dp"
+        android:paddingTop="16dp"
         android:paddingEnd="20dp">
 
         <TextView
@@ -18,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="@color/ink"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -31,12 +33,15 @@
             android:textSize="12sp" />
     </LinearLayout>
 
+    <!-- Koleksi gambar: 5 kolom, bisa digulir -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="138dp"
-        android:layout_marginTop="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:layout_height="132dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_card"
+        android:padding="8dp">
 
         <ScrollView
             android:id="@+id/thumbnailScroll"
@@ -66,14 +71,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_empty_title"
-                android:textColor="@color/ink"
-                android:textSize="14sp"
+                android:textColor="@color/accent"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:gravity="center"
                 android:text="@string/home_empty_hint"
                 android:textColor="@color/ink_muted"
@@ -81,25 +86,73 @@
         </LinearLayout>
     </FrameLayout>
 
-    <com.emrobinso.cutgridimages.ui.GridEditorView
-        android:id="@+id/editor"
+    <!-- Gambar utama + tombol pindah gambar -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:layout_weight="1"
-        android:background="@drawable/preview_background"
-        android:contentDescription="@string/editor_description" />
+        android:layout_weight="1">
 
+        <com.emrobinso.cutgridimages.ui.GridEditorView
+            android:id="@+id/editor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/preview_background"
+            android:contentDescription="@string/editor_description"
+            android:padding="10dp" />
+
+        <ImageButton
+            android:id="@+id/prevImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_circle_button"
+            android:contentDescription="@string/prev_image"
+            android:padding="9dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_chevron_left" />
+
+        <ImageButton
+            android:id="@+id/nextImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_circle_button"
+            android:contentDescription="@string/next_image"
+            android:padding="9dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_chevron_right" />
+
+        <TextView
+            android:id="@+id/imageCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_badge"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="3dp"
+            android:textColor="@color/ink_muted"
+            android:textSize="11sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- Kontrol mode, grid, dan seleksi -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingStart="16dp"
-        android:paddingTop="8dp"
+        android:paddingTop="10dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="4dp">
+        android:paddingBottom="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,121 +161,126 @@
 
             <Button
                 android:id="@+id/modeGridButton"
+                style="@style/CutGridPillPrimary"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="44dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/accent"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="@string/mode_grid"
-                android:textColor="#FFFFFF"
-                android:textSize="13sp" />
+                android:text="@string/mode_grid" />
 
             <Button
                 android:id="@+id/modeSelectButton"
+                style="@style/CutGridPillSoft"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="44dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/chip"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="@string/mode_select"
-                android:textColor="@color/ink"
-                android:textSize="13sp" />
+                android:text="@string/mode_select" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/gridControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_card_soft"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <TextView
-                android:layout_width="52dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/columns"
-                android:textColor="@color/ink"
-                android:textSize="12sp" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/columnsMinus"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:backgroundTint="@color/chip"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="−"
-                android:textColor="@color/ink"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/columns"
+                    android:textColor="@color/ink"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/columnsValue"
-                android:layout_width="32dp"
+                <Button
+                    android:id="@+id/columnsMinus"
+                    style="@style/CutGridPillSoft"
+                    android:layout_width="40dp"
+                    android:layout_height="36dp"
+                    android:backgroundTint="@color/surface"
+                    android:text="−"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/columnsValue"
+                    android:layout_width="34dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/ink"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/columnsPlus"
+                    style="@style/CutGridPillSoft"
+                    android:layout_width="40dp"
+                    android:layout_height="36dp"
+                    android:backgroundTint="@color/accent_soft"
+                    android:text="+"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="3"
-                android:textColor="@color/ink"
-                android:textStyle="bold" />
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/columnsPlus"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:backgroundTint="@color/chip"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="+"
-                android:textColor="@color/ink"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rows"
+                    android:textColor="@color/ink"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="44dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="@string/rows"
-                android:textColor="@color/ink"
-                android:textSize="12sp" />
+                <Button
+                    android:id="@+id/rowsMinus"
+                    style="@style/CutGridPillSoft"
+                    android:layout_width="40dp"
+                    android:layout_height="36dp"
+                    android:backgroundTint="@color/surface"
+                    android:text="−"
+                    android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/rowsMinus"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:backgroundTint="@color/chip"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="−"
-                android:textColor="@color/ink"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/rowsValue"
+                    android:layout_width="34dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/ink"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/rowsValue"
-                android:layout_width="32dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="3"
-                android:textColor="@color/ink"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/rowsPlus"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:backgroundTint="@color/chip"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="+"
-                android:textColor="@color/ink"
-                android:textSize="16sp" />
+                <Button
+                    android:id="@+id/rowsPlus"
+                    style="@style/CutGridPillSoft"
+                    android:layout_width="40dp"
+                    android:layout_height="36dp"
+                    android:backgroundTint="@color/accent_soft"
+                    android:text="+"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/selectPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -233,54 +291,45 @@
 
                 <Button
                     android:id="@+id/selectAllButton"
+                    style="@style/CutGridPillSoft"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/chip"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:text="@string/select_all"
-                    android:textColor="@color/ink"
-                    android:textSize="12sp" />
+                    android:text="@string/select_all" />
 
                 <Button
                     android:id="@+id/clearSelectionButton"
+                    style="@style/CutGridPillSoft"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="6dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/chip"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:text="@string/clear_selection"
-                    android:textColor="@color/ink"
-                    android:textSize="12sp" />
+                    android:backgroundTint="@color/surface"
+                    android:text="@string/clear_selection" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/saveSelectedButton"
+                    style="@style/CutGridPillPrimary"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1.2"
-                    android:backgroundTint="@color/accent"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:text="@string/save"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp" />
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:text="@string/save" />
 
                 <Button
                     android:id="@+id/saveAllButton"
+                    style="@style/CutGridPillSoft"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="6dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/chip"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:text="@string/save_all"
-                    android:textColor="@color/ink"
-                    android:textSize="12sp" />
+                    android:text="@string/save_all" />
             </LinearLayout>
         </LinearLayout>
 

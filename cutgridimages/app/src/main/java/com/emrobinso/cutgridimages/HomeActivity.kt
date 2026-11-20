@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.GridLayout
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
@@ -67,6 +68,9 @@ class HomeActivity : Activity() {
     private lateinit var navHome: Button
     private lateinit var navGallery: Button
     private lateinit var navSettings: Button
+    private lateinit var prevImageButton: ImageButton
+    private lateinit var nextImageButton: ImageButton
+    private lateinit var imageCounter: TextView
 
     private lateinit var settingsStore: SettingsStore
     private lateinit var sourceStore: ImageSourceStore
@@ -115,6 +119,8 @@ class HomeActivity : Activity() {
         navHome.setOnClickListener { updateNavHighlight(0) }
         navGallery.setOnClickListener { navigate(GalleryActivity::class.java) }
         navSettings.setOnClickListener { navigate(SettingsActivity::class.java) }
+        prevImageButton.setOnClickListener { stepImage(-1) }
+        nextImageButton.setOnClickListener { stepImage(1) }
 
         sources = sourceStore.list()
         renderThumbnails()
@@ -132,6 +138,7 @@ class HomeActivity : Activity() {
 
     private fun bindViews() {
         editor = findViewById(R.id.editor)
+        editor.clipToOutline = true
         projectSubtitle = findViewById(R.id.projectSubtitle)
         thumbnailScroll = findViewById(R.id.thumbnailScroll)
         thumbnailGrid = findViewById(R.id.thumbnailGrid)
@@ -154,6 +161,9 @@ class HomeActivity : Activity() {
         navHome = findViewById(R.id.navHome)
         navGallery = findViewById(R.id.navGallery)
         navSettings = findViewById(R.id.navSettings)
+        prevImageButton = findViewById(R.id.prevImageButton)
+        nextImageButton = findViewById(R.id.nextImageButton)
+        imageCounter = findViewById(R.id.imageCounter)
     }
 
     override fun onResume() {
@@ -302,6 +312,7 @@ class HomeActivity : Activity() {
         addTile.contentDescription = getString(R.string.add_image)
         addTile.setOnClickListener { pickImages() }
         thumbnailGrid.addView(addTile)
+        updateImageNav()
     }
 
     private fun loadThumbnail(source: SourceImage, target: ImageView) {
@@ -399,6 +410,34 @@ class HomeActivity : Activity() {
         mainBitmap = bitmap
         editor.setImage(bitmap)
         updateSelectionUi()
+    }
+
+    // --- Pindah gambar dalam koleksi -----------------------------------------------------
+
+    /** Memperbarui tombol prev/next dan penunjuk "2 / 5" sesuai posisi gambar utama. */
+    private fun updateImageNav() {
+        val total = sources.size
+        val index = sources.indexOfFirst { it.uri == mainUri }
+        val canStep = total > 1 && index >= 0 && !busy
+        listOf(prevImageButton, nextImageButton).forEach { button ->
+            button.isEnabled = canStep
+            button.alpha = if (canStep) 1f else 0.35f
+        }
+        if (index >= 0) {
+            imageCounter.text = getString(R.string.image_counter, index + 1, total)
+            imageCounter.visibility = View.VISIBLE
+        } else {
+            imageCounter.visibility = View.GONE
+        }
+    }
+
+    /** Pindah ke gambar sebelum/berikutnya dalam urutan koleksi (memutar di ujung). */
+    private fun stepImage(delta: Int) {
+        if (sources.size < 2 || busy) return
+        val current = sources.indexOfFirst { it.uri == mainUri }
+        val base = if (current >= 0) current else 0
+        val target = ((base + delta) % sources.size + sources.size) % sources.size
+        selectMain(sources[target])
     }
 
     // --- Mode, grid, dan seleksi ---------------------------------------------------------
@@ -506,6 +545,7 @@ class HomeActivity : Activity() {
         clearSelectionButton.isEnabled = !value && editor.selectedCount > 0
         saveSelectedButton.isEnabled = !value && mode == Mode.SELECT && editor.selectedCount > 0
         saveAllButton.isEnabled = !value && mainBitmap != null
+        updateImageNav()
         if (message != null) setStatus(message)
     }
 
@@ -521,7 +561,10 @@ class HomeActivity : Activity() {
         val buttons = listOf(navHome, navGallery, navSettings)
         buttons.forEachIndexed { position, button ->
             val active = position == index
-            button.setTextColor(getColor(if (active) R.color.accent else R.color.ink_muted))
+            button.backgroundTintList = ColorStateList.valueOf(
+                if (active) getColor(R.color.accent) else android.graphics.Color.TRANSPARENT,
+            )
+            button.setTextColor(getColor(if (active) R.color.surface else R.color.ink_muted))
             button.typeface = if (active) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
         }
     }

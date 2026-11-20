@@ -232,7 +232,7 @@ class GalleryActivity : Activity() {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             setPadding(dp(8), dp(8), dp(8), dp(8))
-            background = roundedBackground(getColor(R.color.surface), strokeColor, 10)
+            background = roundedBackground(getColor(R.color.surface), strokeColor, 16)
         }
         row.layoutParams = GridLayout.LayoutParams().apply {
             width = widthPx
@@ -277,7 +277,7 @@ class GalleryActivity : Activity() {
     private fun buildGridItem(piece: Piece, widthPx: Int, strokeColor: Int): View {
         val column = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = roundedBackground(getColor(R.color.surface), strokeColor, 10)
+            background = roundedBackground(getColor(R.color.surface), strokeColor, 16)
             setPadding(dp(3), dp(3), dp(3), dp(4))
         }
         column.layoutParams = GridLayout.LayoutParams().apply {
@@ -439,7 +439,10 @@ class GalleryActivity : Activity() {
         val buttons = listOf(navHome, navGallery, navSettings)
         buttons.forEachIndexed { position, button ->
             val active = position == index
-            button.setTextColor(getColor(if (active) R.color.accent else R.color.ink_muted))
+            button.backgroundTintList = android.content.res.ColorStateList.valueOf(
+                if (active) getColor(R.color.accent) else android.graphics.Color.TRANSPARENT,
+            )
+            button.setTextColor(getColor(if (active) R.color.surface else R.color.ink_muted))
             button.typeface = if (active) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
         }
     }

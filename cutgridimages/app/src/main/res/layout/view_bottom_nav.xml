@@ -2,35 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/nav_background"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_card"
     android:orientation="horizontal"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
+    android:padding="6dp">
 
     <Button
         android:id="@+id/navHome"
-        style="?android:attr/borderlessButtonStyle"
+        style="@style/CutGridNavItem"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
         android:layout_weight="1"
+        android:backgroundTint="@color/accent"
         android:text="@string/nav_home"
-        android:textSize="13sp" />
+        android:textColor="@color/surface"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/navGallery"
-        style="?android:attr/borderlessButtonStyle"
+        style="@style/CutGridNavItem"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="6dp"
         android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"
         android:text="@string/nav_gallery"
-        android:textSize="13sp" />
+        android:textColor="@color/ink_muted" />
 
     <Button
         android:id="@+id/navSettings"
-        style="?android:attr/borderlessButtonStyle"
+        style="@style/CutGridNavItem"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="6dp"
         android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"
         android:text="@string/nav_settings"
-        android:textSize="13sp" />
+        android:textColor="@color/ink_muted" />
 </LinearLayout>
