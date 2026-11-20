@@ -34,7 +34,11 @@
     <string name="grid_drag_hint">Geser garis grid untuk mengatur potongan</string>
     <string name="auto_grid">Deteksi otomatis</string>
     <string name="auto_grid_running">Mendeteksi kotak logo…</string>
-    <string name="auto_grid_done">%1$d sel terdeteksi — potongan mengikuti batas konten</string>
+    <string name="auto_grid_done">%1$d sel terdeteksi · %2$d baris × %3$d kolom</string>
+    <string name="batch_cut">Potong semua gambar (otomatis)</string>
+    <string name="batch_running">Memotong %1$d dari %2$d gambar…</string>
+    <string name="batch_done">%1$d potongan dari %2$d gambar masuk Galeri</string>
+    <string name="grid_size">Petak ± %1$d × %2$d px</string>
     <string name="auto_grid_failed">Tidak ada latar polos yang bisa dideteksi; gunakan garis manual</string>
     <string name="load_failed">Gagal memuat gambar: %1$s</string>
     <string name="load_failed_hint">Gagal memuat gambar: %1$s\nTekan lama thumbnail untuk menghapusnya, lalu pilih ulang gambarnya.</string>

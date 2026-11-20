@@ -60,6 +60,7 @@ class GridEditorView @JvmOverloads constructor(
     private val selected = LinkedHashSet<Int>()
     private val touchSlop = 14f * resources.displayMetrics.density
     private val grabRadius = 22f * resources.displayMetrics.density
+    private val snapDistance = 16f * resources.displayMetrics.density
     private val minTilePx = 28f * resources.displayMetrics.density
     private var downX = 0f
     private var downY = 0f
@@ -72,6 +73,10 @@ class GridEditorView @JvmOverloads constructor(
 
     /** Sel hasil deteksi otomatis; bila ada, grid manual diabaikan sampai direset. */
     private var detectedCells: List<FractionRect>? = null
+
+    /** Posisi celah konten (fraksi) sebagai titik tempel saat garis digeser. */
+    private var snapColumns: FloatArray? = null
+    private var snapRows: FloatArray? = null
 
     /** Posisi garis kolom dalam fraksi 0..1 (ukuran `columns + 1`). */
     private var columnCuts: FloatArray = GridSlicer.uniformCuts(3)
@@ -139,6 +144,12 @@ class GridEditorView @JvmOverloads constructor(
     }
 
     val hasDetectedCells: Boolean get() = detectedCells != null
+
+    /** Menetapkan titik tempel garis (dari deteksi celah konten). */
+    fun setSnapTargets(columns: FloatArray?, rows: FloatArray?) {
+        snapColumns = columns
+        snapRows = rows
+    }
 
     /** Mengaktifkan sel hasil deteksi otomatis (null untuk kembali ke grid manual). */
     fun setDetectedCells(cells: List<FractionRect>?) {
@@ -340,7 +351,8 @@ class GridEditorView @JvmOverloads constructor(
                 val gap = (minTilePx / imageRect.width()).coerceAtMost(0.25f)
                 val lower = cuts[position - 1] + gap
                 val upper = cuts[position + 1] - gap
-                val fraction = ((x - imageRect.left) / imageRect.width()).coerceIn(0f, 1f)
+                val raw = ((x - imageRect.left) / imageRect.width()).coerceIn(0f, 1f)
+                val fraction = snapTo(raw, snapColumns, imageRect.width())
                 cuts[position] = if (lower <= upper) fraction.coerceIn(lower, upper) else (lower + upper) / 2f
                 invalidate()
             }
@@ -352,13 +364,29 @@ class GridEditorView @JvmOverloads constructor(
                 val gap = (minTilePx / imageRect.height()).coerceAtMost(0.25f)
                 val lower = cuts[position - 1] + gap
                 val upper = cuts[position + 1] - gap
-                val fraction = ((y - imageRect.top) / imageRect.height()).coerceIn(0f, 1f)
+                val raw = ((y - imageRect.top) / imageRect.height()).coerceIn(0f, 1f)
+                val fraction = snapTo(raw, snapRows, imageRect.height())
                 cuts[position] = if (lower <= upper) fraction.coerceIn(lower, upper) else (lower + upper) / 2f
                 invalidate()
             }
 
             DragAxis.NONE -> Unit
         }
+    }
+
+    /** Menempelkan garis ke celah konten terdekat bila jaraknya cukup dekat di layar. */
+    private fun snapTo(fraction: Float, targets: FloatArray?, extentPx: Float): Float {
+        if (targets == null || targets.isEmpty() || extentPx <= 0f) return fraction
+        var best = fraction
+        var bestDistance = snapDistance
+        for (target in targets) {
+            val distance = abs(target - fraction) * extentPx
+            if (distance <= bestDistance) {
+                bestDistance = distance
+                best = target
+            }
+        }
+        return best
     }
 
     private fun toggleAt(x: Float, y: Float) {

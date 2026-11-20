@@ -27,6 +27,7 @@ import com.emrobinso.cutgridimages.data.PieceStore
 import com.emrobinso.cutgridimages.data.SettingsStore
 import com.emrobinso.cutgridimages.data.SourceImage
 import com.emrobinso.cutgridimages.grid.ContentGridDetector
+import com.emrobinso.cutgridimages.grid.GridSlicer
 import com.emrobinso.cutgridimages.grid.MAX_GRID
 import com.emrobinso.cutgridimages.grid.MIN_GRID
 import com.emrobinso.cutgridimages.image.ImageLoader
@@ -64,6 +65,7 @@ class HomeActivity : Activity() {
     private lateinit var rowsPlus: Button
     private lateinit var resetGridButton: Button
     private lateinit var autoGridButton: Button
+    private lateinit var batchCutButton: Button
     private lateinit var selectAllButton: Button
     private lateinit var clearSelectionButton: Button
     private lateinit var saveSelectedButton: Button
@@ -121,7 +123,10 @@ class HomeActivity : Activity() {
         editor.columns = savedInstanceState?.getInt(STATE_COLUMNS) ?: 3
         editor.rows = savedInstanceState?.getInt(STATE_ROWS) ?: 3
         editor.onSelectionChanged = { updateSelectionUi() }
-        editor.onGridChanged = { updateSelectionUi() }
+        editor.onGridChanged = {
+            updateSelectionUi()
+            showGridSize()
+        }
 
         modeGridButton.setOnClickListener { setMode(Mode.GRID) }
         modeSelectButton.setOnClickListener { setMode(Mode.SELECT) }
@@ -134,6 +139,7 @@ class HomeActivity : Activity() {
             setStatus(getString(R.string.grid_reset))
         }
         autoGridButton.setOnClickListener { detectGrid() }
+        batchCutButton.setOnClickListener { cutAllAutomatically() }
         selectAllButton.setOnClickListener { editor.selectAll() }
         clearSelectionButton.setOnClickListener { editor.clearSelection() }
         saveSelectedButton.setOnClickListener { savePieces(onlySelected = true) }
@@ -178,6 +184,7 @@ class HomeActivity : Activity() {
         rowsPlus = findViewById(R.id.rowsPlus)
         resetGridButton = findViewById(R.id.resetGridButton)
         autoGridButton = findViewById(R.id.autoGridButton)
+        batchCutButton = findViewById(R.id.batchCutButton)
         selectAllButton = findViewById(R.id.selectAllButton)
         clearSelectionButton = findViewById(R.id.clearSelectionButton)
         saveSelectedButton = findViewById(R.id.saveSelectedButton)
@@ -444,6 +451,7 @@ class HomeActivity : Activity() {
                     previewCache[source.uri] = bitmap
                     showMain(bitmap)
                     setStatus("")
+                    refreshSnapTargets(bitmap)
                 }.onFailure { error ->
                     if (mainBitmap == null) showMain(null)
                     setStatus(getString(R.string.load_failed_hint, error.readableMessage()))
@@ -476,6 +484,7 @@ class HomeActivity : Activity() {
     }
 
     private fun showMain(bitmap: Bitmap?) {
+        if (bitmap == null) editor.setSnapTargets(null, null)
         if (bitmap === mainBitmap) {
             updateSelectionUi()
             return
@@ -487,8 +496,9 @@ class HomeActivity : Activity() {
     }
 
     /**
-     * Menjalankan deteksi kotak isi pada gambar utama (dipakai untuk lembar logo berlatar polos).
-     * Gambar dikecilkan lebih dulu supaya pemindaian piksel tetap ringan.
+     * Deteksi sel otomatis: pemecahan rekursif pada celah kosong terlebar (X-Y cut), sehingga
+     * jumlah baris/kolom tidak perlu ditentukan lebih dulu dan tiap baris boleh punya posisi
+     * kolom sendiri.
      */
     private fun detectGrid() {
         val bitmap = mainBitmap
@@ -497,39 +507,137 @@ class HomeActivity : Activity() {
             return
         }
         if (busy) return
-        val expectedColumns = editor.columns
-        val expectedRows = editor.rows
         setStatus(getString(R.string.auto_grid_running))
+        val token = loadToken
 
         executor.execute {
             val detected = runCatching {
-                val longest = maxOf(bitmap.width, bitmap.height)
-                val scale = (DETECTION_MAX_DIMENSION / longest).coerceAtMost(1f)
-                val width = (bitmap.width * scale).toInt().coerceAtLeast(1)
-                val height = (bitmap.height * scale).toInt().coerceAtLeast(1)
-                val scaled = Bitmap.createScaledBitmap(bitmap, width, height, true)
-                val pixels = IntArray(width * height)
-                scaled.getPixels(pixels, 0, width, 0, 0, width, height)
-                if (scaled !== bitmap) scaled.recycle()
-                ContentGridDetector.detect(
-                    pixels = pixels,
-                    width = width,
-                    height = height,
-                    expectedColumns = expectedColumns,
-                    expectedRows = expectedRows,
-                )
+                val sample = samplePixels(bitmap, DETECTION_MAX_DIMENSION)
+                ContentGridDetector.detect(sample.pixels, sample.width, sample.height)
             }.getOrNull()
 
             handler.post {
-                if (isFinishing || isDestroyed) return@post
+                if (isFinishing || isDestroyed || token != loadToken) return@post
                 if (detected == null || detected.cells.size < 2) {
                     setStatus(getString(R.string.auto_grid_failed))
                     return@post
                 }
                 editor.setDetectedCells(detected.cells)
-                setStatus(getString(R.string.auto_grid_done, detected.cells.size))
+                editor.setSnapTargets(detected.gaps.columns, detected.gaps.rows)
+                setStatus(
+                    getString(
+                        R.string.auto_grid_done,
+                        detected.cells.size,
+                        detected.rows,
+                        detected.columns,
+                    ),
+                )
             }
         }
+    }
+
+    /**
+     * Alur cepat untuk banyak gambar: setiap gambar dideteksi sendiri-sendiri, dipotong, lalu
+     * disimpan ke galeri aplikasi. Gambar yang latarnya tidak bisa dipisahkan memakai grid manual
+     * yang sedang aktif sebagai cadangan.
+     */
+    private fun cutAllAutomatically() {
+        val queue = sources
+        if (queue.isEmpty()) {
+            setStatus(getString(R.string.pick_first))
+            return
+        }
+        if (busy) return
+
+        val settingsSnapshot = settings
+        val fallbackColumns = editor.columns
+        val fallbackRows = editor.rows
+        val total = queue.size
+        setBusy(true, getString(R.string.batch_running, 1, total))
+
+        executor.execute {
+            var pieces = 0
+            var handled = 0
+            queue.forEachIndexed { position, source ->
+                handler.post {
+                    if (!isFinishing && !isDestroyed) {
+                        statusText.text = getString(R.string.batch_running, position + 1, total)
+                    }
+                }
+                val bitmap = runCatching { loadSourceBitmap(source) }.getOrNull()
+                if (bitmap == null) return@forEachIndexed
+
+                val cells = runCatching {
+                    val sample = samplePixels(bitmap, DETECTION_MAX_DIMENSION)
+                    ContentGridDetector.detect(sample.pixels, sample.width, sample.height)?.cells
+                }.getOrNull()
+                val tiles = if (cells != null && cells.size >= 2) {
+                    GridSlicer.tilesFrom(cells, bitmap.width, bitmap.height)
+                } else {
+                    GridSlicer.tileBounds(bitmap.width, bitmap.height, fallbackColumns, fallbackRows)
+                }
+
+                val label = Uri.parse(source.uri).lastPathSegment ?: settingsSnapshot.projectName
+                var savedThisImage = 0
+                tiles.filterNot { it.isEmpty }.forEach { tile ->
+                    if (pieceStore.save(bitmap, tile, settingsSnapshot, label) != null) {
+                        pieces++
+                        savedThisImage++
+                    }
+                }
+                if (savedThisImage > 0) handled++
+                if (bitmap !== mainBitmap) bitmap.recycle()
+            }
+            handler.post {
+                if (isFinishing || isDestroyed) return@post
+                setBusy(false, null)
+                setStatus(getString(R.string.batch_done, pieces, handled))
+            }
+        }
+    }
+
+    /** Memperbarui titik tempel garis dari celah konten gambar yang sedang tampil. */
+    private fun refreshSnapTargets(bitmap: Bitmap) {
+        val token = loadToken
+        executor.execute {
+            val gaps = runCatching {
+                val sample = samplePixels(bitmap, GAP_SAMPLE_DIMENSION)
+                ContentGridDetector.detect(sample.pixels, sample.width, sample.height)?.gaps
+            }.getOrNull()
+            handler.post {
+                if (isFinishing || isDestroyed || token != loadToken) return@post
+                editor.setSnapTargets(
+                    columns = gaps?.columns?.takeIf { it.isNotEmpty() },
+                    rows = gaps?.rows?.takeIf { it.isNotEmpty() },
+                )
+            }
+        }
+    }
+
+    /** Menampilkan perkiraan ukuran petak setelah garis digeser atau direset. */
+    private fun showGridSize() {
+        if (editor.hasDetectedCells) return
+        val tiles = editor.currentTiles().filterNot { it.isEmpty }
+        if (tiles.isEmpty()) return
+        val widths = tiles.map { it.width }.sorted()
+        val heights = tiles.map { it.height }.sorted()
+        val middle = tiles.size / 2
+        setStatus(getString(R.string.grid_size, widths[middle], heights[middle]))
+    }
+
+    /** Salinan kecil gambar untuk analisis piksel (hemat waktu dan memori). */
+    private class Sample(val pixels: IntArray, val width: Int, val height: Int)
+
+    private fun samplePixels(bitmap: Bitmap, maxDimension: Float): Sample {
+        val longest = maxOf(bitmap.width, bitmap.height)
+        val scale = (maxDimension / longest).coerceAtMost(1f)
+        val width = (bitmap.width * scale).toInt().coerceAtLeast(1)
+        val height = (bitmap.height * scale).toInt().coerceAtLeast(1)
+        val scaled = Bitmap.createScaledBitmap(bitmap, width, height, true)
+        val pixels = IntArray(width * height)
+        scaled.getPixels(pixels, 0, width, 0, 0, width, height)
+        if (scaled !== bitmap) scaled.recycle()
+        return Sample(pixels, width, height)
     }
 
     private fun confirmRemoveSource(source: SourceImage) {
@@ -693,6 +801,7 @@ class HomeActivity : Activity() {
         rowsPlus.isEnabled = !value
         resetGridButton.isEnabled = !value
         autoGridButton.isEnabled = !value
+        batchCutButton.isEnabled = !value
         selectAllButton.isEnabled = !value && mainBitmap != null
         clearSelectionButton.isEnabled = !value && editor.selectedCount > 0
         saveSelectedButton.isEnabled = !value && mode == Mode.SELECT && editor.selectedCount > 0
@@ -760,6 +869,7 @@ class HomeActivity : Activity() {
         const val THUMBNAIL_CACHE_LIMIT = 80
         const val PICK_LIMIT = 20
         const val DETECTION_MAX_DIMENSION = 640f
+        const val GAP_SAMPLE_DIMENSION = 480f
         const val STATE_MAIN_URI = "state_main_uri"
         const val STATE_COLUMNS = "state_columns"
         const val STATE_ROWS = "state_rows"

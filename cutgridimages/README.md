@@ -35,10 +35,16 @@ Navigasi bawah: **Beranda · Galeri · Pengaturan**.
 - Perpindahan gambar terasa instan: bitmap pratinjau disimpan di cache memori (2 gambar terakhir)
   dan thumbnail langsung ditampilkan sebagai penanda sebelum versi resolusi penuh selesai dibaca.
   Strip thumbnail tidak dibangun ulang saat ganti gambar — hanya sorotan yang diperbarui.
-- **Deteksi otomatis** (tombol di panel grid): memindai latar polos gambar, menemukan pita baris
-  dan kolom isi, lalu menaruh batas potongan tepat di tengah celah — termasuk bila tiap baris
-  logo punya posisi kolom berbeda (umum pada lembar 3×3 logo). Hasilnya kotak per sel yang tidak
-  memotong konten; jumlah baris/kolom mengikuti perkiraan grid yang sedang aktif.
+- **Deteksi otomatis** (tombol di panel grid): mencari latar gambar secara adaptif (putih, warna
+  pastel, gradien halus, atau PNG transparan), lalu menyusun pita baris dari proyeksi seluruh
+  gambar dan memecah kolom per pita. Jumlah baris/kolom **tidak perlu ditentukan lebih dulu**:
+  lembar 3×3, 4×2, 2×5, baris tak sejajar, sampai daftar satu kolom semuanya terpotong tepat di
+  tengah celah. Garis hias/pita tipis di dalam logo dan bintik noise diabaikan, sehingga sel tidak
+  terpecah; foto tanpa latar polos ditolak dengan pesan agar grid diatur manual.
+- **Garis menempel ke celah** saat digeser (16dp), jadi koreksi manual cepat dan pas.
+- **Potong semua gambar (otomatis)**: memproses seluruh gambar di koleksi satu per satu — deteksi
+  per gambar, potong, lalu simpan ke Galeri. Gambar yang latarnya tidak bisa dipisahkan memakai
+  grid manual yang aktif sebagai cadangan.
 - **Garis grid bisa digeser**: garis kolom digeser horizontal, garis baris digeser vertikal
   (jarak antar garis dijaga minimal 28dp), dengan titik pegangan dan tombol **Reset sumbu**
   untuk mengembalikan ke posisi rata. Potongan disimpan mengikuti posisi garis terakhir.
