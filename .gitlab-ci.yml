@@ -1,0 +1,37 @@
+# Build Cut Grid Images di GitLab CI (mis. setelah repo di-import dari GitHub).
+# Kuota gratis GitLab.com: 400 compute menit/bulan pada runner bersama.
+
+stages:
+  - build
+
+cutgridimages-debug-apk:
+  stage: build
+  image: cimg/android:2024.01.1
+  variables:
+    GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle-home"
+  cache:
+    key: gradle-$CI_COMMIT_REF_SLUG
+    paths:
+      - .gradle-home/caches
+  script:
+    - set -eu
+    - export ANDROID_SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT}}"
+    - export PATH="$ANDROID_SDK/cmdline-tools/latest/bin:$ANDROID_SDK/tools/bin:$PATH"
+    - |
+      if [ ! -d "$ANDROID_SDK/platforms/android-35" ]; then
+        yes | sdkmanager --licenses > /dev/null 2>&1 || true
+        sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      fi
+    - curl -sSL -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.9-bin.zip
+    - unzip -q /tmp/gradle.zip -d /tmp
+    - export PATH="/tmp/gradle-8.9/bin:$PATH"
+    - export ANDROID_VERSION_CODE="${CI_PIPELINE_IID:-1}"
+    - export ANDROID_VERSION_NAME="1.0.${CI_PIPELINE_IID:-1}"
+    - cd cutgridimages
+    - gradle --no-daemon testDebugUnitTest assembleDebug
+  artifacts:
+    name: cutgridimages-debug-apk
+    expire_in: 30 days
+    paths:
+      - cutgridimages/app/build/outputs/apk/debug/app-debug.apk
+      - cutgridimages/app/build/reports/tests/

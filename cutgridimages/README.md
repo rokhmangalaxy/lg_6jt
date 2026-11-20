@@ -100,6 +100,9 @@ increased"*). Workflow tidak perlu diubah; pilih salah satu jalan keluar:
 Hemat menit Actions: workflow hanya berjalan saat berkas `cutgridimages/**` berubah, punya
 `concurrency` dengan `cancel-in-progress`, dan memakai cache Gradle dari `gradle/actions/setup-gradle`.
 
+Perbandingan lengkap jalur build (Codemagic, CircleCI, GitLab CI, Bitrise, self-hosted, lokal)
+beserta konfigurasi yang sudah disiapkan: **[CI-ALTERNATIF.md](CI-ALTERNATIF.md)**.
+
 ## Verifikasi yang sudah dilakukan
 
 - 13 unit test untuk `GridSlicer` dan `ImageSizing` lulus (dijalankan dengan `kotlinc` 2.4.21 dan

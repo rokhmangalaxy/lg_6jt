@@ -1,0 +1,47 @@
+workflows:
+  cutgridimages-android:
+    name: Cut Grid Images — debug APK
+    max_build_duration: 60
+    # Tanpa `instance_type`: memakai mesin default yang tersedia di paket gratis.
+    # Instance `linux_x2`/`linux_x4` hanya untuk akun dengan billing aktif.
+    environment:
+      java: 17
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.gradle/wrapper
+    scripts:
+      - name: Siapkan Gradle 8.9
+        script: |
+          set -eu
+          curl -sSL -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.9-bin.zip
+          unzip -q /tmp/gradle.zip -d /tmp
+          export PATH="/tmp/gradle-8.9/bin:$PATH"
+          gradle --version
+      - name: Siapkan Android SDK 35 bila belum ada
+        script: |
+          set -eu
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Library/Android/sdk}}"
+          if [ ! -d "$SDK_ROOT/platforms/android-35" ]; then
+            export PATH="$SDK_ROOT/cmdline-tools/latest/bin:$SDK_ROOT/tools/bin:$PATH"
+            yes | sdkmanager --licenses > /dev/null 2>&1 || true
+            sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+          fi
+          echo "SDK: $SDK_ROOT"
+      - name: Unit test + APK debug
+        script: |
+          set -eu
+          if ! command -v gradle >/dev/null 2>&1; then
+            curl -sSL -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.9-bin.zip
+            unzip -q /tmp/gradle.zip -d /tmp
+            export PATH="/tmp/gradle-8.9/bin:$PATH"
+          fi
+          export ANDROID_VERSION_CODE="${BUILD_NUMBER:-1}"
+          export ANDROID_VERSION_NAME="1.0.${BUILD_NUMBER:-1}"
+          cd cutgridimages
+          gradle --no-daemon testDebugUnitTest assembleDebug
+    artifacts:
+      - cutgridimages/app/build/outputs/apk/debug/*.apk
+      - cutgridimages/app/build/reports/tests/**
+    # Notifikasi email diatur dari UI Codemagic (Settings → Notifications),
+    # supaya alamat surel tidak tertulis di repository.
