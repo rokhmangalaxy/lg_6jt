@@ -282,4 +282,48 @@ class ContentGridDetectorTest {
         assertEquals(2, result.rows)
         assertEquals(2, result.columns)
     }
+
+    @Test
+    fun `hairline grid lines do not break detection`() {
+        val width = 1200
+        val height = 1200
+        val blocks = grid(columns = 3, rows = 3, cell = 320, gap = 60, margin = 40)
+        val lines = 0xFFC8C8C8.toInt()
+        val pixels = sheet(width, height, white, blocks)
+        // Garis pembatas sel setipis 2 px yang membentang penuh (seperti lembar berpetak).
+        for (x in listOf(400, 800)) {
+            for (y in 0 until height) {
+                for (dx in 0..1) pixels[y * width + x + dx] = lines
+            }
+        }
+        for (y in listOf(400, 800)) {
+            for (x in 0 until width) {
+                for (dy in 0..1) pixels[(y + dy) * width + x] = lines
+            }
+        }
+        val result = ContentGridDetector.detect(pixels, width, height)
+        assertNotNull(result)
+        assertEquals(9, result!!.cells.size)
+    }
+
+    @Test
+    fun `thin frame around the sheet is ignored when reading the background`() {
+        val width = 1000
+        val height = 1000
+        val blocks = grid(columns = 2, rows = 2, cell = 340, gap = 80, margin = 60)
+        val pixels = sheet(width, height, white, blocks)
+        val frame = 0xFFCFCFCF.toInt()
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                if (x < 3 || y < 3 || x >= width - 3 || y >= height - 3) {
+                    pixels[y * width + x] = frame
+                }
+            }
+        }
+        val result = ContentGridDetector.detect(pixels, width, height)
+        assertNotNull(result)
+        assertEquals(4, result!!.cells.size)
+        assertEquals(2, result.rows)
+        assertEquals(2, result.columns)
+    }
 }

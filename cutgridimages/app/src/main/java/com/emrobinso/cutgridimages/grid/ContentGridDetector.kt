@@ -31,7 +31,7 @@ data class FractionRect(
 object ContentGridDetector {
 
     /** Toleransi warna latar bawaan bila pemanggil tidak menentukan. */
-    const val DEFAULT_TOLERANCE = 26
+    const val DEFAULT_TOLERANCE = 36
 
     /** Batas jumlah sel agar hasil tetap bisa dikelola. */
     const val MAX_CELLS = 36
@@ -47,6 +47,9 @@ object ContentGridDetector {
 
     /** Batas minimal celah agar posisinya dipakai sebagai titik snap. */
     private const val SNAP_GAP_RATIO = 0.006f
+
+    /** Sebuah baris/kolom dianggap garis rambut bila terisi konten sepanjang rasio ini. */
+    private const val HAIRLINE_RUN_RATIO = 0.95f
 
     /** Posisi celah (fraksi 0..1) untuk snapping garis manual. */
     data class Gaps(val columns: FloatArray, val rows: FloatArray) {
@@ -85,6 +88,7 @@ object ContentGridDetector {
         }
         if (contentCount == 0) return null
         despeckle(mask, width, height)
+        removeHairlines(mask, width, height)
         // Latar tidak benar-benar polos (mis. foto): pemisahan sel akan mengarang hasil.
         if (contentCount > mask.size * MAX_CONTENT_RATIO) return null
 
@@ -184,6 +188,33 @@ object ContentGridDetector {
             }
         }
         isolated.forEach { mask[it] = false }
+    }
+
+    /**
+     * Menghapus garis rambut pembatas sel (garis abu tipis yang membentang hampir sepanjang
+     * gambar). Tanpa ini, garis tipis dianggap konten sehingga tidak ada celah kosong tersisa.
+     */
+    private fun removeHairlines(mask: BooleanArray, width: Int, height: Int) {
+        val fullColumns = BooleanArray(width)
+        val columnLimit = height * HAIRLINE_RUN_RATIO
+        for (x in 0 until width) {
+            var filled = 0
+            for (y in 0 until height) if (mask[y * width + x]) filled++
+            if (filled >= columnLimit) fullColumns[x] = true
+        }
+        val fullRows = BooleanArray(height)
+        val rowLimit = width * HAIRLINE_RUN_RATIO
+        for (y in 0 until height) {
+            val offset = y * width
+            var filled = 0
+            for (x in 0 until width) if (mask[offset + x]) filled++
+            if (filled >= rowLimit) fullRows[y] = true
+        }
+        if (fullColumns.none { it } && fullRows.none { it }) return
+        for (y in 0 until height) {
+            val offset = y * width
+            for (x in 0 until width) if (fullColumns[x] || fullRows[y]) mask[offset + x] = false
+        }
     }
 
     private fun rowHasContent(mask: BooleanArray, width: Int, y: Int): Boolean {
@@ -296,14 +327,18 @@ object ContentGridDetector {
             fun of(pixels: IntArray, width: Int, height: Int): BackgroundModel {
                 val stepX = max(1, width / 160)
                 val stepY = max(1, height / 160)
+                // Sampel diambil cincin 2% ke dalam: bingkai/tepi tipis gambar tidak ikut terukur,
+                // tetapi latar bergradien tetap terbaca.
+                val insetX = max(4, (width * 0.02f).toInt())
+                val insetY = max(4, (height * 0.02f).toInt())
                 val samples = ArrayList<Int>(capacity())
-                for (x in 0 until width step stepX) {
-                    samples += pixels[x]
-                    samples += pixels[(height - 1) * width + x]
+                for (x in insetX until width - insetX step stepX) {
+                    samples += pixels[insetY * width + x]
+                    samples += pixels[(height - 1 - insetY) * width + x]
                 }
-                for (y in 0 until height step stepY) {
-                    samples += pixels[y * width]
-                    samples += pixels[y * width + width - 1]
+                for (y in insetY until height - insetY step stepY) {
+                    samples += pixels[y * width + insetX]
+                    samples += pixels[y * width + width - 1 - insetX]
                 }
                 val reds = samples.map { (it shr 16) and 0xFF }.sorted()
                 val greens = samples.map { (it shr 8) and 0xFF }.sorted()
@@ -321,7 +356,7 @@ object ContentGridDetector {
                     medianDeviation(samples) { (it shr 8) and 0xFF } - green,
                     medianDeviation(samples) { it and 0xFF } - blue,
                 )
-                val tolerance = (deviation * 3 + 12).coerceIn(20, 80)
+                val tolerance = (deviation * 3 + 12).coerceIn(26, 80)
                 return BackgroundModel(color, transparent = alpha < 128, tolerance = tolerance)
             }
 

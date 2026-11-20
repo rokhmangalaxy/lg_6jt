@@ -42,6 +42,9 @@ Navigasi bawah: **Beranda · Galeri · Pengaturan**.
   tengah celah. Garis hias/pita tipis di dalam logo dan bintik noise diabaikan, sehingga sel tidak
   terpecah; foto tanpa latar polos ditolak dengan pesan agar grid diatur manual.
 - **Garis menempel ke celah** saat digeser (16dp), jadi koreksi manual cepat dan pas.
+- **Tahan bingkai & garis petak**: warna latar dibaca dari cincin 2% ke dalam (bingkai tipis di
+  tepi gambar tidak ikut terukur) dan garis rambut pembatas sel dibuang, sehingga lembar berpetak
+  tetap terpotong 9/9 tanpa perlu menyetel grid manual.
 - **Potong semua gambar (otomatis)**: memproses seluruh gambar di koleksi satu per satu — deteksi
   per gambar, potong, lalu simpan ke Galeri. Gambar yang latarnya tidak bisa dipisahkan memakai
   grid manual yang aktif sebagai cadangan.
