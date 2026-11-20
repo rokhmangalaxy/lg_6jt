@@ -102,3 +102,8 @@ Navigasi bawah berbentuk pill datar dengan latar bar khusus: Logo | ♥ Favorit 
 Seragam menyediakan sudut Kolase: komposisi tiga sudut produk aktif, tetap memakai logo/swatch yang sama, dengan ekspor JPG 1200×1200 melalui header. Jenis produk, sudut kolase, grid favorit dan halaman saat rotasi dipertahankan.
 
 Variasi 07 (shield) dan 08 (triangle) adalah studi geometris baru dari keluarga bentuk pada referensi sembilan logo sebelumnya, bukan unduhan Drive tambahan atau salinan piksel. Master SVG dan JSON dihasilkan bersama oleh `scripts/build_more_variations.py`. Seluruh delapan variasi memakai path native; file Drive lain belum diimpor.
+
+## Batch Drive 02 — Variasi 09–11
+Kelompok Drive 1 nomor 02,03,04 digambar ulang dengan koordinat manual menjadi master SVG dan JSON native; bukan auto-trace. Tiga ID baru ditambahkan di akhir katalog sehingga delapan ID dan favorit lama tidak bergeser. Warna sumber bertekstur dijadikan solid dan M kiri/kanan disimetriskan. Sumber 02/04 adalah M merah dan C navy tanpa bingkai baru; sumber 03 mempertahankan bingkai hexagon navy dengan MCM merah.
+
+Generator `scripts/build_drive_batch_02.py` menghasilkan perbandingan offline di `04-desain/variasi-svg/batch-02/perbandingan.html` dan progres di `progress.json`. Audit SHA256 hanya mencakup lima sumber Drive yang sudah diunduh; tidak ada klaim seluruh folder telah diaudit. Progres kelompok 1: 01,02,03,04,08 selesai (5/9), tersisa 05,06,07,09. Folder lain belum dikerjakan. Tiga redraw tetap perlu review visual pengguna, bukan master produksi yang disetujui.

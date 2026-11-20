@@ -42,7 +42,7 @@ class UniformTest {
         decor.layout(0,0,1080,1920)
         val preview=all(decor).first{it.contentDescription=="Preview logo, geser kiri atau kanan"}
         assertTrue(preview.width>0);assertEquals(preview.width,preview.height)
-        assertEquals(8,all(decor).filterIsInstance<Button>().count{it.text.toString().matches(Regex("0[1-8]"))})
+        assertEquals(11,all(decor).filterIsInstance<Button>().count{it.text.toString().matches(Regex("0[1-9]|1[01]"))})
         assertFalse(all(decor).filterIsInstance<Button>().any{it.text=="Pilihan Klien"||it.text=="Eksplorasi"})
         tap("Seragam")
         assertTrue(all(controller.get().window.decorView).filterIsInstance<TextView>().any{it.text.toString()=="Variasi 03 · Swatch 2"})

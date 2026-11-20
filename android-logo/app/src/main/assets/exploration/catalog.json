@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "driveFolderId": "1fkCuPkqGe4jRAvKhTmi8Z78veYqmWGVh",
   "reportedFolderFiles": 342,
   "reviewedEntries": [
@@ -50,7 +50,49 @@
       "format": "manual-vector",
       "status": "new-geometric-study",
       "sourceName": "Original nine-logo reference: shield/triangle family, not pixel-exact reproduction"
+    },
+    {
+      "id": "exp-001-02",
+      "name": "Variasi 09",
+      "asset": "exploration/exp-001-02.png",
+      "vectorAsset": "exploration/exp-001-02.json",
+      "masterSvg": "04-desain/variasi-svg/exp-001-02.svg",
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-02.png",
+      "driveId": "19yJxNN4xRt_NqpJyOWM6qACQ17scOId6",
+      "sourceSha256": "f9eb80d5afde1186bb5e8d5ee216465491be419c784567ef7052b8a6e7f8fb96",
+      "format": "manual-vector",
+      "group": 1,
+      "sourceNumber": 2,
+      "status": "batch-02-geometric-redraw"
+    },
+    {
+      "id": "exp-001-03",
+      "name": "Variasi 10",
+      "asset": "exploration/exp-001-03.png",
+      "vectorAsset": "exploration/exp-001-03.json",
+      "masterSvg": "04-desain/variasi-svg/exp-001-03.svg",
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-03.png",
+      "driveId": "1FE1MMC1Kpar0jHaCJ4Qm5k59HiOcu-8o",
+      "sourceSha256": "e00412b89aa8cdab53372e1d7d856ef8fc30a6988653c99b46341fa26a850660",
+      "format": "manual-vector",
+      "group": 1,
+      "sourceNumber": 3,
+      "status": "batch-02-geometric-redraw"
+    },
+    {
+      "id": "exp-001-04",
+      "name": "Variasi 11",
+      "asset": "exploration/exp-001-04.png",
+      "vectorAsset": "exploration/exp-001-04.json",
+      "masterSvg": "04-desain/variasi-svg/exp-001-04.svg",
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-04.png",
+      "driveId": "1BpPfhJefVWsIvKLq5u8MObm1GWkAY1ch",
+      "sourceSha256": "799cb74e8a6200ea0a1d312df2426b19d2dbda1605f89ebca2db4e5c0812e80c",
+      "format": "manual-vector",
+      "group": 1,
+      "sourceNumber": 4,
+      "status": "batch-02-geometric-redraw"
     }
   ],
-  "scope": "Two-source pilot only; remaining Drive files not audited for duplicates."
+  "scope": "Five Drive sources redrawn manually (group 1: 01,02,03,04,08), plus two original-reference geometric studies. Remaining Drive files not audited."
 }

@@ -48,15 +48,15 @@ class FavoriteTest{
     @Test fun copyIncludesEveryPageAndDoesNotOverwriteClipboardWhenEmpty(){
         val app:Application=RuntimeEnvironment.getApplication()
         val prefs=app.getSharedPreferences("native-studio",0);prefs.edit().clear().commit()
-        val store=FavoriteStore(prefs);for(i in 0..7)store.toggle(i)
+        val store=FavoriteStore(prefs);for(i in LogoCatalog.files.indices)store.toggle(i)
         val controller=Robolectric.buildActivity(MainActivity::class.java).setup()
         fun views()=all(controller.get().window.decorView)
         views().first{it.contentDescription=="Menu ♥ Favorit"}.performClick()
         val clipboard=app.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
         views().first{it.contentDescription=="Salin semua nama logo favorit"}.performClick()
         assertEquals(LogoCatalog.names.joinToString("\n"),clipboard.primaryClip!!.getItemAt(0).text.toString())
-        // There are eight favorites but only six visible on the first 3-column page.
-        for(i in 0..7)store.toggle(i)
+        // There are eleven favorites but only six visible on the first 3-column page.
+        for(i in LogoCatalog.files.indices)store.toggle(i)
         views().first{it.contentDescription=="Menu ♥ Favorit"}.performClick()
         assertFalse(views().first{it.contentDescription=="Salin semua nama logo favorit"}.isEnabled)
         assertEquals(LogoCatalog.names.joinToString("\n"),clipboard.primaryClip!!.getItemAt(0).text.toString())
