@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cut Grid Images</string>
+    <string name="title">Cut Grid Images</string>
+    <string name="subtitle">Potong satu gambar menjadi beberapa petak sesuai grid, lalu simpan ke galeri.</string>
+    <string name="preview_description">Pratinjau gambar dengan garis grid</string>
+    <string name="no_image">Belum ada gambar</string>
+    <string name="pick_image">Pilih gambar</string>
+    <string name="columns">Kolom</string>
+    <string name="rows">Baris</string>
+    <string name="format">Format</string>
+    <string name="format_png">PNG</string>
+    <string name="format_jpeg">JPEG</string>
+    <string name="export">Potong &amp; simpan</string>
+    <string name="hint_start">Pilih gambar untuk mulai. Grid awal 3 × 3 petak.</string>
+    <string name="pick_first">Pilih gambar terlebih dahulu.</string>
+    <string name="loading_image">Memuat gambar…</string>
+    <string name="load_failed">Gagal memuat gambar: %1$s</string>
+    <string name="exporting">Memotong gambar…</string>
+    <string name="saved">%1$d petak disimpan di %2$s.</string>
+    <string name="export_failed">Gagal menyimpan: %1$s</string>
+    <string name="permission_needed">Izin penyimpanan diperlukan untuk Android 8–9.</string>
+    <string name="grid_summary">Grid %1$d × %2$d = %3$d petak · sumber %4$d × %5$d piksel</string>
+</resources>
