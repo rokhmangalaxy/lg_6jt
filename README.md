@@ -25,4 +25,4 @@ Pisahkan fakta dari usulan desain. Jangan menganggap logo, warna, filosofi, atau
 Lihat [proyek MCM Logo Studio](android-logo/README.md) untuk aplikasi offline dan workflow build APK. Status APK: belum dibangun; membutuhkan toolchain Android lokal atau GitHub Actions.
 
 ## Cut Grid Images (Android Kotlin)
-Proyek Android terpisah di `cutgridimages/` (paket `com.emrobinso.cutgridimages`) untuk memotong satu gambar menjadi grid petak dan menyimpannya ke galeri. Lihat [cutgridimages/README.md](cutgridimages/README.md); workflow build: `.github/workflows/cutgridimages-apk.yml`. Perbandingan jalur build tanpa Actions (kuota habis/billing): [cutgridimages/CI-ALTERNATIF.md](cutgridimages/CI-ALTERNATIF.md).
+Proyek Android terpisah di `cutgridimages/` (paket `com.emrobinso.cutgridimages`) dengan tiga layar — Beranda, Galeri, Pengaturan — untuk memotong satu gambar menjadi grid petak, memilih petak, dan menyimpannya ke galeri. Lihat [cutgridimages/README.md](cutgridimages/README.md); workflow build: `.github/workflows/cutgridimages-apk.yml`. Perbandingan jalur build tanpa Actions (kuota habis/billing): [cutgridimages/CI-ALTERNATIF.md](cutgridimages/CI-ALTERNATIF.md).

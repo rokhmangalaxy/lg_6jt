@@ -1,24 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cut Grid Images</string>
-    <string name="title">Cut Grid Images</string>
-    <string name="subtitle">Potong satu gambar menjadi beberapa petak sesuai grid, lalu simpan ke galeri.</string>
-    <string name="preview_description">Pratinjau gambar dengan garis grid</string>
-    <string name="no_image">Belum ada gambar</string>
-    <string name="pick_image">Pilih gambar</string>
+
+    <!-- Beranda -->
+    <string name="home_project">Proyek: %1$s</string>
+    <string name="home_subtitle">Ketuk gambar mini untuk mengganti gambar utama</string>
+    <string name="home_empty_title">Input images</string>
+    <string name="home_empty_hint">Ketuk untuk memilih satu atau beberapa gambar dari galeri</string>
+    <string name="add_image">Tambah</string>
+    <string name="editor_description">Pratinjau pembagian grid gambar</string>
+    <string name="editor_hint">Pilih gambar untuk mulai</string>
     <string name="columns">Kolom</string>
     <string name="rows">Baris</string>
-    <string name="format">Format</string>
-    <string name="format_png">PNG</string>
-    <string name="format_jpeg">JPEG</string>
-    <string name="export">Potong &amp; simpan</string>
-    <string name="hint_start">Pilih gambar untuk mulai. Grid awal 3 × 3 petak.</string>
-    <string name="pick_first">Pilih gambar terlebih dahulu.</string>
+    <string name="mode_grid">Atur grid</string>
+    <string name="mode_select">Seleksi</string>
+    <string name="select_all">Pilih semua</string>
+    <string name="clear_selection">Kosongkan</string>
+    <string name="save">Simpan</string>
+    <string name="save_selected_count">Simpan (%1$d)</string>
+    <string name="delete">Hapus</string>
+    <string name="save_all">Simpan semua</string>
+    <string name="selected_count">%1$d potongan terpilih</string>
+    <string name="saved_pieces">%1$d potongan disimpan ke galeri aplikasi</string>
+    <string name="selection_empty">Pilih potongan pada gambar terlebih dahulu</string>
+    <string name="pick_first">Pilih gambar terlebih dahulu</string>
     <string name="loading_image">Memuat gambar…</string>
     <string name="load_failed">Gagal memuat gambar: %1$s</string>
-    <string name="exporting">Memotong gambar…</string>
-    <string name="saved">%1$d petak disimpan di %2$s.</string>
+    <string name="saving_pieces">Menyimpan potongan…</string>
+    <string name="unpickable_tile">Potongan ini terlalu kecil untuk disimpan</string>
+
+    <!-- Galeri -->
+    <string name="gallery_title">Galeri</string>
+    <string name="gallery_count">%1$d potongan tersimpan</string>
+    <string name="gallery_empty">Belum ada potongan tersimpan. Pilih potongan di Beranda lalu simpan.</string>
+    <string name="view_list">List</string>
+    <string name="view_grid3">Grid 3</string>
+    <string name="view_grid5">Grid 5</string>
+    <string name="select_mode">Pilih</string>
+    <string name="cancel">Batal</string>
+    <string name="delete_selected">Hapus (%1$d)</string>
+    <string name="delete_title">Hapus potongan?</string>
+    <string name="delete_message">%1$d potongan akan dihapus permanen dari galeri aplikasi.</string>
+    <string name="delete_done">%1$d potongan dihapus</string>
+    <string name="export_selected">Simpan terpilih (%1$d)</string>
+    <string name="export_all">Simpan semua</string>
+    <string name="export_empty">Tidak ada gambar untuk disimpan</string>
+    <string name="exporting">Menyimpan ke galeri perangkat…</string>
+    <string name="export_done">%1$d gambar disimpan ke %2$s</string>
     <string name="export_failed">Gagal menyimpan: %1$s</string>
+    <string name="page_info">Halaman %1$d / %2$d</string>
+    <string name="page_prev">‹</string>
+    <string name="page_next">›</string>
+    <string name="selection_mode_hint">Ketuk potongan untuk memilih</string>
+
+    <!-- Pengaturan -->
+    <string name="settings_title">Pengaturan</string>
+    <string name="settings_project">Nama proyek</string>
+    <string name="settings_project_hint">mis. mcm</string>
+    <string name="settings_digits">Digit nomor (1–6)</string>
+    <string name="settings_separator">Pemisah karakter</string>
+    <string name="settings_color">Warna transparansi seleksi</string>
+    <string name="settings_preview">Contoh nama berkas: %1$s</string>
+    <string name="settings_save">Simpan pengaturan</string>
+    <string name="settings_saved">Pengaturan disimpan</string>
+    <string name="settings_clear">Bersihkan semua data gambar</string>
+    <string name="clear_title">Bersihkan semua data?</string>
+    <string name="clear_message">Semua potongan dan gambar yang diunggah di aplikasi ini akan dihapus.</string>
+    <string name="clear_done">Semua data gambar dibersihkan</string>
+    <string name="invalid_digits">Digit harus angka 1–6</string>
+
+    <!-- Navigasi -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_gallery">Galeri</string>
+    <string name="nav_settings">Pengaturan</string>
+
+    <!-- Izin penyimpanan (Android 8–9) -->
     <string name="permission_needed">Izin penyimpanan diperlukan untuk Android 8–9.</string>
-    <string name="grid_summary">Grid %1$d × %2$d = %3$d petak · sumber %4$d × %5$d piksel</string>
 </resources>
