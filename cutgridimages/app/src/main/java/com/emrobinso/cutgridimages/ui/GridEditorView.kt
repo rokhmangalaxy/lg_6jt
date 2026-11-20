@@ -14,6 +14,7 @@ import android.view.View
 import com.emrobinso.cutgridimages.R
 import com.emrobinso.cutgridimages.data.AppSettings
 import com.emrobinso.cutgridimages.grid.GridSlicer
+import com.emrobinso.cutgridimages.grid.GridTile
 import com.emrobinso.cutgridimages.grid.MAX_GRID
 import com.emrobinso.cutgridimages.grid.MIN_GRID
 import kotlin.math.abs
@@ -114,7 +115,9 @@ class GridEditorView @JvmOverloads constructor(
         val image = bitmap ?: return
         if (image.width <= 0) return
         selected.clear()
-        for (index in 0 until columns * rows) selected += index
+        GridSlicer.tileBounds(image.width, image.height, columns, rows)
+            .filterNot { it.isEmpty }
+            .forEach { selected += it.index }
         onSelectionChanged?.invoke(selected.size)
         invalidate()
     }
@@ -199,13 +202,17 @@ class GridEditorView @JvmOverloads constructor(
     }
 
     private fun toggleAt(x: Float, y: Float) {
-        val index = tileIndexAt(x, y) ?: return
-        if (!selected.add(index)) selected.remove(index)
+        val tile = tileAt(x, y) ?: return
+        if (tile.isEmpty) return
+        val index = tile.index
+        val added = selected.add(index)
+        if (!added) selected.remove(index)
+        performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
         onSelectionChanged?.invoke(selected.size)
         invalidate()
     }
 
-    private fun tileIndexAt(x: Float, y: Float): Int? {
+    private fun tileAt(x: Float, y: Float): GridTile? {
         val image = bitmap ?: return null
         if (imageRect.isEmpty || !imageRect.contains(x, y)) return null
         val bitmapX = ((x - imageRect.left) / imageRect.width() * image.width).toInt()
@@ -214,7 +221,6 @@ class GridEditorView @JvmOverloads constructor(
             .coerceIn(0, image.height - 1)
         return GridSlicer.tileBounds(image.width, image.height, columns, rows)
             .firstOrNull { bitmapX >= it.left && bitmapX < it.right && bitmapY >= it.top && bitmapY < it.bottom }
-            ?.index
     }
 
     private fun computeImageRect(imageWidth: Int, imageHeight: Int, out: RectF) {

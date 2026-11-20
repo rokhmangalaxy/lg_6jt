@@ -24,14 +24,23 @@ class PieceExporter(private val context: Context) {
     fun export(pieces: List<Piece>): Summary {
         require(pieces.isNotEmpty()) { "Tidak ada gambar untuk disimpan" }
         var saved = 0
+        var lastError: String? = null
         pieces.forEach { piece ->
-            if (!piece.file.isFile) return@forEach
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                writeToMediaStore(piece)
-            } else {
-                writeToLegacyPictures(piece)
+            if (!piece.file.isFile) {
+                lastError = "Berkas ${piece.displayName} tidak ditemukan"
+                return@forEach
             }
-            saved++
+            runCatching {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    writeToMediaStore(piece)
+                } else {
+                    writeToLegacyPictures(piece)
+                }
+            }.onSuccess { saved++ }
+                .onFailure { lastError = it.message ?: it.javaClass.simpleName }
+        }
+        if (saved == 0) {
+            throw IOException(lastError ?: "Tidak ada potongan yang bisa disimpan")
         }
         return Summary(saved, "Pictures/$ALBUM")
     }

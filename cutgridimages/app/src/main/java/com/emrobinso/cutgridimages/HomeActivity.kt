@@ -74,6 +74,7 @@ class HomeActivity : Activity() {
     private var mainUri: String? = null
     private var mainBitmap: Bitmap? = null
     private var busy = false
+    private var loadToken = 0
 
     private enum class Mode { GRID, SELECT }
 
@@ -115,12 +116,10 @@ class HomeActivity : Activity() {
         updateGridLabels()
 
         val restoredMain = savedInstanceState?.getString(STATE_MAIN_URI)
-        if (restoredMain != null) {
-            selectMain(restoredMain)
-        } else if (sources.isNotEmpty()) {
-            selectMain(sources.first().uri)
-        } else {
-            handleLaunchIntent(intent)
+        when {
+            handleLaunchIntent(intent) -> Unit
+            restoredMain != null -> selectMain(restoredMain)
+            sources.isNotEmpty() -> selectMain(sources.first().uri)
         }
     }
 
@@ -212,16 +211,24 @@ class HomeActivity : Activity() {
         selectMain(picked.first().toString())
     }
 
-    private fun handleLaunchIntent(intent: Intent?) {
-        if (intent == null) return
+    private fun handleLaunchIntent(intent: Intent?): Boolean {
+        if (intent == null) return false
         val uri = when (intent.action) {
             Intent.ACTION_VIEW -> intent.data
             Intent.ACTION_SEND -> sharedImageUri(intent)
             else -> null
-        } ?: return
+        } ?: return false
         sources = sourceStore.add(listOf(uri.toString()))
         renderThumbnails()
         selectMain(uri.toString())
+        return true
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (busy) return
+        handleLaunchIntent(intent)
     }
 
     @Suppress("DEPRECATION")
@@ -300,12 +307,13 @@ class HomeActivity : Activity() {
         mainUri = uriString
         renderThumbnails()
         setStatus(getString(R.string.loading_image))
+        val token = ++loadToken
         executor.execute {
             val loaded = runCatching {
                 ImageLoader.load(this, Uri.parse(uriString), PREVIEW_MAX_DIMENSION)
             }
             handler.post {
-                if (isFinishing || isDestroyed) {
+                if (isFinishing || isDestroyed || token != loadToken) {
                     loaded.getOrNull()?.recycle()
                     return@post
                 }
