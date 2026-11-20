@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import com.emrobinso.cutgridimages.R
 import com.emrobinso.cutgridimages.grid.MAX_GRID
@@ -39,7 +40,11 @@ class GridPreviewView @JvmOverloads constructor(
     }
     private val hintPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.parseColor("#8A8F98")
-        textSize = 14f * resources.displayMetrics.scaledDensity
+        textSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            14f,
+            resources.displayMetrics,
+        )
         textAlign = Paint.Align.CENTER
     }
 

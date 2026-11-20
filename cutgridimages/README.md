@@ -48,10 +48,14 @@ cutgridimages/
 Workflow **Build Cut Grid Images APK** (`.github/workflows/cutgridimages-apk.yml`) berjalan saat
 folder ini berubah, pada pull request, atau manual dari tab Actions.
 
-Workflow menjalankan unit test (`testDebugUnitTest`), membangun APK debug, dan lint. Bila berhasil,
-unduh artifact **cutgridimages-debug-apk**, ekstrak ZIP, lalu pasang `app-debug.apk`
+Workflow menjalankan unit test (`testDebugUnitTest`) dan membangun APK debug; lint berjalan sebagai
+langkah informasi sehingga temuannya tidak menghalangi artifact. Bila berhasil, unduh artifact
+**cutgridimages-debug-apk**, ekstrak ZIP, lalu pasang `app-debug.apk`
 (izinkan pemasangan dari sumber aplikasi pengunduh bila diminta). Ini APK debug untuk pengujian,
 bukan rilis Play Store dan belum ditandatangani untuk distribusi.
+
+Status: workflow sudah disiapkan, tetapi **APK belum dibangun di CI** pada sesi ini (Actions
+repository belum menjalankan job).
 
 Toolchain: JDK 17, Gradle 8.9, AGP 8.7.3, Kotlin 2.0.21, compile/target SDK 35, min SDK 26
 (Android 8+). Tidak ada Gradle wrapper biner di repository; Gradle disiapkan oleh workflow.
@@ -67,6 +71,13 @@ gradle testDebugUnitTest assembleDebug
 
 Hasil: `app/build/outputs/apk/debug/app-debug.apk`. Build pertama memerlukan internet untuk
 Google Maven, Maven Central, dan komponen SDK Android.
+
+## Verifikasi yang sudah dilakukan
+
+- 13 unit test untuk `GridSlicer` dan `ImageSizing` lulus (dijalankan dengan `kotlinc` 2.4.21 dan
+  JUnit 4 API).
+- Seluruh sumber `app/src/main` dikompilasi tanpa peringatan terhadap `android.jar` API 35.
+- Belum diuji: AAPT/resource linking, lint penuh, dan pemasangan di perangkat/emulator.
 
 ## Batasan yang diketahui
 

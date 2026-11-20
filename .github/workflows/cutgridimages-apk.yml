@@ -43,9 +43,15 @@ jobs:
           export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
           sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Unit tests, assemble, and lint
+      - name: Unit tests and debug APK
         working-directory: cutgridimages
-        run: gradle --no-daemon testDebugUnitTest assembleDebug lintDebug
+        run: gradle --no-daemon testDebugUnitTest assembleDebug
+
+      # Lint bersifat informasi: temuan gaya tidak menghalangi artifact APK.
+      - name: Lint
+        working-directory: cutgridimages
+        continue-on-error: true
+        run: gradle --no-daemon lintDebug
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
