@@ -13,7 +13,7 @@ on:
       - '.github/workflows/cutgridimages-apk.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: cutgridimages-${{ github.ref }}
@@ -51,10 +51,9 @@ jobs:
           gradle --no-daemon --stacktrace testDebugUnitTest assembleDebug 2>&1 | tee build.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
-            # Cetak ekor log sebagai anotasi supaya penyebab gagal bisa dibaca lewat REST API
-            # meski log mentah tidak dapat diunduh dari lingkungan tertentu.
-            tail -c 2500 build.log | tr '\n' '~' | tr -d '\r'
-            echo "::error::build-gagal~$(tail -c 2400 build.log | tr '\n' '~' | tr -d '\r')"
+            tail -n 12 build.log | while IFS= read -r line; do
+              [ -n "$line" ] && echo "::error title=Build gagal::$line"
+            done
             exit "$status"
           fi
 
@@ -70,3 +69,45 @@ jobs:
           name: cutgridimages-debug-apk
           path: cutgridimages/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      # APK juga diterbitkan sebagai aset Release: unduhan sekali klik dari browser,
+      # tanpa perlu masuk ke tab Actions dan mengekstrak ZIP artifact.
+      - name: Terbitkan APK ke GitHub Release
+        if: github.event_name != 'pull_request'
+        working-directory: cutgridimages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk=app/build/outputs/apk/debug/app-debug.apk
+          test -f "$apk"
+          sha=$(sha256sum "$apk" | cut -d' ' -f1)
+          size=$(stat -c%s "$apk")
+          python3 - "$apk" <<'PYEOF' > /tmp/apk-info.txt
+          import sys, zipfile
+          with zipfile.ZipFile(sys.argv[1]) as z:
+              names = z.namelist()
+              dex = [n for n in names if n.endswith('.dex')]
+              print("entries:", len(names))
+              print("dex:", ", ".join(f"{n} ({z.getinfo(n).file_size} B)" for n in dex) or "TIDAK ADA")
+              print("resources.arsc:", "resources.arsc" in names)
+              print("manifest:", "AndroidManifest.xml" in names)
+          PYEOF
+          cat /tmp/apk-info.txt
+          echo "sha256=$sha size=$size"
+          while IFS= read -r info; do
+            echo "::notice title=APK::$info"
+          done < /tmp/apk-info.txt
+          echo "::notice title=APK sha256::$sha ($size byte)"
+          tag="cutgridimages-v${{ github.run_number }}"
+          notes="APK debug otomatis dari commit ${{ github.sha }}. Pasang di perangkat Android 8+ (minSdk 26); izinkan pemasangan dari sumber tidak dikenal bila diminta. Ditandatangani dengan debug keystore milik runner, sehingga APK dari run berbeda harus di-uninstall dulu sebelum dipasang ulang. sha256: $sha"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "$apk#app-debug.apk" --clobber
+          else
+            gh release create "$tag" "$apk#app-debug.apk" \
+              --title "Cut Grid Images v${{ github.run_number }}" \
+              --notes "$notes" \
+              --target "${{ github.sha }}"
+          fi
+          gh release view "$tag" --json url,assets --jq '.url, (.assets[] | "aset: \(.name) \(.size) byte")'
