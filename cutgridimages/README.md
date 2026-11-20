@@ -23,13 +23,21 @@ Navigasi bawah: **Beranda · Galeri · Pengaturan**.
 
 ### 1. Beranda
 
-- Kotak isian bergaris putus-putus (**placeholder**) yang membuka pemilih gambar sistem
-  (Storage Access Framework) dengan **multi-seleksi**. Tidak butuh izin baca.
+- Kotak isian bergaris putus-putus (**placeholder**) yang membuka **galeri**, bukan pengelola
+  berkas: Android 13+ memakai *photo picker* sistem (`ACTION_PICK_IMAGES`, multi pilih hingga 20
+  gambar, tanpa izin); versi lama memakai pemilih konten bergambar, dan pemilih dokumen hanya
+  sebagai jalan terakhir.
 - Gambar yang ditambahkan muncul sebagai **thumbnail mini dalam wadah 5 kolom × 2 baris yang bisa
   digulir vertikal**, ditambah satu petak `+` untuk menambah gambar lagi.
 - Mengetuk thumbnail menjadikannya **gambar utama** pada editor.
 - Di sisi kiri/kanan gambar utama ada tombol **◀ / ▶** untuk pindah ke gambar sebelum/berikutnya
   dalam koleksi (memutar di ujung), dengan penunjuk posisi `2 / 5` di pojok kanan atas.
+- Perpindahan gambar terasa instan: bitmap pratinjau disimpan di cache memori (2 gambar terakhir)
+  dan thumbnail langsung ditampilkan sebagai penanda sebelum versi resolusi penuh selesai dibaca.
+  Strip thumbnail tidak dibangun ulang saat ganti gambar — hanya sorotan yang diperbarui.
+- **Garis grid bisa digeser**: garis kolom digeser horizontal, garis baris digeser vertikal
+  (jarak antar garis dijaga minimal 28dp), dengan titik pegangan dan tombol **Reset sumbu**
+  untuk mengembalikan ke posisi rata. Potongan disimpan mengikuti posisi garis terakhir.
 - Tombol **Atur grid** membuka mode grid dengan **kolom/baris yang bisa dinaikkan/diturunkan
   (1–10 masing-masing)** dan pratinjau garis grid tepat di atas gambar.
 - Mode **Seleksi**: mengetuk petak di gambar memberi **overlay warna semi-transparan** (warna dari
@@ -55,6 +63,13 @@ Navigasi bawah: **Beranda · Galeri · Pengaturan**.
 - **Warna transparansi seleksi** bawaan **hijau muda** (`#8BC34A`), 8 pilihan warna.
 - **Pratinjau nama berkas** yang langsung berubah saat isian diubah, tombol **Simpan
   pengaturan**, dan **Hapus semua data gambar** (potongan + daftar sumber) dengan konfirmasi.
+
+## Navigasi
+
+Tiga layar (Beranda/Galeri/Pengaturan) dipakai sebagai tab: perpindahan memakai
+`FLAG_ACTIVITY_REORDER_TO_FRONT | FLAG_ACTIVITY_NO_ANIMATION`, transisi dinonaktifkan, dan layar
+asal di-`finish()`. Hasilnya tidak ada animasi "membuka halaman baru" dan tombol **Back** langsung
+keluar aplikasi dari tab mana pun, seperti aplikasi Android pada umumnya.
 
 ## Tampilan
 

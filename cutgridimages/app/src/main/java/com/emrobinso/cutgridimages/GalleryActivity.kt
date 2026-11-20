@@ -431,8 +431,16 @@ class GalleryActivity : Activity() {
         if (message != null) galleryStatus.text = message
     }
 
+    /** Pindah tab tanpa animasi halaman baru dan tanpa menumpuk back stack. */
     private fun navigate(target: Class<*>) {
-        startActivity(Intent(this, target).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+        startActivity(
+            Intent(this, target).addFlags(
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION,
+            ),
+        )
+        @Suppress("DEPRECATION")
+        overridePendingTransition(0, 0)
+        finish()
     }
 
     private fun updateNavHighlight(index: Int) {

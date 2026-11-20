@@ -21,8 +21,11 @@ import kotlin.math.abs
 import kotlin.math.min
 
 /**
- * Menampilkan gambar utama dengan pembagian grid presisi dan overlay seleksi.
- * Ketuk sebuah petak (mode seleksi) untuk menyalakan/mematikan overlay semi transparan.
+ * Menampilkan gambar utama dengan pembagian grid presisi.
+ *
+ * Garis grid bisa **digeser**: garis kolom digeser horizontal, garis baris digeser vertikal,
+ * sehingga potongan tidak harus simetris. Mode seleksi memakai ketukan pada petak untuk
+ * menyalakan overlay semi transparan.
  */
 class GridEditorView @JvmOverloads constructor(
     context: Context,
@@ -33,6 +36,7 @@ class GridEditorView @JvmOverloads constructor(
     private val imageRect = RectF()
     private val bitmapPaint = Paint(Paint.FILTER_BITMAP_FLAG)
     private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
+    private val handlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
     private val lineShadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
         strokeWidth = 3.5f * resources.displayMetrics.density
@@ -54,9 +58,22 @@ class GridEditorView @JvmOverloads constructor(
 
     private val selected = LinkedHashSet<Int>()
     private val touchSlop = 14f * resources.displayMetrics.density
+    private val grabRadius = 22f * resources.displayMetrics.density
+    private val minTilePx = 28f * resources.displayMetrics.density
     private var downX = 0f
     private var downY = 0f
     private var downAt = 0L
+
+    private enum class DragAxis { NONE, COLUMN, ROW }
+
+    private var dragAxis = DragAxis.NONE
+    private var dragIndex = -1
+
+    /** Posisi garis kolom dalam fraksi 0..1 (ukuran `columns + 1`). */
+    private var columnCuts: FloatArray = GridSlicer.uniformCuts(3)
+
+    /** Posisi garis baris dalam fraksi 0..1 (ukuran `rows + 1`). */
+    private var rowCuts: FloatArray = GridSlicer.uniformCuts(3)
 
     var bitmap: Bitmap? = null
         private set
@@ -64,6 +81,7 @@ class GridEditorView @JvmOverloads constructor(
     var columns: Int = 3
         set(value) {
             field = value.coerceIn(MIN_GRID, MAX_GRID)
+            columnCuts = GridSlicer.uniformCuts(field)
             clearSelection()
             invalidate()
         }
@@ -71,6 +89,7 @@ class GridEditorView @JvmOverloads constructor(
     var rows: Int = 3
         set(value) {
             field = value.coerceIn(MIN_GRID, MAX_GRID)
+            rowCuts = GridSlicer.uniformCuts(field)
             clearSelection()
             invalidate()
         }
@@ -91,6 +110,9 @@ class GridEditorView @JvmOverloads constructor(
     /** Dipanggil setiap kali jumlah potongan terpilih berubah. */
     var onSelectionChanged: ((Int) -> Unit)? = null
 
+    /** Dipanggil setelah garis grid selesai digeser atau direset. */
+    var onGridChanged: (() -> Unit)? = null
+
     val selectedCount: Int get() = selected.size
 
     val selectedTiles: Set<Int> get() = selected.toSet()
@@ -98,6 +120,21 @@ class GridEditorView @JvmOverloads constructor(
     fun setImage(image: Bitmap?) {
         bitmap = image
         clearSelection()
+        invalidate()
+    }
+
+    /** Petak sesuai posisi garis saat ini; dipakai juga saat menyimpan potongan. */
+    fun currentTiles(): List<GridTile> {
+        val image = bitmap ?: return emptyList()
+        if (image.width <= 0 || image.height <= 0) return emptyList()
+        return GridSlicer.tilesFor(image.width, image.height, columnCuts, rowCuts)
+    }
+
+    /** Mengembalikan semua garis ke posisi seragam. */
+    fun resetGrid() {
+        columnCuts = GridSlicer.uniformCuts(columns)
+        rowCuts = GridSlicer.uniformCuts(rows)
+        onGridChanged?.invoke()
         invalidate()
     }
 
@@ -112,12 +149,8 @@ class GridEditorView @JvmOverloads constructor(
     }
 
     fun selectAll() {
-        val image = bitmap ?: return
-        if (image.width <= 0) return
         selected.clear()
-        GridSlicer.tileBounds(image.width, image.height, columns, rows)
-            .filterNot { it.isEmpty }
-            .forEach { selected += it.index }
+        currentTiles().filterNot { it.isEmpty }.forEach { selected += it.index }
         onSelectionChanged?.invoke(selected.size)
         invalidate()
     }
@@ -133,9 +166,9 @@ class GridEditorView @JvmOverloads constructor(
         canvas.drawBitmap(image, null, imageRect, bitmapPaint)
         if (imageRect.isEmpty) return
 
+        val tiles = GridSlicer.tilesFor(image.width, image.height, columnCuts, rowCuts)
         val scaleX = imageRect.width() / image.width
         val scaleY = imageRect.height() / image.height
-        val tiles = GridSlicer.tileBounds(image.width, image.height, columns, rows)
 
         val overlay = Color.argb(
             80,
@@ -145,7 +178,7 @@ class GridEditorView @JvmOverloads constructor(
         )
         fillPaint.color = overlay
         tiles.forEach { tile ->
-            if (tile.index !in selected) return@forEach
+            if (tile.index !in selected || tile.isEmpty) return@forEach
             canvas.drawRect(
                 imageRect.left + tile.left * scaleX,
                 imageRect.top + tile.top * scaleY,
@@ -156,15 +189,31 @@ class GridEditorView @JvmOverloads constructor(
         }
 
         linePaint.color = if (selectionMode) highlightColor else Color.argb(235, 255, 255, 255)
-        for (index in 1 until columns) {
-            val x = imageRect.left + imageRect.width() / columns * index
+        for (position in 1 until columnCuts.size - 1) {
+            val x = imageRect.left + columnCuts[position] * imageRect.width()
             canvas.drawLine(x, imageRect.top, x, imageRect.bottom, lineShadowPaint)
             canvas.drawLine(x, imageRect.top, x, imageRect.bottom, linePaint)
         }
-        for (index in 1 until rows) {
-            val y = imageRect.top + imageRect.height() / rows * index
+        for (position in 1 until rowCuts.size - 1) {
+            val y = imageRect.top + rowCuts[position] * imageRect.height()
             canvas.drawLine(imageRect.left, y, imageRect.right, y, lineShadowPaint)
             canvas.drawLine(imageRect.left, y, imageRect.right, y, linePaint)
+        }
+
+        if (!selectionMode) drawHandles(canvas)
+    }
+
+    /** Titik kecil di tengah tiap garis sebagai penanda bahwa garis bisa digeser. */
+    private fun drawHandles(canvas: Canvas) {
+        handlePaint.color = Color.argb(235, 255, 255, 255)
+        val radius = 3.5f * resources.displayMetrics.density
+        for (position in 1 until columnCuts.size - 1) {
+            val x = imageRect.left + columnCuts[position] * imageRect.width()
+            canvas.drawCircle(x, imageRect.centerY(), radius, handlePaint)
+        }
+        for (position in 1 until rowCuts.size - 1) {
+            val y = imageRect.top + rowCuts[position] * imageRect.height()
+            canvas.drawCircle(imageRect.centerX(), y, radius, handlePaint)
         }
     }
 
@@ -175,21 +224,45 @@ class GridEditorView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (bitmap == null || imageRect.isEmpty) return super.onTouchEvent(event)
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 downX = event.x
                 downY = event.y
                 downAt = SystemClock.uptimeMillis()
+                val hit = findCut(event.x, event.y)
+                dragAxis = hit?.first ?: DragAxis.NONE
+                dragIndex = hit?.second ?: -1
+                return true
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                if (dragAxis != DragAxis.NONE) {
+                    moveCut(dragAxis, dragIndex, event.x, event.y)
+                    return true
+                }
                 return true
             }
 
             MotionEvent.ACTION_UP -> {
+                if (dragAxis != DragAxis.NONE) {
+                    dragAxis = DragAxis.NONE
+                    dragIndex = -1
+                    onGridChanged?.invoke()
+                    return true
+                }
                 val moved = abs(event.x - downX) > touchSlop || abs(event.y - downY) > touchSlop
                 val quick = SystemClock.uptimeMillis() - downAt < 400
                 if (!moved && quick) {
                     performClick()
                     if (selectionMode) toggleAt(event.x, event.y)
                 }
+                return true
+            }
+
+            MotionEvent.ACTION_CANCEL -> {
+                dragAxis = DragAxis.NONE
+                dragIndex = -1
                 return true
             }
         }
@@ -199,6 +272,63 @@ class GridEditorView @JvmOverloads constructor(
     override fun performClick(): Boolean {
         super.performClick()
         return true
+    }
+
+    /** Mencari garis terdekat dari titik sentuh; hanya garis dalam (bukan tepi gambar). */
+    private fun findCut(x: Float, y: Float): Pair<DragAxis, Int>? {
+        if (x < imageRect.left - grabRadius || x > imageRect.right + grabRadius) return null
+        if (y < imageRect.top - grabRadius || y > imageRect.bottom + grabRadius) return null
+
+        var best: Pair<DragAxis, Int>? = null
+        var bestDistance = grabRadius
+        for (position in 1 until columnCuts.size - 1) {
+            val lineX = imageRect.left + columnCuts[position] * imageRect.width()
+            val distance = abs(x - lineX)
+            if (distance <= bestDistance) {
+                bestDistance = distance
+                best = DragAxis.COLUMN to position
+            }
+        }
+        for (position in 1 until rowCuts.size - 1) {
+            val lineY = imageRect.top + rowCuts[position] * imageRect.height()
+            val distance = abs(y - lineY)
+            if (distance <= bestDistance) {
+                bestDistance = distance
+                best = DragAxis.ROW to position
+            }
+        }
+        return best
+    }
+
+    private fun moveCut(axis: DragAxis, position: Int, x: Float, y: Float) {
+        if (position <= 0) return
+        when (axis) {
+            DragAxis.COLUMN -> {
+                if (imageRect.width() <= 0f) return
+                val cuts = columnCuts
+                if (position >= cuts.size - 1) return
+                val gap = (minTilePx / imageRect.width()).coerceAtMost(0.25f)
+                val lower = cuts[position - 1] + gap
+                val upper = cuts[position + 1] - gap
+                val fraction = ((x - imageRect.left) / imageRect.width()).coerceIn(0f, 1f)
+                cuts[position] = if (lower <= upper) fraction.coerceIn(lower, upper) else (lower + upper) / 2f
+                invalidate()
+            }
+
+            DragAxis.ROW -> {
+                if (imageRect.height() <= 0f) return
+                val cuts = rowCuts
+                if (position >= cuts.size - 1) return
+                val gap = (minTilePx / imageRect.height()).coerceAtMost(0.25f)
+                val lower = cuts[position - 1] + gap
+                val upper = cuts[position + 1] - gap
+                val fraction = ((y - imageRect.top) / imageRect.height()).coerceIn(0f, 1f)
+                cuts[position] = if (lower <= upper) fraction.coerceIn(lower, upper) else (lower + upper) / 2f
+                invalidate()
+            }
+
+            DragAxis.NONE -> Unit
+        }
     }
 
     private fun toggleAt(x: Float, y: Float) {
@@ -219,8 +349,9 @@ class GridEditorView @JvmOverloads constructor(
             .coerceIn(0, image.width - 1)
         val bitmapY = ((y - imageRect.top) / imageRect.height() * image.height).toInt()
             .coerceIn(0, image.height - 1)
-        return GridSlicer.tileBounds(image.width, image.height, columns, rows)
-            .firstOrNull { bitmapX >= it.left && bitmapX < it.right && bitmapY >= it.top && bitmapY < it.bottom }
+        return currentTiles().firstOrNull {
+            bitmapX >= it.left && bitmapX < it.right && bitmapY >= it.top && bitmapY < it.bottom
+        }
     }
 
     private fun computeImageRect(imageWidth: Int, imageHeight: Int, out: RectF) {

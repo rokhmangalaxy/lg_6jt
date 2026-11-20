@@ -7,9 +7,11 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -24,7 +26,6 @@ import com.emrobinso.cutgridimages.data.ImageSourceStore
 import com.emrobinso.cutgridimages.data.PieceStore
 import com.emrobinso.cutgridimages.data.SettingsStore
 import com.emrobinso.cutgridimages.data.SourceImage
-import com.emrobinso.cutgridimages.grid.GridSlicer
 import com.emrobinso.cutgridimages.grid.MAX_GRID
 import com.emrobinso.cutgridimages.grid.MIN_GRID
 import com.emrobinso.cutgridimages.image.ImageLoader
@@ -37,11 +38,11 @@ import java.io.File
 import java.util.concurrent.Executors
 
 /**
- * Beranda: placeholder input gambar (multi seleksi), strip 5 kolom yang bisa di-scroll,
- * gambar utama dengan pengaturan kolom/baris, dan mode seleksi untuk menyimpan potongan.
+ * Beranda: input gambar dari galeri, strip 5 kolom yang bisa di-scroll, gambar utama dengan
+ * grid yang bisa digeser, tombol pindah gambar, dan mode seleksi untuk menyimpan potongan.
  *
- * Setiap gambar yang berhasil dibaca langsung disalin ke penyimpanan aplikasi, sehingga
- * pemuatan berikutnya tidak lagi bergantung pada izin URI penyedia dokumen.
+ * Bitmap yang sudah dibaca disimpan di cache memori supaya pindah gambar terasa instan, dan
+ * setiap gambar juga disalin ke penyimpanan aplikasi agar tidak bergantung izin URI penyedia.
  */
 class HomeActivity : Activity() {
 
@@ -60,6 +61,7 @@ class HomeActivity : Activity() {
     private lateinit var columnsPlus: Button
     private lateinit var rowsMinus: Button
     private lateinit var rowsPlus: Button
+    private lateinit var resetGridButton: Button
     private lateinit var selectAllButton: Button
     private lateinit var clearSelectionButton: Button
     private lateinit var saveSelectedButton: Button
@@ -78,6 +80,18 @@ class HomeActivity : Activity() {
 
     private val executor = Executors.newSingleThreadExecutor()
     private val handler = Handler(Looper.getMainLooper())
+
+    /** Bitmap pratinjau terakhir (paling banyak 2) agar pindah gambar tidak memuat ulang. */
+    private val previewCache = object : LinkedHashMap<String, Bitmap>(2, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Bitmap>?): Boolean =
+            size > PREVIEW_CACHE_SIZE
+    }
+
+    /** Thumbnail hasil dekode, dipakai ulang saat strip digambar ulang. */
+    private val thumbnailCache = HashMap<String, Bitmap>()
+
+    /** Bingkai thumbnail per URI, supaya hanya sorotan yang diperbarui saat ganti gambar. */
+    private val thumbnailFrames = HashMap<String, View>()
 
     private var settings = AppSettings()
     private var sources: List<SourceImage> = emptyList()
@@ -100,10 +114,12 @@ class HomeActivity : Activity() {
         settings = settingsStore.load()
 
         bindViews()
+        editor.clipToOutline = true
         editor.highlightColor = settings.highlightColor
         editor.columns = savedInstanceState?.getInt(STATE_COLUMNS) ?: 3
         editor.rows = savedInstanceState?.getInt(STATE_ROWS) ?: 3
         editor.onSelectionChanged = { updateSelectionUi() }
+        editor.onGridChanged = { updateSelectionUi() }
 
         modeGridButton.setOnClickListener { setMode(Mode.GRID) }
         modeSelectButton.setOnClickListener { setMode(Mode.SELECT) }
@@ -111,16 +127,20 @@ class HomeActivity : Activity() {
         columnsPlus.setOnClickListener { adjustGrid(columnsDelta = 1) }
         rowsMinus.setOnClickListener { adjustGrid(rowsDelta = -1) }
         rowsPlus.setOnClickListener { adjustGrid(rowsDelta = 1) }
+        resetGridButton.setOnClickListener {
+            editor.resetGrid()
+            setStatus(getString(R.string.grid_reset))
+        }
         selectAllButton.setOnClickListener { editor.selectAll() }
         clearSelectionButton.setOnClickListener { editor.clearSelection() }
         saveSelectedButton.setOnClickListener { savePieces(onlySelected = true) }
         saveAllButton.setOnClickListener { savePieces(onlySelected = false) }
         emptyPlaceholder.setOnClickListener { pickImages() }
+        prevImageButton.setOnClickListener { stepImage(-1) }
+        nextImageButton.setOnClickListener { stepImage(1) }
         navHome.setOnClickListener { updateNavHighlight(0) }
         navGallery.setOnClickListener { navigate(GalleryActivity::class.java) }
         navSettings.setOnClickListener { navigate(SettingsActivity::class.java) }
-        prevImageButton.setOnClickListener { stepImage(-1) }
-        nextImageButton.setOnClickListener { stepImage(1) }
 
         sources = sourceStore.list()
         renderThumbnails()
@@ -133,12 +153,12 @@ class HomeActivity : Activity() {
         when {
             handleLaunchIntent(intent) -> Unit
             preferred != null -> selectMain(preferred)
+            else -> updateImageNav()
         }
     }
 
     private fun bindViews() {
         editor = findViewById(R.id.editor)
-        editor.clipToOutline = true
         projectSubtitle = findViewById(R.id.projectSubtitle)
         thumbnailScroll = findViewById(R.id.thumbnailScroll)
         thumbnailGrid = findViewById(R.id.thumbnailGrid)
@@ -153,6 +173,7 @@ class HomeActivity : Activity() {
         columnsPlus = findViewById(R.id.columnsPlus)
         rowsMinus = findViewById(R.id.rowsMinus)
         rowsPlus = findViewById(R.id.rowsPlus)
+        resetGridButton = findViewById(R.id.resetGridButton)
         selectAllButton = findViewById(R.id.selectAllButton)
         clearSelectionButton = findViewById(R.id.clearSelectionButton)
         saveSelectedButton = findViewById(R.id.saveSelectedButton)
@@ -186,17 +207,51 @@ class HomeActivity : Activity() {
         updateSelectionUi()
     }
 
-    // --- Gambar sumber ------------------------------------------------------------------
+    // --- Memilih gambar ------------------------------------------------------------------
 
+    /**
+     * Android 13+ memakai **photo picker** sistem (grid galeri, multi pilih, tanpa izin).
+     * Versi lama memakai pemilih konten bergambar yang biasanya diarahkan ke aplikasi galeri,
+     * dan pemilih dokumen hanya dipakai sebagai jalan terakhir.
+     */
     @Suppress("DEPRECATION")
     private fun pickImages() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val picker = Intent(MediaStore.ACTION_PICK_IMAGES).apply {
+                type = "image/*"
+                putExtra(MediaStore.EXTRA_PICK_IMAGES_MAX, PICK_LIMIT)
+            }
+            if (picker.resolveActivity(packageManager) != null) {
+                startActivityForResult(picker, REQUEST_PICK_IMAGES)
+                return
+            }
+        }
+
+        val contentPicker = Intent(Intent.ACTION_GET_CONTENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "image/*"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        }
+        if (contentPicker.resolveActivity(packageManager) != null) {
+            startActivityForResult(contentPicker, REQUEST_PICK_IMAGES)
+            return
+        }
+
+        val galleryPicker = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+            type = "image/*"
+        }
+        if (galleryPicker.resolveActivity(packageManager) != null) {
+            startActivityForResult(galleryPicker, REQUEST_PICK_IMAGES)
+            return
+        }
+
+        val documents = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "image/*"
             putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        startActivityForResult(intent, REQUEST_PICK_IMAGES)
+        startActivityForResult(documents, REQUEST_PICK_IMAGES)
     }
 
     @Suppress("DEPRECATION")
@@ -253,18 +308,24 @@ class HomeActivity : Activity() {
 
     @Suppress("DEPRECATION")
     private fun sharedImageUri(intent: Intent): Uri? =
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
         } else {
             intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
         }
 
+    // --- Strip thumbnail -----------------------------------------------------------------
+
     private fun renderThumbnails() {
         thumbnailGrid.removeAllViews()
+        thumbnailFrames.clear()
         val hasSources = sources.isNotEmpty()
         thumbnailScroll.visibility = if (hasSources) View.VISIBLE else View.GONE
         emptyPlaceholder.visibility = if (hasSources) View.GONE else View.VISIBLE
-        if (!hasSources) return
+        if (!hasSources) {
+            updateImageNav()
+            return
+        }
 
         val tileSize = dp(56)
         val margin = dp(4)
@@ -275,13 +336,6 @@ class HomeActivity : Activity() {
                 height = tileSize
                 setMargins(margin, margin, margin, margin)
             }
-            frame.background = roundedBackground(
-                fillColor = getColor(R.color.surface),
-                strokeColor = getColor(
-                    if (source.uri == mainUri) R.color.selected_outline else R.color.line,
-                ),
-                radiusDp = 10,
-            )
             val image = ImageView(this)
             image.layoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
@@ -295,6 +349,7 @@ class HomeActivity : Activity() {
                 true
             }
             thumbnailGrid.addView(frame)
+            thumbnailFrames[source.uri] = frame
             loadThumbnail(source, image)
         }
 
@@ -308,49 +363,85 @@ class HomeActivity : Activity() {
         addTile.gravity = Gravity.CENTER
         addTile.setTextColor(getColor(R.color.accent))
         addTile.textSize = 22f
-        addTile.background = roundedBackground(getColor(R.color.chip), radiusDp = 10)
+        addTile.background = roundedBackground(getColor(R.color.chip), radiusDp = 14)
         addTile.contentDescription = getString(R.string.add_image)
         addTile.setOnClickListener { pickImages() }
         thumbnailGrid.addView(addTile)
+
+        updateThumbnailSelection()
         updateImageNav()
     }
 
     private fun loadThumbnail(source: SourceImage, target: ImageView) {
         val uriString = source.uri
         target.tag = uriString
-        val cached = source.cachedPath?.let { File(it) }?.takeIf { it.isFile }
+        val ready = thumbnailCache[uriString]
+        if (ready != null && !ready.isRecycled) {
+            target.setImageBitmap(ready)
+            return
+        }
+        val cachedFile = source.cachedPath?.let { File(it) }?.takeIf { it.isFile }
         executor.execute {
-            val bitmap = if (cached != null) {
-                Thumbnails.decodeFile(cached, THUMBNAIL_DIMENSION)
+            val bitmap = if (cachedFile != null) {
+                Thumbnails.decodeFile(cachedFile, THUMBNAIL_DIMENSION)
             } else {
                 runCatching {
                     Thumbnails.decode(contentResolver, Uri.parse(uriString), THUMBNAIL_DIMENSION)
                 }.getOrNull()
             }
             handler.post {
-                if (target.tag == uriString && bitmap != null) target.setImageBitmap(bitmap)
+                if (bitmap == null || isFinishing || isDestroyed) return@post
+                if (thumbnailCache.size > THUMBNAIL_CACHE_LIMIT) thumbnailCache.clear()
+                thumbnailCache[uriString] = bitmap
+                if (target.tag == uriString) target.setImageBitmap(bitmap)
             }
         }
     }
 
+    /** Hanya menyorot ulang bingkai terpilih; strip tidak dibangun ulang. */
+    private fun updateThumbnailSelection() {
+        thumbnailFrames.forEach { (uri, frame) ->
+            frame.background = roundedBackground(
+                fillColor = getColor(R.color.surface),
+                strokeColor = getColor(
+                    if (uri == mainUri) R.color.selected_outline else R.color.line,
+                ),
+                radiusDp = 14,
+            )
+        }
+    }
+
+    // --- Gambar utama --------------------------------------------------------------------
+
     private fun selectMain(source: SourceImage) {
         if (busy) return
         mainUri = source.uri
-        renderThumbnails()
+        updateThumbnailSelection()
+        updateImageNav()
+
+        val cachedBitmap = previewCache[source.uri]
+        if (cachedBitmap != null && !cachedBitmap.isRecycled) {
+            showMain(cachedBitmap)
+            setStatus("")
+            return
+        }
+
+        // Tampilkan thumbnail lebih dulu supaya perpindahan terasa instan,
+        // lalu ganti dengan resolusi penuh ketika selesai dibaca.
+        thumbnailCache[source.uri]?.takeIf { !it.isRecycled }?.let { showMain(it) }
         setStatus(getString(R.string.loading_image))
+
         val token = ++loadToken
         executor.execute {
             val loaded = runCatching { loadSourceBitmap(source) }
             handler.post {
-                if (isFinishing || isDestroyed || token != loadToken) {
-                    loaded.getOrNull()?.recycle()
-                    return@post
-                }
+                if (isFinishing || isDestroyed || token != loadToken) return@post
                 loaded.onSuccess { bitmap ->
+                    previewCache[source.uri] = bitmap
                     showMain(bitmap)
                     setStatus("")
                 }.onFailure { error ->
-                    showMain(null)
+                    if (mainBitmap == null) showMain(null)
                     setStatus(getString(R.string.load_failed_hint, error.readableMessage()))
                 }
             }
@@ -374,13 +465,20 @@ class HomeActivity : Activity() {
         if (file != null) {
             val updated = sourceStore.setCached(source.uri, file.absolutePath)
             handler.post {
-                if (!isFinishing && !isDestroyed) {
-                    sources = updated
-                    renderThumbnails()
-                }
+                if (!isFinishing && !isDestroyed) sources = updated
             }
         }
         return bitmap
+    }
+
+    private fun showMain(bitmap: Bitmap?) {
+        if (bitmap === mainBitmap) {
+            updateSelectionUi()
+            return
+        }
+        mainBitmap = bitmap
+        editor.setImage(bitmap)
+        updateSelectionUi()
     }
 
     private fun confirmRemoveSource(source: SourceImage) {
@@ -394,6 +492,8 @@ class HomeActivity : Activity() {
 
     private fun removeSource(source: SourceImage) {
         SourceCache.delete(this, source.uri)
+        previewCache.remove(source.uri)?.let { if (it !== mainBitmap) it.recycle() }
+        thumbnailCache.remove(source.uri)
         sources = sourceStore.remove(source.uri)
         if (mainUri == source.uri) {
             mainUri = null
@@ -404,17 +504,9 @@ class HomeActivity : Activity() {
         setStatus(getString(R.string.source_removed))
     }
 
-    private fun showMain(bitmap: Bitmap?) {
-        editor.setImage(null)
-        mainBitmap?.recycle()
-        mainBitmap = bitmap
-        editor.setImage(bitmap)
-        updateSelectionUi()
-    }
-
     // --- Pindah gambar dalam koleksi -----------------------------------------------------
 
-    /** Memperbarui tombol prev/next dan penunjuk "2 / 5" sesuai posisi gambar utama. */
+    /** Memperbarui tombol prev/next dan penunjuk posisi `2 / 5`. */
     private fun updateImageNav() {
         val total = sources.size
         val index = sources.indexOfFirst { it.uri == mainUri }
@@ -452,12 +544,12 @@ class HomeActivity : Activity() {
         modeGridButton.backgroundTintList =
             ColorStateList.valueOf(getColor(if (selecting) R.color.chip else R.color.accent))
         modeGridButton.setTextColor(
-            getColor(if (selecting) R.color.ink else android.R.color.white),
+            getColor(if (selecting) R.color.ink else R.color.surface),
         )
         modeSelectButton.backgroundTintList =
             ColorStateList.valueOf(getColor(if (selecting) R.color.accent else R.color.chip))
         modeSelectButton.setTextColor(
-            getColor(if (selecting) android.R.color.white else R.color.ink),
+            getColor(if (selecting) R.color.surface else R.color.ink),
         )
         updateSelectionUi()
     }
@@ -484,6 +576,7 @@ class HomeActivity : Activity() {
         clearSelectionButton.isEnabled = !busy && count > 0
         selectAllButton.isEnabled = !busy && mainBitmap != null
         if (mode == Mode.SELECT && count > 0) setStatus(getString(R.string.selected_count, count))
+        updateImageNav()
     }
 
     private fun savePieces(onlySelected: Boolean) {
@@ -494,10 +587,17 @@ class HomeActivity : Activity() {
         }
         if (busy) return
 
-        val columns = editor.columns
-        val rows = editor.rows
+        val tiles = editor.currentTiles()
+        if (tiles.isEmpty()) {
+            setStatus(getString(R.string.pick_first))
+            return
+        }
         val indexes: Set<Int> =
-            if (onlySelected) editor.selectedTiles else (0 until columns * rows).toSet()
+            if (onlySelected) {
+                editor.selectedTiles
+            } else {
+                tiles.filterNot { it.isEmpty }.mapTo(LinkedHashSet()) { it.index }
+            }
         if (indexes.isEmpty()) {
             setStatus(getString(R.string.selection_empty))
             return
@@ -509,7 +609,6 @@ class HomeActivity : Activity() {
 
         setBusy(true, getString(R.string.saving_pieces))
         executor.execute {
-            val tiles = GridSlicer.tileBounds(bitmap.width, bitmap.height, columns, rows)
             var saved = 0
             indexes.sorted().forEach { index ->
                 val tile = tiles.getOrNull(index) ?: return@forEach
@@ -541,6 +640,7 @@ class HomeActivity : Activity() {
         columnsPlus.isEnabled = !value
         rowsMinus.isEnabled = !value
         rowsPlus.isEnabled = !value
+        resetGridButton.isEnabled = !value
         selectAllButton.isEnabled = !value && mainBitmap != null
         clearSelectionButton.isEnabled = !value && editor.selectedCount > 0
         saveSelectedButton.isEnabled = !value && mode == Mode.SELECT && editor.selectedCount > 0
@@ -553,8 +653,16 @@ class HomeActivity : Activity() {
         statusText.text = message
     }
 
+    /** Pindah tab tanpa terasa seperti membuka halaman baru, dan tanpa menumpuk back stack. */
     private fun navigate(target: Class<*>) {
-        startActivity(Intent(this, target).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+        startActivity(
+            Intent(this, target).addFlags(
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION,
+            ),
+        )
+        @Suppress("DEPRECATION")
+        overridePendingTransition(0, 0)
+        finish()
     }
 
     private fun updateNavHighlight(index: Int) {
@@ -583,15 +691,22 @@ class HomeActivity : Activity() {
         handler.removeCallbacksAndMessages(null)
         executor.shutdownNow()
         editor.setImage(null)
-        mainBitmap?.recycle()
         mainBitmap = null
+        previewCache.values.forEach { runCatching { it.recycle() } }
+        previewCache.clear()
+        thumbnailCache.values.forEach { runCatching { it.recycle() } }
+        thumbnailCache.clear()
+        thumbnailFrames.clear()
         super.onDestroy()
     }
 
     private companion object {
         const val REQUEST_PICK_IMAGES = 1001
-        const val PREVIEW_MAX_DIMENSION = 3072
+        const val PREVIEW_MAX_DIMENSION = 2560
         const val THUMBNAIL_DIMENSION = 256
+        const val PREVIEW_CACHE_SIZE = 2
+        const val THUMBNAIL_CACHE_LIMIT = 80
+        const val PICK_LIMIT = 20
         const val STATE_MAIN_URI = "state_main_uri"
         const val STATE_COLUMNS = "state_columns"
         const val STATE_ROWS = "state_rows"

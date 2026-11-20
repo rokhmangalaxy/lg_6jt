@@ -71,4 +71,67 @@ object GridSlicer {
     /** Tepi ke-`i` dari `parts` bagian sepanjang `total`, dihitung tanpa sisa pembulatan. */
     private fun edges(total: Int, parts: Int): IntArray =
         IntArray(parts + 1) { position -> (position.toLong() * total / parts).toInt() }
+
+    /** Posisi tepi seragam 0..1 untuk [parts] bagian (dipakai grid yang belum digeser). */
+    fun uniformCuts(parts: Int): FloatArray {
+        require(parts >= MIN_GRID) { "parts minimal $MIN_GRID" }
+        return FloatArray(parts + 1) { position -> position.toFloat() / parts }
+    }
+
+    /**
+     * Petak dengan batas yang bisa digeser per sumbu.
+     *
+     * @param columnCuts posisi garis kolom dalam fraksi 0..1; ukuran `columns + 1`, elemen
+     *   pertama 0f dan terakhir 1f, nilai harus naik.
+     * @param rowCuts posisi garis baris dalam fraksi 0..1; ukuran `rows + 1`.
+     * @return petak berurutan baris demi baris; petak dengan lebar/tinggi 0 menjadi
+     *   [GridTile.isEmpty] (tidak bisa dipotong, dilewati saat menyimpan).
+     */
+    fun tilesFor(
+        width: Int,
+        height: Int,
+        columnCuts: FloatArray,
+        rowCuts: FloatArray,
+    ): List<GridTile> {
+        require(width > 0) { "width harus positif, diterima $width" }
+        require(height > 0) { "height harus positif, diterima $height" }
+        require(columnCuts.size >= 2) { "columnCuts minimal 2 elemen" }
+        require(rowCuts.size >= 2) { "rowCuts minimal 2 elemen" }
+
+        val columnEdges = pixelEdges(columnCuts, width)
+        val rowEdges = pixelEdges(rowCuts, height)
+        val columns = columnEdges.size - 1
+        val rows = rowEdges.size - 1
+        val tiles = ArrayList<GridTile>(columns * rows)
+        var index = 0
+        for (row in 0 until rows) {
+            for (column in 0 until columns) {
+                tiles += GridTile(
+                    index = index++,
+                    row = row,
+                    column = column,
+                    left = columnEdges[column],
+                    top = rowEdges[row],
+                    right = columnEdges[column + 1],
+                    bottom = rowEdges[row + 1],
+                )
+            }
+        }
+        return tiles
+    }
+
+    /** Fraksi 0..1 menjadi tepi piksel yang selalu naik dan menutup sisi 0..[size]. */
+    private fun pixelEdges(cuts: FloatArray, size: Int): IntArray {
+        val edges = IntArray(cuts.size)
+        for (position in cuts.indices) {
+            val fraction = cuts[position].coerceIn(0f, 1f)
+            edges[position] = Math.round(fraction * size).coerceIn(0, size)
+        }
+        edges[0] = 0
+        edges[edges.size - 1] = size
+        for (position in 1 until edges.size) {
+            if (edges[position] < edges[position - 1]) edges[position] = edges[position - 1]
+        }
+        return edges
+    }
 }
