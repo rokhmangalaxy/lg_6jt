@@ -7,7 +7,7 @@ import kotlin.math.roundToInt
 /** Raster exploration preview. Not a vector master: enlargement cannot invent source detail. */
 object ExplorationRenderer {
     fun render(assets:AssetManager,logo:Int,preset:Int,maxEdge:Int,transparent:Boolean):Bitmap{
-        val source=assets.open(LogoCatalog.files[logo]).use{BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply{inMutable=true;inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false})}
+        val source=assets.open(LogoCatalog.files[logo]).use{BitmapFactory.decodeStream(it,null,BitmapFactory.Options().apply{inMutable=true;inPreferredConfig=Bitmap.Config.ARGB_8888;inScaled=false})} ?: error("Exploration asset cannot be decoded")
         val pixels=IntArray(source.width*source.height)
         source.getPixels(pixels,0,source.width,0,0,source.width,source.height)
         val colors=LogoPixels.presets[preset]
