@@ -283,4 +283,53 @@ class PathBatch08Test(PathBatchTest):
         for key,x,y in [('exp-006-05',165,160),('exp-007-02',160,160),('exp-007-03',40,158),('exp-007-04',125,170),('exp-006-06',201,20),('exp-006-09',178,290),('exp-006-09',178,333)]:
             self.assertTrue(painted(key,x,y),(key,x,y))
 
+class PathBatch09Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-09'
+    count=10
+    total=68
+    pending=[]
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_full_capacity_unique_masters_and_percentage(self):
+        progress=json.loads((self.batch/'progress.json').read_text())
+        self.assertEqual(progress['newMasterCount'],10)
+        self.assertEqual(progress['groups']['7']['redrawn'],list(range(1,10)))
+        self.assertEqual(progress['groups']['8']['redrawn'],[1,2,3,4,5])
+        self.assertEqual(progress['exactDuplicateAudit']['filesChecked'],68)
+        self.assertEqual(progress['exactDuplicateAudit']['duplicateGroups'],[])
+        self.assertEqual(progress['remainingNotProcessed'],274)
+        self.assertEqual(progress['progressPercent'],19.88)
+        self.assertEqual(progress['progressPercent'],round(self.total/342*100,2))
+        page=(self.batch/'perbandingan.html').read_text()
+        self.assertIn('68 dari 342',page)
+        self.assertIn('19.88%',page)
+        previous_ids=set()
+        for batch in ('03','04','05','06','07','08'):
+            previous=json.loads((R/f'04-desain/variasi-svg/batch-{batch}/progress.json').read_text())
+            previous_ids.update(e['id'] for e in previous['entries'])
+        known={hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'04-desain/variasi-svg').rglob('*.svg') if p.parent!=self.batch}
+        for e in progress['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known)
+            known.add(digest)
+
+    def test_counterplates_split_axis_and_wing_gaps(self):
+        def painted(key,x,y):
+            data=json.loads((self.batch/f'{key}.json').read_text())
+            for layer in data['layers']:
+                inside=False;poly=[]
+                for c in layer['commands']:
+                    if c[0]=='M':poly=[c[1:]]
+                    elif c[0]=='L':poly.append(c[1:])
+                    else:
+                        for (x1,y1),(x2,y2) in zip(poly,poly[1:]+poly[:1]):
+                            if (y1>y)!=(y2>y) and x<(x2-x1)*(y-y1)/(y2-y1)+x1:inside=not inside
+                if inside:return True
+            return False
+        for key,x,y in [('exp-007-07',179,20),('exp-007-07',179,285),('exp-007-06',60,100),('exp-007-09',50,144),('exp-008-04',28,180),('exp-008-01',135,180),('exp-008-05',195,160)]:
+            self.assertFalse(painted(key,x,y),(key,x,y))
+        for key,x,y in [('exp-007-07',166,20),('exp-007-07',166,285),('exp-007-06',60,110),('exp-007-09',80,144),('exp-008-04',15,180),('exp-008-01',160,180),('exp-008-05',160,160)]:
+            self.assertTrue(painted(key,x,y),(key,x,y))
+
 if __name__=='__main__':unittest.main()
