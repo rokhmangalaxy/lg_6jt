@@ -1,0 +1,284 @@
+{
+  "batch": "10",
+  "apkBuildsPaused": true,
+  "newMasterCount": 10,
+  "driveSourcesWithMasters": 78,
+  "reportedDriveFiles": 342,
+  "remainingNotProcessed": 264,
+  "progressPercent": 22.81,
+  "progressBasis": "source files with path masters / previously reported Drive file count; not verified unique designs",
+  "groups": {
+    "1": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "2": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "3": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "4": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "5": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "6": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "7": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "8": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "9": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "pending": [],
+      "inventoryStatus": "Only 01\u201306 listed; remaining group inventory not yet requested."
+    }
+  },
+  "exactDuplicateAudit": {
+    "scope": "downloaded PNG files only, not entire Drive folder",
+    "filesChecked": 78,
+    "duplicateGroups": []
+  },
+  "visualReview": {
+    "scope": "new sources compared against downloaded references; no full-folder visual audit",
+    "result": "source-specific layouts retained; similar motifs not automatically merged",
+    "requiresUserApproval": true
+  },
+  "notes": [
+    "342 is a previously reported file count, not a verified unique-design total.",
+    "Historical progress files are snapshots.",
+    "Colors flattened; hand-measured polygons regularized, not pixel-identical.",
+    "No Android build or app catalog change."
+  ],
+  "entries": [
+    {
+      "id": "exp-008-06",
+      "group": 8,
+      "sourceNumber": 6,
+      "driveId": "1zGBKyxtlAbrPvabLD-kyIV_cahRR-cR0",
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-06.png",
+      "sourceSha256": "ce3eec6089f7b3dac76c0dc91b546cf7022258147860403b2d0cde07c58f5a97",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-06.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-008-07",
+      "group": 8,
+      "sourceNumber": 7,
+      "driveId": "1hMEMFmgJuEntc8WUcug5ncVjiOamwJps",
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-07.png",
+      "sourceSha256": "cddfa32051db320eea649ace29a11c2cb09196403bb0ec9a2ec76bab4efbe3eb",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-07.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-008-08",
+      "group": 8,
+      "sourceNumber": 8,
+      "driveId": "1dNQlnw8yZwwOKJlzyOjTmt7Q4w5Xubkj",
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-08.png",
+      "sourceSha256": "fdabb75824315834f6592d1f18f0cc48beb33f86d9d2f8c2f2c4845b6f9b9d10",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-08.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-008-09",
+      "group": 8,
+      "sourceNumber": 9,
+      "driveId": "1JhlyJ4_T3oLckmwk7bYpQWfyZEk9ne2x",
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-09.png",
+      "sourceSha256": "26bacdf159f26100113a47a8f294fea3f2a8e84c4010c89a12c71b7d4bf741ff",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-09.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-009-01",
+      "group": 9,
+      "sourceNumber": 1,
+      "driveId": "16S-yDaTzA4MzAVt1RXZb-b2XCKnolvP2",
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-01.png",
+      "sourceSha256": "8d9576733c926ec97dbdfa97241a9f77bd4eabb9346fbd2c5dd3c6313bbd150c",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-01.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-009-02",
+      "group": 9,
+      "sourceNumber": 2,
+      "driveId": "136dosuBYJ9SAH9PeABI0-5bvy07znHsL",
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-02.png",
+      "sourceSha256": "c84b3027d88946188111ff3a593469911277e29276ec31fd86b3ca407913814d",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-02.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-009-03",
+      "group": 9,
+      "sourceNumber": 3,
+      "driveId": "1AvxyBGvC49H4GaOL1w1Mm0kK-lk8k0X5",
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-03.png",
+      "sourceSha256": "8c37998fbc66f89a91a439b69aa71263e922b91b77f6b555940317662c4d161b",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-03.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-009-04",
+      "group": 9,
+      "sourceNumber": 4,
+      "driveId": "1gxaUQ_f_FbDtwbmqubJE2WzIdJp7iQTM",
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-04.png",
+      "sourceSha256": "985503c9ea2e1bf7266cd9c5a794ba98cd4989a2a637b075f8a7f9561076a748",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-04.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-009-05",
+      "group": 9,
+      "sourceNumber": 5,
+      "driveId": "1d5l7x5-OJPxyIe595QXTBlP8EP5ZZKdz",
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-05.png",
+      "sourceSha256": "c159193d1b29291691dcb000791e93991ce31c3f3760efb312da405b1abc85ef",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-05.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-009-06",
+      "group": 9,
+      "sourceNumber": 6,
+      "driveId": "1o4-Dg-aePnZaLGsv8rC2IazmDP8Hf2tq",
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-06.png",
+      "sourceSha256": "061c417da6c5672c764bd88e8c17cbeb860fd3b94ab656f8c893cef0ddb9fbe6",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-06.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    }
+  ]
+}

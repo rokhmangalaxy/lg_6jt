@@ -332,4 +332,53 @@ class PathBatch09Test(PathBatchTest):
         for key,x,y in [('exp-007-07',166,20),('exp-007-07',166,285),('exp-007-06',60,110),('exp-007-09',80,144),('exp-008-04',15,180),('exp-008-01',160,180),('exp-008-05',160,160)]:
             self.assertTrue(painted(key,x,y),(key,x,y))
 
+class PathBatch10Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-10'
+    count=10
+    total=78
+    pending=[]
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_full_capacity_unique_masters_and_percentage(self):
+        progress=json.loads((self.batch/'progress.json').read_text())
+        self.assertEqual(progress['newMasterCount'],10)
+        self.assertEqual(progress['groups']['8']['redrawn'],list(range(1,10)))
+        self.assertEqual(progress['groups']['9']['redrawn'],[1,2,3,4,5,6])
+        self.assertEqual(progress['exactDuplicateAudit']['filesChecked'],78)
+        self.assertEqual(progress['exactDuplicateAudit']['duplicateGroups'],[])
+        self.assertEqual(progress['remainingNotProcessed'],264)
+        self.assertEqual(progress['progressPercent'],22.81)
+        self.assertEqual(progress['progressPercent'],round(self.total/342*100,2))
+        page=(self.batch/'perbandingan.html').read_text()
+        self.assertIn('78 dari 342',page)
+        self.assertIn('22.81%',page)
+        previous_ids=set()
+        for batch in ('03','04','05','06','07','08','09'):
+            previous=json.loads((R/f'04-desain/variasi-svg/batch-{batch}/progress.json').read_text())
+            previous_ids.update(e['id'] for e in previous['entries'])
+        known={hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'04-desain/variasi-svg').rglob('*.svg') if p.parent!=self.batch}
+        for e in progress['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known)
+            known.add(digest)
+
+    def test_detached_red_tips_counterplates_and_wing_gaps(self):
+        def painted(key,x,y):
+            data=json.loads((self.batch/f'{key}.json').read_text())
+            for layer in data['layers']:
+                inside=False;poly=[]
+                for c in layer['commands']:
+                    if c[0]=='M':poly=[c[1:]]
+                    elif c[0]=='L':poly.append(c[1:])
+                    else:
+                        for (x1,y1),(x2,y2) in zip(poly,poly[1:]+poly[:1]):
+                            if (y1>y)!=(y2>y) and x<(x2-x1)*(y-y1)/(y2-y1)+x1:inside=not inside
+                if inside:return True
+            return False
+        for key,x,y in [('exp-009-06',85,168),('exp-009-06',310,168),('exp-009-01',170,180),('exp-008-08',140,170),('exp-008-06',33,110),('exp-008-06',190,110),('exp-009-04',60,90)]:
+            self.assertFalse(painted(key,x,y),(key,x,y))
+        for key,x,y in [('exp-009-06',70,168),('exp-009-06',325,168),('exp-009-06',95,168),('exp-009-01',195,180),('exp-008-08',160,170),('exp-008-06',18,110),('exp-008-06',160,110),('exp-009-04',60,70)]:
+            self.assertTrue(painted(key,x,y),(key,x,y))
+
 if __name__=='__main__':unittest.main()
