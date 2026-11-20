@@ -25,3 +25,16 @@ python scripts/build_drive_batch_13.py
 python scripts/integrate_vector_masters.py
 python -m unittest discover -s tests -p 'test_path_batches.py'
 ```
+
+## Hasil build
+Workflow manual **44839925549** berhasil pada commit `0390be849016450d09db58b920e6f739520da0d9`.
+Rilis **android-v1.0.42**, versionCode **42**, 105 variasi. Tahap tes unit Android,
+lint, inventory 105 logo/path native, dan verifikasi signature berhasil di CI.
+69 tes Python lokal juga lulus. Belum diuji pada perangkat fisik.
+
+APK: https://github.com/rokhmangalaxy/lg_6jt/releases/download/android-v1.0.42/mcm-logo-studio-release.apk
+
+Unduhan salinan APK ke sandbox gagal karena host release-assets mengembalikan EOF;
+binary tidak diperiksa ulang secara lokal. Verifikasi inventory dan signature merujuk
+pada tahap CI sukses, bukan klaim pemeriksaan binary lokal. Aset rilis GitHub terunggah
+berukuran 2.533.678 byte. Sertifikat demo publik yang sama digunakan; bukan kunci produksi.
