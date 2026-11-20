@@ -108,7 +108,15 @@ beserta konfigurasi yang sudah disiapkan: **[CI-ALTERNATIF.md](CI-ALTERNATIF.md)
 - 13 unit test untuk `GridSlicer` dan `ImageSizing` lulus (dijalankan dengan `kotlinc` 2.4.21 dan
   JUnit 4 API).
 - Seluruh sumber `app/src/main` dikompilasi tanpa peringatan terhadap `android.jar` API 35.
-- Belum diuji: AAPT/resource linking, lint penuh, dan pemasangan di perangkat/emulator.
+- AAPT2 (build-tools 28) berhasil mengompilasi seluruh `res/` dan menautkannya ke `base.apk`
+  (`--target-sdk-version 35`, label & ikon adaptif terbaca), lalu `apksigner` menandatangani APK
+  itu (skema v2 + v3 terverifikasi).
+- **APK lengkap belum bisa dirakit di sandbox:** satu-satunya komponen yang tidak tersedia adalah
+  dexer JVM (`d8`/`r8`). GitHub release assets (host `objects.githubusercontent.com`), Google Maven,
+  dan Maven Central tidak dapat diakses dari sandbox; jar `d8.jar` yang ditemukan di repo GitHub
+  semuanya pointer Git LFS. Karena itu job CI (Actions/Codemagic/CircleCI) atau build di mesin
+  sendiri tetap diperlukan untuk menghasilkan APK yang bisa dipasang.
+- Belum diuji: lint penuh dan pemasangan di perangkat/emulator.
 
 ## Batasan yang diketahui
 
