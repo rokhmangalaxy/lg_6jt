@@ -430,4 +430,53 @@ class PathBatch11Test(PathBatchTest):
         for key,x,y in [('exp-010-07',50,150),('exp-010-07',20,150),('exp-010-07',20,250),('exp-009-09',50,50),('exp-009-09',175,110),('exp-010-01',190,180),('exp-010-04',50,100),('exp-010-04',50,70),('exp-010-03',161,180)]:
             self.assertTrue(painted(key,x,y),(key,x,y))
 
+class PathBatch12Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-12'
+    count=10
+    total=98
+    pending=[]
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_full_capacity_unique_masters_and_percentage(self):
+        progress=json.loads((self.batch/'progress.json').read_text())
+        self.assertEqual(progress['newMasterCount'],10)
+        self.assertEqual(progress['groups']['10']['redrawn'],list(range(1,10)))
+        self.assertEqual(progress['groups']['11']['redrawn'],[1,2,3,4,5,6,7,8])
+        self.assertEqual(progress['exactDuplicateAudit']['filesChecked'],98)
+        self.assertEqual(progress['exactDuplicateAudit']['duplicateGroups'],[])
+        self.assertEqual(progress['remainingNotProcessed'],244)
+        self.assertEqual(progress['progressPercent'],28.65)
+        self.assertEqual(progress['progressPercent'],round(self.total/342*100,2))
+        page=(self.batch/'perbandingan.html').read_text()
+        self.assertIn('98 dari 342',page)
+        self.assertIn('28.65%',page)
+        previous_ids=set()
+        for batch in ('03','04','05','06','07','08','09','10','11'):
+            previous=json.loads((R/f'04-desain/variasi-svg/batch-{batch}/progress.json').read_text())
+            previous_ids.update(e['id'] for e in previous['entries'])
+        known={hashlib.sha256(p.read_bytes()).hexdigest() for p in (R/'04-desain/variasi-svg').rglob('*.svg') if p.parent!=self.batch}
+        for e in progress['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known)
+            known.add(digest)
+
+    def test_positive_initials_detached_tips_and_wing_gaps(self):
+        def painted(key,x,y):
+            data=json.loads((self.batch/f'{key}.json').read_text())
+            for layer in data['layers']:
+                inside=False;poly=[]
+                for c in layer['commands']:
+                    if c[0]=='M':poly=[c[1:]]
+                    elif c[0]=='L':poly.append(c[1:])
+                    else:
+                        for (x1,y1),(x2,y2) in zip(poly,poly[1:]+poly[:1]):
+                            if (y1>y)!=(y2>y) and x<(x2-x1)*(y-y1)/(y2-y1)+x1:inside=not inside
+                if inside:return True
+            return False
+        for key,x,y in [('exp-011-07',84,151),('exp-011-07',203,150),('exp-011-07',161,150),('exp-010-08',60,94),('exp-011-03',60,101),('exp-011-08',180,116),('exp-011-04',170,160)]:
+            self.assertFalse(painted(key,x,y),(key,x,y))
+        for key,x,y in [('exp-011-07',65,151),('exp-011-07',145,151),('exp-011-07',174,151),('exp-010-08',60,80),('exp-010-08',60,110),('exp-011-03',60,120),('exp-011-08',150,116),('exp-011-04',140,160)]:
+            self.assertTrue(painted(key,x,y),(key,x,y))
+
 if __name__=='__main__':unittest.main()
