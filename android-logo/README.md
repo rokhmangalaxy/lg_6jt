@@ -1,6 +1,12 @@
 # MCM Logo Studio — Android Kotlin
 
-Aplikasi Android Kotlin dengan WebView lokal, bukan website remote. Memuat lima logo tertanam dari `../html/index.html`, satu per halaman, navigasi Prev/Next, dan enam permutasi palet merah/biru/putih melalui pemetaan piksel Canvas. Tidak memerlukan izin internet, server sandbox, atau gambar baru per susunan warna.
+Aplikasi Android Kotlin dengan WebView lokal, bukan website remote. Memuat pustaka
+**347 logo** (5 konsep lama + 342 hasil potong) dari `../html/`: grid dengan pencarian dan
+filter set, lalu tampilan detail dengan Prev/Next. Semua logo memakai warna aslinya.
+
+Aset disajikan lewat **`WebViewAssetLoader`** pada origin `https://appassets.androidplatform.net`,
+jadi halaman dapat memakai jalur relatif (`assets/logos/*.webp`) tanpa mengaktifkan akses
+`file://`. Manifest Android tidak meminta izin INTERNET.
 
 ## Status build
 Proyek dan workflow build sudah disiapkan. **APK belum dibangun atau diuji di perangkat.** Workspace saat ini tidak memiliki JDK/Android SDK/Gradle dan akses unduh dibatasi, sehingga dependensi Google Maven/Android SDK tidak bisa dipenuhi secara lokal.
@@ -22,9 +28,12 @@ gradle assembleDebug lintDebug
 
 Output: `app/build/outputs/apk/debug/app-debug.apk`. Build pertama memerlukan internet untuk Google Maven, Maven Central, dan SDK Android.
 
+Aset pustaka disalin otomatis dari `../html/` ke `web/` di dalam assets oleh task
+`syncLogoAssets`; perkiraan ukuran APK ±5 MB (WebP 3,84 MB).
+
 ## Batas versi awal
-- Menggunakan UI HTML/Canvas yang dibungkus Activity Kotlin; bukan UI native Compose.
-- Unduh PNG disembunyikan pada Android: ekspor native belum diimplementasikan. Gunakan HTML mandiri untuk mengunduh PNG.
-- Pilihan warna hanya bertahan selama halaman aktif; pemuatan ulang/rotasi Activity akan meresetnya.
-- Latar putih dan bagian putih logo berasal dari satu kelompok warna; belum dapat dipisahkan.
+- Menggunakan UI HTML yang dibungkus Activity Kotlin; bukan UI native Compose.
+- Ekspor/unduh gambar belum tersedia di Android.
+- Susunan warna (enam permutasi merah/biru/putih) dinonaktifkan; logo tampil dengan warna asli. Rencana dan alasan ada di `RENCANA-PUSTAKA-LOGO.md`.
+- Galeri memuat thumbnail 160 px; gambar penuh dimuat saat detail dibuka.
 - Jangan memasukkan kunci signing ke repository. Versi release memerlukan konfigurasi signing terpisah.

@@ -38,9 +38,14 @@ android {
     sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/logoAssets"))
 }
 
-// Reuse the standalone HTML: no duplicate artwork or remote website required.
+// Reuse the standalone HTML and its WebP library: no duplicate artwork or remote website.
+// Copied under web/ so relative paths such as assets/logos/x.webp keep working.
 val syncLogoAssets by tasks.registering(Copy::class) {
-    from(rootProject.file("../html/index.html"))
-    into(layout.buildDirectory.dir("generated/logoAssets"))
+    from(rootProject.file("../html"))
+    into(layout.buildDirectory.dir("generated/logoAssets/web"))
 }
 tasks.named("preBuild") { dependsOn(syncLogoAssets) }
+
+dependencies {
+    implementation("androidx.webkit:webkit:1.12.1")
+}

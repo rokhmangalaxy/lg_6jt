@@ -1,10 +1,42 @@
-# Preview HTML lima konsep logo
+# Pustaka logo HTML
 
-Situs statis mandiri: `index.html` dan lima PNG palet solid di `assets/`. Tanpa build, CDN, font eksternal, atau backend. Buka `index.html` langsung atau jalankan dari root repository:
+Situs statis mandiri: `index.html` plus `assets/` berisi lima konsep lama (PNG) dan
+seluruh logo hasil potong (WebP + thumbnail). Tanpa build, CDN, font eksternal, atau backend.
+Buka `index.html` langsung atau jalankan dari root repository:
 
 ```sh
 python3 -m http.server 8000 --bind 0.0.0.0 --directory html
 ```
+
+Halaman menampilkan grid pustaka (**347 logo**: 5 konsep lama + 171 set *kotak* + 171 set
+*rasio*), pencarian, filter per set, dan tampilan detail dengan Prev/Next. Semua logo
+ditampilkan dengan warna aslinya; susunan warna belum aktif, lihat
+`../android-logo/RENCANA-PUSTAKA-LOGO.md`.
+
+## Struktur aset
+
+| Jalur | Isi |
+| --- | --- |
+| `assets/logos/*.webp` | 347 tampilan penuh, WebP q85 (±2,9 MB) |
+| `assets/thumbs/*.webp` | thumbnail 160 px untuk grid (±1,0 MB) |
+| `assets/manifest.js` | `window.LOGO_LIBRARY` — id, label, set, dimensi |
+| `assets/variasi-0*.png` | master lima konsep lama (3 warna solid) |
+
+`index.html` **tidak** lagi menanam gambar sebagai base64 dan **tidak** memuat susunan
+palet. Fungsi `recolor()` tetap ada di skrip untuk fitur yang ditunda.
+
+## Membangun ulang aset
+
+Master PNG hasil potong tidak disimpan di git (lihat `.gitignore`); sumbernya folder Drive
+`mcm/logos` atau salinan lokal `drive_out/`.
+
+```sh
+python3 scripts/build_logo_assets.py
+```
+
+Skrip itu menulis `assets/logos/`, `assets/thumbs/`, `assets/manifest.js`, sekaligus
+menyalin `index.html` menjadi `preview-logo-mcm.html` di root (hanya berbeda pada awalan
+aset `html/`). Butuh Pillow dengan dukungan WebP.
 
 ## GitHub Pages
 
@@ -20,14 +52,17 @@ Status saat diperiksa: repository private, `has_pages: false`; API pengaturan Pa
 
 Workflow `.github/workflows/pages.yml` hanya mengunggah **folder `html/`**, bukan riset, brief, atau seluruh repository. Publikasi tidak otomatis berjalan setiap push. README ini ikut menjadi berkas publik pada artifact; isinya tidak memuat rahasia.
 
-## Memperbarui gambar
+## Pemeriksaan
 
-Setelah mengubah logo solid di `03-konsep/solid/`, salin lima PNG ke `html/assets/`, periksa preview, lalu jalankan publikasi manual lagi. Gambar adalah konsep raster berbasis generasi AI, bukan master vektor/siap bordir. Palet kerja bukan warna resmi perusahaan.
+```sh
+node tests/test_logo_preview.cjs
+```
 
-## Navigasi dan warna interaktif
+Menguji sintaks skrip, mesin `recolor()` (masih dijaga untuk fitur yang ditunda), tidak ada
+base64 tertanam, tidak ada kontrol palet, kesamaan `preview-logo-mcm.html` dengan
+`index.html`, serta kontrak manifest: 347 item (5/171/171), id unik, setiap WebP ada,
+dimensi sesuai manifest, thumbnail ≤160 px, dan anggaran aset <5 MB. Ini bukan pengujian
+browser otomatis.
 
-Galeri menampilkan satu konsep aktif dengan Prev/Next (berputar), tombol nomor 01–05, dan tombol panah keyboard. Enam tombol susunan palet memetakan area merah, biru, dan putih dari gambar sumber asli ke seluruh enam permutasi warna dasar. Tidak ada color picker atau warna tambahan. Pilihan terpisah per konsep bertahan selama halaman terbuka, bukan setelah reload. Area putih termasuk latar. Unduh PNG mengekspor warna konsep aktif; reset hanya berlaku pada konsep aktif.
-
-Kelima sumber PNG tertanam di `index.html`; tidak perlu fetch atau server agar kanvas dapat dipakai ketika membuka file lokal. `preview-logo-mcm.html` di root adalah salinan mandiri yang sama. Tidak ada gambar tambahan per kombinasi warna. Setelah mengganti sumber artwork, data gambar tertanam pada HTML harus diperbarui juga; sekadar mengganti `assets/` tidak mengubah preview interaktif.
-
-Pemeriksaan logika: `node tests/test_logo_preview.cjs` (sintaks, pemetaan warna simultan, sumber tetap utuh, reset, warna kustom, lima sumber tertanam, dan kesamaan versi offline). Ini bukan pengujian browser otomatis.
+Catatan: logo berasal dari gambar hasil generasi AI, bukan tanda merek resmi dan bukan
+master vektor/siap bordir. Palet kerja bukan warna resmi perusahaan.

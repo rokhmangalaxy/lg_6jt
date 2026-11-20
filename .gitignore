@@ -6,3 +6,7 @@ local.properties
 *.apk
 *.jks
 *.keystore
+
+# Master hasil potong (28 MB) dan unduhan sumber hidup di Google Drive, bukan di git.
+drive_out/
+google_drive/

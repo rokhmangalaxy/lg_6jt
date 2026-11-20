@@ -5,36 +5,57 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.webkit.WebViewAssetLoader
 
-/** Offline Kotlin shell for the same canvas-based logo studio. No JS/native bridge. */
+/**
+ * Offline Kotlin shell for the logo library. Assets are served through
+ * [WebViewAssetLoader] over an https origin so the page can use relative paths
+ * without enabling file:// access. No JS/native bridge.
+ */
 class MainActivity : Activity() {
     private lateinit var webView: WebView
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val loader = WebViewAssetLoader.Builder()
+            .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(this))
+            .build()
+
         webView = WebView(this)
         webView.setBackgroundColor(Color.WHITE)
         webView.settings.apply {
             javaScriptEnabled = true
             allowFileAccess = false
             allowContentAccess = false
-            blockNetworkLoads = true
+            // Manifest declares no INTERNET permission; the loader answers locally.
+            blockNetworkLoads = false
             domStorageEnabled = false
         }
         webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean = true
+            override fun shouldInterceptRequest(
+                view: WebView,
+                request: WebResourceRequest,
+            ): WebResourceResponse? = loader.shouldInterceptRequest(request.url)
+
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest,
+            ): Boolean = true
         }
         setContentView(webView)
-        // Read only the packaged asset; base64 images require neither file access nor internet.
-        val html = assets.open("index.html").bufferedReader().use { it.readText() }
-        webView.loadDataWithBaseURL("https://mcm.invalid/?android=1", html, "text/html", "UTF-8", null)
+        webView.loadUrl("$ORIGIN/assets/web/index.html")
     }
 
     override fun onDestroy() {
         webView.destroy()
         super.onDestroy()
+    }
+
+    private companion object {
+        const val ORIGIN = "https://appassets.androidplatform.net"
     }
 }
