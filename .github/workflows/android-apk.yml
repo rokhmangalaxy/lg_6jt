@@ -17,7 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Validate path masters without building Android
-        run: python3 -m unittest discover -s tests -p 'test_path_batches.py'
+        run: |
+          python3 -m unittest discover -s tests -p 'test_path_batches.py'
+          python3 -m unittest discover -s tests -p 'test_temporary_review.py'
   build:
     # Explicit user-requested APK only; automatic push/PR builds remain paused.
     if: ${{ github.event_name == 'workflow_dispatch' }}

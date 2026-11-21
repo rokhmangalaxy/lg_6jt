@@ -18,7 +18,15 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
         vector=json.loads(apk.read('assets/'+entry['vectorAsset']))
         assert vector['layers'] and vector['construction']=='manual-geometric-v1'
         assert apk.read('assets/'+entry['asset']).startswith(b'\x89PNG\r\n\x1a\n')
-    assert actual == {'assets/' + name for name in expected} | {'assets/'+e['asset'] for e in pilot}, f'Unexpected/missing logos: {actual}'
+    review=json.loads(apk.read('assets/temporary-review/index.json'))
+    assert len(review)==324 and len({e['id'] for e in review})==324
+    review_paths={f"assets/temporary-review/{e['id']}-{kind}.png" for e in review for kind in ('source','redraw')}
+    import hashlib
+    for name in review_paths:
+        content=apk.read(name)
+        assert content.startswith(b'\x89PNG\r\n\x1a\n')
+        assert hashlib.sha256(content).digest()==hashlib.sha256((Path('android-logo/app/src/main')/name).read_bytes()).digest()
+    assert actual == {'assets/' + name for name in expected} | {'assets/'+e['asset'] for e in pilot} | review_paths, f'Unexpected/missing logos: {actual}'
     for filename in expected:
         path = 'assets/' + filename
         assert path in available, f'Missing APK asset: {path}'
@@ -28,4 +36,4 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
         assert json.loads(apk.read(vector))['layers'], f'Empty vector source: {vector}'
         data = apk.read(path)
         assert data.startswith(b'\x89PNG\r\n\x1a\n'), f'Invalid PNG: {filename}'
-print('PASS: release APK contains 105 logo variations with native paths, no duplicate group 12 assets')
+print('PASS: 105 catalog variations with native paths unchanged; 324 separate offline review pairs verified')
