@@ -1522,4 +1522,64 @@ class PathBatch35Test(PathBatchTest):
             self.assertEqual(e['sourceName'],f"Max_a_Gambar_kotak_rasio_1_logo-{e['sourceNumber']:02}.png")
             self.assertIn('unnumbered',e['id'])
 
+class PathBatch36Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-36'
+    count=5
+    total=324
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_progress_and_limited_audit_are_consistent(self):
+        p=json.loads((self.batch/'progress.json').read_text())
+        old=json.loads((R/'04-desain/variasi-svg/batch-35/progress.json').read_text())
+        self.assertTrue(p['apkBuildsPaused'])
+        self.assertEqual(p['newMasterCount'],5)
+        self.assertEqual(p['uniqueDriveMasters'],324)
+        self.assertEqual(p['driveSourcesCoveredIncludingDuplicates'],342)
+        self.assertEqual(p['remainingNotProcessed'],0)
+        self.assertEqual(p['progressPercent'],100.0)
+        self.assertEqual(p['redrawOnlyPercent'],94.74)
+        self.assertEqual(p['sourceAliases'],old['sourceAliases'])
+        self.assertEqual(len(p['sourceAliases']),18)
+        self.assertEqual(p['groups']['rasio-13']['redrawn'],list(range(1,10)))
+        self.assertEqual(p['groups']['rasio-unnumbered']['redrawn'],list(range(1,10)))
+        self.assertEqual(p['entries'][-1]['id'],'exp-rasio-unnumbered-09')
+        previous_ids=set();previous_sources=set();known=set()
+        for f in (R/'04-desain/variasi-svg').glob('batch-*/progress.json'):
+            if f.parent!=self.batch:
+                for e in json.loads(f.read_text())['entries']:
+                    previous_ids.add(e['id']);previous_sources.add(e['sourceSha256'])
+        for f in (R/'04-desain/variasi-svg').rglob('*.svg'):
+            if f.parent!=self.batch:known.add(hashlib.sha256(f.read_bytes()).hexdigest())
+        for e in p['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            self.assertNotIn(e['sourceSha256'],previous_sources)
+            previous_sources.add(e['sourceSha256'])
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known);known.add(digest)
+            source=R/'google_drive'/e['sourceName']
+            if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+
+    def test_final_inventory_reconciles_every_source(self):
+        audit=json.loads((self.batch/'audit_inventory.json').read_text())
+        records=audit['records']
+        self.assertEqual(len(records),342)
+        self.assertEqual(len({e['sourceName'] for e in records}),342)
+        self.assertEqual(len({e['driveId'] for e in records}),342)
+        self.assertEqual(len({e['sourceSha256'] for e in records}),324)
+        self.assertEqual(sum(e['kind']=='manual-master' for e in records),324)
+        self.assertEqual(sum(e['kind']=='exact-byte-alias' for e in records),18)
+        self.assertEqual(audit['uncoveredSources'],[])
+        self.assertEqual(audit['unexpectedLocalSources'],[])
+        masters={e['masterId']:e for e in records if e['kind']=='manual-master'}
+        for e in records:
+            self.assertEqual(e['sourceSha256'],masters[e['masterId']]['sourceSha256'])
+            src=R/'google_drive'/e['sourceName']
+            if src.exists():self.assertEqual(hashlib.sha256(src.read_bytes()).hexdigest(),e['sourceSha256'])
+        for f in self.batch.glob('exp-*.json'):
+            self.assertNotIn(2,{l['color'] for l in json.loads(f.read_text())['layers']})
+        page=(self.batch/'perbandingan.html').read_text()
+        self.assertIn('342 dari 342 sumber tercakup',page)
+        self.assertIn('Sisa <strong>0</strong>',page)
+
 if __name__=='__main__':unittest.main()

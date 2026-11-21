@@ -1,0 +1,3055 @@
+{
+  "scope": "All 342 downloaded PNG sources matched against provenance; not a fresh full remote listing or semantic visual deduplication.",
+  "sourceFolder": "1fkCuPkqGe4jRAvKhTmi8Z78veYqmWGVh",
+  "downloadedPngCount": 342,
+  "manualMasterCount": 324,
+  "exactByteAliasCount": 18,
+  "uniqueSourceSha256Count": 324,
+  "uncoveredSources": [],
+  "unexpectedLocalSources": [],
+  "visualApproval": "pending",
+  "records": [
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-01.png",
+      "driveId": "1xn3jgPVODcTO4KyOLHoA_e7sETLiQdwq",
+      "sourceSha256": "385131dff4abaab8c6ec724c3ae7abee3d2de155a46945127c437ee5dd13906f",
+      "masterId": "exp-010-01",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-02.png",
+      "driveId": "1T0BfFfFeaaMJToasr8C2sQcVdWNKO_O4",
+      "sourceSha256": "2337b7f6b52f521acbb204cd977056a4f6cafdb432c439d36c56187eab95c8c1",
+      "masterId": "exp-010-02",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-03.png",
+      "driveId": "19UAbPUMiYVR4HIWE9ZLS-vgMpDRyCBJr",
+      "sourceSha256": "3771b2e636335cbbef9ce0aae3a918da896c8c717808ed0408cc702c69488e29",
+      "masterId": "exp-010-03",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-04.png",
+      "driveId": "1fDbjcjsFGahqQWbvR-_HUYg86alP03zZ",
+      "sourceSha256": "3b8bf1c7ffbbb957ce58db2456f1205492a1661247a0e63b69cba2a49bdaaeae",
+      "masterId": "exp-010-04",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-05.png",
+      "driveId": "19vdP0oD-Shp58tesXwIyb4YY7_NHtrGX",
+      "sourceSha256": "60cbb429f24a66973bd966a1ffd54f0c1730ed27667091641a1a3bb7df025174",
+      "masterId": "exp-010-05",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-06.png",
+      "driveId": "1NK-U_jrxob4IGRgckhCrI6bXe_mHZC3l",
+      "sourceSha256": "004054e5b98927aebff0791f1c8795ced32efeb3a67a4a68d05c027fbbb399c3",
+      "masterId": "exp-010-06",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-07.png",
+      "driveId": "17Gsf_LNf_Q-kvLUblBHbLCdqdUTbARVf",
+      "sourceSha256": "4e2cd62b70f90647432edc841df20ed489338174d29dd8391db298568a5eb3e1",
+      "masterId": "exp-010-07",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-010-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-010-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-08.png",
+      "driveId": "1xQVJff4uUkKeYtkHhgFcfMFOgtBXRYhh",
+      "sourceSha256": "120b182ab8f9de854085d6cd987192bb62426a5d1f2d94f1e539585b2b4d57b4",
+      "masterId": "exp-010-08",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-010-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-010-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__10_logo-09.png",
+      "driveId": "1Tyukh6m50VW0tf64M42w83DXDu7Ddvqp",
+      "sourceSha256": "f84c0377694cd4110b0bb5a68d90a7548b187340fb0f649c0e6806f2925c9ae8",
+      "masterId": "exp-010-09",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-010-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-010-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-01.png",
+      "driveId": "1RfeIaD6-cx9_-rp6sbcj8pmRMxBDYRV0",
+      "sourceSha256": "63c8a3feb3973f3e4844b05d36ffff971d8c3a72c30b4318bdc4e5b1fb8ca457",
+      "masterId": "exp-011-01",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-02.png",
+      "driveId": "1bBUYXOHf6C-VXp5qfZHNhBuXbwydHdqS",
+      "sourceSha256": "2ee2100abc076ad5b45a1c3869c1526ee6c7ab4fc9e33da4cefe59c70c9ac641",
+      "masterId": "exp-011-02",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-03.png",
+      "driveId": "1YLg-2MMwS0GrkGzcMzBxyC1DZvxYvAPK",
+      "sourceSha256": "0f57c159048cae62414e844f650f4ec21fff5ed5a0f76d7032f4bf8d397ecb8b",
+      "masterId": "exp-011-03",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-04.png",
+      "driveId": "1wDOcy1v4PK96avUB0K3vnXLSrBDkBT1e",
+      "sourceSha256": "0da2c7027dfa7e29a6bb44a6f8569a2b4b01c3e694544dddfa99d6c265b0ff6e",
+      "masterId": "exp-011-04",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-05.png",
+      "driveId": "1FasftThFua6OyVAwT8MTAaLfsuFsHXQg",
+      "sourceSha256": "7de5dc666e598e3bae92c6a85f58779df27f6f3112493c24976a7211f791d245",
+      "masterId": "exp-011-05",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-06.png",
+      "driveId": "1hBkVeZNHn6uS2SWHgRKF1YsZtC32HzsK",
+      "sourceSha256": "b603121ee1422d3bbe97793ea36af9016dbc5a3b53854ce8af6b3bc13e4aac3b",
+      "masterId": "exp-011-06",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-07.png",
+      "driveId": "1uYO4_DodSxg8zjAz25Km7W_KEXLT9BTi",
+      "sourceSha256": "b49885ef0f5a12f50f8d2cdeb22e7b051a40f782a764ae800c8273e8991f4c1e",
+      "masterId": "exp-011-07",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-08.png",
+      "driveId": "1uyc73f01tQp7BEMIK2PX4hiQtXjNHEyr",
+      "sourceSha256": "a067e929a609d4bd9e1b29ec341aca6bf7b88cb1184a5f5f0cf5f158929e02ec",
+      "masterId": "exp-011-08",
+      "masterSvg": "04-desain/variasi-svg/batch-12/exp-011-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-12/exp-011-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__11_logo-09.png",
+      "driveId": "14Wp9mIqa_--b02AmFUuahVIsagUBkzwn",
+      "sourceSha256": "15ccd1510a553abc201c008dd5d797b3bda8b3926a6531c0fe9232ab86653567",
+      "masterId": "exp-011-09",
+      "masterSvg": "04-desain/variasi-svg/batch-13/exp-011-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-13/exp-011-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-01.png",
+      "driveId": "1hy_Q8mc0HZVFWjnQQpxFQUq_DOyjbEKZ",
+      "sourceSha256": "63c8a3feb3973f3e4844b05d36ffff971d8c3a72c30b4318bdc4e5b1fb8ca457",
+      "masterId": "exp-011-01",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-02.png",
+      "driveId": "1nRZLDTu6FhVVizwIo_66O6FUyiW-5paN",
+      "sourceSha256": "2ee2100abc076ad5b45a1c3869c1526ee6c7ab4fc9e33da4cefe59c70c9ac641",
+      "masterId": "exp-011-02",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-03.png",
+      "driveId": "1d1W11PKtufqOxGl22pAmIz4e7wFMo89R",
+      "sourceSha256": "0f57c159048cae62414e844f650f4ec21fff5ed5a0f76d7032f4bf8d397ecb8b",
+      "masterId": "exp-011-03",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-04.png",
+      "driveId": "1ovG3j6Vc99yIGvS3HqXGaNmtkc8rDrTx",
+      "sourceSha256": "0da2c7027dfa7e29a6bb44a6f8569a2b4b01c3e694544dddfa99d6c265b0ff6e",
+      "masterId": "exp-011-04",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-05.png",
+      "driveId": "1KfcUB_yD0wOBEecb6fb0jpb9IMOWcW1x",
+      "sourceSha256": "7de5dc666e598e3bae92c6a85f58779df27f6f3112493c24976a7211f791d245",
+      "masterId": "exp-011-05",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-06.png",
+      "driveId": "1-DMOYuGRwxpH0aHGOM2W0gwvPLZLc_i6",
+      "sourceSha256": "b603121ee1422d3bbe97793ea36af9016dbc5a3b53854ce8af6b3bc13e4aac3b",
+      "masterId": "exp-011-06",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-07.png",
+      "driveId": "1F0NHSqNnna1wBxR3D6zKD646_-ej3s3i",
+      "sourceSha256": "b49885ef0f5a12f50f8d2cdeb22e7b051a40f782a764ae800c8273e8991f4c1e",
+      "masterId": "exp-011-07",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-08.png",
+      "driveId": "19OCt8d4AxX2IqYXMw2R69xG4n76EIdrr",
+      "sourceSha256": "a067e929a609d4bd9e1b29ec341aca6bf7b88cb1184a5f5f0cf5f158929e02ec",
+      "masterId": "exp-011-08",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__12_logo-09.png",
+      "driveId": "1-5vODvv6tkYgbAl0aW0bPuVgu5v0ZYzm",
+      "sourceSha256": "15ccd1510a553abc201c008dd5d797b3bda8b3926a6531c0fe9232ab86653567",
+      "masterId": "exp-011-09",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-01.png",
+      "driveId": "1ABgmLlcHosOORDoK0qw2iLq_EnSy06-K",
+      "sourceSha256": "1e8c00d35892306f0a2083befea0e750bf184488bf17e9a061757bf6327a596d",
+      "masterId": "exp-013-01",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-02.png",
+      "driveId": "1CtZOQUyBSoPuccZtCeRgm9w8LVwnEUor",
+      "sourceSha256": "617410f24324629c086b140d611c723adbcf7884364dec3ea48df9b2196de844",
+      "masterId": "exp-013-02",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-03.png",
+      "driveId": "19Tr6f6Ss-0yWP5x_x9YI-m8WiMkAbvFB",
+      "sourceSha256": "4a6b252436359993cb7c615dbb93322d5a3b9b9055781175e22a9d56b7f4b132",
+      "masterId": "exp-013-03",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-04.png",
+      "driveId": "1OeK-edGoH21SrRMSjj4ZofJKxfb3xbak",
+      "sourceSha256": "62becacdea5c4383c8994829c914d56bbcf2879994942a4f62fed864f8c0dfa1",
+      "masterId": "exp-013-04",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-05.png",
+      "driveId": "14rdfZzlw_qcUq2EfyFLG2DpOepsJp69m",
+      "sourceSha256": "babdcdb1af8e79ab0a62fee525142dbd24c277e4d4d953c5b9bb4cc149361790",
+      "masterId": "exp-013-05",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-06.png",
+      "driveId": "1ZqNYeh3PD8D--cwvJj0D0kFDGYgO1SZc",
+      "sourceSha256": "3e73be81d8614998dde9fd6b70913a974d4247c9c60dc650556b9e2d6d849091",
+      "masterId": "exp-013-06",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-07.png",
+      "driveId": "1KUNM49hBAytKA5BF0JeojsG4UuKKNS2U",
+      "sourceSha256": "abebf986ed3a80fa16a49092e5136fd65a6ddf5fd2befee1ff1df5c9849dabbb",
+      "masterId": "exp-013-07",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-08.png",
+      "driveId": "1pYpVQh0MsEiWbvvanS6zifDjnGbJhSj9",
+      "sourceSha256": "b30b97cb3d91d89614ee9047b9176be209e7ff105cf8cc3edfbd1c5ca8b7d472",
+      "masterId": "exp-013-08",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__13_logo-09.png",
+      "driveId": "17QvpmfPs1_HA1rLTdWbJEghamPXBwUzF",
+      "sourceSha256": "b9ca2d20dfe3ba956e8a3337211e7a038899a96e618c9f7aebc2881fdfa3cb0d",
+      "masterId": "exp-013-09",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-013-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-013-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-01.png",
+      "driveId": "1knpdjmfDta6JtZLmOLvtR4vA6L7gC83w",
+      "sourceSha256": "1e8c00d35892306f0a2083befea0e750bf184488bf17e9a061757bf6327a596d",
+      "masterId": "exp-013-01",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-02.png",
+      "driveId": "1PUFj4UXocnG81LSzoH-D6XAz3ePcIXwz",
+      "sourceSha256": "617410f24324629c086b140d611c723adbcf7884364dec3ea48df9b2196de844",
+      "masterId": "exp-013-02",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-03.png",
+      "driveId": "1PGP8ChgSJMPqUvD0Knz-8PxTTqGHuHCM",
+      "sourceSha256": "4a6b252436359993cb7c615dbb93322d5a3b9b9055781175e22a9d56b7f4b132",
+      "masterId": "exp-013-03",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-04.png",
+      "driveId": "1vqFXvYbltMc4BoAUeZO22pg1ehLf-MPo",
+      "sourceSha256": "62becacdea5c4383c8994829c914d56bbcf2879994942a4f62fed864f8c0dfa1",
+      "masterId": "exp-013-04",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-05.png",
+      "driveId": "1wi0X3uVXKS4hqRosni1Qs9My6i8ko1fk",
+      "sourceSha256": "babdcdb1af8e79ab0a62fee525142dbd24c277e4d4d953c5b9bb4cc149361790",
+      "masterId": "exp-013-05",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-06.png",
+      "driveId": "1knY8hbx6cWqK0MfbeQ8Kwbc80vWAXRHz",
+      "sourceSha256": "3e73be81d8614998dde9fd6b70913a974d4247c9c60dc650556b9e2d6d849091",
+      "masterId": "exp-013-06",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-07.png",
+      "driveId": "1loBELtOFwp_tE0uFIRbr1hhwwpbkl6EF",
+      "sourceSha256": "abebf986ed3a80fa16a49092e5136fd65a6ddf5fd2befee1ff1df5c9849dabbb",
+      "masterId": "exp-013-07",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-08.png",
+      "driveId": "1KR1EXUIH7NAkY1mp_hedH8UFa_t1CPqW",
+      "sourceSha256": "b30b97cb3d91d89614ee9047b9176be209e7ff105cf8cc3edfbd1c5ca8b7d472",
+      "masterId": "exp-013-08",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__14_logo-09.png",
+      "driveId": "1U0FPzTtsJTOOj4TdehnyeWFsBLxtKW4O",
+      "sourceSha256": "b9ca2d20dfe3ba956e8a3337211e7a038899a96e618c9f7aebc2881fdfa3cb0d",
+      "masterId": "exp-013-09",
+      "kind": "exact-byte-alias"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-01.png",
+      "driveId": "1pBKaaFrRed0o-vv7iuRcMO3J9mcj70VQ",
+      "sourceSha256": "ed469ca6a3b366346f297542b5124f4e5472006362de75c341f35f91f514e7d3",
+      "masterId": "exp-015-01",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-02.png",
+      "driveId": "1gcSP97E23w3irrCFvszZbvJz_FBFM93G",
+      "sourceSha256": "a7d449f6ec4d8516cebd5b482c5e1b91e2e732fcb0f4b595e542cdc0143008ab",
+      "masterId": "exp-015-02",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-03.png",
+      "driveId": "1D3owlngiXzo0WUnhRbpvZSJdHpD43TiA",
+      "sourceSha256": "28560e6729d952c9366230d5bf7e71e6885d32a3166bfdc3723e487ee2b69d6e",
+      "masterId": "exp-015-03",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-04.png",
+      "driveId": "1Bg_FkX-QzczoclfS832Ij4Ywuq4d2iTo",
+      "sourceSha256": "ec346e15220ef296c6e3bc4b5a439538cd033645bc7f18bd63f163251260a08f",
+      "masterId": "exp-015-04",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-05.png",
+      "driveId": "1S-PeEMgkcnPlhA6w3Ql-6m1az1NBT6to",
+      "sourceSha256": "e4f80e405e40fdfcd57ff5106d34c33c007c30d704205393729e639520ab2c86",
+      "masterId": "exp-015-05",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-06.png",
+      "driveId": "1LhUUsRYDq4TNqSysfXwAoA_yMigXsRjh",
+      "sourceSha256": "bec0970e8ccf26ea291e34b136967f182fe95d17a767c0728a3cbd722fe82243",
+      "masterId": "exp-015-06",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-07.png",
+      "driveId": "1nQ_n4NyLjbIpdtBwGsnOlhG9LEecrNZO",
+      "sourceSha256": "03ee3b074fa2f831b7107e7b50408e1a9bfa523bf4b5dd15dbc8edabe8ce8a4e",
+      "masterId": "exp-015-07",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-08.png",
+      "driveId": "1N2xHAoD4Wv_0scpWZu2V4ofkNM9UTpTK",
+      "sourceSha256": "214c8dc55c8f611f0027eeda0f6bb092cb3bd77ffe93ceb26f8d595d7e3a330c",
+      "masterId": "exp-015-08",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-09.png",
+      "driveId": "1Y0PCy7iGIMd19HavhCUgc43pZH30iee7",
+      "sourceSha256": "00941b0f73bb7ae8b4728d4e95f093a993cce94c311a86a8437e3dc47c30baa7",
+      "masterId": "exp-015-09",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-015-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-015-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-01.png",
+      "driveId": "1SgEUdBbQVDcWZi26bZhJOexXIf0iv13L",
+      "sourceSha256": "1a41b1182515f597dacd09bf1c7b05fbd7d08944ff640d1e03bceaf4230218c9",
+      "masterId": "exp-016-01",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-02.png",
+      "driveId": "1GrK7vTYFz6l8oZEQZ5EDx8HoAQgg8BeU",
+      "sourceSha256": "c4874deeeb57cd841f514dd22cdfd78970c710785166fddedb5158d8ce0e31d8",
+      "masterId": "exp-016-02",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-03.png",
+      "driveId": "1cLDbeYN4o40vjigk15ucmx718p58v9qC",
+      "sourceSha256": "8189b6621dc8519789e71857582bff3ef2caf8ae0ccd4f403ee6705ddd50a55a",
+      "masterId": "exp-016-03",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-04.png",
+      "driveId": "1DTjHFFOdIAN3ZXTI6oZ_Lp2D07R1zBKf",
+      "sourceSha256": "2be9dc99b891fefce8abed1a49e75920b8b6d846638cabf39217547ddb769bb7",
+      "masterId": "exp-016-04",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-05.png",
+      "driveId": "1uy-78vtl09atK1I0O5P_VEHUZ4Wm_BbZ",
+      "sourceSha256": "650c23c02a283c414f7e951c3e2e50e0b278de06983f5dbab5e78ce53c925331",
+      "masterId": "exp-016-05",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-06.png",
+      "driveId": "1TOK9xUyXd22tr4z0S3vg6dg58gBaXPyJ",
+      "sourceSha256": "35b179d3c8948520e37b50363ac86cc08a4d72505b31ae6265102f3edf38be74",
+      "masterId": "exp-016-06",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-07.png",
+      "driveId": "1f0stcgDYFRTbLD1qjqnnUGaUhDn-QxBq",
+      "sourceSha256": "4526b897d77d95911838fc7a588baff4f90818946fb842a90c68f73f9f5cee1c",
+      "masterId": "exp-016-07",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-08.png",
+      "driveId": "1UaFhym6DhLTB0L2oxFhAoXOr_TrhV5Dk",
+      "sourceSha256": "8e9e86cf89e563297392ec48639195b6dfa1c798f05c5347662e1999604f6c87",
+      "masterId": "exp-016-08",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-09.png",
+      "driveId": "1HQsPL8J-nYQsSvz2QmJa4tB9iSwCB8rI",
+      "sourceSha256": "516a9c07411a460389fc450211627eadd5d2ce13a86a6a9f94bd43797961e86f",
+      "masterId": "exp-016-09",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-016-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-016-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-01.png",
+      "driveId": "10MugnbkEKy09tNkLA58qK8XbPMxEJKGP",
+      "sourceSha256": "ac7385f1389262797cb9fe3e76041aa0d34cbd27a460fb0b352902aaef9c7a70",
+      "masterId": "exp-017-01",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-02.png",
+      "driveId": "1vkFA4EuMYAsIq5i4vp-muoeAcrUHPrPB",
+      "sourceSha256": "22d80fd37af7c9c79b7bf966706fce26b6d05be2e6d3dc794bd5567965a75351",
+      "masterId": "exp-017-02",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-03.png",
+      "driveId": "1Ne1gocskIvZb1-hRstbW9FpZLc0Z2inW",
+      "sourceSha256": "ac27d7b031fccf2c100287da0af982ef9a44f547fc160708626e09d772ddaa3a",
+      "masterId": "exp-017-03",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-04.png",
+      "driveId": "1Rv1qBvYCYc4ySDXDCre8VaJ7BAzXQK4O",
+      "sourceSha256": "ba5f7cdf3fe453df7fe153bcfaecd6e1f4027feec1fa36f21370b7234685bee5",
+      "masterId": "exp-017-04",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-05.png",
+      "driveId": "1_6hqI5cq-BGHTuNnTr4Djw30W8ySZZoT",
+      "sourceSha256": "502859f463e098f217480e34b20e4b605376e46c4732cd953109a220334a4834",
+      "masterId": "exp-017-05",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-06.png",
+      "driveId": "1c41B4NUTi-AR1C2eH2C29hQYfCnSt4oi",
+      "sourceSha256": "456df2b97ed8596fcfdefd71f376ac62bd052ccc5a2ad16a63f2d4ce7e691a93",
+      "masterId": "exp-017-06",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-07.png",
+      "driveId": "1MAhT4u3OSIeifdk9yTkR1WdvApU86doH",
+      "sourceSha256": "801f83468f648ca0e79e5bef1c74cdeed754d8497f16d6094e718437df6e5f7c",
+      "masterId": "exp-017-07",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-08.png",
+      "driveId": "1-xwAQ2pyalK_Y3aUzshCXGZMnJLgPOGE",
+      "sourceSha256": "1eba7d2f1164457a5f0751310e1f042df9067b6b31fc2ab65b08a9315be56f34",
+      "masterId": "exp-017-08",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__17_logo-09.png",
+      "driveId": "1atm3G4Mm9SByEQJZjA9XhXCkJtA_YkA2",
+      "sourceSha256": "220f3d1505d565915aa7965438651deb34a861e8cc541fa5417828e5d6ea5220",
+      "masterId": "exp-017-09",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-017-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-017-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-01.png",
+      "driveId": "18MltYjrNixgCWiOuxO6QIOclIVsoPXXb",
+      "sourceSha256": "e1eaa8455956e40664fe201f1ef1b0fde508ae6b9e1633fced49545959711ca7",
+      "masterId": "exp-018-01",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-02.png",
+      "driveId": "1uHH8xD5_R46lfjkEmR9FGfgXAG1XpHTE",
+      "sourceSha256": "2bdb9c371c3667530eca728adde8a45cec202a256de699fcab755dfd6a08a253",
+      "masterId": "exp-018-02",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-03.png",
+      "driveId": "13l7sZrqJj4cac8zK4d9plEEVlxcDw8m2",
+      "sourceSha256": "48e7c480bce62f8a9b88b5490b6ba64be6d391a100d05b58ce70c185886f4b7d",
+      "masterId": "exp-018-03",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-04.png",
+      "driveId": "1AQ9QyH4wTioP2rN8nWrfDQ1_W1lWfx3k",
+      "sourceSha256": "c27d118048a577b6626b8c8b62e08e4e55b63f1a0f46929f6be04c274a9acf0b",
+      "masterId": "exp-018-04",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-05.png",
+      "driveId": "1V2gFfsMJqYPv2vp9jAr_wUbCqzEAho-z",
+      "sourceSha256": "d64e8a69f8ba8a42a6838e4aa684aadcb849063fd4a8e340fdf37fcbcfd8093d",
+      "masterId": "exp-018-05",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-06.png",
+      "driveId": "1PaP3bi_JuldkM6WrAtWda1vfyCYs-7vk",
+      "sourceSha256": "d7780b5dca165e65e25d156d0e17e7102329cab82c1683544a4edaf3f2ba0441",
+      "masterId": "exp-018-06",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-07.png",
+      "driveId": "1OzOEv0WoS0fLQ236UsLtj3nTsYbhSlvG",
+      "sourceSha256": "62e65e9d6e25371434b60a8afe57f02c596256c3c067e5640820da3a094a838f",
+      "masterId": "exp-018-07",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-08.png",
+      "driveId": "1AkwNocGtUekrSCX17Nj4ANF4ah5rLr1e",
+      "sourceSha256": "09880fab42b4621c6298e89e7b9001f6e6eff296a6580c1ad85bc5ba38e95abc",
+      "masterId": "exp-018-08",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__18_logo-09.png",
+      "driveId": "1i9TSVdsGycios-paISjB--B8WjDSoU9y",
+      "sourceSha256": "744f69c39fa7d62d8cd27636a191e753577ff0b09c6ae1c973b7e6e13de0f003",
+      "masterId": "exp-018-09",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-018-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-018-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-01.png",
+      "driveId": "1Sx92h_ucWsScsFc85kn7-1_be2CjVitL",
+      "sourceSha256": "c61d14157c0162b1833978a0ae2f6632e146a2f4c511d1fc5b0ddf5dfb4cf72c",
+      "masterId": "exp-019-01",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-02.png",
+      "driveId": "18IDDczPSg1BG3i2Fhc7JjrYBS_190-th",
+      "sourceSha256": "7b06e80d52f76b9936233d110ddc5e81e6a39292769b53c4c78bad5577c6c23f",
+      "masterId": "exp-019-02",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-03.png",
+      "driveId": "1AmbcDMjBoHPElUm52DwAhFybbwW78FSd",
+      "sourceSha256": "6d3df4fb8615a2eca98191cd0eaaf8f02f449ea260318510682d4da886a81e64",
+      "masterId": "exp-019-03",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-04.png",
+      "driveId": "15GqyPgWKf7bMtfjrx1ezoIUimDaC5m05",
+      "sourceSha256": "5c95c3c15a2b511dd0dec5a131c29e4b6cdc608492d57a565b2a4a22b3b61fa1",
+      "masterId": "exp-019-04",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-05.png",
+      "driveId": "1LS9VR31fDMtnGWcxpzU7QHgJ9CF-8DOT",
+      "sourceSha256": "81198d276c8a4552f1d502be5d67b4e873b2eca320c2cc1c04dd176d70b6371b",
+      "masterId": "exp-019-05",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-06.png",
+      "driveId": "1A25Aca_IlrYBCSDejqC1hwbJMLmRFOK-",
+      "sourceSha256": "efb664290c7c706b263fa9d7d65d02ae526f4b81ba6390119ab5a04b68ec204c",
+      "masterId": "exp-019-06",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-07.png",
+      "driveId": "1jKXuNaHNtQ6hvMMERaDCs0B3C0XqUKm3",
+      "sourceSha256": "f353c6f23aea65dd3efd8eaec18f973ad1e8df83fdb3cc95cf9196b9e2610e9d",
+      "masterId": "exp-019-07",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-08.png",
+      "driveId": "1jrKl3GqpRrtq2QEh_JWeQCJ0knc4a4NN",
+      "sourceSha256": "8c181b06630d173e1ce0ea29cf33166df6db76cc3bdaa27db9d8501d825d21da",
+      "masterId": "exp-019-08",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__19_logo-09.png",
+      "driveId": "1iwDApH3W7S-ZbHEHH_TA4eVe3KXAr4kL",
+      "sourceSha256": "a3cbdfa38c1bc97a2c7edf7d7b4e8723b14618923a6c60b83bbc76dbcaf7d88f",
+      "masterId": "exp-019-09",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-019-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-019-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-01.png",
+      "driveId": "1IVHq9P1VGzAsMO5deUIAKPokgLzgn7Yz",
+      "sourceSha256": "0b1023d4b6cf139e475765b745392b9e0f7dad39a9c92bfc23e1ec24feb5d97a",
+      "masterId": "exp-001-01",
+      "masterSvg": "04-desain/variasi-svg/exp-001-01.svg",
+      "pathJson": "android-logo/app/src/main/assets/exploration/exp-001-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-02.png",
+      "driveId": "19yJxNN4xRt_NqpJyOWM6qACQ17scOId6",
+      "sourceSha256": "f9eb80d5afde1186bb5e8d5ee216465491be419c784567ef7052b8a6e7f8fb96",
+      "masterId": "exp-001-02",
+      "masterSvg": "04-desain/variasi-svg/exp-001-02.svg",
+      "pathJson": "android-logo/app/src/main/assets/exploration/exp-001-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-03.png",
+      "driveId": "1FE1MMC1Kpar0jHaCJ4Qm5k59HiOcu-8o",
+      "sourceSha256": "e00412b89aa8cdab53372e1d7d856ef8fc30a6988653c99b46341fa26a850660",
+      "masterId": "exp-001-03",
+      "masterSvg": "04-desain/variasi-svg/exp-001-03.svg",
+      "pathJson": "android-logo/app/src/main/assets/exploration/exp-001-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-04.png",
+      "driveId": "1BpPfhJefVWsIvKLq5u8MObm1GWkAY1ch",
+      "sourceSha256": "799cb74e8a6200ea0a1d312df2426b19d2dbda1605f89ebca2db4e5c0812e80c",
+      "masterId": "exp-001-04",
+      "masterSvg": "04-desain/variasi-svg/exp-001-04.svg",
+      "pathJson": "android-logo/app/src/main/assets/exploration/exp-001-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-05.png",
+      "driveId": "1RIrzJpkMmS4Q4tu_85LjlM0PPB0dWMne",
+      "sourceSha256": "c9d6732d13cc0a27f33a737c409507cd3b7fd0c422f2b0b5b342f502f66a4987",
+      "masterId": "exp-001-05",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-001-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-001-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-06.png",
+      "driveId": "1HlW_E3M3LHz9ddIR_WfjFp3SvnxhRjBm",
+      "sourceSha256": "875fc80cf4473e5ccfe74abd4b01662f6594b0523cae70bc7d6071d6facc9127",
+      "masterId": "exp-001-06",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-001-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-001-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-07.png",
+      "driveId": "1NKizrU2i63S7bsRYKNUguLeOllyxbyat",
+      "sourceSha256": "e5af07eb8a0273aa2bb8e95630194fd9cc17704f9ea7b7d8b3424a8740a99609",
+      "masterId": "exp-001-07",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-001-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-001-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-08.png",
+      "driveId": "1Vvrn5uwVmy-MvJb2h65UJ5LZFoLuOKsO",
+      "sourceSha256": "184b82af9b20a23b23a9170d7eb214478d5c3452c567d34dc48c61f9c9d5bdbc",
+      "masterId": "exp-001-08",
+      "masterSvg": "04-desain/variasi-svg/exp-001-08.svg",
+      "pathJson": "android-logo/app/src/main/assets/exploration/exp-001-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-09.png",
+      "driveId": "1gfszrYaow3XWHHpZaA7INrJyLqtFWhD7",
+      "sourceSha256": "d626c97b888ba12751ec6d3a181b4fd7ca9b82dec48fe739f014d958128b7464",
+      "masterId": "exp-001-09",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-001-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-001-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-01.png",
+      "driveId": "1W9Qprp4WVM0cDpz1cZAG-k7KlsF-gJ8c",
+      "sourceSha256": "665fe92c9c7e501649d92506af4d078db7058704cf4812781f251ecbe222cdc3",
+      "masterId": "exp-002-01",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-002-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-002-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-02.png",
+      "driveId": "1IBuI5PQu68mjxIzi-yasCPeV2N4vtE6n",
+      "sourceSha256": "a29e975b6dc4888daf6b5ec6436d3e48cfb29dd4a42090f2f182ff080df13667",
+      "masterId": "exp-002-02",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-002-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-002-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-03.png",
+      "driveId": "1VFWI3qAY3uyXgTu1KUCTg0ZeQwAsjidE",
+      "sourceSha256": "709310af56660498d32fc78580cc56824456ea2b6e823f65f49b84a3323b0c70",
+      "masterId": "exp-002-03",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-002-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-002-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-04.png",
+      "driveId": "1WobAExx5YpO4zz4Zl9z_nH8Mcsc40USH",
+      "sourceSha256": "254a5c04e73de7637ad311b516e3bcd8e4b33cc685349cc8bf7afe274f008116",
+      "masterId": "exp-002-04",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-002-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-002-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-05.png",
+      "driveId": "1UrJuqKuK8hAiBcBFruXHzBJNP3Yh3Qhy",
+      "sourceSha256": "1e74d14c1cc9eb371b58bd251da7f2e1795202dbc0994c73e07e766d013def45",
+      "masterId": "exp-002-05",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-002-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-002-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-06.png",
+      "driveId": "1ZLvApBQd05hCv_aw44BYC_fxh6_npoox",
+      "sourceSha256": "81360b73ce671d4e27a90be6ca2101194e4426608beaad312e98b932049f4b59",
+      "masterId": "exp-002-06",
+      "masterSvg": "04-desain/variasi-svg/batch-03/exp-002-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-03/exp-002-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-07.png",
+      "driveId": "1CCQn9_aj7lSjj_yGdG9u5T02EqzhCMw-",
+      "sourceSha256": "a1521c96cc1d97825d34c625f9ea401184069fabbc9eed22de9e205f0c23e37a",
+      "masterId": "exp-002-07",
+      "masterSvg": "04-desain/variasi-svg/batch-04/exp-002-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-04/exp-002-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-08.png",
+      "driveId": "17uu9WqGHvwLqSX8i4EgEGmxJczzfNrKA",
+      "sourceSha256": "5af8b6701132c82d807b75f71d39ef0df6c25d5f29b3d2f9290b3f7d5b744af9",
+      "masterId": "exp-002-08",
+      "masterSvg": "04-desain/variasi-svg/batch-04/exp-002-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-04/exp-002-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-09.png",
+      "driveId": "1TL-cMeI6JIaqrrJ3iE6fqEqE-2PrSqkb",
+      "sourceSha256": "4a716116af69e5a7bd192d945b4d875d8196f7d74855f8355a7d3f33175e8922",
+      "masterId": "exp-002-09",
+      "masterSvg": "04-desain/variasi-svg/batch-04/exp-002-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-04/exp-002-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-01.png",
+      "driveId": "1U5OHoFKc4iYkKUoXxBiqhOddLDsOQcMH",
+      "sourceSha256": "e8139fdaded8341957919feb10bb08c679b49d9ad4e16324454fe7754508b32a",
+      "masterId": "exp-003-01",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-02.png",
+      "driveId": "10RpuHdwqqGIC3xcYKOQOhy3aZUMkaSeS",
+      "sourceSha256": "ac8864f77bfd458ff17c1c3bfd2b81a8d6da75a598b140a4d58de7e858f266b9",
+      "masterId": "exp-003-02",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-03.png",
+      "driveId": "1eGgGzHId-fWAGw_Z_BjyMfneHwUJQREF",
+      "sourceSha256": "9a7fc9f4b347ae61196ff5dad85add48f59a67ccf8cdf4991aa0766826d84acb",
+      "masterId": "exp-003-03",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-04.png",
+      "driveId": "1LNt5Lt4irXEh0OZB61LRxlU5Y-ArLhLf",
+      "sourceSha256": "707aca21ca74c406cf41bb36c27979dd106885861df446082801d23ec2ac90ef",
+      "masterId": "exp-003-04",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-05.png",
+      "driveId": "1IkEx5ag86lD_tSH-fZi0q6c0SD0gRYgp",
+      "sourceSha256": "a20f4949512ce5a72477b7f062b6ba5f3aba3980a60deb19a32485798183ac26",
+      "masterId": "exp-003-05",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-06.png",
+      "driveId": "1-BaZlbiFMrv5Lj2uyypl9XkNoT-PTWN8",
+      "sourceSha256": "edff76a115507ce250f033a6aa1dc9d0905a0c212c089cca45cc53cf6a4bd039",
+      "masterId": "exp-003-06",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-07.png",
+      "driveId": "1g0wOMdbJNrHEOuCO9BeSzAstsPPch_2x",
+      "sourceSha256": "43889965896c0d2c743504f35928a45a47d3a02625892cf5c8ce3fc968eedc2f",
+      "masterId": "exp-003-07",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-08.png",
+      "driveId": "1U7JiDlc3qb3fVdxOmW5QeX8uoKYUsIiy",
+      "sourceSha256": "a91cb4b7f7f5ba442f36fe4c5b1bc49e9f5e1128eeced2298abbfc05fd161f39",
+      "masterId": "exp-003-08",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__3_logo-09.png",
+      "driveId": "1AdYM1job7IIu5a5B8K-KdnAjVHCbH0n6",
+      "sourceSha256": "a6777ab8c586a97980c710efb816b5c260faea4531e68ec38e9fb45e195c8f9b",
+      "masterId": "exp-003-09",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-003-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-003-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-01.png",
+      "driveId": "1ziU05aI34FbQURatrA7IA-2hu-kfmxvy",
+      "sourceSha256": "6a95750648492fe69aff64a23dbf16b3b4f64d2285d8d84ed85dc4bd2f115908",
+      "masterId": "exp-004-01",
+      "masterSvg": "04-desain/variasi-svg/batch-05/exp-004-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-05/exp-004-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-02.png",
+      "driveId": "1OIONE_Qe4CQCqMUSUGctTSsM_tILrrvd",
+      "sourceSha256": "b91a6ca773be86d78c196443d8a4861e75d17bc59ea4538dd289f5cd66f76ee4",
+      "masterId": "exp-004-02",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-03.png",
+      "driveId": "1as6HDjgxIVw85648tLloWXD6WjeDPM8S",
+      "sourceSha256": "fe908cafc8c08946a6a13b12344302d4739c622f04f3a72fcc2fc176cf297af4",
+      "masterId": "exp-004-03",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-04.png",
+      "driveId": "1vPQbPwK2z90fegCZCx-R1ljh1IQFuFkV",
+      "sourceSha256": "67485bb9f8f77e480a0742c734834a235034330490b1fae7f05f0cafd7d810c0",
+      "masterId": "exp-004-04",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-05.png",
+      "driveId": "1Q46EEaHy8E4Am8I-xeQluF_y7-4n9vjZ",
+      "sourceSha256": "1fc1d3b613a20443d6bb726673780c9bc9a56a9f82e304cc92d8161fc31ab96b",
+      "masterId": "exp-004-05",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-06.png",
+      "driveId": "18az1etVk9kpaSAZuMpW6yZnVS56r8AbC",
+      "sourceSha256": "d47aa876119240abeefcc3175210e101a35f39a480ef65a77e0d1c7d69d980e1",
+      "masterId": "exp-004-06",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-07.png",
+      "driveId": "1NEktZC1SMpFPtwKdpB6B8BYObrwoE2X0",
+      "sourceSha256": "8bbdb1ee0127435e5412590bd59a6d83863fe31fbba07e76107ee1b020d2ca45",
+      "masterId": "exp-004-07",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-08.png",
+      "driveId": "1r8Zf327rcpUoOHNRLxXdRoFOxT-vn6lg",
+      "sourceSha256": "7a864bcb1b214b0a369c1bdad44c2d318315c51ed30afe8e051ee83b1bfc7657",
+      "masterId": "exp-004-08",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__4_logo-09.png",
+      "driveId": "1wHVT-T371RrJIvgpe1G-eLHPBPGO9MKH",
+      "sourceSha256": "661c8611cb1c4c875691ebf8d0db9b6d560b550e71ac2e4016d96134c558192c",
+      "masterId": "exp-004-09",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-004-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-004-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-01.png",
+      "driveId": "1CSdH7MdcE5z-mUHIMoRwr72yw2BboD9c",
+      "sourceSha256": "ed331b341d8e0ae13504ce6f331de5c2a015e0af5c0fc698d5cf104cfcbf17c3",
+      "masterId": "exp-005-01",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-005-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-005-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-02.png",
+      "driveId": "19Mgd-iX4rDiuc-7j_23n7zqbL-VJLRyl",
+      "sourceSha256": "e26db7fc45ef0208435a07c8164f7448c487db709a1bac907fbac8ecc18fc18f",
+      "masterId": "exp-005-02",
+      "masterSvg": "04-desain/variasi-svg/batch-06/exp-005-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-06/exp-005-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-03.png",
+      "driveId": "14xxWeNkW0azeMTcuoqXdQ-LgJ-hQLLLM",
+      "sourceSha256": "6e4902d593381f55b9a85f007eda20b262cd044054a8512b5ef0d689fe52e514",
+      "masterId": "exp-005-03",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-04.png",
+      "driveId": "12E4Q-7YRcT4nBocnrWIy2g4JKRI6yPdE",
+      "sourceSha256": "276892094954e1ffafedc047bd53dd472eb69db096061b4d3f061462ec290c36",
+      "masterId": "exp-005-04",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-05.png",
+      "driveId": "1jtMkURAPn8fmU57bdQF-e1ABoK9i2Rxc",
+      "sourceSha256": "98fc804ff6dea612d4fce02edc4a73b528880703f6bc45bad059a05d2ce08d0d",
+      "masterId": "exp-005-05",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-06.png",
+      "driveId": "1qqtOmegsSN3dicaqU32iyQaYhWM7COQn",
+      "sourceSha256": "294d3e21b69a6b40827d00638f6a818a7d6a7fc09a11cbf42bbb1f4ae7d0e2b0",
+      "masterId": "exp-005-06",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-07.png",
+      "driveId": "14-2LwInxBQ6wGEnBtF1Ke4AaJvhHoKZ0",
+      "sourceSha256": "32618b587807ea19ee3fb2e2e679a46eb0a6a0683f58570257f76fa845c2a2e7",
+      "masterId": "exp-005-07",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-08.png",
+      "driveId": "1VoT82KZhScDQgsxMqJCxfe1mqziODB50",
+      "sourceSha256": "db4a6ba1c9000915b03424f452eb715e67e1d1d2cdc3016dfb933da9764875eb",
+      "masterId": "exp-005-08",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-09.png",
+      "driveId": "1niO7vAekIZ0KOFaWTQRjRxK-FguJ2LPx",
+      "sourceSha256": "a48d4cdc52bd1e711e27570bd042190b73bdd205e2cfcf0a5504c22dbe3c2b9a",
+      "masterId": "exp-005-09",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-005-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-005-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-01.png",
+      "driveId": "1DcokNgmB1R8X3RFwleC_TJV0UkvFuP-e",
+      "sourceSha256": "150b0365f5dddc7e25ea26e62fa305d08f2a328bd3ab7b216431ba2f54010bae",
+      "masterId": "exp-006-01",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-006-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-006-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-02.png",
+      "driveId": "1vd_yxHJ2jIIxKBn1rHI0B5pU9rAY5Iss",
+      "sourceSha256": "a30f4e8309275d2f7105a0c5c45df0310485ab1d2f24ec1d4da269c2c95c3755",
+      "masterId": "exp-006-02",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-006-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-006-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-03.png",
+      "driveId": "1PkPf8uOf2G5S6fgAiNEDG6yXJOjoxtHD",
+      "sourceSha256": "c247393370391ab1ccbff0215dbf85edc3b09c35abf25b06fafbe68130007581",
+      "masterId": "exp-006-03",
+      "masterSvg": "04-desain/variasi-svg/batch-07/exp-006-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-07/exp-006-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-04.png",
+      "driveId": "19m471sEP04wpYazAihe4Zu84BuBGpvFo",
+      "sourceSha256": "dec65e3d497f20f338031669b77662a8bf15b30eed627d05bbaa5be168e2b88e",
+      "masterId": "exp-006-04",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-006-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-006-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-05.png",
+      "driveId": "1N7jgQ3oUZya_suL12CwsVXhI_GD5UAWL",
+      "sourceSha256": "82435ab38a31e16d2f5100a3952d5ce2426de60469500918c430aa1d09d0a4c3",
+      "masterId": "exp-006-05",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-006-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-006-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-06.png",
+      "driveId": "1vvfCR7fODZkqLqjb1_WQRyvFlcHKg6TA",
+      "sourceSha256": "9f80d95fe6918670d3abce3a401e19e865129a86bb4b2790c7c6a3b104257de8",
+      "masterId": "exp-006-06",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-006-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-006-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-07.png",
+      "driveId": "189sXjpjuPHqxsm1sNE6cIjB5tyJbKLQX",
+      "sourceSha256": "0611a1117cd72ef2509ca6c93773a9b8a98aba522aa7d36befae501f938422bb",
+      "masterId": "exp-006-07",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-006-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-006-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-08.png",
+      "driveId": "1pvs8MeutZGKk9ZTAjUbqDyr-HZnt1huD",
+      "sourceSha256": "90008cd7d9650696ca9ab2df98731b47e2ddf7a325076cfa0b6725b2fe7ff668",
+      "masterId": "exp-006-08",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-006-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-006-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__6_logo-09.png",
+      "driveId": "1eBaYQrQoNK9zVehmlOSO5ojsQA1a5zKv",
+      "sourceSha256": "c8616acb8386c5153b78ebcf5a7a7e78deab228e9b21f0ce740189df8dd0d31c",
+      "masterId": "exp-006-09",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-006-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-006-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-01.png",
+      "driveId": "1doXnUt2mCKeHh9GyA1h2IdU1zAovEy3W",
+      "sourceSha256": "cb6f07d4054b6db32f6582c01dc4a6a08d0874aa29224f1a7ff07878a9e490de",
+      "masterId": "exp-007-01",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-007-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-007-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-02.png",
+      "driveId": "1QJ4nqdx7UMM6bdJqwSzss96N0sQ3iLyb",
+      "sourceSha256": "a562e70b7d5a6d258ebb59c78d253b6f5add643513b3340fad00005571429d35",
+      "masterId": "exp-007-02",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-007-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-007-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-03.png",
+      "driveId": "1oqY2NdKkqAKOm5UzPTGhnF1nHDfjFxQ2",
+      "sourceSha256": "ac5c5b775669844d13143b9a2bd77a5dada2ce4f71bb07a9c3b0fb0181098564",
+      "masterId": "exp-007-03",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-007-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-007-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-04.png",
+      "driveId": "1RwW_VUtWFXyravok5kVSaQ7sch2Zl_uu",
+      "sourceSha256": "77d5da72b7efd6ec182a672e5d654854daf2c3e2e4372fcb4348d7df4890475f",
+      "masterId": "exp-007-04",
+      "masterSvg": "04-desain/variasi-svg/batch-08/exp-007-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-08/exp-007-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-05.png",
+      "driveId": "1lbgt2928yZ7LyQ7SbkPLwCaBHTc9eU2Y",
+      "sourceSha256": "2152d6b746a680e7a93a54e56889087cfa9993784e07b91543576ccaf8fbdd1f",
+      "masterId": "exp-007-05",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-007-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-007-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-06.png",
+      "driveId": "1PEOGcbILXeFX5dvq7Rv-86KuGg_TBdvN",
+      "sourceSha256": "e7cf26f76020b15193d3a8092e1667c536a57c95ea1e3858bb8ebf98165bd317",
+      "masterId": "exp-007-06",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-007-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-007-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-07.png",
+      "driveId": "1OnJiZmS_oXm7bD3NaQZGsavzdJeap4mz",
+      "sourceSha256": "bfb48a67d4d4866858cc7f9e28212311319faa621d3da6af66f0bb02d1cf574b",
+      "masterId": "exp-007-07",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-007-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-007-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-08.png",
+      "driveId": "1BxJm0b-fT86wRA-St8-WeEwVi7M-SMmI",
+      "sourceSha256": "d3a9ce9996f67ded29f95d116ef21da700efa51cc653f67163a203924d007b36",
+      "masterId": "exp-007-08",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-007-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-007-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-09.png",
+      "driveId": "1KybQPyuoZ3O0Ekg3pHcYEEtUXKKnd7Wt",
+      "sourceSha256": "7bdab0f5bcdbc7ac7d993f3771bc5d1daaf5d027865e859b8db0aab01a67eb70",
+      "masterId": "exp-007-09",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-007-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-007-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-01.png",
+      "driveId": "1QPyQQx8jzSKMG54U3lX4AosmDJUG3Y2-",
+      "sourceSha256": "0570c6a435b5c0c84108968be3a1723975b6aff76257ab56a5ba80fd345b52c8",
+      "masterId": "exp-008-01",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-008-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-008-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-02.png",
+      "driveId": "1m-e--RRIIiKexH5pperWUso3t1t-SUc7",
+      "sourceSha256": "c05aad68f42d198daa27f2f833b8f18e496ee9ce104807c2e454d9fffcbc462f",
+      "masterId": "exp-008-02",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-008-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-008-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-03.png",
+      "driveId": "1qEy06RdMcTqUu9pbWRp00bzyaP73J9xu",
+      "sourceSha256": "c735f24eafab69c3e0b772eb2a1d666c3238d11a9b4050ca05d0207b6c3dcb70",
+      "masterId": "exp-008-03",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-008-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-008-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-04.png",
+      "driveId": "1fnEMGIDpQ1volPMBRtGKo99BIWR-xgk3",
+      "sourceSha256": "bbb79d8e5ce980fbdc89c94e6113bea192cb133ccebf47251328b8ebe9357625",
+      "masterId": "exp-008-04",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-008-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-008-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-05.png",
+      "driveId": "11KMw9ROqpyck_Uui80bpNpbKQL6B1H_q",
+      "sourceSha256": "383d81da9529424fdc89d4fe281eb1c955c6268d9ba7a2dcdbf2e1ffdb0c538b",
+      "masterId": "exp-008-05",
+      "masterSvg": "04-desain/variasi-svg/batch-09/exp-008-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-09/exp-008-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-06.png",
+      "driveId": "1zGBKyxtlAbrPvabLD-kyIV_cahRR-cR0",
+      "sourceSha256": "ce3eec6089f7b3dac76c0dc91b546cf7022258147860403b2d0cde07c58f5a97",
+      "masterId": "exp-008-06",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-07.png",
+      "driveId": "1hMEMFmgJuEntc8WUcug5ncVjiOamwJps",
+      "sourceSha256": "cddfa32051db320eea649ace29a11c2cb09196403bb0ec9a2ec76bab4efbe3eb",
+      "masterId": "exp-008-07",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-08.png",
+      "driveId": "1dNQlnw8yZwwOKJlzyOjTmt7Q4w5Xubkj",
+      "sourceSha256": "fdabb75824315834f6592d1f18f0cc48beb33f86d9d2f8c2f2c4845b6f9b9d10",
+      "masterId": "exp-008-08",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__8_logo-09.png",
+      "driveId": "1JhlyJ4_T3oLckmwk7bYpQWfyZEk9ne2x",
+      "sourceSha256": "26bacdf159f26100113a47a8f294fea3f2a8e84c4010c89a12c71b7d4bf741ff",
+      "masterId": "exp-008-09",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-008-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-008-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-01.png",
+      "driveId": "16S-yDaTzA4MzAVt1RXZb-b2XCKnolvP2",
+      "sourceSha256": "8d9576733c926ec97dbdfa97241a9f77bd4eabb9346fbd2c5dd3c6313bbd150c",
+      "masterId": "exp-009-01",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-02.png",
+      "driveId": "136dosuBYJ9SAH9PeABI0-5bvy07znHsL",
+      "sourceSha256": "c84b3027d88946188111ff3a593469911277e29276ec31fd86b3ca407913814d",
+      "masterId": "exp-009-02",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-03.png",
+      "driveId": "1AvxyBGvC49H4GaOL1w1Mm0kK-lk8k0X5",
+      "sourceSha256": "8c37998fbc66f89a91a439b69aa71263e922b91b77f6b555940317662c4d161b",
+      "masterId": "exp-009-03",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-04.png",
+      "driveId": "1gxaUQ_f_FbDtwbmqubJE2WzIdJp7iQTM",
+      "sourceSha256": "985503c9ea2e1bf7266cd9c5a794ba98cd4989a2a637b075f8a7f9561076a748",
+      "masterId": "exp-009-04",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-05.png",
+      "driveId": "1d5l7x5-OJPxyIe595QXTBlP8EP5ZZKdz",
+      "sourceSha256": "c159193d1b29291691dcb000791e93991ce31c3f3760efb312da405b1abc85ef",
+      "masterId": "exp-009-05",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-06.png",
+      "driveId": "1o4-Dg-aePnZaLGsv8rC2IazmDP8Hf2tq",
+      "sourceSha256": "061c417da6c5672c764bd88e8c17cbeb860fd3b94ab656f8c893cef0ddb9fbe6",
+      "masterId": "exp-009-06",
+      "masterSvg": "04-desain/variasi-svg/batch-10/exp-009-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-10/exp-009-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-07.png",
+      "driveId": "1ydRKm84dRasVu5vG99RKpJDOigYZsKKm",
+      "sourceSha256": "63f70a798c61397aa43576ef5bb943c5092d0c575e9b4ba1a9bafa04f6ea4214",
+      "masterId": "exp-009-07",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-009-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-009-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-08.png",
+      "driveId": "11NwLOVIsbHuXbj9mULSezJFUzBvXfbAt",
+      "sourceSha256": "5eea1847c732edbfe226c96d0801d160a00c88384b976df759086e8afe68efe6",
+      "masterId": "exp-009-08",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-009-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-009-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_berisi__9_logo-09.png",
+      "driveId": "1GY7t6wZK_OogYKpWsZZJ5JI6wNw-8HOX",
+      "sourceSha256": "284ad4a968e54b9654525e7ca66f684443dd26dd0bac324abbf431f2eb278496",
+      "masterId": "exp-009-09",
+      "masterSvg": "04-desain/variasi-svg/batch-11/exp-009-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-11/exp-009-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-01.png",
+      "driveId": "16WMOaoo08h4_Rr9GgJv-bW4gRGb29vS7",
+      "sourceSha256": "53bee12c2970ab79c70b0b088e0cf9ad7ec6f9fa2dcdb2a0541bfc14073df080",
+      "masterId": "exp-rasio-010-01",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-02.png",
+      "driveId": "1B38TCvim5lKoZKNOQgwl1VlPMRdOGavf",
+      "sourceSha256": "0c44a45cde7881d08288b31bac58c6138a00c16b323b60c07d31afd4acab3959",
+      "masterId": "exp-rasio-010-02",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-03.png",
+      "driveId": "1iHk6cnEdTEpzySgMP_FY-cidL1Wu6l1H",
+      "sourceSha256": "f52e65bbdf4a4b0d9f1ab4ec2e22ef17a8a42e2726cd7cf0f9cc76ef1fda58e6",
+      "masterId": "exp-rasio-010-03",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-04.png",
+      "driveId": "1frZrmAnMorof7GvsDLgTvAFM67Ft73Il",
+      "sourceSha256": "72cd8443f13ecf0b78dda94a5f7da5538f3860ebdf2bed1d103ed38cf94554a5",
+      "masterId": "exp-rasio-010-04",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-05.png",
+      "driveId": "1TWhKFSKPOwHzlrkVjYIEuNhG-eafnXs3",
+      "sourceSha256": "cbee890785b40d8b131cb21d86db9764acecc48c3a2ac4b9b595b88cc357901c",
+      "masterId": "exp-rasio-010-05",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-06.png",
+      "driveId": "1KhqJ9KQzSBm6b-1HYzYiI_Mv_-E4jXks",
+      "sourceSha256": "4494e67c90437eaad942bac0aa78aadaa128bdb78c5345ecac8ad803f7730126",
+      "masterId": "exp-rasio-010-06",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-07.png",
+      "driveId": "1ycgAv2pynC7npxgKabkuBJb9aOGzrqWp",
+      "sourceSha256": "c652175dd34f4dea9226faf536223d82ce053cb5a43ee927d93702f7540f57f3",
+      "masterId": "exp-rasio-010-07",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-08.png",
+      "driveId": "1q0VCGMHoIy_HgcsX3Wik8wDR-1fShkZu",
+      "sourceSha256": "38393820c47de00c25a6adadd15896cd7c211486803aaf8d4952d36d95e98238",
+      "masterId": "exp-rasio-010-08",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-09.png",
+      "driveId": "1t4HS_pvtArvUygUQGkA1RzHsBqo1zsZF",
+      "sourceSha256": "d8534df9c572e053b3eeeb5fcdb99c6747d62a6fbfd4a30f37c7ab8baa95e53e",
+      "masterId": "exp-rasio-010-09",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-010-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-010-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-01.png",
+      "driveId": "14bm52hBkq5aWN9vOBZUOLhoHmaDmIsva",
+      "sourceSha256": "251d1fa7cf23477d1344cb81745f49e1097112c05ccc6559c572f7445713c75a",
+      "masterId": "exp-rasio-011-01",
+      "masterSvg": "04-desain/variasi-svg/batch-32/exp-rasio-011-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-32/exp-rasio-011-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-02.png",
+      "driveId": "1WI7iFI5tmcUAfb9FUbWD-2UughZMhXs5",
+      "sourceSha256": "33840e0ab62d73aa3f8675c8a411b8b7646cbb116d738002eb4ea6ea3d09a2ec",
+      "masterId": "exp-rasio-011-02",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-03.png",
+      "driveId": "1HT2rSkT_ri-N5U6ks71SchPC5TPPHXwm",
+      "sourceSha256": "a8cf96588c88925b652586fab61ff2c5fe4ab8725b6592aea032c454f714e95b",
+      "masterId": "exp-rasio-011-03",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-04.png",
+      "driveId": "1pAku5X9Z_vNp0ybUsrbnl4kf1pJzAWNe",
+      "sourceSha256": "25712bd25507ad9c103fd300c8c634fc64d9951a520c30a4139bd1c3237098a5",
+      "masterId": "exp-rasio-011-04",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-05.png",
+      "driveId": "1LT28Tt8Tpsepxnm7171TI5uWLLP3-nt3",
+      "sourceSha256": "85e28fb3de8e4febc0738ba2a6f46845f8537f7ca71a5168bc504eecbd944787",
+      "masterId": "exp-rasio-011-05",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-06.png",
+      "driveId": "1_v7ldI8QiP9lan5ewg1YCyW__5XXlcv7",
+      "sourceSha256": "b41a7a16605d5ac37143c7c07b824940fbf775b6a99979322087d4409fdabd6a",
+      "masterId": "exp-rasio-011-06",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-07.png",
+      "driveId": "1MzDABSSduDjPimNDb_luDt10vpsKiOyX",
+      "sourceSha256": "939a8220afdc86530d63624460f7c6f908cc7fe8789e3986c95abc9065a1b79e",
+      "masterId": "exp-rasio-011-07",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-08.png",
+      "driveId": "13hmmjybuJkqmLlIkP23KBZ22W_NQd8hO",
+      "sourceSha256": "c7241e958c654395b3cb232e1d4f7ceeeece4282a508f8e7fdae6ac2971cfeb8",
+      "masterId": "exp-rasio-011-08",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-09.png",
+      "driveId": "1GstP2yQ7-hfLpEsUXZeyTVmY0LDuieoE",
+      "sourceSha256": "7502d9d2055ee98e6c413bc951b03d617a4e20c576a9f195f061c6198f495bdf",
+      "masterId": "exp-rasio-011-09",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-011-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-011-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-01.png",
+      "driveId": "1_vxzjzMgpiAxxzO04dAzXZdfGP64l4Mz",
+      "sourceSha256": "c71d7ae329b73ff7378b1177c887fe38e8f3a298d0fac264628b43763a464ec5",
+      "masterId": "exp-rasio-012-01",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-012-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-012-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-02.png",
+      "driveId": "1u4G-lLSONO0uZ6wkTSNSYvXVysAFIJC9",
+      "sourceSha256": "0df1f8d1b4f9ca5b30755d92363b7ecb45d55077dfebe7c04591709e4bb963b9",
+      "masterId": "exp-rasio-012-02",
+      "masterSvg": "04-desain/variasi-svg/batch-33/exp-rasio-012-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-33/exp-rasio-012-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-03.png",
+      "driveId": "1J82ZEWeJScHx6IDKYioxNtgYKjNNOiSJ",
+      "sourceSha256": "864dde612e3496547af5a0c55329bdb78669163a85083fc32c67d445cbdfbda5",
+      "masterId": "exp-rasio-012-03",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-04.png",
+      "driveId": "1uN8VqVlrTLJOJfltvPDgUhd8hDRsF8eW",
+      "sourceSha256": "a25c8efb9ae99f1c1c3ef83d40b202f664b2163aaeb3743372723453d00b8082",
+      "masterId": "exp-rasio-012-04",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-05.png",
+      "driveId": "1T3t0fFRkj5Lso2TnVpliNbaB7Lsbyjvv",
+      "sourceSha256": "7fe2548eaf47c38de401333924cc24530d4dc02e2714140de4f0166582291745",
+      "masterId": "exp-rasio-012-05",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-06.png",
+      "driveId": "1mgSJPNSnrP0Vv_atqs9YapXKVptMQDJ4",
+      "sourceSha256": "697936b1b434ecba3df66b2fb718d393b628e69e8b797711001b83b97f14f1d7",
+      "masterId": "exp-rasio-012-06",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-07.png",
+      "driveId": "1zG1EZsff00gC-t_ERHnHCUNKTOP43GI8",
+      "sourceSha256": "2cf0110879f736e05c829cbe5876cbe7e5283f35dd3b1d3fb67ec4d537eacd55",
+      "masterId": "exp-rasio-012-07",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-08.png",
+      "driveId": "1vlIkOtfHVGODjukyc6P3zfS8BXaREHqo",
+      "sourceSha256": "103ee784284956726b6f17e2c6822555adb382a42173c0eb792a775961e88e04",
+      "masterId": "exp-rasio-012-08",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-09.png",
+      "driveId": "1Tp2IjZ7shZ6ZwKsgFM0MIv2pz_a_aW-U",
+      "sourceSha256": "0be92cc2bf629b1082e1df44fd8f13ddd220c398d88b911d19563d140e4e06d8",
+      "masterId": "exp-rasio-012-09",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-012-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-012-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-01.png",
+      "driveId": "1PN6yNfiCHY_Dg81vs1fT7Jn_Xwdz_f5e",
+      "sourceSha256": "4198c59c5fd5d9f7188875e17d8b780a7cf5fd85ef2d1773e67a8346280867d2",
+      "masterId": "exp-rasio-013-01",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-013-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-013-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-02.png",
+      "driveId": "1pT-o7j2pzeTxTcXOB4Ja1N9TMiti6FLG",
+      "sourceSha256": "c8b11408590425b464aa70d06483f7b73481009db87ad7c12e715939647af9a3",
+      "masterId": "exp-rasio-013-02",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-013-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-013-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-03.png",
+      "driveId": "1L61gZJMMyQLdQekJcBaq5wmlbia02Jm3",
+      "sourceSha256": "6d26a52d0d59af8e141ba6742bf7e06311affb477c220197534253d8d366036c",
+      "masterId": "exp-rasio-013-03",
+      "masterSvg": "04-desain/variasi-svg/batch-34/exp-rasio-013-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-34/exp-rasio-013-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-04.png",
+      "driveId": "1WjYUUvVGETVFEc1yaM1Z6RBKV6yfcxRZ",
+      "sourceSha256": "1952dd4d01c478111ab8735bb4c16219de22a842c6b4c2729f23b02f6c685a82",
+      "masterId": "exp-rasio-013-04",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-013-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-013-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-05.png",
+      "driveId": "1lcpTuZwAn-jpiAKA7dUn1v7lRMSQzBt0",
+      "sourceSha256": "cf4cd2954acf30b572056b4e30640923db5ba674c90a5c184c42cc5de9c6639e",
+      "masterId": "exp-rasio-013-05",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-013-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-013-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-06.png",
+      "driveId": "1V-tE7604a7TNoTk_w0dMxcjBtXL_4jAy",
+      "sourceSha256": "7228a3112abd7ff4c0d55de4892ed94346a56da1149627d0f4ecbce7f149a6c8",
+      "masterId": "exp-rasio-013-06",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-013-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-013-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-07.png",
+      "driveId": "1mJUNHRRyZI-UcZskBSePGPes-sy5Rafa",
+      "sourceSha256": "cb389c9c4a2b33458f2879afd9ac7a68488b077011bdd1e228df86a3fa8fa5a7",
+      "masterId": "exp-rasio-013-07",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-013-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-013-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-08.png",
+      "driveId": "1Ujm4-P1C48kk3zVCXkJSwnMYE2g_S8Pr",
+      "sourceSha256": "2e04e252de648edc9eab0992822038bf3da721bb34a7944c30a24819299a0b5c",
+      "masterId": "exp-rasio-013-08",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-013-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-013-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-09.png",
+      "driveId": "1z3EQxzLummrwu9H8z6HPv9ZVRoE-fXfV",
+      "sourceSha256": "8fe56a9eb7f8c6d54cac40cbdcbe33082fa7330003813820fe6bb4506114cd45",
+      "masterId": "exp-rasio-013-09",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-013-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-013-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-01.png",
+      "driveId": "1n-ksGC4eD40d0lUJ-4NP6RPyPuVHycZJ",
+      "sourceSha256": "75c3aa387e5a814e52aeb83598e4d35f4e44184b4f545ede641f51f47c6f5604",
+      "masterId": "exp-rasio-014-01",
+      "masterSvg": "04-desain/variasi-svg/batch-14/exp-rasio-014-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-14/exp-rasio-014-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-02.png",
+      "driveId": "105Eh9PKuZNqKNCb9tQQ3m83oFWaCSdHK",
+      "sourceSha256": "b5c49e58df04b0fba30f2afc3f2bcd0929735951bc151b8f1840e5d27d082ce5",
+      "masterId": "exp-rasio-014-02",
+      "masterSvg": "04-desain/variasi-svg/batch-15/exp-rasio-014-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-15/exp-rasio-014-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-03.png",
+      "driveId": "1Uwh42PzP0kB7KJ4xPZEtjtDv0V1vjwIj",
+      "sourceSha256": "d74e7bade76b55032753a81319a10e34f7cce8ed9c051f82444a0718b46e400f",
+      "masterId": "exp-rasio-014-03",
+      "masterSvg": "04-desain/variasi-svg/batch-16/exp-rasio-014-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-16/exp-rasio-014-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-04.png",
+      "driveId": "14HO41gyDnP7vos7NWt2DkTRe99NXFaWr",
+      "sourceSha256": "b8bab664551fcdfae91f72b559855cfdefba81ea9e94c4e48eb4875d97d513db",
+      "masterId": "exp-rasio-014-04",
+      "masterSvg": "04-desain/variasi-svg/batch-17/exp-rasio-014-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-17/exp-rasio-014-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-05.png",
+      "driveId": "1L_NtqHqtUgMmNTpkscFjkO8FG4BCeCV5",
+      "sourceSha256": "db90b1d825542c106b8021c6a4596bc111af8a6b09d7b574d0c1458a9931aa90",
+      "masterId": "exp-rasio-014-05",
+      "masterSvg": "04-desain/variasi-svg/batch-18/exp-rasio-014-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-18/exp-rasio-014-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-06.png",
+      "driveId": "1_fPHHoyXK0c5ce6Wcf4Di7HfyMBhgAXJ",
+      "sourceSha256": "91f04cea732219552ec5e1e127bcbd2a4e4523d5841a06be2368367d3198793e",
+      "masterId": "exp-rasio-014-06",
+      "masterSvg": "04-desain/variasi-svg/batch-19/exp-rasio-014-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-19/exp-rasio-014-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-07.png",
+      "driveId": "14-G3H6Wsc9IpP7mkksqOWhpFOSgKMlHY",
+      "sourceSha256": "9b138546c8790363dd9e05a0d4c65e43a899de415b34bf7fc366f7612963e22e",
+      "masterId": "exp-rasio-014-07",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-014-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-014-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-08.png",
+      "driveId": "1dJfyEqxqJo4Sc1wfD7ttOKsImNCQdZhP",
+      "sourceSha256": "1a5046105cfd5b04315b5cc776991cb388f1ea4b8d2278a5aa8aaeb33c1f27a7",
+      "masterId": "exp-rasio-014-08",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-014-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-014-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-09.png",
+      "driveId": "1bPRatIvT88fomQXOHu6dtUWdgwUqXHip",
+      "sourceSha256": "f11198e46ebdc2f024171531f1e0190cfe5436ad47d35cdafdb2c108cd9881d9",
+      "masterId": "exp-rasio-014-09",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-014-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-014-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-01.png",
+      "driveId": "13uVI4MP47HyMdwE0ZGGs53PB34fqdRLy",
+      "sourceSha256": "b1b8a65a28e7bd770baaf4cfca7184680405101006f535e881bf6cb0e71f5e29",
+      "masterId": "exp-rasio-015-01",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-02.png",
+      "driveId": "1ROE2IoOtHLIiEINWIH8-FE-4OCA9vASw",
+      "sourceSha256": "d4e863e560f9e8620545d4d703f251567f93be90260f6fa1e45ece7d34574687",
+      "masterId": "exp-rasio-015-02",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-03.png",
+      "driveId": "10jpeM3P6flHrmjyZQLaHzMCzLjcNPSXw",
+      "sourceSha256": "87ad978c537af68d553b55a01628cbfb67e8a15f1bfd8b67a59026294507ed61",
+      "masterId": "exp-rasio-015-03",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-04.png",
+      "driveId": "1cW0UB2TeNGQsNTiSIrXXvG_PgeG7osMb",
+      "sourceSha256": "4d4fdf26756197cead583e8ff4630ea748a50a70a79fd97a6587227cb1fc7f10",
+      "masterId": "exp-rasio-015-04",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-05.png",
+      "driveId": "1xORNw-vJJPx_3HO9Rfn_nGl0vXNDVa6i",
+      "sourceSha256": "27697191ec239c4b0b087d7eedb899e8b8f6a8d6ec9304d7ee71f2015981d9d1",
+      "masterId": "exp-rasio-015-05",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-06.png",
+      "driveId": "17xnrid8PpjTtx6Fdt57BW4GDYx2nlHms",
+      "sourceSha256": "22d95f3f417d9a238981deba84f88e0a56ea88f541c1127df9dcaea190572a24",
+      "masterId": "exp-rasio-015-06",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-07.png",
+      "driveId": "1UL1aFMR-hrTSAoAynYChkJOUmpNhAlSB",
+      "sourceSha256": "ccee796566037d5dbca80e96ec8456335fde1cbf825ce355f6bf2396775c9ee0",
+      "masterId": "exp-rasio-015-07",
+      "masterSvg": "04-desain/variasi-svg/batch-20/exp-rasio-015-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-20/exp-rasio-015-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-08.png",
+      "driveId": "1OLxp2EoqcKoNdS6r23FZsiAEiR6yGs-w",
+      "sourceSha256": "4a368595241261d55050c98cdc385ea5dc2aa35d8abb7a55da17661d07b3f211",
+      "masterId": "exp-rasio-015-08",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-015-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-015-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-09.png",
+      "driveId": "1G5pb9IgCqr1nx30CvmZBXQRSP_7cfp74",
+      "sourceSha256": "3371f4bdd858e9edadb3aee9192b3de0d710feb825ea3b20d9afbbb54ce11300",
+      "masterId": "exp-rasio-015-09",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-015-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-015-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-01.png",
+      "driveId": "15pkdCudcrnuUQrce3BJGLwRT-jCsnqa9",
+      "sourceSha256": "427b162af3bdc1ad070c05b04c85188585de2ebf2836e438e3073061ef04e2a4",
+      "masterId": "exp-rasio-016-01",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-02.png",
+      "driveId": "1jEA9C9kxU6ky_FsSm51D0l5hJ2pZTpy1",
+      "sourceSha256": "01f410644942afcd1dd18267daa56e3929049d7a1409c56da628c6003cbed3cf",
+      "masterId": "exp-rasio-016-02",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-03.png",
+      "driveId": "1IQNIk2eFV0uFQK9vrqkecAOeKgprIM1S",
+      "sourceSha256": "51fd9d7a66eb83e47477fe876f76533aa598b44b88da2dbe32ce3b019bcf7ac2",
+      "masterId": "exp-rasio-016-03",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-04.png",
+      "driveId": "154eaFsIbi7k0zuNHQxJqh7cE6gkuGdF-",
+      "sourceSha256": "2caff0fc9005219270677b9b867921d445a39071226d7847412b5eaa42f9d3ea",
+      "masterId": "exp-rasio-016-04",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-05.png",
+      "driveId": "13WQfIXyrE8UgKMz_XgILMgMbzAXps0Dx",
+      "sourceSha256": "f0877ec1a3940f127b0fbc07f205c7ea53f37e37a02e621d7b5ee3e63a5ecbf8",
+      "masterId": "exp-rasio-016-05",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-06.png",
+      "driveId": "1r4n7RLJooN_oxY4QdFqXmdoh-E7ZfhnH",
+      "sourceSha256": "e012f3ea6ffbfc4a64b1f4326d838d68deb9113a25dde3d50a733ab28edc1ed4",
+      "masterId": "exp-rasio-016-06",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-07.png",
+      "driveId": "1nAEnq1lN5Zlx5KfcKjv5nRixDU_cS2y0",
+      "sourceSha256": "a463e4fdd484a689a3a81f740ec7fedb81ae4de7de1f2cc03e6516f1581fc3b6",
+      "masterId": "exp-rasio-016-07",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-08.png",
+      "driveId": "1wMkHCkTdsTV-uUu5vvPbtjuzv9qIitm0",
+      "sourceSha256": "ff4144133e92ffb061fec494eb2a634a4b6446ba3d548d1d14b233a732865609",
+      "masterId": "exp-rasio-016-08",
+      "masterSvg": "04-desain/variasi-svg/batch-21/exp-rasio-016-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-21/exp-rasio-016-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-09.png",
+      "driveId": "16GCfk7oF-b04hgiiWCiVCN1SKhaHcKo0",
+      "sourceSha256": "95a8a10b0edab337e655ffb309ccd7405e487ac6da748dcaa29e2e1d2118ce81",
+      "masterId": "exp-rasio-016-09",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-016-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-016-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-01.png",
+      "driveId": "12JOCvGTmojJ1jdsS2SKj4CiOj_0r7X7u",
+      "sourceSha256": "d9d6b9cb67dacdcffc55aa62d05f680326f73899b85ac6429a0c3673c04dc39b",
+      "masterId": "exp-rasio-017-01",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-02.png",
+      "driveId": "1uFWJT0nEAkA4gXHlvgw7b3inGUFeoQrG",
+      "sourceSha256": "d20cce75780e98ff35c71882b1f9a1296b398b7fa4999e2acbca4fc4960f0463",
+      "masterId": "exp-rasio-017-02",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-03.png",
+      "driveId": "1rSBxnAOyfSyqB_rNvB_FakYnjGdloavS",
+      "sourceSha256": "86aed6d57e6f01896d915697aa4d30e0febe0051698ffe0d5a0cbfe6e0d9bd3d",
+      "masterId": "exp-rasio-017-03",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-04.png",
+      "driveId": "17YGrpLz42aiIgpIw8FzaIKbcyiIm_vVa",
+      "sourceSha256": "e6bc274d988ff1685018fb6e0f353feea3f5fbeffbd786ef717fa4a767cbea32",
+      "masterId": "exp-rasio-017-04",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-05.png",
+      "driveId": "1T9kFXA2EIxSJ6n4jbgwZ5dawzEKTsnNb",
+      "sourceSha256": "ba57fcf4d65255903946f68e611c309de12c3fc81ed88a5b01c9b0ad00caf3a5",
+      "masterId": "exp-rasio-017-05",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-06.png",
+      "driveId": "190ZRvBDOkQId-NehOva1zJ4C4WoQ1Vs5",
+      "sourceSha256": "cd540f25b8d9a106a1f7320b13a13ab02bf2bcc50bce7381a8cd4cdec01a8975",
+      "masterId": "exp-rasio-017-06",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-07.png",
+      "driveId": "1zlTQtqdMOi3KhWewhd1PCVIJFAhF0i2T",
+      "sourceSha256": "9a48216c4d2c7c044fbe76ace844850920fbe8c229002668c4bd9a533ae90276",
+      "masterId": "exp-rasio-017-07",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-08.png",
+      "driveId": "1GPqiEThw53yRLLDp8iYWry-xvAe-cd6U",
+      "sourceSha256": "e9767f513c2e09538d5500753f3afbc5b8e146de7a2100e628b64c670c3f7808",
+      "masterId": "exp-rasio-017-08",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-09.png",
+      "driveId": "1PPYuY_I3rlmciO9M4z94_KwQaLpwhRpZ",
+      "sourceSha256": "e2819ca96d30c98730b1de5a88793fd7d3a4b2356efbc7350345f9c12f0f0039",
+      "masterId": "exp-rasio-017-09",
+      "masterSvg": "04-desain/variasi-svg/batch-22/exp-rasio-017-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-22/exp-rasio-017-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-01.png",
+      "driveId": "1rKsC7GztAyscVjtegS1gwyAV6ehQ3iQz",
+      "sourceSha256": "6b90c708ab89ca3e5645ea7093234a2afecbf31c82e0eaaf4ef65b79e9ad0893",
+      "masterId": "exp-rasio-018-01",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-02.png",
+      "driveId": "1wdsblgFKpuF-kQJgpMJFgh-H0biVqn76",
+      "sourceSha256": "02898c1bda2962a64ff37fefcd18996550f05cb858eb9a90d5d29fa3db189bff",
+      "masterId": "exp-rasio-018-02",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-03.png",
+      "driveId": "1MNviexi6u5CV7yQQAhtiBevG_V0-gcUp",
+      "sourceSha256": "86f5c2ec9a1a72d34763d11961ca609c1fd6808dba9bfbde2b9c22da02d94a94",
+      "masterId": "exp-rasio-018-03",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-04.png",
+      "driveId": "1U4dBsY-_NAHrclh6NEEDejz0qprnhBtm",
+      "sourceSha256": "2601fd55eb7f9fc474711b6530b4fd7699107aeb1dfb50a6cd40b0806861d311",
+      "masterId": "exp-rasio-018-04",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-05.png",
+      "driveId": "18jm2HoZjxM0cIS9Vjm19bClMfibr7LDb",
+      "sourceSha256": "bbb8eb7a148cb71ab120501cafb649bbf006c3eed22db21bff585d00c68071df",
+      "masterId": "exp-rasio-018-05",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-06.png",
+      "driveId": "1_dk4bMZOxZnYpYbwoaNNLTm_T9ndr_xd",
+      "sourceSha256": "31e96dd6d6c734de0295c2b67e1295c2b6e5daf86c0beae74b3bd75baacbe987",
+      "masterId": "exp-rasio-018-06",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-07.png",
+      "driveId": "1U29KLo7zknYyu-sxPk8riNH23vavY7Uk",
+      "sourceSha256": "ab52ef6ac5ebbb03046743474e98394f9487c34779a82845da3caee34bff9bb6",
+      "masterId": "exp-rasio-018-07",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-08.png",
+      "driveId": "1jl7hCin1U15gozLGQ17KrinmNYrQm3HC",
+      "sourceSha256": "d8374c64ec957476a48685371ecea2cd3a41bdfbf557a5c8aad2cf8910398f5d",
+      "masterId": "exp-rasio-018-08",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_18_logo-09.png",
+      "driveId": "1Zv2zVmlZi91j12I2o5khs0KfICU7jN7R",
+      "sourceSha256": "895b2c9d9c0d037042f9b8643d7cd730f35a6c9f74006c581c61f3ff3ece191e",
+      "masterId": "exp-rasio-018-09",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-018-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-018-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-01.png",
+      "driveId": "1tdJxWeEWS3Qfgwt4J2IRb2srC_Oe_cOh",
+      "sourceSha256": "46866e1f6552f4f5dc1aaeb12b015738b11b3ddd702e31bce1b3624ed7fe4e3a",
+      "masterId": "exp-rasio-001-01",
+      "masterSvg": "04-desain/variasi-svg/batch-23/exp-rasio-001-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-23/exp-rasio-001-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-02.png",
+      "driveId": "1_2jEZ697BPdmyn10coLExIClJ0YzAqLQ",
+      "sourceSha256": "912eb781f60aa0c8b40dd3fdc5a3e8b63bf8ccd2dbcf07b7fb58211314fea94b",
+      "masterId": "exp-rasio-001-02",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-03.png",
+      "driveId": "1XMd8kjP5dmj9HqwmXLdlXijRKe6CeTUZ",
+      "sourceSha256": "a11e5ef358304e5b596d3f6afc338d243b0d82912d9f4bdb1bde718734679ff8",
+      "masterId": "exp-rasio-001-03",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-04.png",
+      "driveId": "1q_viFpmjEA1J1da5AoatPERmaZ9agSCE",
+      "sourceSha256": "9fa4d1f28ea5875f20de5cf0411d099537e28b7e09e81f639aee8b5ec6d4df75",
+      "masterId": "exp-rasio-001-04",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-05.png",
+      "driveId": "1_rUT7KoThQrmOk0n--PSQJ7RN3n1snt2",
+      "sourceSha256": "7dc36e91c6fa06229c1445b246030c85658566fde1d9dfb0c8ef2c91ce315a8b",
+      "masterId": "exp-rasio-001-05",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-06.png",
+      "driveId": "1quS4z_0kCP6XxlqDKbajs4vAZxwVW6xe",
+      "sourceSha256": "92f37c9a08c0ea9fd3bf125f32ba5eb39aa471fd037da4020776bc339c8f3d08",
+      "masterId": "exp-rasio-001-06",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-07.png",
+      "driveId": "1DTAUXvrB_xzyPxLJR3mDIpuc0hN2Whkc",
+      "sourceSha256": "f1b3617a687f55e66b27103a785964e4573e911ce8e2b72f956eff2b2ae0dee5",
+      "masterId": "exp-rasio-001-07",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-08.png",
+      "driveId": "1MAa4EatzeGo_kVChj03Ug9DQC4FMurVL",
+      "sourceSha256": "4243652167275a464444f5130b1a8fb94057fb711d4c71b438c5624d4df694a1",
+      "masterId": "exp-rasio-001-08",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-09.png",
+      "driveId": "1b7HE54Oc6EHjGfBRRr663n2wYtLgELP6",
+      "sourceSha256": "65287e7dcfade3cd27e88d28ec56f61fb29d05b4609695dce3fc8cc70d51f9ed",
+      "masterId": "exp-rasio-001-09",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-001-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-001-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-01.png",
+      "driveId": "1LTopCP0o7ZQ_qUnjKZQ_OqmXGZk3gx0o",
+      "sourceSha256": "bc66d5afe851d47132bba3e6fb5de3a7ab8f1ab2dbb841ad12e68d84a3160410",
+      "masterId": "exp-rasio-002-01",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-002-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-002-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-02.png",
+      "driveId": "13N5wPZft78D24LORaZlnc5rS3uRFuTT3",
+      "sourceSha256": "0aece3ba73b40a4bd536f093fc47e594d8256e9bb679fcae20ebd6fca81f0084",
+      "masterId": "exp-rasio-002-02",
+      "masterSvg": "04-desain/variasi-svg/batch-24/exp-rasio-002-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-24/exp-rasio-002-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-03.png",
+      "driveId": "1GKWicTGrhyBuagWmZsVslrJzUcALovKA",
+      "sourceSha256": "f252ccd6e813d60c8757f269b753a6c65d40dff3bf9eb12c90090ec585b1441a",
+      "masterId": "exp-rasio-002-03",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-04.png",
+      "driveId": "15EByEzW-Z2iQJPeXJWbXD-6ZR1yhQo5C",
+      "sourceSha256": "65489208c6e2c25df2ea5c074c61ebd5126e730a732d2a2b4a797d7f55541763",
+      "masterId": "exp-rasio-002-04",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-05.png",
+      "driveId": "11qeDYWKaGUMhRcAk_kEPINOErfE0vyvl",
+      "sourceSha256": "809b336fdda381d8be468783d3ed85908754350553391a60c59f00129376978e",
+      "masterId": "exp-rasio-002-05",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-06.png",
+      "driveId": "1KCMtzhB_dyt0PNg2XJqy2NAuqCSRhxha",
+      "sourceSha256": "80bc53a6226ed4e5ccac1ab0d35010eae0563a2e1b305844289e054493504259",
+      "masterId": "exp-rasio-002-06",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-07.png",
+      "driveId": "1So9ugcKjn5s5kFYF68tj2hDZOkdpTYCr",
+      "sourceSha256": "26f98f8cdb0ae80146498c413267911d0bd37d579daa81c9067ebf834a819ada",
+      "masterId": "exp-rasio-002-07",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-08.png",
+      "driveId": "1xmlRNxXu2Xb51eJCBqZr8HmYVv3Wa2ed",
+      "sourceSha256": "e07dbf3c18e9b3b27821ac5665c15b60f4a91bd149b5bd1173a22682d7144d6c",
+      "masterId": "exp-rasio-002-08",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_2_logo-09.png",
+      "driveId": "1BCwVDJ9F76sAwzovgcLb0ugOMP_OtGMR",
+      "sourceSha256": "177ae05cfa27b15f4ec437a75d607390931c866a9876a3433ec108b2d34142c1",
+      "masterId": "exp-rasio-002-09",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-002-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-002-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-01.png",
+      "driveId": "1IduNtj0j8O8gz9h1P2F2mBEtKLa-uofH",
+      "sourceSha256": "d378ebd6a92edf468fcb48d40d94bc7556c1dbfd478f5e1d109d109a9274fe36",
+      "masterId": "exp-rasio-003-01",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-003-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-003-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-02.png",
+      "driveId": "14CsUR1in57bPe6yUIKSp3VFI-WUIx_vl",
+      "sourceSha256": "ebeba2c9b1a08f778d8ee9d119f391f2653687a0218a5ab61557a393c33466f7",
+      "masterId": "exp-rasio-003-02",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-003-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-003-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-03.png",
+      "driveId": "1v_CpCIV2MAwFeEk7iBlrsJH53flyQTfn",
+      "sourceSha256": "f249489c2618ba137a0338982c62b046c9b9e8c1d27b6924681409b6b61a6531",
+      "masterId": "exp-rasio-003-03",
+      "masterSvg": "04-desain/variasi-svg/batch-25/exp-rasio-003-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-25/exp-rasio-003-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-04.png",
+      "driveId": "1kYU5uNIhaEXPXhytZ1TVUZZfSKhIaikK",
+      "sourceSha256": "8f3d5d9c950241fecc13f55efd90ce2c1c4b58038bc182a65d6c644546391ba5",
+      "masterId": "exp-rasio-003-04",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-003-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-003-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-05.png",
+      "driveId": "1jynJzxsmgYcSf1WftIr5QKEV0h-ZIIen",
+      "sourceSha256": "cd5dc70f11ffaf66a63586067c3ff5cd1bd3af12ff71fbf95fbcd090400ab438",
+      "masterId": "exp-rasio-003-05",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-003-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-003-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-06.png",
+      "driveId": "1ErzoVR0kIsYQDUv41l97w3eqjc6gvErY",
+      "sourceSha256": "3bb6d62df7fdde02e70ad76eee9dbc672be661dae3f14daacd017309f252e894",
+      "masterId": "exp-rasio-003-06",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-003-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-003-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-07.png",
+      "driveId": "1JGcrdB37mZ8DSIedIOvWqEzvkbBca2Qg",
+      "sourceSha256": "0b3c133a9f1f7c8068191caf3c53d2cb2749921aef88bbb0b866178d806348ad",
+      "masterId": "exp-rasio-003-07",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-003-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-003-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-08.png",
+      "driveId": "1pwl87kIXzbOU938-idB6d7bYOoAOURBF",
+      "sourceSha256": "bbe335f8a4f08e6b6cea19ceb2a27b21b81dbacdd06b27874a7e7793cf9a772b",
+      "masterId": "exp-rasio-003-08",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-003-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-003-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_3_logo-09.png",
+      "driveId": "1brjyC4padurgCJPgz-cycwwDbB1DdBI-",
+      "sourceSha256": "a1d1399af2415e8c3233c591de5771be5dd5c27b1556ec0d0f1883e951bd3fdb",
+      "masterId": "exp-rasio-003-09",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-003-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-003-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-01.png",
+      "driveId": "1Auofz_4Tx8PkAMfYHsRL3zEm5y7yLpPG",
+      "sourceSha256": "6aee61d2d10df0ef14d2d6acf354aafb3e5e08f77667154bddf442394594182a",
+      "masterId": "exp-rasio-004-01",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-004-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-004-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-02.png",
+      "driveId": "1HAZygFMa5UQ6kZpj-Ua9sIAgVFuqYkAZ",
+      "sourceSha256": "708361de0d7bb9d3043b122ab89ecc6c9aa6a9144a639867b41795f0f92a2312",
+      "masterId": "exp-rasio-004-02",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-004-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-004-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-03.png",
+      "driveId": "1ez74IsR0XpQbuMuL1Cq0BxfZJ4xXq6wX",
+      "sourceSha256": "e4b02fdf7d0cd10e1b209d38ad1e4e27646ab42e1a9b2123b692f647ec9ad260",
+      "masterId": "exp-rasio-004-03",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-004-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-004-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-04.png",
+      "driveId": "1E4DjpQV3hT1iQfLYSL1b_xdGUAZFBPxN",
+      "sourceSha256": "9dc4800b2a3780928e466eb17b526da36905551ed78fed38d1b1a9890c840382",
+      "masterId": "exp-rasio-004-04",
+      "masterSvg": "04-desain/variasi-svg/batch-26/exp-rasio-004-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-26/exp-rasio-004-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-05.png",
+      "driveId": "1tz-QagibfBulVXXlt706GmUhvVFK7WlP",
+      "sourceSha256": "3cbb3386318aee184804e5cead3aabdcb0ca3b39f48dc25fb5ee8edaefef905d",
+      "masterId": "exp-rasio-004-05",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-004-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-004-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-06.png",
+      "driveId": "1s5Q8CjAPN-MppHhY41S5iuFCZP4KCK9a",
+      "sourceSha256": "54b6b426a8d83b55deac91dfb4575da53c578ff2f963a93eea2ada81186ce197",
+      "masterId": "exp-rasio-004-06",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-004-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-004-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-07.png",
+      "driveId": "1czw27ZoUHSikp7gfHUAogSSrCDIVFPJW",
+      "sourceSha256": "4f35edea0d8279754ae73980a29156386a2dd242dc8bcb2f85f1c6c6a9985d6e",
+      "masterId": "exp-rasio-004-07",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-004-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-004-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-08.png",
+      "driveId": "1nY3Os2cq4uh__BUXGPQK18tV6jZSwqI_",
+      "sourceSha256": "48dc408a05019fa73053beb74e866cdc7da6fc3b5c781c246a6016ed456089c5",
+      "masterId": "exp-rasio-004-08",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-004-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-004-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_4_logo-09.png",
+      "driveId": "1k3O23TrtabZ-wmd_LRSkfMysdW-nrJoi",
+      "sourceSha256": "d8d99f485f1d1e6bbf6ea777d7332363f97e0e51aa8ee9a943efec84493b4fe4",
+      "masterId": "exp-rasio-004-09",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-004-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-004-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-01.png",
+      "driveId": "1rPSRJoQq1gBVF03aCoTMIexl6SZ4Hw0O",
+      "sourceSha256": "4a1503921770b95a4450bcfe930effbc81310d1edec6802341b3e71cc3157e43",
+      "masterId": "exp-rasio-005-01",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-005-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-005-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-02.png",
+      "driveId": "1czQd3tb_Bs1OaQ_FDWPE-_LB8PPFsD9y",
+      "sourceSha256": "76e77cbf8a9818fe7d8248aa6aacfc89c75d0dc81cb6c664d7c3af04d33d7a4b",
+      "masterId": "exp-rasio-005-02",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-005-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-005-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-03.png",
+      "driveId": "1oNLbfpbE3ogb_8GQDxLyBRP9Dxupd-Yo",
+      "sourceSha256": "a8a322fee606e5e3a826cff42f3e485c7eb4daf41832569a7ec5e44537a57447",
+      "masterId": "exp-rasio-005-03",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-005-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-005-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-04.png",
+      "driveId": "1sRCUJ2uaeWd9jfgxiX1e7yEelVmWfyI0",
+      "sourceSha256": "24453d4b6b2a308bbab506795a3048a3e58724d44322de4bfeeffe23df2ba830",
+      "masterId": "exp-rasio-005-04",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-005-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-005-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-05.png",
+      "driveId": "19E-Wis4LICo1g9KuAyRUSQudiU1QFkD5",
+      "sourceSha256": "63bc70b4735e5ebfb89419258bfc5409fcc33d56fb0a0f13042a2dba0ca242f5",
+      "masterId": "exp-rasio-005-05",
+      "masterSvg": "04-desain/variasi-svg/batch-27/exp-rasio-005-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-27/exp-rasio-005-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-06.png",
+      "driveId": "13EiTGJO9jsfw-H4UdIokH_gQjf4K1Nwc",
+      "sourceSha256": "cc7e301be974ece59c3a75cd5c49f9b2206811563f7619cb8eba4b2e79c67111",
+      "masterId": "exp-rasio-005-06",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-005-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-005-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-07.png",
+      "driveId": "1Z-Xhye7nZKY_R4wmj9PDUa8FESgz1BS2",
+      "sourceSha256": "c4ff66f493fc987e160a409fb6ce55acbd0907ccf3159997533ca5298418723e",
+      "masterId": "exp-rasio-005-07",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-005-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-005-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-08.png",
+      "driveId": "1t23u7bjyWBV4FJzUOBmiavimdSrkp8Oc",
+      "sourceSha256": "e34d5dc104dc53c7b52f4721973c081b6741185020e5304601c8a2ad658d014b",
+      "masterId": "exp-rasio-005-08",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-005-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-005-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_5_logo-09.png",
+      "driveId": "1nGt-l1OUTFjIagaGFBtd41_WtF9CuDdM",
+      "sourceSha256": "7f0b1c9d113fdb34f7e23c7f0d1040c641235d98331c5d092ba7e96a299ec6ed",
+      "masterId": "exp-rasio-005-09",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-005-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-005-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-01.png",
+      "driveId": "14aX5uinc_xH7Z910tsXCddsn2FoXEL68",
+      "sourceSha256": "9db26d6ad39bda98a2b80d7be689c4b392428ba8d2ec4c1521cd4df928f62039",
+      "masterId": "exp-rasio-006-01",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-006-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-006-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-02.png",
+      "driveId": "141rRzJ-6yZyIzCBvWt0pZvoC7IvRJ0DO",
+      "sourceSha256": "f9d07af323e82c3735648c6909f59c59be253c45abb171e23fa0c46c6a44b3a0",
+      "masterId": "exp-rasio-006-02",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-006-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-006-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-03.png",
+      "driveId": "1yrTicVw7-kIPXHshVPg4XvHkUIROcfyE",
+      "sourceSha256": "47e5701d8aa27a11461baffcd9becfba4634afad0a9a5e14e2740045b0c21342",
+      "masterId": "exp-rasio-006-03",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-006-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-006-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-04.png",
+      "driveId": "1XjJhvF3Lci7yw86cT6uiPJt6Tl6Pdu8n",
+      "sourceSha256": "077d5b1d8962c514709102ed7f9571385f836427c7a8106a1606fc14c72e6ff8",
+      "masterId": "exp-rasio-006-04",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-006-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-006-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-05.png",
+      "driveId": "1TG-WunFAxhV7xFpmavHwrDwoNdzdd5Ns",
+      "sourceSha256": "4954131f8189b372cdfe9027de6448c1ece7c2aeb908e8808807614be12403f8",
+      "masterId": "exp-rasio-006-05",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-006-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-006-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-06.png",
+      "driveId": "1Yr0Hg4HdiYTD4Mm1KMoJdl8R1MVCC_88",
+      "sourceSha256": "31eaa905261f67be93ea0ed7bdde70b3cccdc39d1652d42db71f8f005ee4fa3b",
+      "masterId": "exp-rasio-006-06",
+      "masterSvg": "04-desain/variasi-svg/batch-28/exp-rasio-006-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-28/exp-rasio-006-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-07.png",
+      "driveId": "1Pvm5RTUB4x-MTHbaKT4oPCGG9O0pCto3",
+      "sourceSha256": "d5c9a14fc911cef53dc2deec6c6baf76aee85b9e11bd64fc6ad59e1257fa224f",
+      "masterId": "exp-rasio-006-07",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-006-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-006-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-08.png",
+      "driveId": "1P-ACDjIOPaCae0kPVnZNo2Q_Z6VLfoaC",
+      "sourceSha256": "f71ab8c1796ac6981b6900f090caad44065b998005cd6d3b5593dee685c8666e",
+      "masterId": "exp-rasio-006-08",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-006-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-006-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_6_logo-09.png",
+      "driveId": "1lFJkfG4TXl_ifav2bCT6oIbDmL9N2V2U",
+      "sourceSha256": "dd949057474fea6890b2f85598effed93afa5d9531af7c69a2d05269c3f67860",
+      "masterId": "exp-rasio-006-09",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-006-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-006-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-01.png",
+      "driveId": "17wg0oJFoai1TxvNs5Eud8Qfzn_uMuBl0",
+      "sourceSha256": "ba4507cb928ef4853a12266d072ad53e0dee3a0156ebc8374d31949674b26631",
+      "masterId": "exp-rasio-007-01",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-02.png",
+      "driveId": "10HwkaMIhRQ-VsRQx3FduPqlWOqQIP3NM",
+      "sourceSha256": "8b97b57b5d4fda7423478b303ea66ad657d77749549483a2de347d7df0d73fce",
+      "masterId": "exp-rasio-007-02",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-03.png",
+      "driveId": "1FCSeYcgD3jEnjTscKWSUH404oU6xFGg1",
+      "sourceSha256": "d3de1295ca71023d83c603ad06ad222934ad106c7e56714336603055e53412a2",
+      "masterId": "exp-rasio-007-03",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-04.png",
+      "driveId": "1vjHGruNUWRVuNNX61J4WcLqjMVXtyW4u",
+      "sourceSha256": "b70bf4f84cda47cc65fd32b86bda6f12fe84f508a4e866fbf7e2095328514aa2",
+      "masterId": "exp-rasio-007-04",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-05.png",
+      "driveId": "1fgu2mBhugKClg5dT3VmCg2aT2r4A1B5i",
+      "sourceSha256": "ac1a238f06f136182210fd4abcfeeb4134eef805fed32294e8b63119733355ba",
+      "masterId": "exp-rasio-007-05",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-06.png",
+      "driveId": "1jR0QaQHlR5yzUSQ7LhhYz374HqMTXZLy",
+      "sourceSha256": "3170dcd0b6ae8cfa18c560a6e864534e00cb348a83c1a21c73f2ad187cf7e49d",
+      "masterId": "exp-rasio-007-06",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-07.png",
+      "driveId": "1VaspDzRXc0HmiCkZyS4-T_rKuTCacjVS",
+      "sourceSha256": "02e958986fe58f0fd002ecc125e6360c21e2df6f017e482a54ac98cf09d397fc",
+      "masterId": "exp-rasio-007-07",
+      "masterSvg": "04-desain/variasi-svg/batch-29/exp-rasio-007-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-29/exp-rasio-007-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-08.png",
+      "driveId": "1XB-UCaBSorlRHf9PITw8GP3fXvXQkYGK",
+      "sourceSha256": "c303999c93ee29e7d4b15e269b507d4e659f4bd0e022757d6080d82b3e99d5f5",
+      "masterId": "exp-rasio-007-08",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-007-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-007-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_7_logo-09.png",
+      "driveId": "1nJcE6UvGAAPJcAzQ8D41jfECV3inwvto",
+      "sourceSha256": "b8fcbb0f0b29ddc4db068ab76727a66b001351982711f21d59a258222491076b",
+      "masterId": "exp-rasio-007-09",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-007-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-007-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-01.png",
+      "driveId": "1S5nXsVsN8nibZSHBpHyPeFJgE6M7cAtY",
+      "sourceSha256": "0cd55c2880a5251d6c688a773b7fa9c144e7eb2823c838c533ee3965832af2d9",
+      "masterId": "exp-rasio-008-01",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-02.png",
+      "driveId": "1t2xLw22OBw1GBxZYxOPX2jE-BdVG3zKP",
+      "sourceSha256": "56e0a751320268c9b72586caeb8a867c898f101bbc4d4d49ceda8389089b180e",
+      "masterId": "exp-rasio-008-02",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-03.png",
+      "driveId": "1X-hWfU-YA3VAoKMZ0QrRV_GNA6eOrbji",
+      "sourceSha256": "835dbb0137f78b901a634b0fb25056e32e60a978717d176d0c6034636851be0f",
+      "masterId": "exp-rasio-008-03",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-04.png",
+      "driveId": "1BDpyGESNKbr_GnTNqOCGiH24vW6lHdsG",
+      "sourceSha256": "e2fb74276983d7b108494c0899de9b420cffcdabeb8a01595b6103bc6a97eb4c",
+      "masterId": "exp-rasio-008-04",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-05.png",
+      "driveId": "1eI1hsQCZTsuvw0-6Nq7Axa4Te-8Rc4nl",
+      "sourceSha256": "80c67c3a5889c7727d5418973ccec42fb46de8ca4827d072c14331451fa188f2",
+      "masterId": "exp-rasio-008-05",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-06.png",
+      "driveId": "1_e_qbrL2wrTsv36vZ80cjhFSdz18R5k6",
+      "sourceSha256": "d8993064ef98c0d6912b227b225f2ed7e3620cdf1a6f48ab9b84b0caa50f2b13",
+      "masterId": "exp-rasio-008-06",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-07.png",
+      "driveId": "1WyAVOnbivmueILet05iYDb84eCfKUj94",
+      "sourceSha256": "81e2692380208ea5ea0d6125c6e3c1ddcbdbdd0cccff4585d2977629c8ae7fcb",
+      "masterId": "exp-rasio-008-07",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-08.png",
+      "driveId": "13mnTPXRPURL6Z3iX6NuIEyx9GrVaGEzE",
+      "sourceSha256": "1014f53bea00a6d15d3dc87098258748fdb412e5e27ebd3f8fbd666511801cfb",
+      "masterId": "exp-rasio-008-08",
+      "masterSvg": "04-desain/variasi-svg/batch-30/exp-rasio-008-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-30/exp-rasio-008-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_8_logo-09.png",
+      "driveId": "1lcd_kmTLNXlBqxH67XEtZjTZqPjWJDhe",
+      "sourceSha256": "4c480354555712ccac88014fd1d4d3b09b9ca1b372a014896ea938a064810dd0",
+      "masterId": "exp-rasio-008-09",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-008-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-008-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-01.png",
+      "driveId": "1FFuNgvudWx7TeSQ-Y9irUU76dN7vwXRh",
+      "sourceSha256": "0a9f33d666ddf728d21e7c57bc5e11ffff7d0d64aee3f70c367157694070c26e",
+      "masterId": "exp-rasio-009-01",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-02.png",
+      "driveId": "1-GMsQ6ZWhIGPDH8TMfR5JzrTiPufDlC6",
+      "sourceSha256": "5c8b019a1cce952b9abf7cd5103d76d1b2252270ce2b6db06aa2ee1ce77579b9",
+      "masterId": "exp-rasio-009-02",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-03.png",
+      "driveId": "1Vpjtfx7A_CY2sqHxDQSj7uR4G73fke0C",
+      "sourceSha256": "d76c9d736a7d72020a531612b146a9c15cf223b91a9390768ade22feeb25e0c3",
+      "masterId": "exp-rasio-009-03",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-04.png",
+      "driveId": "1kt_2_t9thvUJfhqkgdcKfv8ZKaJ2g6iZ",
+      "sourceSha256": "c52bc7ad3e2a01b3cd798b7d61e939fcd13f52b73b9a7f057d00a721624becd9",
+      "masterId": "exp-rasio-009-04",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-05.png",
+      "driveId": "1SLunpOn0JtnT7WYtOdAFOquE061T0KU5",
+      "sourceSha256": "6a071a83ff2414ba03eff71f0de0b82a72b15ab3ea2d297bc2380985574f9d90",
+      "masterId": "exp-rasio-009-05",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-06.png",
+      "driveId": "1_DMXRs48PhYV1Uvdxmhf1IT-OSbJ8jwx",
+      "sourceSha256": "b67eb5965e0b17e31d170ccf9ffc75d24a48cf309d439897fe389f272e98cc56",
+      "masterId": "exp-rasio-009-06",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-07.png",
+      "driveId": "1fVwNeaL6L52LRyDogfnQxOYE70ZsjaSO",
+      "sourceSha256": "cea794e40465ac890982756a3f680cb88951f9158605bb3dbe94f6ef2db04669",
+      "masterId": "exp-rasio-009-07",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-08.png",
+      "driveId": "1DO0IxfsgWTf1jon4ZNr8B4zLBm8RWJGO",
+      "sourceSha256": "c062a62738274ac6ac43b41c9a0b88eec7db5ccc7391df2ee33883f10912af30",
+      "masterId": "exp-rasio-009-08",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-09.png",
+      "driveId": "1jnkSv5sInyqJdqnAD6GDh-gPxIR3H6Ji",
+      "sourceSha256": "f1d43238ae983255f6c9096d91a5f3b3f9fcabafa28604dd118568ebe4991ddc",
+      "masterId": "exp-rasio-009-09",
+      "masterSvg": "04-desain/variasi-svg/batch-31/exp-rasio-009-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-31/exp-rasio-009-09.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-01.png",
+      "driveId": "1epOJSbHnP8BkGZxiWlZKn9O7_LAiQYwK",
+      "sourceSha256": "25ea2456877c22b5cbe1854e98366a1435aeb770bb361595e2eadfac0f38379b",
+      "masterId": "exp-rasio-unnumbered-01",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-01.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-01.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-02.png",
+      "driveId": "1MdwywPoacl0zATReeZ9-ZLl7fBqUh1gj",
+      "sourceSha256": "6c3ee0ca97d57a3106d5ff3225ab0128d27182d8c4574b2fcb3ad2ddc881cd96",
+      "masterId": "exp-rasio-unnumbered-02",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-02.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-02.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-03.png",
+      "driveId": "14sr-fC6D-ItN4Nvp39RfMm9cMEylzcT5",
+      "sourceSha256": "9d1514286a32f8353537c4dc10b49afe7497df22d14e0b243b25d7e691b11634",
+      "masterId": "exp-rasio-unnumbered-03",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-03.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-03.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-04.png",
+      "driveId": "14uRAWkFyIUstTS4XG6Pj8VKo1Qym19z6",
+      "sourceSha256": "06ce94b53ace278d4bc8b7eea03cb15fe44bb428b4deda0aa4409ea9ff156bfb",
+      "masterId": "exp-rasio-unnumbered-04",
+      "masterSvg": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-04.svg",
+      "pathJson": "04-desain/variasi-svg/batch-35/exp-rasio-unnumbered-04.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-05.png",
+      "driveId": "1b5eoneoO0Tp__YyiV6QLc8yD1_qaq5Y-",
+      "sourceSha256": "9032c685581be0a4189f2494c35af7d2bd6549dc9c05d6291cf6181d3c90d958",
+      "masterId": "exp-rasio-unnumbered-05",
+      "masterSvg": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-05.svg",
+      "pathJson": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-05.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-06.png",
+      "driveId": "1SCXtwrcR3DOfw4PRHxdsAK7W31rBwGOP",
+      "sourceSha256": "205eb0d84d86fde254e83698f123e4b86cbadd490ef34c5e84ddf080e944306f",
+      "masterId": "exp-rasio-unnumbered-06",
+      "masterSvg": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-06.svg",
+      "pathJson": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-06.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-07.png",
+      "driveId": "16MsmVHxiNxP0IeuUCNr6Trhs-SwPB__K",
+      "sourceSha256": "fb1827a4e394dcf7fd308870c25440044020861862ede551d068a7aa0ed929ff",
+      "masterId": "exp-rasio-unnumbered-07",
+      "masterSvg": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-07.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-08.png",
+      "driveId": "1Ki92W259lKUy7cMKv9ds1oMf_ZoB7kMY",
+      "sourceSha256": "c3a34bdcbdd933a9fd077942082ad3964b730d07d5ca141c70866b13d7ecacc5",
+      "masterId": "exp-rasio-unnumbered-08",
+      "masterSvg": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-08.json",
+      "kind": "manual-master"
+    },
+    {
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-09.png",
+      "driveId": "1_gMP-STT-r-6t8o-QUu0sFLFmm1wQ-kZ",
+      "sourceSha256": "b51b3c52ddb6d0a0a949cd5d7500926f8eec416b73aca6b841ebbb7361e3979f",
+      "masterId": "exp-rasio-unnumbered-09",
+      "masterSvg": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-36/exp-rasio-unnumbered-09.json",
+      "kind": "manual-master"
+    }
+  ]
+}
