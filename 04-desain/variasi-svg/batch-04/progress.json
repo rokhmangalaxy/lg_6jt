@@ -1,0 +1,95 @@
+{
+  "batch": "04",
+  "apkBuildsPaused": true,
+  "newMasterCount": 3,
+  "driveSourcesWithMasters": 18,
+  "reportedDriveFiles": 342,
+  "remainingNotProcessed": 324,
+  "groups": {
+    "1": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    },
+    "2": {
+      "redrawn": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pending": []
+    }
+  },
+  "exactDuplicateAudit": {
+    "scope": "downloaded PNG files only, not entire Drive folder",
+    "filesChecked": 18,
+    "duplicateGroups": []
+  },
+  "visualReview": {
+    "scope": "three new sources compared against downloaded group 1 and 2 references",
+    "result": "distinct layouts; similar MCM motifs retained, not merged as duplicates",
+    "requiresUserApproval": true
+  },
+  "notes": [
+    "342 is the previously reported file count, not a verified unique-design total.",
+    "Historical batch progress is a snapshot, not a current cumulative ledger.",
+    "Colors flattened; hand-measured polygons regularized, not pixel-identical.",
+    "No Android build or app catalog change."
+  ],
+  "entries": [
+    {
+      "id": "exp-002-07",
+      "group": 2,
+      "sourceNumber": 7,
+      "driveId": "1CCQn9_aj7lSjj_yGdG9u5T02EqzhCMw-",
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-07.png",
+      "sourceSha256": "a1521c96cc1d97825d34c625f9ea401184069fabbc9eed22de9e205f0c23e37a",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-04/exp-002-07.svg",
+      "pathJson": "04-desain/variasi-svg/batch-04/exp-002-07.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-002-08",
+      "group": 2,
+      "sourceNumber": 8,
+      "driveId": "17uu9WqGHvwLqSX8i4EgEGmxJczzfNrKA",
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-08.png",
+      "sourceSha256": "5af8b6701132c82d807b75f71d39ef0df6c25d5f29b3d2f9290b3f7d5b744af9",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-04/exp-002-08.svg",
+      "pathJson": "04-desain/variasi-svg/batch-04/exp-002-08.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    },
+    {
+      "id": "exp-002-09",
+      "group": 2,
+      "sourceNumber": 9,
+      "driveId": "1TL-cMeI6JIaqrrJ3iE6fqEqE-2PrSqkb",
+      "sourceName": "Max_a_Gambar_kotak_berisi__2_logo-09.png",
+      "sourceSha256": "4a716116af69e5a7bd192d945b4d875d8196f7d74855f8355a7d3f33175e8922",
+      "status": "geometric-redraw-awaiting-user-review",
+      "masterSvg": "04-desain/variasi-svg/batch-04/exp-002-09.svg",
+      "pathJson": "04-desain/variasi-svg/batch-04/exp-002-09.json",
+      "format": "manual-vector",
+      "appIntegration": "deferred-until-collection-complete"
+    }
+  ]
+}

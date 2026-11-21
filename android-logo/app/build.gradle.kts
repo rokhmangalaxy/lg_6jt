@@ -35,12 +35,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
-    sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/logoAssets"))
+    // Use the actual asset folder directly: avoid generated-asset task ordering/cache issues.
+    sourceSets["main"].assets.srcDir(rootProject.file("logo-assets"))
+    testOptions { unitTests.isIncludeAndroidResources = true }
 }
 
-// Reuse the standalone HTML: no duplicate artwork or remote website required.
-val syncLogoAssets by tasks.registering(Copy::class) {
-    from(rootProject.file("../html/index.html"))
-    into(layout.buildDirectory.dir("generated/logoAssets"))
+dependencies {
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.robolectric:robolectric:4.14.1")
 }
-tasks.named("preBuild") { dependsOn(syncLogoAssets) }

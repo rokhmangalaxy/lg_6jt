@@ -31,3 +31,31 @@ Galeri menampilkan satu konsep aktif dengan Prev/Next (berputar), tombol nomor 0
 Kelima sumber PNG tertanam di `index.html`; tidak perlu fetch atau server agar kanvas dapat dipakai ketika membuka file lokal. `preview-logo-mcm.html` di root adalah salinan mandiri yang sama. Tidak ada gambar tambahan per kombinasi warna. Setelah mengganti sumber artwork, data gambar tertanam pada HTML harus diperbarui juga; sekadar mengganti `assets/` tidak mengubah preview interaktif.
 
 Pemeriksaan logika: `node tests/test_logo_preview.cjs` (sintaks, pemetaan warna simultan, sumber tetap utuh, reset, warna kustom, lima sumber tertanam, dan kesamaan versi offline). Ini bukan pengujian browser otomatis.
+
+## Mode visual dan latar terkunci
+
+UI kini mengutamakan satu logo besar, navigasi ikon, enam tombol swatch, reset, dan ekspor (HTML). Penjelasan teknis tidak ditampilkan pada layar utama.
+
+Mask latar dihitung sekali per sumber dengan flood fill empat arah terhadap piksel putih yang tersambung ke tepi kanvas. Piksel latar ini selalu putih pada preview dan hasil ekspor, terlepas dari susunan palet. Bagian putih yang tertutup di dalam logo tetap dapat diwarnai. Bagian putih yang terbuka dan tersambung ke luar dianggap latar; pemisahan semantik lebih rinci memerlukan master vektor/mask manual. Ini tidak memperbaiki cropping pada artwork lama.
+
+Tes `node tests/test_logo_preview.cjs` memeriksa keenam permutasi: latar tetap putih dan putih internal tertutup tetap dapat berubah. Pengujian ini logika piksel, bukan uji perangkat Android.
+
+## Header, navigasi bawah, dan Catatan (update terbaru)
+
+Urutan studio: topbar → logo → Prev/Next → Swatch 1/2/Hitam–Putih/Putih–Hitam → nomor logo. Swatch 1/2 mempertahankan putih internal; monokrom memetakan merah dan biru bersama ke hitam atau putih, putih internal menjadi warna kebalikan. Latar luar selalu putih pada Swatch 1/2 atau abu-abu #d1d5db pada dua mode monokrom. Ini menggantikan enam permutasi sebelumnya.
+
+Navigasi bawah membuka Logo, Menu (reset/ekspor HTML), dan Catatan. Catatan memuat jenis Bug/Pengembangan, isi, waktu, dan nomor logo aktif. Teks ditampilkan dengan textContent, tidak sebagai HTML. Catatan dan draft disimpan lewat localStorage pada perangkat/origin yang sama; tidak disinkronkan ke GitHub. Hapus memerlukan konfirmasi. Jika storage gagal, UI menyampaikan bahwa data hanya bertahan sementara. Penghapusan data aplikasi/browser atau uninstall menghilangkan catatan. Pindah file/origin browser juga dapat membuat data lama tidak terlihat.
+
+Android mengaktifkan DOM storage pada origin lokal tetap yang sama; tidak menambahkan akses jaringan atau jembatan JavaScript/native. Update package yang ditandatangani sama mempertahankan data aplikasi selama tidak dihapus oleh pengguna/OS. Perlu uji instalasi/update pada perangkat nyata.
+
+## Counter huruf, swipe, dan ikon galaksi
+
+Mask nameplate berupa batas ternormalisasi spesifik pada lima sumber raster. Semua piksel putih di area nama perusahaan, termasuk lubang O/A/P/R, dianggap latar, bukan fill putih simbol. Area simbol di luar nameplate tetap memakai aturan sebelumnya. Batas ini perlu disesuaikan bila gambar sumber/komposisi berubah.
+
+Area logo mendukung swipe kiri/kanan melalui Pointer Events (juga drag mouse), ambang 55px, dominan horizontal, maksimal 900ms. Scroll vertikal tetap diizinkan; pointercancel membatalkan gesture. Tombol Prev/Next tetap tersedia.
+
+Ikon launcher Android berupa spiral merah–biru pada putih, dengan adaptive icon dan fallback berbagai density. Sumber AI ada di `android-logo/icon-source/galaxy.png`, hasil palet solid dan margin aman ada pada resource Android. Ini ikon aplikasi, bukan kandidat logo perusahaan baru.
+
+## Sepuluh konsep
+
+Preview mandiri sekarang berisi 10 logo. Konsep 06–10 ada di `assets/variasi-06-native.png` sampai `variasi-10-native.png`, dengan nameplate yang konsisten. Warna solid tetap sama; mask nama baru dimulai pada 80% tinggi. UI preview mengikuti gaya neumorphism, sedangkan aplikasi Android tetap memakai implementasi native terpisah.

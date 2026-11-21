@@ -1,0 +1,93 @@
+[
+  {
+    "variation": 5,
+    "id": "exp-001-01",
+    "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-01.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 49,
+    "id": "exp-005-07",
+    "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-07.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 50,
+    "id": "exp-005-08",
+    "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-08.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 122,
+    "id": "exp-015-07",
+    "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-07.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 123,
+    "id": "exp-015-08",
+    "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-08.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 128,
+    "id": "exp-016-03",
+    "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-03.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 179,
+    "id": "exp-rasio-016-02",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-02.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Modifikasi tekukan huruf C vertikal di tengah-tengah"
+  },
+  {
+    "variation": 184,
+    "id": "exp-rasio-016-07",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-07.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 188,
+    "id": "exp-rasio-017-02",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-02.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 290,
+    "id": "exp-rasio-010-05",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-05.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 294,
+    "id": "exp-rasio-010-09",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-09.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 301,
+    "id": "exp-rasio-011-07",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-07.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 328,
+    "id": "exp-rasio-unnumbered-07",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-07.png",
+    "instruction": "Redraw dari nol; acuan hanya gambar asli; jangan membandingkan redraw lama",
+    "note": "Redraw ulang"
+  }
+]

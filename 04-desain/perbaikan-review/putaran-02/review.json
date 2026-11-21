@@ -1,0 +1,292 @@
+{
+  "scope": "29 user-marked repairs only; approved items unchanged",
+  "records": [
+    {
+      "variation": 5,
+      "id": "exp-001-01",
+      "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "sudut terlalu lancip",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Empat ujung diamond dilunakkan dengan chord pendek; huruf putih tidak diubah."
+    },
+    {
+      "variation": 44,
+      "id": "exp-005-02",
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Bagian atas huruf c",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Cap C merah dibuat satu apex di tengah mengikuti sumber, bukan puncak datar dua titik."
+    },
+    {
+      "variation": 49,
+      "id": "exp-005-07",
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-07.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 50,
+      "id": "exp-005-08",
+      "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-08.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "garis putih yng menempel dari bawah huruf c",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Ujung atas slit tengah diturunkan dari y=275 ke y=292 agar terpisah 17 unit dari ujung counter C, tetap terbuka ke bawah."
+    },
+    {
+      "variation": 64,
+      "id": "exp-007-04",
+      "sourceName": "Max_a_Gambar_kotak_berisi__7_logo-04.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Sisi dalam kaki huruf M terlalu mepet ke bawah",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Kedua kaki dalam M dipendekkan 12 unit; sisi bawah dinaikkan sejajar agar ruang ke bingkai bertambah tanpa mengubah C.",
+      "round": 2
+    },
+    {
+      "variation": 115,
+      "id": "exp-rasio-014-01",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_14_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 122,
+      "id": "exp-015-07",
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-07.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 123,
+      "id": "exp-015-08",
+      "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-08.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Atas bawah aneh yang siku biru",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Cap navy atas/bawah dibuat simetris terhadap y=159; ujung dalam menjadi garis miring sejajar sisi luar, bukan siku horizontal.",
+      "round": 2
+    },
+    {
+      "variation": 128,
+      "id": "exp-016-03",
+      "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-03.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf M sisi kanan tidak sesuai",
+      "status": "corrected-awaiting-visual-review",
+      "change": "M kanan dicerminkan dari M kiri terhadap sumbu x=210.5; margin luar kanan kembali 9 unit dan konstruksi kaki sama.",
+      "round": 2
+    },
+    {
+      "variation": 169,
+      "id": "exp-rasio-015-01",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 170,
+      "id": "exp-rasio-015-02",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_15_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf c kasar, tidak sama, harusnya rapi",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 179,
+      "id": "exp-rasio-016-02",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Udah sama, tapi modifikasi huruf c agar rapi, gpp tidak sama, logo aslinya memang sudah jelek",
+      "status": "corrected-awaiting-visual-review",
+      "change": "C dibangun ulang dengan kontur luar simetris dan counter heksagonal sederhana; takik liar di ujung bawah dihapus sesuai izin perapian.",
+      "round": 2
+    },
+    {
+      "variation": 184,
+      "id": "exp-rasio-016-07",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-07.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "garis potong putih atas bawah tidak konsisten lebarnya",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Dua celah potong counter C dibuat sejajar: offset vertikal 14 unit di atas/bawah, lebar tegak lurus sekitar 13 unit.",
+      "round": 2
+    },
+    {
+      "variation": 188,
+      "id": "exp-rasio-017-02",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Sisi dalam atas bagian huruf M kasar, kurang rapi",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Kedua transisi dalam atas M diluruskan menjadi satu diagonal tanpa sisi hampir vertikal pendek; pasangan kanan dicerminkan.",
+      "round": 2
+    },
+    {
+      "variation": 205,
+      "id": "exp-rasio-001-01",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 206,
+      "id": "exp-rasio-001-02",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_1_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf c kurang rapi",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 278,
+      "id": "exp-rasio-009-02",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf c kurang rapi",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 281,
+      "id": "exp-rasio-009-05",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-05.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf c kurang rapi",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 284,
+      "id": "exp-rasio-009-08",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_9_logo-08.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf c kurang rapi",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 287,
+      "id": "exp-rasio-010-02",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-02.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "bagian atas ada space putih tipis",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Kontur merah atas disatukan tepat pada seam navy x=130 dan x=230. Celah 1 unit di sisi kiri dihilangkan, seam kanan tetap bertemu.",
+      "round": 2
+    },
+    {
+      "variation": 290,
+      "id": "exp-rasio-010-05",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-05.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "atas warna merah kurang rapi",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 294,
+      "id": "exp-rasio-010-09",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-09.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "biru pojok kanan kurang rapi",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Dua bidang navy kanan memakai garis potong diagonal sejajar x+y=479/491 sehingga jarak celah konstan, tanpa ujung yang melebar.",
+      "round": 2
+    },
+    {
+      "variation": 301,
+      "id": "exp-rasio-011-07",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-07.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "bagian atas kurang rapi",
+      "status": "corrected-awaiting-visual-review",
+      "change": "Kedua cap merah dan strip navy atas dicerminkan terhadap x=203; tebal strip 12 unit dan jarak merah\u2013navy 4 unit dipertahankan vertikal.",
+      "round": 2
+    },
+    {
+      "variation": 302,
+      "id": "exp-rasio-011-08",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-08.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 303,
+      "id": "exp-rasio-011-09",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-09.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 304,
+      "id": "exp-rasio-012-01",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_12_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 313,
+      "id": "exp-rasio-013-01",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_13_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 322,
+      "id": "exp-rasio-unnumbered-01",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-01.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "",
+      "status": "pending-source-comparison"
+    },
+    {
+      "variation": 328,
+      "id": "exp-rasio-unnumbered-07",
+      "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-07.png",
+      "userStatus": "Perlu perbaikan",
+      "userNote": "Huruf c kurang rapi",
+      "status": "corrected-awaiting-visual-review",
+      "change": "C dibangun ulang simetris terhadap x=175; tebal stem 26 unit, counter atas/bawah mengikuti kemiringan yang konsisten tanpa takik.",
+      "round": 2
+    }
+  ],
+  "consolidationCandidates": [
+    {
+      "members": [
+        115,
+        169,
+        205
+      ],
+      "representative": 205,
+      "reason": "Diamond merah dengan MCM navy dan empat tip navy; proporsi 205 paling seimbang untuk master kerja."
+    },
+    {
+      "members": [
+        304,
+        313,
+        322
+      ],
+      "representative": 313,
+      "reason": "Diamond merah dengan MCM putih; 313 dipilih sebagai master kerja. Cap kontinu 322 adalah detail yang sengaja tidak dijadikan varian terpisah pada usulan konsolidasi."
+    }
+  ],
+  "applicationMappingApplied": false,
+  "apkBuilt": false,
+  "excludedNote": {
+    "variation": 98,
+    "reason": "Application feature note, not geometry"
+  },
+  "progress": {
+    "correctedWorkingCopies": 13,
+    "totalRepairItems": 29,
+    "remaining": 16,
+    "percent": 44.8
+  }
+}

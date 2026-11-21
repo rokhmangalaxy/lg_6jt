@@ -3,16 +3,28 @@ on:
   workflow_dispatch:
   push:
     branches: [main, arena/1707a542-lg-6jt]
-    paths: ['android-logo/**', 'html/index.html', '.github/workflows/android-apk.yml']
+    paths: ['android-logo/**', 'html/index.html', '04-desain/variasi-svg/**', 'scripts/**', 'tests/**', '.github/workflows/android-apk.yml']
   pull_request:
-    paths: ['android-logo/**', 'html/index.html', '.github/workflows/android-apk.yml']
+    paths: ['android-logo/**', 'html/index.html', '04-desain/variasi-svg/**', 'scripts/**', 'tests/**', '.github/workflows/android-apk.yml']
 permissions:
   contents: read
 concurrency:
   group: android-release-${{ github.ref }}
   cancel-in-progress: false
 jobs:
+  vector-validation:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Validate path masters without building Android
+        run: |
+          python3 -m unittest discover -s tests -p 'test_path_batches.py'
+          python3 -m unittest discover -s tests -p 'test_temporary_review.py'
+          python3 -m unittest discover -s tests -p 'test_review_repairs*.py'
+          python3 -m unittest discover -s tests -p 'test_redraw_source_only.py'
   build:
+    # Explicit user-requested APK only; automatic push/PR builds remain paused.
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -21,6 +33,10 @@ jobs:
       ANDROID_VERSION_NAME: 1.0.${{ github.run_number }}
     steps:
       - uses: actions/checkout@v5
+      - name: Verify geometric logo masters
+        run: |
+          python3 -m unittest discover -s tests -p 'test*geometric*.py'
+          python3 -m unittest discover -s tests -p 'test_variation_vectors.py'
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -36,7 +52,7 @@ jobs:
       - name: Validate pull request
         if: github.event_name == 'pull_request'
         working-directory: android-logo
-        run: gradle --no-daemon assembleDebug lintDebug
+        run: gradle --no-daemon testDebugUnitTest assembleDebug lintDebug
       - name: Prepare fixed public demo signing identity
         if: github.event_name != 'pull_request'
         shell: bash
@@ -55,7 +71,33 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: android
           ANDROID_KEY_ALIAS: mcm-demo
           ANDROID_KEY_PASSWORD: android
-        run: gradle --no-daemon assembleRelease lintRelease
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle --no-daemon testReleaseUnitTest assembleRelease lintRelease 2>&1 | tee "$RUNNER_TEMP/android-build.log"
+      - name: Report build diagnostics
+        if: failure()
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          import os
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          log=Path(os.environ['RUNNER_TEMP'])/'android-build.log'
+          if log.exists():
+              lines=log.read_text(errors='replace').splitlines()
+              for line in lines:
+                  if line.startswith('e:') or 'error:' in line.lower():
+                      print('::error::'+line[:2000].replace('%','%25'))
+              tail='\n'.join(lines[-20:])
+              print('::error::'+tail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          for report in Path('android-logo/app/build/test-results').rglob('TEST-*.xml'):
+              for failure in ET.parse(report).iter('failure'):
+                  print('::error::'+(failure.text or '')[:5000].replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PYCODE
+      - name: Verify packaged logo inventory
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/check_apk_assets.py android-logo/app/build/outputs/apk/release/app-release.apk
       - name: Verify signature and publish APK directly
         if: github.event_name != 'pull_request'
         env:
