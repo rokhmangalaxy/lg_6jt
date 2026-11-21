@@ -156,3 +156,13 @@ menggunakan posisi review terakhir). Katalog kini **330 variasi = 324 master Dri
 + 2 studi**. Seluruh 105 indeks lama dipertahankan; 225 master ditambahkan di belakang.
 Catatan v1.0.72 tetap memakai preference dan stable ID sama. Tambahan tes launcher memastikan
 tombol benar-benar bisa dijangkau, bukan hanya ada dalam source code.
+
+### Review: navigasi dan penilaian cepat
+
+Di bawah pasangan gambar: **❮ | tiga radio penilaian | ❯**. Radio disimpan setiap
+perubahan. Next mewariskan nilai item yang ditinggalkan hanya jika item tujuan belum
+memiliki nilai tersimpan, termasuk menyimpan default warisan itu. Nilai tujuan yang
+sudah ada tidak ditimpa; Prev tidak mewariskan nilai. Catatan manual tidak ikut disalin
+ke item lain dan tetap autosave. Salin catatan menghasilkan
+`Variasi NN:Perlu perbaikan, isi penilaian manual` dengan nama katalog, bukan nomor
+posisi review atau ID sumber. Preference lama tetap kompatibel.

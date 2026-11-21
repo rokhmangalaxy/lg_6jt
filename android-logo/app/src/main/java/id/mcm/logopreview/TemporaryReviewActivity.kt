@@ -35,6 +35,8 @@ class TemporaryReviewActivity : Activity() {
         val item = items.getJSONObject(position)
         val id = item.getString("id")
         val source = item.getString("sourceName")
+        val catalogIndex=LogoCatalog.files.indexOf("exploration/$id.png")
+        val variationName=if(catalogIndex>=0) LogoCatalog.names[catalogIndex] else id
         val foreground = Color.parseColor(if (dark) "#E5E7EB" else "#173257")
         val background = Color.parseColor(if (dark) "#111827" else "#EEF2F7")
         window.statusBarColor = background
@@ -61,10 +63,6 @@ class TemporaryReviewActivity : Activity() {
                 dark=checked; prefs.edit().putBoolean("dark",dark).apply(); showReview()
             }
         })
-        val navigation=LinearLayout(this)
-        navigation.addView(action("❮ Sebelumnya") { move(-1) }, LinearLayout.LayoutParams(0,dp(52),1f))
-        navigation.addView(action("Berikutnya ❯") { move(1) }, LinearLayout.LayoutParams(0,dp(52),1f))
-        body.addView(navigation)
         val jump=EditText(this).apply {
             hint="Nomor logo 1–${items.length()}"; inputType=android.text.InputType.TYPE_CLASS_NUMBER
             setTextColor(foreground); setHintTextColor(Color.GRAY)
@@ -75,7 +73,7 @@ class TemporaryReviewActivity : Activity() {
             if(number!=null && number in 1..items.length()) { position=number-1; savePosition(); showReview() }
             else Toast.makeText(this,"Nomor tidak valid",Toast.LENGTH_SHORT).show()
         })
-        body.addView(label("$id\n$source"))
+        body.addView(label("$variationName · $id\n$source"))
         body.addView(label("Asli (kiri) · Redraw (kanan)"))
         val pair=LinearLayout(this).apply { gravity=Gravity.CENTER_VERTICAL }
         for(kind in listOf("source","redraw")) {
@@ -87,7 +85,7 @@ class TemporaryReviewActivity : Activity() {
             },LinearLayout.LayoutParams(0,dp(200),1f).apply { setMargins(dp(2),0,dp(2),0) })
         }
         body.addView(pair)
-        body.addView(label("Penilaian manual; bukan skor otomatis. Catatan tersimpan otomatis di perangkat ini."))
+
         val statuses=listOf("Belum dicek","Perlu perbaikan","Sesuai")
         val statusGroup=RadioGroup(this)
         val saved=prefs.getInt("status:$id",0).coerceIn(0,2)
@@ -99,7 +97,12 @@ class TemporaryReviewActivity : Activity() {
         }
         statusGroup.check(saved+1)
         statusGroup.setOnCheckedChangeListener { _, checked -> prefs.edit().putInt("status:$id",checked-1).apply() }
-        body.addView(statusGroup)
+        val navigation=LinearLayout(this).apply { gravity=Gravity.CENTER_VERTICAL }
+        navigation.addView(action("❮") { move(-1) }.apply { contentDescription="Logo sebelumnya" },LinearLayout.LayoutParams(dp(52),dp(52)))
+        navigation.addView(statusGroup,LinearLayout.LayoutParams(0,-2,1f))
+        navigation.addView(action("❯") { move(1) }.apply { contentDescription="Logo berikutnya" },LinearLayout.LayoutParams(dp(52),dp(52)))
+        body.addView(navigation)
+        body.addView(label("Penilaian manual untuk catatan kompleks. Radio dan catatan otomatis tersimpan di perangkat ini."))
         val notes=EditText(this).apply {
             hint="Catatan perbaikan, boleh beberapa poin…"; setTextColor(foreground); setHintTextColor(Color.GRAY)
             gravity=Gravity.TOP; minLines=5
@@ -114,7 +117,7 @@ class TemporaryReviewActivity : Activity() {
         body.addView(notes)
         body.addView(action("Salin catatan") {
             val status=statuses[prefs.getInt("status:$id",0).coerceIn(0,2)]
-            val value="$id — $status\nSumber: $source\n${notes.text}"
+            val value="$variationName:$status, ${notes.text}"
             (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("Review logo",value))
             Toast.makeText(this,"Catatan disalin",Toast.LENGTH_SHORT).show()
         })
@@ -126,5 +129,16 @@ class TemporaryReviewActivity : Activity() {
         scroll.requestApplyInsets()
     }
     private fun savePosition() { prefs.edit().putInt("position",position).apply() }
-    private fun move(step:Int) { position=(position+step+items.length())%items.length(); savePosition(); showReview() }
+    private fun move(step:Int) {
+        val previousId=items.getJSONObject(position).getString("id")
+        val previousValue=prefs.getInt("status:$previousId",0).coerceIn(0,2)
+        position=(position+step+items.length())%items.length()
+        val nextId=items.getJSONObject(position).getString("id")
+        // Inherit only on Next, only if the destination has no saved radio value.
+        // Manual notes never carry over to another logo.
+        if(step>0 && !prefs.contains("status:$nextId")) {
+            prefs.edit().putInt("status:$nextId",previousValue).apply()
+        }
+        savePosition(); showReview()
+    }
 }
