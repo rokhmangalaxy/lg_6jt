@@ -895,4 +895,51 @@ class PathBatch22Test(PathBatchTest):
         self.assertEqual(sum(c[0]=='M' for c in frame['layers'][0]['commands']),2)
         self.assertNotIn(2,{l['color'] for l in frame['layers']})
 
+class PathBatch23Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-23'
+    count=10
+    total=199
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_progress_and_limited_audit_are_consistent(self):
+        p=json.loads((self.batch/'progress.json').read_text())
+        old=json.loads((R/'04-desain/variasi-svg/batch-22/progress.json').read_text())
+        self.assertTrue(p['apkBuildsPaused'])
+        self.assertEqual(p['newMasterCount'],10)
+        self.assertEqual(p['uniqueDriveMasters'],199)
+        self.assertEqual(p['driveSourcesCoveredIncludingDuplicates'],217)
+        self.assertEqual(p['remainingNotProcessed'],125)
+        self.assertEqual(p['progressPercent'],63.45)
+        self.assertEqual(p['redrawOnlyPercent'],58.19)
+        self.assertEqual(p['sourceAliases'],old['sourceAliases'])
+        self.assertEqual(len(p['sourceAliases']),18)
+        self.assertEqual(p['groups']['rasio-18']['redrawn'],list(range(1,10)))
+        self.assertEqual(p['groups']['rasio-1']['redrawn'],[1])
+        self.assertEqual(p['entries'][-1]['id'],'exp-rasio-001-01')
+        previous_ids=set();previous_sources=set();known=set()
+        for f in (R/'04-desain/variasi-svg').glob('batch-*/progress.json'):
+            if f.parent!=self.batch:
+                for e in json.loads(f.read_text())['entries']:
+                    previous_ids.add(e['id']);previous_sources.add(e['sourceSha256'])
+        for f in (R/'04-desain/variasi-svg').rglob('*.svg'):
+            if f.parent!=self.batch:known.add(hashlib.sha256(f.read_bytes()).hexdigest())
+        for e in p['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            self.assertNotIn(e['sourceSha256'],previous_sources)
+            previous_sources.add(e['sourceSha256'])
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known);known.add(digest)
+            source=R/'google_drive'/e['sourceName']
+            if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+
+    def test_mounting_holes_and_positive_dots(self):
+        plate=json.loads((self.batch/'exp-rasio-018-06.json').read_text())
+        self.assertEqual(sum(c[0]=='M' for c in plate['layers'][0]['commands']),10)
+        self.assertNotIn(2,{l['color'] for l in plate['layers']})
+        diamond=json.loads((self.batch/'exp-rasio-018-09.json').read_text())
+        self.assertEqual(sum(c[0]=='M' for c in diamond['layers'][-1]['commands']),6)
+        arch=json.loads((self.batch/'exp-rasio-018-07.json').read_text())
+        self.assertEqual(max(c[2] for c in arch['layers'][0]['commands'] if c[0] in ('M','L')),225)
+
 if __name__=='__main__':unittest.main()
