@@ -58,7 +58,7 @@ class PathBatchTest(unittest.TestCase):
     def test_apk_job_is_explicitly_paused(self):
         workflow=(R/'.github/workflows/android-apk.yml').read_text()
         block=workflow.split('\n  build:\n',1)[1]
-        self.assertIn("    if: ${{ false }}",block.split('    runs-on:',1)[0])
+        self.assertIn("    if: ${{ github.event_name == 'workflow_dispatch' }}",block.split('    runs-on:',1)[0])
         self.assertIn("test_path_batches.py",workflow)
 class PathBatch04Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-04'

@@ -19,8 +19,8 @@ jobs:
       - name: Validate path masters without building Android
         run: python3 -m unittest discover -s tests -p 'test_path_batches.py'
   build:
-    # User resumed redraw-only work: all APK builds paused, including manual dispatch.
-    if: ${{ false }}
+    # Explicit user-requested APK only; automatic push/PR builds remain paused.
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-24.04
     permissions:
       contents: write

@@ -368,6 +368,7 @@ class MainActivity : Activity() {
     private fun showMenu() {
         val layout=column().apply {setPadding(dp(20),dp(16),dp(20),dp(16))}
         layout.addView(text("Menu",22f))
+        layout.addView(button("Review logo asli + catatan") {startActivity(Intent(this,TemporaryReviewActivity::class.java))})
         layout.addView(button("Reset warna logo aktif") {selections[current]=0;prefs.edit().putInt("clientSetPalette$current",0).apply();Toast.makeText(this,"Warna direset",Toast.LENGTH_SHORT).show()})
         layout.addView(text("Native Kotlin · Offline\nSigning demo publik · untuk review internal",14f))
         content.addView(layout)

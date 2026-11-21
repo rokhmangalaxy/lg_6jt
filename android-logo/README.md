@@ -115,3 +115,19 @@ and two studies. Original 11 IDs/indices remain unchanged. Group 12 source files
 SHA-256-identical to group 11 and mapped as aliases, never duplicated in the app.
 Native JSON is copied verbatim from batch masters. APK builds are manual dispatch
 only; PR/push run path checks. The public demo signing identity is unchanged.
+
+## Review sementara (permintaan build setelah batch 36)
+
+Menu → **Review logo asli + catatan** membuka halaman terpisah untuk 324 master Drive.
+324 pasangan sumber asli/redraw tersedia offline; 18 alias identik tidak diulang.
+Katalog utama tetap 105 variasi dan indeks favorit lama tidak diubah.
+Tiga status manual, satu catatan per master, tombol salin identitas + status + catatan.
+Dark mode default aktif, dapat ditoggle dan diingat. Catatan/status/posisi otomatis
+tersimpan di SharedPreferences `temporary-logo-review`, terpisah dari catatan pengembangan.
+Catatan hanya di perangkat ini dan hilang bila data aplikasi dihapus/uninstall; belum ada sinkronisasi.
+Sumber raster tetap berlatar putih; dark mode meredupkan UI, bukan mengubah sumber acuan.
+
+Untuk mencabut: hapus `TemporaryReviewActivity.kt`, entri activity manifest, tombol pada
+`showMenu`, folder aset `temporary-review`, generator `prepare_temporary_review.py`, dan tes terkait.
+Tidak memerlukan migrasi katalog/favorit. APK kini hanya dibangun melalui manual workflow_dispatch;
+automatic push/PR tetap tidak membangun Android. Signing tetap identitas demo sebelumnya.
