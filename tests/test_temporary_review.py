@@ -28,3 +28,14 @@ class TemporaryReviewTest(unittest.TestCase):
         for row in rows:
             entry=next(e for e in catalog if e['id']==row['id'])
             self.assertEqual(int(entry['name'].split()[-1]),row['variation'])
+
+    def test_corrected_vectors_and_review_previews_are_installed(self):
+        applied=json.loads((R/'android-logo/app/src/main/assets/temporary-review/applied-repairs.json').read_text())
+        final=json.loads((R/'04-desain/perbaikan-review/putaran-04/review.json').read_text())['records']
+        self.assertEqual(len(applied),29)
+        for row in applied:
+            representative=next(r for r in final if r['id']==row['representative'])
+            folder=R/f"04-desain/perbaikan-review/putaran-{representative.get('round',1):02}"
+            assets=R/'android-logo/app/src/main/assets'
+            self.assertEqual(json.loads((assets/'exploration'/f"{row['id']}.json").read_text()),json.loads((folder/f"{row['representative']}.json").read_text()))
+            self.assertEqual((assets/'exploration'/f"{row['id']}.png").read_bytes(),(assets/'temporary-review'/f"{row['id']}-redraw.png").read_bytes())

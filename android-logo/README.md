@@ -187,3 +187,20 @@ atau menyalin catatan antar item (berbeda dari Next yang mewariskan radio kosong
 Salin-semua tetap hanya mengambil catatan/rating yang benar-benar tersimpan.
 Fitur ini masih kode sumber, belum dirilis sebagai APK. Salinan kerja koreksi dan
 master konsolidasi di `04-desain/perbaikan-review/` belum mengganti aset aplikasi.
+
+### Koreksi setelah v1.0.86
+
+Koreksi 29 ID kini **dipasang** ke JSON native dan PNG studio, serta PNG redraw
+review. Asli/sumber tidak diganti. Enam anggota konsolidasi menggunakan dua master
+bersama (115/169/205 → 205, 304/313/322 → 313); ID/nomor lama tetap disimpan untuk
+kompatibilitas favorit dan catatan. Entri lama belum disembunyikan dari katalog.
+Manifest instalasi: `temporary-review/applied-repairs.json`.
+Reproduksi setelah menyiapkan ulang aset: `python scripts/apply_review_repairs.py`
+(memerlukan resvg-js di `.cache/mcm-redraw/node_modules`).
+
+Shortcut yang benar bukan grid di Seluruh catatan: satu baris **❮ | Logo perbaikan |
+❯** tepat di bawah radio penilaian normal. Kedua panah hanya menjelajah subset
+perbaikan dalam urutan katalog dan berputar di ujung; tombol tengah membuka item
+perbaikan berikutnya. Jump ini tidak mewariskan status dan tidak memindahkan notes.
+Baseline 29 item tetap digunakan jika rating lokal belum tersimpan; rating lokal
+terbaru mengalahkan baseline. Navigasi biasa dan copy seluruh catatan tidak berubah.

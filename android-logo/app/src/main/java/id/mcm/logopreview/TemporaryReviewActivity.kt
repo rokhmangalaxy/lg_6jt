@@ -104,6 +104,18 @@ class TemporaryReviewActivity : Activity() {
         navigation.addView(statusGroup,LinearLayout.LayoutParams(0,-2,1f))
         navigation.addView(action("❯") { move(1) }.apply { contentDescription="Logo berikutnya" },LinearLayout.LayoutParams(dp(52),dp(52)))
         body.addView(navigation)
+        val repairNavigation=LinearLayout(this).apply { gravity=Gravity.CENTER_VERTICAL }
+        repairNavigation.addView(action("❮") { moveRepair(-1) }.apply {
+            contentDescription="Logo perbaikan sebelumnya"
+        },LinearLayout.LayoutParams(dp(52),dp(52)))
+        repairNavigation.addView(action("Logo perbaikan") { moveRepair(1) }.apply {
+            contentDescription="Buka logo perbaikan"
+        },LinearLayout.LayoutParams(0,dp(56),1f))
+        repairNavigation.addView(action("❯") { moveRepair(1) }.apply {
+            contentDescription="Logo perbaikan berikutnya"
+        },LinearLayout.LayoutParams(dp(52),dp(52)))
+        body.addView(repairNavigation)
+
         body.addView(label("Penilaian manual untuk catatan kompleks. Radio dan catatan otomatis tersimpan di perangkat ini."))
         val notes=EditText(this).apply {
             hint="Catatan perbaikan, boleh beberapa poin…"; setTextColor(foreground); setHintTextColor(Color.GRAY)
@@ -140,6 +152,18 @@ class TemporaryReviewActivity : Activity() {
             val needsRepair=if(prefs.contains("status:$id")) prefs.getInt("status:$id",0)==1 else id in baselineIds
             if(id in reviewIds && needsRepair) Pair(id,LogoCatalog.names[index]) else null
         }
+    }
+    private fun moveRepair(step:Int) {
+        val repairs=repairShortcuts()
+        if(repairs.isEmpty()) {
+            Toast.makeText(this,"Tidak ada logo perlu perbaikan",Toast.LENGTH_SHORT).show();return
+        }
+        val current=items.getJSONObject(position).getString("id")
+        val index=repairs.indexOfFirst { it.first==current }
+        val next=if(index<0) { if(step<0) repairs.lastIndex else 0 }
+            else (index+step+repairs.size)%repairs.size
+        // Direct jump: never use Next's inherited radio behavior.
+        openReviewItem(repairs[next].first)
     }
     private fun openReviewItem(id:String) {
         for(i in 0 until items.length()) {
@@ -185,28 +209,6 @@ class TemporaryReviewActivity : Activity() {
             text="Seluruh catatan · ${notes.size} item";textSize=20f;setTextColor(foreground)
         })
         body.addView(action("Salin semua catatan") { copyAllNotes() })
-        val shortcuts=repairShortcuts()
-        body.addView(TextView(this).apply {
-            text="Shortcut logo perbaikan · ${shortcuts.size} item";textSize=18f;setTextColor(foreground)
-            setPadding(0,dp(16),0,dp(8))
-        })
-        body.addView(TextView(this).apply {
-            text="Ketuk nomor untuk membuka asli/redraw. Daftar awal dari review Anda; rating lokal terbaru diutamakan. Shortcut tidak mengubah rating atau catatan."
-            setTextColor(foreground)
-        })
-        // Compact two-column buttons; keep this temporary screen simple.
-        shortcuts.chunked(2).forEach { rowItems ->
-            val row=LinearLayout(this)
-            rowItems.forEach { (id,name) ->
-                row.addView(action(name) { openReviewItem(id) }.apply {
-                    contentDescription="Buka perbaikan $name";tag="repair-shortcut:$id"
-                },LinearLayout.LayoutParams(0,dp(56),1f))
-            }
-            body.addView(row)
-        }
-        if(shortcuts.isEmpty()) body.addView(TextView(this).apply {
-            text="Tidak ada logo berstatus perlu perbaikan.";setTextColor(foreground)
-        })
         body.addView(TextView(this).apply {
             text=if(notes.isEmpty()) "Belum ada catatan atau penilaian tersimpan." else notes.joinToString("\n\n")
             textSize=16f;setTextColor(foreground);setTextIsSelectable(true)
