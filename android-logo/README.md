@@ -166,3 +166,12 @@ sudah ada tidak ditimpa; Prev tidak mewariskan nilai. Catatan manual tidak ikut 
 ke item lain dan tetap autosave. Salin catatan menghasilkan
 `Variasi NN:Perlu perbaikan, isi penilaian manual` dengan nama katalog, bukan nomor
 posisi review atau ID sumber. Preference lama tetap kompatibel.
+
+### Seluruh catatan dan salin massal
+
+Halaman review menyediakan **Seluruh catatan** (daftar scroll/selectable dengan tema
+mengikuti dark mode) dan **Salin semua catatan**. Keduanya mencakup semua item yang
+mempunyai nilai radio tersimpan atau catatan tidak kosong, termasuk radio warisan Next.
+Item tanpa keduanya tidak dimasukkan. Urutan berdasarkan katalog dan format tiap item
+`Variasi NN:radio, penilaian manual`. Salin massal tidak dibatasi item aktif atau halaman.
+Catatan lama dibaca dari preference sama, tanpa migrasi atau penghapusan.

@@ -52,6 +52,26 @@ class TemporaryReviewTest {
         assertTrue(views().filterIsInstance<RadioButton>().first { it.text=="Sesuai" }.isChecked)
         controller.pause().stop().destroy()
     }
+    @Test fun allNotesShowsAndCopiesEverySavedItemIncludingRatingOnly() {
+        val controller=Robolectric.buildActivity(TemporaryReviewActivity::class.java).setup()
+        val activity=controller.get()
+        val prefs=activity.getSharedPreferences("temporary-logo-review",Context.MODE_PRIVATE)
+        prefs.edit().clear().putInt("status:exp-001-01",1).putString("note:exp-001-01","Perbaiki rail")
+            .putInt("status:exp-001-08",2).putString("note:exp-001-02","Catatan saja").apply()
+        fun views()=descendants(activity.findViewById<View>(android.R.id.content))
+        views().filterIsInstance<Button>().first { it.text=="Seluruh catatan" }.performClick()
+        val text=views().filterIsInstance<TextView>().map { it.text.toString() }.joinToString("\n")
+        assertTrue(text.contains("Variasi 05:Perlu perbaikan, Perbaiki rail"))
+        assertTrue(text.contains("Variasi 06:Sesuai, "))
+        assertTrue(text.contains("Variasi 09:Belum dicek, Catatan saja"))
+        assertFalse(text.contains("Variasi 10:"))
+        views().filterIsInstance<Button>().first { it.text=="Salin semua catatan" }.performClick()
+        val clipboard=activity.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+        assertEquals("Variasi 05:Perlu perbaikan, Perbaiki rail\nVariasi 06:Sesuai, \nVariasi 09:Belum dicek, Catatan saja",clipboard.primaryClip!!.getItemAt(0).text.toString())
+        views().filterIsInstance<Button>().first { it.text=="← Kembali ke review" }.performClick()
+        assertTrue(views().filterIsInstance<Button>().any { it.text=="❯" })
+        controller.pause().stop().destroy()
+    }
     @Test fun notesStatusAndDarkModePersistAcrossNavigationAndRecreation() {
         val controller=Robolectric.buildActivity(TemporaryReviewActivity::class.java).setup()
         val activity=controller.get()

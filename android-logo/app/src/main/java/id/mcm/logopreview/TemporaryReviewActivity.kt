@@ -57,6 +57,8 @@ class TemporaryReviewActivity : Activity() {
         }
         body.addView(action("← Kembali") { finish() })
         body.addView(label("Review sementara · ${position+1}/${items.length()}"))
+        body.addView(action("Seluruh catatan") { showAllNotes() })
+        body.addView(action("Salin semua catatan") { copyAllNotes() })
         body.addView(Switch(this).apply {
             text="Dark mode"; setTextColor(foreground); isChecked=dark
             setOnCheckedChangeListener { _, checked ->
@@ -121,6 +123,58 @@ class TemporaryReviewActivity : Activity() {
             (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("Review logo",value))
             Toast.makeText(this,"Catatan disalin",Toast.LENGTH_SHORT).show()
         })
+        setContentView(scroll)
+        scroll.setOnApplyWindowInsetsListener { view,insets ->
+            view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom)
+            insets
+        }
+        scroll.requestApplyInsets()
+    }
+    private fun collectedNotes(): List<String> {
+        val statuses=listOf("Belum dicek","Perlu perbaikan","Sesuai")
+        // Use catalog order and stable IDs, not the source-filename review ordering.
+        return LogoCatalog.files.mapIndexedNotNull { index, asset ->
+            val id=asset.substringAfterLast('/').removeSuffix(".png")
+            val isReviewItem=(0 until items.length()).any { items.getJSONObject(it).getString("id")==id }
+            val note=prefs.getString("note:$id","").orEmpty()
+            if(!isReviewItem || (!prefs.contains("status:$id") && note.isBlank())) null
+            else "${LogoCatalog.names[index]}:${statuses[prefs.getInt("status:$id",0).coerceIn(0,2)]}, $note"
+        }
+    }
+    private fun copyAllNotes() {
+        val notes=collectedNotes()
+        if(notes.isEmpty()) {
+            Toast.makeText(this,"Belum ada catatan atau penilaian tersimpan",Toast.LENGTH_SHORT).show()
+            return
+        }
+        (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
+            ClipData.newPlainText("Seluruh catatan logo",notes.joinToString("\n")))
+        Toast.makeText(this,"${notes.size} catatan disalin",Toast.LENGTH_SHORT).show()
+    }
+    private fun showAllNotes() {
+        val foreground=Color.parseColor(if(dark) "#E5E7EB" else "#173257")
+        val body=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL;setPadding(dp(16),dp(16),dp(16),dp(24))
+        }
+        fun action(title:String, run:()->Unit)=Button(this).apply {
+            text=title;setTextColor(foreground)
+            backgroundTintList=android.content.res.ColorStateList.valueOf(Color.parseColor(if(dark) "#374151" else "#D1D5DB"))
+            setOnClickListener { run() }
+        }
+        val notes=collectedNotes()
+        body.addView(action("← Kembali ke review") { showReview() })
+        body.addView(TextView(this).apply {
+            text="Seluruh catatan · ${notes.size} item";textSize=20f;setTextColor(foreground)
+        })
+        body.addView(action("Salin semua catatan") { copyAllNotes() })
+        body.addView(TextView(this).apply {
+            text=if(notes.isEmpty()) "Belum ada catatan atau penilaian tersimpan." else notes.joinToString("\n\n")
+            textSize=16f;setTextColor(foreground);setTextIsSelectable(true)
+            setPadding(0,dp(16),0,0)
+        })
+        val scroll=ScrollView(this).apply {
+            setBackgroundColor(Color.parseColor(if(dark) "#111827" else "#EEF2F7"));addView(body)
+        }
         setContentView(scroll)
         scroll.setOnApplyWindowInsetsListener { view,insets ->
             view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom)
