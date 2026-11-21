@@ -7,13 +7,13 @@ import json
 import subprocess
 R=Path(__file__).resolve().parents[1]
 PALETTE=['#DC2626','#173257','#FFFFFF']
-def export_batch(batch,data_by_source,drive_ids,total,groups):
+def export_batch(batch,data_by_source,drive_ids,total,groups,source_names=None,entry_ids=None):
     out=R/f'04-desain/variasi-svg/batch-{batch}'
     out.mkdir(parents=True,exist_ok=True)
     entries=[]
     for (group,n),data in data_by_source.items():
-        key=f'exp-{group:03}-{n:02}'
-        source=R/f'google_drive/Max_a_Gambar_kotak_berisi__{group}_logo-{n:02}.png'
+        key=(entry_ids or {}).get((group,n),f'exp-{group:03}-{n:02}')
+        source=R/'google_drive'/(source_names or {}).get((group,n),f'Max_a_Gambar_kotak_berisi__{group}_logo-{n:02}.png')
         entry=dict(id=key,group=group,sourceNumber=n,driveId=drive_ids[group,n],sourceName=source.name,
                    sourceSha256=hashlib.sha256(source.read_bytes()).hexdigest(),
                    status='geometric-redraw-awaiting-user-review',

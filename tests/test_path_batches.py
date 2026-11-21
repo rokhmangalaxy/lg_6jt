@@ -58,7 +58,7 @@ class PathBatchTest(unittest.TestCase):
     def test_apk_job_is_explicitly_paused(self):
         workflow=(R/'.github/workflows/android-apk.yml').read_text()
         block=workflow.split('\n  build:\n',1)[1]
-        self.assertIn("    if: ${{ github.event_name == 'workflow_dispatch' }}",block.split('    runs-on:',1)[0])
+        self.assertIn("    if: ${{ false }}",block.split('    runs-on:',1)[0])
         self.assertIn("test_path_batches.py",workflow)
 class PathBatch04Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-04'
@@ -518,5 +518,39 @@ class PathBatch13Test(PathBatchTest):
             self.assertTrue((assets/e['asset']).read_bytes().startswith(b'\x89PNG'))
             native=json.loads((assets/e['vectorAsset']).read_text())
             if 'pathJson' in e:self.assertEqual(native,json.loads((R/e['pathJson']).read_text()))
+
+class PathBatch14Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-14'
+    count=10
+    total=109
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_progress_and_limited_audit_are_consistent(self):
+        p=json.loads((self.batch/'progress.json').read_text())
+        self.assertTrue(p['apkBuildsPaused'])
+        self.assertEqual(p['newMasterCount'],10)
+        self.assertEqual(p['uniqueDriveMasters'],109)
+        self.assertEqual(p['driveSourcesCoveredIncludingDuplicates'],119)
+        self.assertEqual(p['remainingNotProcessed'],223)
+        self.assertEqual(p['progressPercent'],34.8)
+        self.assertEqual(p['redrawOnlyPercent'],31.87)
+        self.assertEqual(len(p['sourceAliases']),10)
+        self.assertEqual(p['entries'][-1]['id'],'exp-rasio-014-01')
+        self.assertEqual(p['entries'][-1]['sourceName'],'Max_a_Gambar_kotak_rasio_1_14_logo-01.png')
+        previous_ids=set()
+        for path in (R/'04-desain/variasi-svg').glob('batch-*/progress.json'):
+            if path.parent!=self.batch:
+                previous_ids.update(e['id'] for e in json.loads(path.read_text())['entries'])
+        self.assertFalse(previous_ids & {e['id'] for e in p['entries']})
+        known={hashlib.sha256(f.read_bytes()).hexdigest() for f in (R/'04-desain/variasi-svg').rglob('*.svg') if f.parent!=self.batch}
+        for e in p['entries']:
+            self.assertNotIn(hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest(),known)
+            src=R/'google_drive'/e['sourceName']
+            if src.exists():self.assertEqual(hashlib.sha256(src.read_bytes()).hexdigest(),e['sourceSha256'])
+        alias=p['sourceAliases'][-1]
+        self.assertEqual(alias['duplicateOf'],'exp-013-01')
+        source=R/'google_drive'/alias['sourceName']
+        if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),p['entries'][0]['sourceSha256'])
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
 
 if __name__=='__main__':unittest.main()
