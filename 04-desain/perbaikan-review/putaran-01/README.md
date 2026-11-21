@@ -1,6 +1,6 @@
 # Review perbaikan — putaran 01
 
-29 item berstatus Perlu perbaikan dicatat pada `review.json`, termasuk 11 item tanpa
+29 item berstatus Perlu perbaikan dicatat pada `review.json`, termasuk 10 item tanpa
 keterangan. Catatan pengguna dipertahankan; 98 dipisahkan sebagai catatan fitur.
 Nama variasi dipetakan melalui katalog v1.0.79, bukan posisi daftar review.
 
