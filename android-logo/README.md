@@ -131,3 +131,17 @@ Untuk mencabut: hapus `TemporaryReviewActivity.kt`, entri activity manifest, tom
 `showMenu`, folder aset `temporary-review`, generator `prepare_temporary_review.py`, dan tes terkait.
 Tidak memerlukan migrasi katalog/favorit. APK kini hanya dibangun melalui manual workflow_dispatch;
 automatic push/PR tetap tidak membangun Android. Signing tetap identitas demo sebelumnya.
+
+### Hasil build review sementara
+
+- APK **v1.0.72**, versionCode **72**, tetap package `id.mcm.logopreview`.
+- Release: https://github.com/rokhmangalaxy/lg_6jt/releases/download/android-v1.0.72/mcm-logo-studio-release.apk
+- CI run **44861163852**, source **2c6d342eac8fdebe7aaa16e1a27858e4bef7ba80**: success.
+- Tes Android release (termasuk navigasi/status/catatan/dark mode dan recreation), lint,
+  inventaris 105 katalog + 324 pasangan review, serta signature verification lulus di CI.
+- Ukuran asset release **36,615,116 byte**. Digest yang dilaporkan GitHub:
+  `38a6823d76f0cb99964faa12d8bd0a07cfda526cbcee9ceb229c25934346c539`.
+- Unduh biner ke sandbox gagal EOF pada host release-assets; APK tidak tersedia lokal,
+  digest di atas metadata GitHub, bukan hash ulang lokal. Belum diuji pada perangkat fisik.
+- Build manual sebelumnya gagal (kompilasi tes awal; kemudian aturan inventaris lama),
+  run final di atas sudah melewati semua tahap dan memublikasikan release.
