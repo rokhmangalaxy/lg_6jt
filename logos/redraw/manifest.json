@@ -1,0 +1,106 @@
+[
+  {
+    "variation": 5,
+    "id": "exp-001-01",
+    "file": "variasi-05-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_berisi__1_logo-01.png",
+    "sha256": "0b1023d4b6cf139e475765b745392b9e0f7dad39a9c92bfc23e1ec24feb5d97a",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 49,
+    "id": "exp-005-07",
+    "file": "variasi-49-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-07.png",
+    "sha256": "32618b587807ea19ee3fb2e2e679a46eb0a6a0683f58570257f76fa845c2a2e7",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 50,
+    "id": "exp-005-08",
+    "file": "variasi-50-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_berisi__5_logo-08.png",
+    "sha256": "db4a6ba1c9000915b03424f452eb715e67e1d1d2cdc3016dfb933da9764875eb",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 122,
+    "id": "exp-015-07",
+    "file": "variasi-122-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-07.png",
+    "sha256": "03ee3b074fa2f831b7107e7b50408e1a9bfa523bf4b5dd15dbc8edabe8ce8a4e",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 123,
+    "id": "exp-015-08",
+    "file": "variasi-123-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_berisi__15_logo-08.png",
+    "sha256": "214c8dc55c8f611f0027eeda0f6bb092cb3bd77ffe93ceb26f8d595d7e3a330c",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 128,
+    "id": "exp-016-03",
+    "file": "variasi-128-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_berisi__16_logo-03.png",
+    "sha256": "8189b6621dc8519789e71857582bff3ef2caf8ae0ccd4f403ee6705ddd50a55a",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 179,
+    "id": "exp-rasio-016-02",
+    "file": "variasi-179-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-02.png",
+    "sha256": "01f410644942afcd1dd18267daa56e3929049d7a1409c56da628c6003cbed3cf",
+    "note": "Modifikasi tekukan huruf C vertikal di tengah-tengah"
+  },
+  {
+    "variation": 184,
+    "id": "exp-rasio-016-07",
+    "file": "variasi-184-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_16_logo-07.png",
+    "sha256": "a463e4fdd484a689a3a81f740ec7fedb81ae4de7de1f2cc03e6516f1581fc3b6",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 188,
+    "id": "exp-rasio-017-02",
+    "file": "variasi-188-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_17_logo-02.png",
+    "sha256": "d20cce75780e98ff35c71882b1f9a1296b398b7fa4999e2acbca4fc4960f0463",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 290,
+    "id": "exp-rasio-010-05",
+    "file": "variasi-290-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-05.png",
+    "sha256": "cbee890785b40d8b131cb21d86db9764acecc48c3a2ac4b9b595b88cc357901c",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 294,
+    "id": "exp-rasio-010-09",
+    "file": "variasi-294-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_10_logo-09.png",
+    "sha256": "d8534df9c572e053b3eeeb5fcdb99c6747d62a6fbfd4a30f37c7ab8baa95e53e",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 301,
+    "id": "exp-rasio-011-07",
+    "file": "variasi-301-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_11_logo-07.png",
+    "sha256": "939a8220afdc86530d63624460f7c6f908cc7fe8789e3986c95abc9065a1b79e",
+    "note": "Redraw ulang"
+  },
+  {
+    "variation": 328,
+    "id": "exp-rasio-unnumbered-07",
+    "file": "variasi-328-asli.png",
+    "sourceName": "Max_a_Gambar_kotak_rasio_1_logo-07.png",
+    "sha256": "fb1827a4e394dcf7fd308870c25440044020861862ede551d068a7aa0ed929ff",
+    "note": "Redraw ulang"
+  }
+]
