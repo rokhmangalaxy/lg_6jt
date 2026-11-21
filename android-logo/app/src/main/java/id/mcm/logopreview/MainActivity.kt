@@ -102,6 +102,10 @@ class MainActivity : Activity() {
         }
         header.addView(downloadButton,LinearLayout.LayoutParams(dp(56),dp(56)))
         root.addView(header)
+        root.addView(button("☾ Review asli · Catatan · Dark mode") {
+            val key=LogoCatalog.files[current].substringAfterLast('/').removeSuffix(".png")
+            startActivity(Intent(this,TemporaryReviewActivity::class.java).putExtra("logoId",key))
+        },LinearLayout.LayoutParams(-1,dp(48)))
         content=FrameLayout(this);root.addView(content,LinearLayout.LayoutParams(-1,0,1f))
         bottomNav=row().apply {
             setPadding(dp(8),dp(6),dp(8),dp(6))

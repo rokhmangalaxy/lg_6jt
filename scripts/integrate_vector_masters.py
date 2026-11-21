@@ -9,7 +9,7 @@ def integrate():
     kotlin=K.read_text();files=re.findall(r'"([^"\n]+\.png)"',kotlin)
     names=re.findall(r'"(Variasi \d+)"',kotlin)
     original=files[:11];assert len(files)==len(names)
-    for batch in range(3,14):
+    for batch in range(3,37):
         progress=json.loads((R/f'04-desain/variasi-svg/batch-{batch:02}/progress.json').read_text())
         for e in progress['entries']:
             if e['id'] in known:continue
@@ -18,11 +18,11 @@ def integrate():
             name=f'Variasi {len(files)+1:02}';asset=f'exploration/{target}.png'
             entry={**e,'asset':asset,'vectorAsset':f'exploration/{target}.json','name':name,'appIntegration':'included-by-explicit-user-build-request','status':'geometric-redraw-awaiting-user-review'}
             manifest['reviewedEntries'].append(entry);files.append(asset);names.append(name);known.add(target)
-    assert files[:11]==original and len(files)==105
-    manifest.update(version=5,scope='99 unique Drive path masters, four original selections, two studies; collection incomplete. User explicitly requested this interim APK.',sourceAliases=json.loads((R/'04-desain/variasi-svg/batch-13/progress.json').read_text())['sourceAliases'])
+    assert files[:11]==original and len(files)==330
+    manifest.update(version=6,scope='324 unique Drive path masters, four original selections, two studies; visual review pending.',sourceAliases=json.loads((R/'04-desain/variasi-svg/batch-36/progress.json').read_text())['sourceAliases'])
     (A/'catalog.json').write_text(json.dumps(manifest,indent=2))
     kotlin=re.sub(r'val files = arrayOf\(.*?\)\n', 'val files = arrayOf(\n        '+',\n        '.join(json.dumps(x) for x in files)+')\n',kotlin,count=1,flags=re.S)
     kotlin=re.sub(r'val names = arrayOf\(.*?\)\n','val names = arrayOf('+', '.join(json.dumps(x) for x in names)+')\n',kotlin,count=1,flags=re.S)
     K.write_text(kotlin)
-    print('105 variations, 99 unique Drive masters. Existing 11 IDs and indices retained.')
+    print('330 variations, 324 unique Drive masters. Existing 11 IDs and indices retained.')
 if __name__=='__main__':integrate()

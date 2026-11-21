@@ -24,6 +24,10 @@ class TemporaryReviewActivity : Activity() {
         super.onCreate(state)
         items = assets.open("temporary-review/index.json").bufferedReader().use { JSONArray(it.readText()) }
         position = prefs.getInt("position", 0).coerceIn(0, items.length()-1)
+        val requested=intent.getStringExtra("logoId")
+        if(requested!=null) {
+            for(i in 0 until items.length()) if(items.getJSONObject(i).getString("id")==requested) { position=i; break }
+        }
         dark = prefs.getBoolean("dark", true)
         showReview()
     }

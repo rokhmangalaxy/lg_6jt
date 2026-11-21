@@ -145,3 +145,14 @@ automatic push/PR tetap tidak membangun Android. Signing tetap identitas demo se
   digest di atas metadata GitHub, bukan hash ulang lokal. Belum diuji pada perangkat fisik.
 - Build manual sebelumnya gagal (kompilasi tes awal; kemudian aturan inventaris lama),
   run final di atas sudah melewati semua tahap dan memublikasikan release.
+
+## Koreksi setelah laporan pengguna v1.0.72
+
+v1.0.72 mempertahankan 105 katalog dan salah menempatkan tombol review dalam
+`showMenu()` yang tidak dijangkau navigasi. Ini bug implementasi, bukan masalah pengguna.
+Perbaikan: tombol **☾ Review asli · Catatan · Dark mode** selalu terlihat di bawah header,
+langsung membuka review master yang sedang dipilih (pilihan original/studi tanpa pasangan
+menggunakan posisi review terakhir). Katalog kini **330 variasi = 324 master Drive + 4 original
++ 2 studi**. Seluruh 105 indeks lama dipertahankan; 225 master ditambahkan di belakang.
+Catatan v1.0.72 tetap memakai preference dan stable ID sama. Tambahan tes launcher memastikan
+tombol benar-benar bisa dijangkau, bukan hanya ada dalam source code.

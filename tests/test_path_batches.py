@@ -506,12 +506,12 @@ class PathBatch13Test(PathBatchTest):
         import re
         assets=R/'android-logo/app/src/main/assets'
         entries=json.loads((assets/'exploration/catalog.json').read_text())['reviewedEntries']
-        self.assertEqual(len(entries),101)
-        self.assertEqual(len({e['id'] for e in entries}),101)
+        self.assertEqual(len(entries),326)
+        self.assertEqual(len({e['id'] for e in entries}),326)
         self.assertFalse(any(e['id'].startswith('exp-012-') for e in entries))
         kotlin=(R/'android-logo/app/src/main/java/id/mcm/logopreview/LogoCatalog.kt').read_text()
         files=re.findall(r'"([^"\n]+\.png)"',kotlin)
-        self.assertEqual(len(files),105)
+        self.assertEqual(len(files),330)
         self.assertEqual(files[:11],['client-logo-04.png','client-attachment-01.png','client-attachment-08.png','client-attachment-09.png','exploration/exp-001-01.png','exploration/exp-001-08.png','exploration/geo-007.png','exploration/geo-008.png','exploration/exp-001-02.png','exploration/exp-001-03.png','exploration/exp-001-04.png'])
         self.assertEqual(set(files[4:]),{e['asset'] for e in entries})
         for e in entries:
@@ -551,7 +551,7 @@ class PathBatch14Test(PathBatchTest):
         self.assertEqual(alias['duplicateOf'],'exp-013-01')
         source=R/'google_drive'/alias['sourceName']
         if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),p['entries'][0]['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
 class PathBatch15Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-15'
@@ -591,7 +591,7 @@ class PathBatch15Test(PathBatchTest):
             if source.exists() and original.exists():
                 self.assertEqual(source.read_bytes(),original.read_bytes())
                 self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),alias['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
 class PathBatch16Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-16'
@@ -629,7 +629,7 @@ class PathBatch16Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
 class PathBatch17Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-17'
@@ -667,7 +667,7 @@ class PathBatch17Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
 class PathBatch18Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-18'
@@ -705,7 +705,7 @@ class PathBatch18Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_source_specific_colors_and_positive_letters(self):
         data=json.loads((self.batch/'exp-018-02.json').read_text())
@@ -751,7 +751,7 @@ class PathBatch19Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
 class PathBatch20Test(PathBatchTest):
     batch=R/'04-desain/variasi-svg/batch-20'
@@ -789,7 +789,7 @@ class PathBatch20Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_nameplate_holes_and_positive_white_letters(self):
         plate=json.loads((self.batch/'exp-rasio-014-08.json').read_text())
@@ -837,7 +837,7 @@ class PathBatch21Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_source_specific_colors_and_split_c(self):
         diamond=json.loads((self.batch/'exp-rasio-016-01.json').read_text())
@@ -884,7 +884,7 @@ class PathBatch22Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_letters_and_transparent_frame(self):
         diamond=json.loads((self.batch/'exp-rasio-017-01.json').read_text())
@@ -931,7 +931,7 @@ class PathBatch23Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_mounting_holes_and_positive_dots(self):
         plate=json.loads((self.batch/'exp-rasio-018-06.json').read_text())
@@ -978,7 +978,7 @@ class PathBatch24Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_mounting_holes_and_white_letters(self):
         plate=json.loads((self.batch/'exp-rasio-001-06.json').read_text())
@@ -1024,7 +1024,7 @@ class PathBatch25Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_white_letters_and_source_colors(self):
         for name in ('exp-rasio-003-01','exp-rasio-003-03'):
@@ -1070,7 +1070,7 @@ class PathBatch26Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_white_letters_and_transparent_ring(self):
         for name in ('exp-rasio-003-09','exp-rasio-004-01'):
@@ -1119,7 +1119,7 @@ class PathBatch27Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_navy_letters_and_detached_rails(self):
         diamond=json.loads((self.batch/'exp-rasio-005-01.json').read_text())
@@ -1166,7 +1166,7 @@ class PathBatch28Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_white_letters_and_frame_counters(self):
         for name in ('exp-rasio-005-07','exp-rasio-006-01'):
@@ -1214,7 +1214,7 @@ class PathBatch29Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_letters_and_double_ring(self):
         plate=json.loads((self.batch/'exp-rasio-007-01.json').read_text())
@@ -1261,7 +1261,7 @@ class PathBatch30Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_white_letters_and_detached_roof(self):
         plate=json.loads((self.batch/'exp-rasio-008-01.json').read_text())
@@ -1309,7 +1309,7 @@ class PathBatch31Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_positive_navy_letters_and_perspective_panels(self):
         plate=json.loads((self.batch/'exp-rasio-009-01.json').read_text())
@@ -1357,7 +1357,7 @@ class PathBatch32Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_white_positive_letters_and_hollow_rings(self):
         badge=json.loads((self.batch/'exp-rasio-010-06.json').read_text())
@@ -1406,7 +1406,7 @@ class PathBatch33Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_white_positive_letters_and_six_roof_facets(self):
         plate=json.loads((self.batch/'exp-rasio-012-01.json').read_text())
@@ -1455,7 +1455,7 @@ class PathBatch34Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_white_positive_letters_and_hollow_hexagon(self):
         plate=json.loads((self.batch/'exp-rasio-013-01.json').read_text())
@@ -1506,7 +1506,7 @@ class PathBatch35Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_white_letters_mounting_holes_and_unnumbered_identity(self):
         plate=json.loads((self.batch/'exp-rasio-unnumbered-01.json').read_text())
@@ -1558,7 +1558,7 @@ class PathBatch36Test(PathBatchTest):
             self.assertNotIn(digest,known);known.add(digest)
             source=R/'google_drive'/e['sourceName']
             if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
-        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),326)
 
     def test_final_inventory_reconciles_every_source(self):
         audit=json.loads((self.batch/'audit_inventory.json').read_text())

@@ -16,6 +16,16 @@ import org.robolectric.annotation.Config
 class TemporaryReviewTest {
     private fun descendants(view: View): List<View> = listOf(view) +
         if(view is ViewGroup) (0 until view.childCount).flatMap { descendants(view.getChildAt(it)) } else emptyList()
+    @Test fun reviewIsReachableFromLauncherAndCatalogExpanded() {
+        val controller=Robolectric.buildActivity(MainActivity::class.java).setup()
+        val activity=controller.get()
+        val button=descendants(activity.findViewById<View>(android.R.id.content)).filterIsInstance<Button>().single { it.text=="☾ Review asli · Catatan · Dark mode" }
+        button.performClick()
+        val launched=org.robolectric.Shadows.shadowOf(activity).nextStartedActivity
+        assertEquals(TemporaryReviewActivity::class.java.name,launched.component?.className)
+        assertEquals(330,LogoCatalog.count)
+        controller.pause().stop().destroy()
+    }
     @Test fun notesStatusAndDarkModePersistAcrossNavigationAndRecreation() {
         val controller=Robolectric.buildActivity(TemporaryReviewActivity::class.java).setup()
         val activity=controller.get()
