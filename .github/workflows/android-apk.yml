@@ -21,6 +21,7 @@ jobs:
           python3 -m unittest discover -s tests -p 'test_path_batches.py'
           python3 -m unittest discover -s tests -p 'test_temporary_review.py'
           python3 -m unittest discover -s tests -p 'test_review_repairs*.py'
+          python3 -m unittest discover -s tests -p 'test_redraw_source_only.py'
   build:
     # Explicit user-requested APK only; automatic push/PR builds remain paused.
     if: ${{ github.event_name == 'workflow_dispatch' }}

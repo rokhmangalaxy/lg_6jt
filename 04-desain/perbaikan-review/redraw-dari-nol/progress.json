@@ -1,0 +1,99 @@
+{
+  "total": 13,
+  "completedWorkingCopies": 13,
+  "remaining": 0,
+  "percent": 100,
+  "entries": [
+    {
+      "variation": 5,
+      "id": "exp-001-01",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-001-01-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 49,
+      "id": "exp-005-07",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-005-07-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 50,
+      "id": "exp-005-08",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-005-08-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 122,
+      "id": "exp-015-07",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-015-07-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 123,
+      "id": "exp-015-08",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-015-08-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 128,
+      "id": "exp-016-03",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-016-03-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 179,
+      "id": "exp-rasio-016-02",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-016-02-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 184,
+      "id": "exp-rasio-016-07",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-016-07-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 188,
+      "id": "exp-rasio-017-02",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-017-02-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 290,
+      "id": "exp-rasio-010-05",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-010-05-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 294,
+      "id": "exp-rasio-010-09",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-010-09-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 301,
+      "id": "exp-rasio-011-07",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-011-07-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    },
+    {
+      "variation": 328,
+      "id": "exp-rasio-unnumbered-07",
+      "source": "android-logo/app/src/main/assets/temporary-review/exp-rasio-unnumbered-07-source.png",
+      "status": "fresh-source-only-redraw-awaiting-review",
+      "installed": true
+    }
+  ]
+}

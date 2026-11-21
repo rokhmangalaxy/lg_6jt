@@ -32,10 +32,15 @@ class TemporaryReviewTest(unittest.TestCase):
     def test_corrected_vectors_and_review_previews_are_installed(self):
         applied=json.loads((R/'android-logo/app/src/main/assets/temporary-review/applied-repairs.json').read_text())
         final=json.loads((R/'04-desain/perbaikan-review/putaran-04/review.json').read_text())['records']
+        fresh=json.loads((R/'04-desain/perbaikan-review/redraw-dari-nol/progress.json').read_text())['entries']
+        freshIds={r['id'] for r in fresh}
         self.assertEqual(len(applied),29)
         for row in applied:
             representative=next(r for r in final if r['id']==row['representative'])
             folder=R/f"04-desain/perbaikan-review/putaran-{representative.get('round',1):02}"
+            if row['id'] in freshIds:
+                folder=R/'04-desain/perbaikan-review/redraw-dari-nol'
+                representative={'id':row['id']}
             assets=R/'android-logo/app/src/main/assets'
             self.assertEqual(json.loads((assets/'exploration'/f"{row['id']}.json").read_text()),json.loads((folder/f"{row['representative']}.json").read_text()))
             self.assertEqual((assets/'exploration'/f"{row['id']}.png").read_bytes(),(assets/'temporary-review'/f"{row['id']}-redraw.png").read_bytes())

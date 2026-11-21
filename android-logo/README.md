@@ -204,3 +204,11 @@ perbaikan dalam urutan katalog dan berputar di ujung; tombol tengah membuka item
 perbaikan berikutnya. Jump ini tidak mewariskan status dan tidak memindahkan notes.
 Baseline 29 item tetap digunakan jika rating lokal belum tersimpan; rating lokal
 terbaru mengalahkan baseline. Navigasi biasa dan copy seluruh catatan tidak berubah.
+
+### Redraw dari nol setelah feedback v1.0.89
+
+13 item (05,49,50,122,123,128,179,184,188,290,294,301,328) digambar baru dari sumber
+asli saja, bukan penyuntingan geometri redraw sebelumnya. Aset studio dan review
+kini memakai hasil baru, dengan provenance pada katalog. Sumber offline tidak
+berubah. Lihat `04-desain/perbaikan-review/redraw-dari-nol/` untuk feedback lengkap,
+HTML sumber/baru dan cara reproduksi. Semua masih menunggu penilaian pengguna.
