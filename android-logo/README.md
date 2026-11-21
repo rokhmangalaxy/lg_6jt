@@ -175,3 +175,15 @@ mempunyai nilai radio tersimpan atau catatan tidak kosong, termasuk radio warisa
 Item tanpa keduanya tidak dimasukkan. Urutan berdasarkan katalog dan format tiap item
 `Variasi NN:radio, penilaian manual`. Salin massal tidak dibatasi item aktif atau halaman.
 Catatan lama dibaca dari preference sama, tanpa migrasi atau penghapusan.
+
+### Shortcut logo perbaikan pada Seluruh catatan
+
+Layar `Seluruh catatan` menyediakan tombol nomor variasi dua kolom yang membuka
+langsung pasangan asli/redraw berdasarkan ID stabil. Baseline 29 logo dari review
+manual ada di `assets/temporary-review/repair-shortcuts.json`; rating perangkat
+terbaru mengalahkan baseline. Item Perlu perbaikan baru ikut tampil; item yang
+sudah dinilai Sesuai atau Belum dicek tidak ikut. Shortcut tidak mengisi radio
+atau menyalin catatan antar item (berbeda dari Next yang mewariskan radio kosong).
+Salin-semua tetap hanya mengambil catatan/rating yang benar-benar tersimpan.
+Fitur ini masih kode sumber, belum dirilis sebagai APK. Salinan kerja koreksi dan
+master konsolidasi di `04-desain/perbaikan-review/` belum mengganti aset aplikasi.

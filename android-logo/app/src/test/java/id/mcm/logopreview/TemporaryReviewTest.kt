@@ -72,6 +72,33 @@ class TemporaryReviewTest {
         assertTrue(views().filterIsInstance<Button>().any { it.text=="❯" })
         controller.pause().stop().destroy()
     }
+    @Test fun repairShortcutsUseStableIdsAndNeverInheritOrOverwriteNotes() {
+        val controller=Robolectric.buildActivity(TemporaryReviewActivity::class.java).setup()
+        val activity=controller.get()
+        val prefs=activity.getSharedPreferences("temporary-logo-review",Context.MODE_PRIVATE)
+        // 05 is in supplied review; 09 is a newly flagged item; 44 has been approved locally.
+        prefs.edit().clear().putInt("status:exp-001-01",1).putString("note:exp-001-01","Catatan tetap")
+            .putInt("status:exp-001-02",1).putInt("status:exp-005-02",2).apply()
+        fun views()=descendants(activity.findViewById<View>(android.R.id.content))
+        fun allNotes() { views().filterIsInstance<Button>().first { it.text=="Seluruh catatan" }.performClick() }
+        allNotes()
+        assertFalse(views().any { it.tag=="repair-shortcut:exp-005-02" })
+        assertTrue(views().any { it.tag=="repair-shortcut:exp-001-02" })
+        val before=prefs.all.filterKeys { it!="position" }
+        // Baseline item without local status is still reachable, without inheriting 05's radio.
+        views().single { it.tag=="repair-shortcut:exp-rasio-013-01" }.performClick()
+        assertEquals(before,prefs.all.filterKeys { it!="position" })
+        assertFalse(prefs.contains("status:exp-rasio-013-01"))
+        assertTrue(views().filterIsInstance<TextView>().any { it.text.toString().startsWith("Variasi 313 ·") })
+        allNotes()
+        views().single { it.tag=="repair-shortcut:exp-001-01" }.performClick()
+        assertEquals("Catatan tetap",views().filterIsInstance<EditText>().last().text.toString())
+        assertTrue(views().filterIsInstance<RadioButton>().first { it.text=="Perlu perbaikan" }.isChecked)
+        controller.recreate()
+        assertTrue(views().filterIsInstance<TextView>().any { it.text.toString().startsWith("Variasi 05 ·") })
+        assertEquals(before,prefs.all.filterKeys { it!="position" })
+        controller.pause().stop().destroy()
+    }
     @Test fun notesStatusAndDarkModePersistAcrossNavigationAndRecreation() {
         val controller=Robolectric.buildActivity(TemporaryReviewActivity::class.java).setup()
         val activity=controller.get()

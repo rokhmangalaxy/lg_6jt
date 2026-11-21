@@ -20,6 +20,10 @@ with zipfile.ZipFile(sys.argv[1]) as apk:
         assert apk.read('assets/'+entry['asset']).startswith(b'\x89PNG\r\n\x1a\n')
     review=json.loads(apk.read('assets/temporary-review/index.json'))
     assert len(review)==324 and len({e['id'] for e in review})==324
+    shortcuts=json.loads(apk.read('assets/temporary-review/repair-shortcuts.json'))
+    assert len(shortcuts)==29 and len({e['id'] for e in shortcuts})==29
+    assert {e['id'] for e in shortcuts}<={e['id'] for e in review}
+    assert shortcuts==json.loads(Path('android-logo/app/src/main/assets/temporary-review/repair-shortcuts.json').read_text())
     review_paths={f"assets/temporary-review/{e['id']}-{kind}.png" for e in review for kind in ('source','redraw')}
     import hashlib
     for name in review_paths:

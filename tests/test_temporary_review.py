@@ -18,3 +18,13 @@ class TemporaryReviewTest(unittest.TestCase):
             self.assertIn(value,code)
         main=(R/'android-logo/app/src/main/java/id/mcm/logopreview/MainActivity.kt').read_text()
         self.assertIn('TemporaryReviewActivity::class.java',main)
+
+    def test_repair_shortcut_baseline_matches_user_review(self):
+        rows=json.loads((R/'android-logo/app/src/main/assets/temporary-review/repair-shortcuts.json').read_text())
+        review=json.loads((R/'04-desain/perbaikan-review/putaran-04/review.json').read_text())
+        self.assertEqual(len(rows),29)
+        self.assertEqual({r['id'] for r in rows},{r['id'] for r in review['records']})
+        catalog=json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']
+        for row in rows:
+            entry=next(e for e in catalog if e['id']==row['id'])
+            self.assertEqual(int(entry['name'].split()[-1]),row['variation'])

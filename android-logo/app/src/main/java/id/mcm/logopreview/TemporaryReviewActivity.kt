@@ -130,6 +130,24 @@ class TemporaryReviewActivity : Activity() {
         }
         scroll.requestApplyInsets()
     }
+    // Baseline from the supplied manual review; never seed or overwrite local preferences.
+    private fun repairShortcuts(): List<Pair<String, String>> {
+        val baseline=assets.open("temporary-review/repair-shortcuts.json").bufferedReader().use { JSONArray(it.readText()) }
+        val baselineIds=(0 until baseline.length()).map { baseline.getJSONObject(it).getString("id") }.toSet()
+        val reviewIds=(0 until items.length()).map { items.getJSONObject(it).getString("id") }.toSet()
+        return LogoCatalog.files.mapIndexedNotNull { index, asset ->
+            val id=asset.substringAfterLast('/').removeSuffix(".png")
+            val needsRepair=if(prefs.contains("status:$id")) prefs.getInt("status:$id",0)==1 else id in baselineIds
+            if(id in reviewIds && needsRepair) Pair(id,LogoCatalog.names[index]) else null
+        }
+    }
+    private fun openReviewItem(id:String) {
+        for(i in 0 until items.length()) {
+            if(items.getJSONObject(i).getString("id")==id) {
+                position=i;savePosition();showReview();return
+            }
+        }
+    }
     private fun collectedNotes(): List<String> {
         val statuses=listOf("Belum dicek","Perlu perbaikan","Sesuai")
         // Use catalog order and stable IDs, not the source-filename review ordering.
@@ -167,6 +185,28 @@ class TemporaryReviewActivity : Activity() {
             text="Seluruh catatan · ${notes.size} item";textSize=20f;setTextColor(foreground)
         })
         body.addView(action("Salin semua catatan") { copyAllNotes() })
+        val shortcuts=repairShortcuts()
+        body.addView(TextView(this).apply {
+            text="Shortcut logo perbaikan · ${shortcuts.size} item";textSize=18f;setTextColor(foreground)
+            setPadding(0,dp(16),0,dp(8))
+        })
+        body.addView(TextView(this).apply {
+            text="Ketuk nomor untuk membuka asli/redraw. Daftar awal dari review Anda; rating lokal terbaru diutamakan. Shortcut tidak mengubah rating atau catatan."
+            setTextColor(foreground)
+        })
+        // Compact two-column buttons; keep this temporary screen simple.
+        shortcuts.chunked(2).forEach { rowItems ->
+            val row=LinearLayout(this)
+            rowItems.forEach { (id,name) ->
+                row.addView(action(name) { openReviewItem(id) }.apply {
+                    contentDescription="Buka perbaikan $name";tag="repair-shortcut:$id"
+                },LinearLayout.LayoutParams(0,dp(56),1f))
+            }
+            body.addView(row)
+        }
+        if(shortcuts.isEmpty()) body.addView(TextView(this).apply {
+            text="Tidak ada logo berstatus perlu perbaikan.";setTextColor(foreground)
+        })
         body.addView(TextView(this).apply {
             text=if(notes.isEmpty()) "Belum ada catatan atau penilaian tersimpan." else notes.joinToString("\n\n")
             textSize=16f;setTextColor(foreground);setTextIsSelectable(true)
