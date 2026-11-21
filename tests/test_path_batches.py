@@ -553,4 +553,44 @@ class PathBatch14Test(PathBatchTest):
         if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),p['entries'][0]['sourceSha256'])
         self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
 
+class PathBatch15Test(PathBatchTest):
+    batch=R/'04-desain/variasi-svg/batch-15'
+    count=10
+    total=119
+    test_polygons_do_not_self_intersect=PathBatch05Test.test_polygons_do_not_self_intersect
+
+    def test_progress_and_limited_audit_are_consistent(self):
+        p=json.loads((self.batch/'progress.json').read_text())
+        self.assertTrue(p['apkBuildsPaused'])
+        self.assertEqual(p['newMasterCount'],10)
+        self.assertEqual(p['uniqueDriveMasters'],119)
+        self.assertEqual(p['driveSourcesCoveredIncludingDuplicates'],137)
+        self.assertEqual(p['remainingNotProcessed'],205)
+        self.assertEqual(p['progressPercent'],40.06)
+        self.assertEqual(p['redrawOnlyPercent'],34.8)
+        self.assertEqual(len(p['sourceAliases']),18)
+        self.assertEqual(p['entries'][-1]['id'],'exp-rasio-014-02')
+        previous_ids=set()
+        known=set()
+        for f in (R/'04-desain/variasi-svg').glob('batch-*/progress.json'):
+            if f.parent!=self.batch:
+                previous_ids.update(e['id'] for e in json.loads(f.read_text())['entries'])
+        for f in (R/'04-desain/variasi-svg').rglob('*.svg'):
+            if f.parent!=self.batch:known.add(hashlib.sha256(f.read_bytes()).hexdigest())
+        for e in p['entries']:
+            self.assertNotIn(e['id'],previous_ids)
+            digest=hashlib.sha256((R/e['masterSvg']).read_bytes()).hexdigest()
+            self.assertNotIn(digest,known);known.add(digest)
+            source=R/'google_drive'/e['sourceName']
+            if source.exists():self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),e['sourceSha256'])
+        for alias in p['sourceAliases'][-8:]:
+            n=alias['sourceNumber']
+            self.assertEqual(alias['duplicateOf'],f'exp-013-{n:02}')
+            source=R/'google_drive'/alias['sourceName']
+            original=R/f'google_drive/Max_a_Gambar_kotak_berisi__13_logo-{n:02}.png'
+            if source.exists() and original.exists():
+                self.assertEqual(source.read_bytes(),original.read_bytes())
+                self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),alias['sourceSha256'])
+        self.assertEqual(len(json.loads((R/'android-logo/app/src/main/assets/exploration/catalog.json').read_text())['reviewedEntries']),101)
+
 if __name__=='__main__':unittest.main()
